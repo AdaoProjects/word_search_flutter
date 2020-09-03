@@ -12,14 +12,14 @@ class _LevelState extends State<Level> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                 Text('LEVELS',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
                     fontSize: MediaQuery. of(context). size. height/15)
@@ -30,13 +30,13 @@ class _LevelState extends State<Level> {
           RaisedButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(MediaQuery. of(context). size. height/30),
-                  side: BorderSide(color: Colors.red[700])),
+                  side: BorderSide(color: Colors.blue[700])),
               onPressed: (){ Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Game_Easy()),
               ); },
-              color:Colors.red,
-              highlightColor: Colors.red[700],
+              color:Colors.blue,
+              highlightColor: Colors.blue[700],
               elevation: MediaQuery. of(context). size. height/50,
               highlightElevation: MediaQuery. of(context). size. height/30,
               child:Text('EASY',
@@ -53,13 +53,13 @@ class _LevelState extends State<Level> {
           RaisedButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(MediaQuery. of(context). size. height/30),
-                  side: BorderSide(color: Colors.red[700])),
+                  side: BorderSide(color: Colors.blue[700])),
               onPressed: (){ Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Game_Medium()),
               );},
-              color:Colors.red,
-              highlightColor: Colors.red[700],
+              color:Colors.blue,
+              highlightColor: Colors.blue[700],
               elevation: MediaQuery. of(context). size. height/50,
               highlightElevation: MediaQuery. of(context). size. height/30,
               child:Text('MEDIUM',
@@ -76,13 +76,13 @@ class _LevelState extends State<Level> {
           RaisedButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(MediaQuery. of(context). size. height/30),
-                  side: BorderSide(color: Colors.red[700])),
+                  side: BorderSide(color: Colors.blue[700])),
               onPressed: (){ Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Game_Hard()),
               );},
-              color:Colors.red,
-              highlightColor: Colors.red[700],
+              color:Colors.blue,
+              highlightColor: Colors.blue[700],
               elevation: MediaQuery. of(context). size. height/50,
               highlightElevation: MediaQuery. of(context). size. height/30,
               child:Text('HARD',

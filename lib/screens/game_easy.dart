@@ -9,6 +9,9 @@ class Game_Easy extends StatefulWidget {
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   //Timer
+  int _counter = 0;
+  AnimationController _controller;
+  int levelClock = 180;
   //Puzzle
   List<String> puzzle = [
     '',
@@ -1339,18 +1342,17 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         backgroundColor: Colors.black,
         body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('FIND THE WORDS',
-
-                    style: TextStyle(
-                        fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 20,
-                      color:Colors.white,
-                    ),
-                  ),
+                  Image.asset('assets/images/artecriada.jpg',
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height / 10,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width*2),
                   Row(
                       children: [
                         SizedBox(width: MediaQuery
@@ -1371,8 +1373,18 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                         //Timer
                         Icon(Icons.timer,
                           color: Colors.blue,),
+                        Countdown(
+                          animation: StepTween(
+                            begin: levelClock,
+                            end: 0,
+                          ).animate(_controller),
+                        ),
                       ]
                   ),
+                  SizedBox(height:MediaQuery
+                      .of(context)
+                      .size
+                      .height / 25),
                   Container(
                     width:MediaQuery
                         .of(context)
@@ -2330,27 +2342,69 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
+                  SizedBox(height:MediaQuery
+        .of(context)
+        .size
+        .height / 25),
+                  Container(
+                      width:MediaQuery
+                          .of(context)
+                          .size
+                          .width* 3/ 5 ,
+                      child: Table(
+                        children: [
+                          TableRow( children:[
+                          Column(children:[
                   Text(words[0] + ", " + words[1],
                     style: TextStyle(fontSize: MediaQuery
                         .of(context)
                         .size
-                        .height / 25,
-                    color:Colors.white),
+                        .height / 30,
+                    color:Colors.black),
                   ),
-                  Text(words[2] + ", " + words[3],
-                    style: TextStyle(fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 25,
-                        color:Colors.white),
-                  ),
-                  Text(words[4],
-                    style: TextStyle(fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 25,
-                        color:Colors.white),
-                  )
+                       ]
+                          ),
+                        ]
+                          ),
+                          TableRow( children:[
+                            Column(children:[
+                              Text(words[2] + ", " + words[3],
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
+                              ),
+                            ]
+                            ),
+                          ]
+                          ),
+                          TableRow( children:[
+                            Column(children:[
+                              Text(words[4] ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
+                              ),
+                            ]
+                            ),
+                          ]
+                          ),
+     ]
+                      ),
+
+                          decoration: BoxDecoration(
+                          color: Colors.white,
+    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+    boxShadow: [
+    BoxShadow(
+    color: Colors.blue, spreadRadius: MediaQuery.of(context).size.height/100),
+    ],
+    ),
+    )
+
                 ]
 
             )
@@ -2606,5 +2660,56 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     words[3] = all[four].toUpperCase();
     words[4] = all[five].toUpperCase();
   }
+//Timer
 
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+        vsync: this,
+        duration: Duration(
+            seconds:
+            levelClock)
+    );
+
+    _controller.forward();
+  }
+}
+class Countdown extends AnimatedWidget {
+  Countdown({Key key, this.animation}) : super(key: key, listenable: animation);
+  Animation<int> animation;
+
+  @override
+  build(BuildContext context) {
+    Duration clockTimer = Duration(seconds: animation.value);
+
+    String timerText =
+        '${clockTimer.inMinutes.remainder(60).toString()}:${clockTimer.inSeconds.remainder(60).toString().padLeft(2, '0')}';
+
+    print('animation.value  ${animation.value} ');
+    print('inMinutes ${clockTimer.inMinutes.toString()}');
+    print('inSeconds ${clockTimer.inSeconds.toString()}');
+    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(60).toString()}');
+
+    return Text(
+      "$timerText",
+      style: TextStyle(
+        fontSize: MediaQuery.of(context).size.height/25,
+        color: Theme.of(context).primaryColor,
+      ),
+    );
+  }
 }
