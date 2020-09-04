@@ -1,7 +1,10 @@
+import 'dart:io';
+import 'dart:ui';
 import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 class Game_Easy extends StatefulWidget {
 
   @override
@@ -9,6 +12,21 @@ class Game_Easy extends StatefulWidget {
 }
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
+  //Paint
+  Color selectedColor = Colors.red;
+  Color pickerColor = Colors.red;
+  double strokeWidth = 3.0;
+  List<DrawingPoints> points = List();
+  bool showBottomList = false;
+  double opacity = 0.2;
+  StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
+  SelectedMode selectedMode = SelectedMode.StrokeWidth;
+  List<Color> colors = [
+    Colors.red,
+    Colors.green,
+    Colors.blue,
+    Colors.amber,
+  ];
   //Timer
   int _counter = 0;
   AnimationController _controller;
@@ -1342,1074 +1360,1112 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     return Scaffold(
         backgroundColor: Colors.black,
         body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset('assets/images/artecriada.jpg',
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height / 7,
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width),
-                  Row(
-                      children: [
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 10),
-                        Text('LEVEL: EASY',
-                          style: TextStyle(fontSize: MediaQuery
+            child:
+                  GestureDetector(
+                    onPanUpdate: (details) {
+                      setState(() {
+                        RenderBox renderBox = context.findRenderObject();
+                        points.add(DrawingPoints(
+                            points: renderBox.globalToLocal(details.globalPosition),
+                            paint: Paint()
+                              ..strokeCap = strokeCap
+                              ..isAntiAlias = true
+                              ..color = selectedColor.withOpacity(opacity)
+                              ..strokeWidth = strokeWidth));
+                      });
+                    },
+                    onPanStart: (details) {
+                      setState(() {
+                        RenderBox renderBox = context.findRenderObject();
+                        points.add(DrawingPoints(
+                            points: renderBox.globalToLocal(details.globalPosition),
+                            paint: Paint()
+                              ..strokeCap = strokeCap
+                              ..isAntiAlias = true
+                              ..color = selectedColor.withOpacity(opacity)
+                              ..strokeWidth = strokeWidth));
+                      });
+                    },
+                    onPanEnd: (details) {
+                      setState(() {
+                        points.add(null);
+                      });
+                    },
+
+                    child: CustomPaint(
+                      size: Size.infinite,
+                      foregroundPainter: DrawingPainter(
+                        pointsList: points,
+                      ),
+                    child:Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                      Image.asset('assets/images/artecriada.jpg',
+                          height: MediaQuery
                               .of(context)
                               .size
-                              .height / 25,
-                            color:Colors.white,),
-                        ),
-                        SizedBox(width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 10),
-                        //Timer
-                        Icon(Icons.timer,
-                          color: Colors.white,),
-                        Countdown(
-                          animation: StepTween(
-                            begin: levelClock,
-                            end: 0,
-                          ).animate(_controller),
-                        ),
-                      ]
-                  ),
-                  SizedBox(height:MediaQuery
-                      .of(context)
-                      .size
-                      .height / 25),
-                  Container(
-                    width:MediaQuery
-                        .of(context)
-                        .size
-                        .width* 9/ 10 ,
-                    child: Table(
-                      children: [
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50)
-
-                        ]),
-                        TableRow(
+                              .height / 7,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width),
+                      Row(
                           children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25)
-
-                        ]),
-                        TableRow(
-                          children: [
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                            Column(children: [
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 40),),
-                            ]),
-                          ],
-                        ),
-                        TableRow(children: [
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50),
-                          SizedBox(
-                              width: 10,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 50)
-
-                        ]),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
-                      boxShadow: [
-                        BoxShadow(
-                            color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height:MediaQuery
-        .of(context)
-        .size
-        .height / 25),
-                  Container(
-                      width:MediaQuery
+                            SizedBox(width: MediaQuery
+                                .of(context)
+                                .size
+                                .width / 10),
+                            Text('LEVEL: EASY',
+                              style: TextStyle(fontSize: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 25,
+                                color:Colors.white,),
+                            ),
+                            SizedBox(width: MediaQuery
+                                .of(context)
+                                .size
+                                .width / 10),
+                            //Timer
+                            Icon(Icons.timer,
+                              color: Colors.white,),
+                            Countdown(
+                              animation: StepTween(
+                                begin: levelClock,
+                                end: 0,
+                              ).animate(_controller),
+                            ),
+                          ]
+                      ),
+                      SizedBox(height:MediaQuery
                           .of(context)
                           .size
-                          .width* 3/ 5 ,
-                      child: Table(
-                        children: [
-                          TableRow( children:[
-                          Column(children:[
-                  Text(words[0] + ", " + words[1],
-                    style: TextStyle(fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 30,
-                    color:Colors.black),
-                  ),
-                       ]
-                          ),
-                        ]
-                          ),
-                          TableRow( children:[
-                            Column(children:[
-                              Text(words[2] + ", " + words[3],
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 30,
-                                    color:Colors.black),
-                              ),
-                            ]
-                            ),
-                          ]
-                          ),
-                          TableRow( children:[
-                            Column(children:[
-                              Text(words[4] ,
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 30,
-                                    color:Colors.black),
-                              ),
-                            ]
-                            ),
-                          ]
-                          ),
-     ]
-                      ),
+                          .height / 25),
+                      Container(
+                        width:MediaQuery
+                            .of(context)
+                            .size
+                            .width* 9/ 10 ,
+                        child: Table(
+                          children: [
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50)
 
-                          decoration: BoxDecoration(
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 25)
+
+                            ]),
+                            TableRow(
+                              children: [
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                                Column(children: [
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),),
+                                ]),
+                              ],
+                            ),
+                            TableRow(children: [
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50),
+                              SizedBox(
+                                  width: 10,
+                                  height: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 50)
+
+                            ]),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
                           color: Colors.white,
-    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
-    boxShadow: [
-    BoxShadow(
-    color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
-    ],
-    ),
-    )
+                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                          boxShadow: [
+                            BoxShadow(
+                                color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height:MediaQuery
+                          .of(context)
+                          .size
+                          .height / 25),
+                      Container(
+                        width:MediaQuery
+                            .of(context)
+                            .size
+                            .width* 3/ 5 ,
+                        child: Table(
+                            children: [
+                              TableRow( children:[
+                                Column(children:[
+                                  Text(words[0] + ", " + words[1],
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                        color:Colors.black),
+                                  ),
+                                ]
+                                ),
+                              ]
+                              ),
+                              TableRow( children:[
+                                Column(children:[
+                                  Text(words[2] + ", " + words[3],
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                        color:Colors.black),
+                                  ),
+                      ]
+                                ),
+                              ]
+                              ),
 
-                ]
+                              TableRow( children:[
+                                Column(children:[
+                                  Text(words[4] ,
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                        color:Colors.black),
+                                  ),
+                                ]
+                                ),
+                              ]
+                              ),
+                            ]
+                        ),
 
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                          boxShadow: [
+                            BoxShadow(
+                                color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
+                          ],
+                        ),
+                      ),
+                    ]
+                      ),
+                    ),
+                  ),
             )
-        )
     );
   }
 
@@ -2457,9 +2513,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       words.sort();
     }
     count++;
-    if (count < 64) {
-      return puzzle[count];
+    if (count == 64) {
+      count=0;
     }
+      return puzzle[count];
+
   }
 
   write_Puzzle_Words(List<String> puzzle, String word_one, String word_two,
@@ -2661,6 +2719,75 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     words[3] = all[four].toUpperCase();
     words[4] = all[five].toUpperCase();
   }
+
+  getColorList() {
+    List<Widget> listWidget = List();
+    for (Color color in colors) {
+      listWidget.add(colorCircle(color));
+    }
+    Widget colorPicker = GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          child: AlertDialog(
+            title: const Text('Pick a color!'),
+            content: SingleChildScrollView(
+              child: ColorPicker(
+                pickerColor: pickerColor,
+                onColorChanged: (color) {
+                  pickerColor = color;
+                },
+                enableLabel: true,
+                pickerAreaHeightPercent: 0.8,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text('Save'),
+                onPressed: () {
+                  setState(() => selectedColor = pickerColor);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+      child: ClipOval(
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          height: 36,
+          width: 36,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.red, Colors.green, Colors.blue],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )),
+        ),
+      ),
+    );
+    listWidget.add(colorPicker);
+    return listWidget;
+  }
+
+  Widget colorCircle(Color color) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedColor = color;
+        });
+      },
+      child: ClipOval(
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          height: 36,
+          width: 36,
+          color: color,
+        ),
+      ),
+    );
+  }
 //Timer
 
   void _incrementCounter() {
@@ -2714,3 +2841,36 @@ class Countdown extends AnimatedWidget {
     );
   }
 }
+
+
+class DrawingPainter extends CustomPainter {
+  DrawingPainter({this.pointsList});
+  List<DrawingPoints> pointsList;
+  List<Offset> offsetPoints = List();
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (int i = 0; i < pointsList.length - 1; i++) {
+      if (pointsList[i] != null && pointsList[i + 1] != null) {
+        canvas.drawLine(pointsList[i].points, pointsList[i + 1].points,
+            pointsList[i].paint);
+      } else if (pointsList[i] != null && pointsList[i + 1] == null) {
+        offsetPoints.clear();
+        offsetPoints.add(pointsList[i].points);
+        offsetPoints.add(Offset(
+            pointsList[i].points.dx + 0.1, pointsList[i].points.dy + 0.1));
+        canvas.drawPoints(PointMode.points, offsetPoints, pointsList[i].paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(DrawingPainter oldDelegate) => true;
+}
+
+class DrawingPoints {
+  Paint paint;
+  Offset points;
+  DrawingPoints({this.points, this.paint});
+}
+
+enum SelectedMode { StrokeWidth, Opacity, Color }
