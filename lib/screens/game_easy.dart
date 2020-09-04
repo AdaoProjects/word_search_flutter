@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:huntersofwords/utilites/colors.dart';
 class Game_Easy extends StatefulWidget {
 
   @override
@@ -1348,11 +1349,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   height: MediaQuery
                       .of(context)
                       .size
-                      .height / 10,
+                      .height / 7,
                   width: MediaQuery
                       .of(context)
                       .size
-                      .width*2),
+                      .width),
                   Row(
                       children: [
                         SizedBox(width: MediaQuery
@@ -1372,7 +1373,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                             .width / 10),
                         //Timer
                         Icon(Icons.timer,
-                          color: Colors.blue,),
+                          color: Colors.white,),
                         Countdown(
                           animation: StepTween(
                             begin: levelClock,
@@ -2338,7 +2339,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.blue, spreadRadius: MediaQuery.of(context).size.height/100),
+                            color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
                       ],
                     ),
                   ),
@@ -2400,7 +2401,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
     boxShadow: [
     BoxShadow(
-    color: Colors.blue, spreadRadius: MediaQuery.of(context).size.height/100),
+    color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
     ],
     ),
     )
@@ -2708,7 +2709,7 @@ class Countdown extends AnimatedWidget {
       "$timerText",
       style: TextStyle(
         fontSize: MediaQuery.of(context).size.height/25,
-        color: Theme.of(context).primaryColor,
+        color: Colors.white,
       ),
     );
   }
