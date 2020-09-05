@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 class Game_Easy extends StatefulWidget {
 
   @override
@@ -12,25 +11,7 @@ class Game_Easy extends StatefulWidget {
 }
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
-  //Paint
-  Color selectedColor = Colors.red;
-  Color pickerColor = Colors.red;
-  double strokeWidth = 3.0;
-  List<DrawingPoints> points = List();
-  bool showBottomList = false;
-  double opacity = 0.2;
-  StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
-  SelectedMode selectedMode = SelectedMode.StrokeWidth;
-  List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.blue,
-    Colors.amber,
-  ];
-  //Timer
-  int _counter = 0;
-  AnimationController _controller;
-  int levelClock = 180;
+
   //Puzzle
   List<String> puzzle = [
     '',
@@ -1354,7 +1335,19 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'tiny',
     'block',
   ];
-
+//Paint
+  Color selected_color;
+  List<bool> is_Selected_Container=[false,false];
+  List<Color> colors = [
+    Colors.red,
+    Colors.green,
+    Colors.blue,
+    Colors.amber,
+  ];
+  //Timer
+  int _counter = 0;
+  AnimationController _controller;
+  int levelClock = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1363,41 +1356,23 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             child:
                   GestureDetector(
                     onPanUpdate: (details) {
-                      setState(() {
-                        RenderBox renderBox = context.findRenderObject();
-                        points.add(DrawingPoints(
-                            points: renderBox.globalToLocal(details.globalPosition),
-                            paint: Paint()
-                              ..strokeCap = strokeCap
-                              ..isAntiAlias = true
-                              ..color = selectedColor.withOpacity(opacity)
-                              ..strokeWidth = strokeWidth));
-                      });
+
                     },
                     onPanStart: (details) {
-                      setState(() {
-                        RenderBox renderBox = context.findRenderObject();
-                        points.add(DrawingPoints(
-                            points: renderBox.globalToLocal(details.globalPosition),
-                            paint: Paint()
-                              ..strokeCap = strokeCap
-                              ..isAntiAlias = true
-                              ..color = selectedColor.withOpacity(opacity)
-                              ..strokeWidth = strokeWidth));
-                      });
+                      final RenderBox referenceBox = context.findRenderObject();
+                      var local_position = referenceBox.globalToLocal(details.globalPosition);
+                      if(details.globalPosition.dx>1){
+                        setState(() {
+                          is_Selected_Container[0]=true;
+                          count=-1;
+                        });
+                      }
                     },
                     onPanEnd: (details) {
-                      setState(() {
-                        points.add(null);
-                      });
+
                     },
 
-                    child: CustomPaint(
-                      size: Size.infinite,
-                      foregroundPainter: DrawingPainter(
-                        pointsList: points,
-                      ),
-                    child:Column(
+                    child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                       Image.asset('assets/images/artecriada.jpg',
@@ -1448,945 +1423,1491 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                             .width* 9/ 10 ,
                         child: Table(
                           children: [
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50)
-
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child: is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/40)) : Text(write_Puzzle_Letter()) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
 
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
-
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
 
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
 
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
-
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
 
-                            ]),
+
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 25)
 
-                            ]),
                             TableRow(
                               children: [
-                                Column(children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  is_Selected_Container[0] ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 40),) :
                                   Text(write_Puzzle_Letter(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 40),),
-                                ]),
-                                Column(children: [
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 40),),
-                                ]),
+                                        .height / 40),) ,
+                                  decoration: BoxDecoration(
+                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30),
+                                  ),
+                                ),
                               ],
                             ),
-                            TableRow(children: [
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50),
-                              SizedBox(
-                                  width: 10,
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 50)
 
-                            ]),
                           ],
                         ),
                         decoration: BoxDecoration(
@@ -2465,7 +2986,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-            )
+
     );
   }
 
@@ -2501,23 +3022,31 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     Random random = new Random();
     return letters[random.nextInt(26)];
   }
-
+ create_Puzzle_Random(){
+   if (count == -1) {
+     for (int i = 0; i < 64; i++) {
+       puzzle[i] = write_Random_Letter();
+     }
+     pick_Random_Words();
+     write_Puzzle_Words(
+         puzzle, words[0], words[1], words[2], words[3], words[4]);
+     words.sort();
+   }
+ }
   String write_Puzzle_Letter() {
-    if (count == -1) {
-      for (int i = 0; i < 64; i++) {
-        puzzle[i] = write_Random_Letter();
-      }
-      pick_Random_Words();
-      write_Puzzle_Words(
-          puzzle, words[0], words[1], words[2], words[3], words[4]);
-      words.sort();
-    }
+    create_Puzzle_Random();
     count++;
     if (count == 64) {
       count=0;
     }
       return puzzle[count];
-
+  }
+  String get_Old_Puzzle_Letter(){
+    count++;
+    if (count == 64) {
+      count=0;
+    }
+    return puzzle[count];
   }
 
   write_Puzzle_Words(List<String> puzzle, String word_one, String word_two,
@@ -2703,7 +3232,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     int two = random.nextInt(240) + 240;
     int three = random.nextInt(240) + 480;
     int four = random.nextInt(240) + 725;
-    int five = random.nextInt(240) + 960;
+    int five = random.nextInt(240) + 980;
     while (all[three].length == 5) {
       three = random.nextInt(240) + 480;
     }
@@ -2711,7 +3240,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       four = random.nextInt(240) + 725;
     }
     while (all[five].length == 5) {
-      five = random.nextInt(240) + 960;
+      five = random.nextInt(240) + 980;
     }
     words[0] = all[one].toUpperCase();
     words[1] = all[two].toUpperCase();
@@ -2719,75 +3248,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     words[3] = all[four].toUpperCase();
     words[4] = all[five].toUpperCase();
   }
-
-  getColorList() {
-    List<Widget> listWidget = List();
-    for (Color color in colors) {
-      listWidget.add(colorCircle(color));
-    }
-    Widget colorPicker = GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          child: AlertDialog(
-            title: const Text('Pick a color!'),
-            content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: pickerColor,
-                onColorChanged: (color) {
-                  pickerColor = color;
-                },
-                enableLabel: true,
-                pickerAreaHeightPercent: 0.8,
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: const Text('Save'),
-                onPressed: () {
-                  setState(() => selectedColor = pickerColor);
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-      },
-      child: ClipOval(
-        child: Container(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          height: 36,
-          width: 36,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.red, Colors.green, Colors.blue],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              )),
-        ),
-      ),
-    );
-    listWidget.add(colorPicker);
-    return listWidget;
+  Color random_Color(){
+    Random random = new Random();
+    selected_color=colors[random.nextInt(4)];
+    return colors[random.nextInt(4)];
   }
 
-  Widget colorCircle(Color color) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedColor = color;
-        });
-      },
-      child: ClipOval(
-        child: Container(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          height: 36,
-          width: 36,
-          color: color,
-        ),
-      ),
-    );
-  }
 //Timer
 
   void _incrementCounter() {
@@ -2825,12 +3291,12 @@ class Countdown extends AnimatedWidget {
     Duration clockTimer = Duration(seconds: animation.value);
 
     String timerText =
-        '${clockTimer.inMinutes.remainder(60).toString()}:${clockTimer.inSeconds.remainder(60).toString().padLeft(2, '0')}';
+        '${clockTimer.inMinutes.remainder(80).toString()}:${clockTimer.inSeconds.remainder(80).toString().padLeft(2, '0')}';
 
     print('animation.value  ${animation.value} ');
     print('inMinutes ${clockTimer.inMinutes.toString()}');
     print('inSeconds ${clockTimer.inSeconds.toString()}');
-    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(60).toString()}');
+    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(80).toString()}');
 
     return Text(
       "$timerText",
@@ -2843,15 +3309,18 @@ class Countdown extends AnimatedWidget {
 }
 
 
+
 class DrawingPainter extends CustomPainter {
   DrawingPainter({this.pointsList});
+
   List<DrawingPoints> pointsList;
   List<Offset> offsetPoints = List();
+
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < pointsList.length - 1; i++) {
       if (pointsList[i] != null && pointsList[i + 1] != null) {
-        canvas.drawLine(pointsList[i].points, pointsList[i + 1].points,
+        canvas.drawCircle(pointsList[i].points, 20,
             pointsList[i].paint);
       } else if (pointsList[i] != null && pointsList[i + 1] == null) {
         offsetPoints.clear();
@@ -2864,13 +3333,22 @@ class DrawingPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(DrawingPainter oldDelegate) => true;
+  bool shouldRepaint(DrawingPainter oldDelegate) => false;
+
+  void drawCircle(Offset c,
+      double radius,
+      Paint paint){
+
+  }
+
 }
 
 class DrawingPoints {
+  double height;
   Paint paint;
   Offset points;
   DrawingPoints({this.points, this.paint});
 }
 
 enum SelectedMode { StrokeWidth, Opacity, Color }
+
