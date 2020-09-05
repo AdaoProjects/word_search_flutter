@@ -1985,19 +1985,17 @@ class _Game_MediumState extends State<Game_Medium> {
 
   pick_Random_Words(){
     Random random =new Random();
-    int one=random.nextInt(240);
-    int two=random.nextInt(240)+240;
-    int three=random.nextInt(240)+480;
-    int four =random.nextInt(240)+720;
-    int five =random.nextInt(240)+960;
-    while(all[three].length==5){
-      three=random.nextInt(240)+480;
-    }
-    while(all[four].length==6){
-      four=random.nextInt(240)+720;
-    }
-    while(all[five].length==6){
-      five=random.nextInt(240)+960;
+    int one = random.nextInt(1200);
+    int two = random.nextInt(1200);
+    int three = random.nextInt(1200);
+    int four = random.nextInt(1200);
+    int five = random.nextInt(1200);
+    while (all[three].length == 6 || all[four].length == 6 || all[five].length == 6 || one==two || one==three || one == four || one==five || two==three || two==four||two==five||three==four||three==five||four==five) {
+      one = random.nextInt(1200);
+      two = random.nextInt(1200);
+      three = random.nextInt(1200);
+      four = random.nextInt(1200);
+      five = random.nextInt(1200);
     }
     words[0]=all[one].toUpperCase();
     words[1]=all[two].toUpperCase();
