@@ -1336,9 +1336,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'block',
   ];
 //Paint
+  List<DrawingPoints> points = List();
+  StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
   Color selected_color;
   bool old_Puzzle=false;
-  List<bool> is_Selected_Container=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+  double opacity = 0.2;
   List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -1361,21 +1363,20 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     onPanStart: (details) {
                       RenderBox box = context.findRenderObject();
                       final Offset local = box.globalToLocal(details.globalPosition);
-
-
-                          puzzle[0]=local.dx.toString();
-                          puzzle[8]=local.dy.toString();
-                          puzzle[16]=(MediaQuery.of(context).size.width/19.63).toString();
-                          puzzle[24]=(MediaQuery.of(context).size.height/2.92).toString();
-
                             for(int row =0; row<8;row++) {
                               for (int column = 0; column < 8; column++) {
-                                if (local.dx>MediaQuery.of(context).size.width/20+column*MediaQuery.of(context).size.width/8.8&&local.dx<18+(column+1)*MediaQuery.of(context).size.width/8.8
+                                if (local.dx>MediaQuery.of(context).size.width/18.4
+                                    +column*MediaQuery.of(context).size.width/9&&local.dx<MediaQuery.of(context).size.width/18.4+(column+1)*MediaQuery.of(context).size.width/9
 
-                                && local.dy>MediaQuery.of(context).size.height/3.8+row*MediaQuery.of(context).size.height/15 && local.dy<MediaQuery.of(context).size.height/3.8+(row+1)*MediaQuery.of(context).size.height/15) {
+                                && local.dy>MediaQuery.of(context).size.height/3.732+row*MediaQuery.of(context).size.height/15 && local.dy<MediaQuery.of(context).size.height/3.732+(row+1)*MediaQuery.of(context).size.height/15) {
                                   setState(() {
-                                    is_Selected_Container[8 * row + column] =
-                                    true;
+                                    points.add(DrawingPoints(
+                                        points:  Offset(MediaQuery.of(context).size.width/18.4+(column+1/2)*MediaQuery.of(context).size.width/9, MediaQuery.of(context).size.height/3.732+(row+1/2)*MediaQuery.of(context).size.height/15),
+                                        paint: Paint()
+                                          ..strokeCap = strokeCap
+                                          ..isAntiAlias = true
+                                          ..color = random_Color().withOpacity(opacity)
+                                          ..strokeWidth = 10.0));
                                     old_Puzzle = true;
                                     count = -1;
                                   });
@@ -1383,19 +1384,22 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                               }
                             }
 
-    /* Testing gesture
-                          puzzle[0]=local.dx.toString();
-                          puzzle[8]=local.dy.toString();
-                          puzzle[16]=(MediaQuery.of(context).size.width/19.63).toString();
-                          puzzle[24]=(MediaQuery.of(context).size.height/2.92).toString();
-                        */
+                      setState(() {
+                        RenderBox renderBox = context.findRenderObject();
+
+                      });
 
                     },
                     onPanEnd: (details) {
 
                     },
 
-                    child: Column(
+                    child: CustomPaint(
+    size: Size.infinite,
+    foregroundPainter:DrawingPainter(
+      pointsList: points,
+    ) ,
+    child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                       Image.asset('assets/images/artecriada.jpg',
@@ -1444,7 +1448,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                             .of(context)
                             .size
                             .width* 8/ 10 *1.1,
-                        child: Table(
+                        child:Table(
                           children: [
                             TableRow(
                               children: [
@@ -1460,8 +1464,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
                                   decoration: BoxDecoration(
-                                    color: is_Selected_Container[0] ? random_Color() : Colors.white,
-                                    
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
                                   ),
                                 ),
                                 Container(
@@ -1484,162 +1487,139 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[1] ? random_Color() : Colors.white,
-                                    
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[2] ? random_Color() : Colors.white,
-                                    
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[3] ? random_Color() : Colors.white,
-                                    
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[4] ? random_Color() : Colors.white,
-                                    
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[5] ? random_Color() : Colors.white,
-                                    
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[6] ? random_Color() : Colors.white,
-                                    
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[7] ? random_Color() : Colors.white,
 
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
                                   ),
                                 ),
                               ],
@@ -1658,10 +1638,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .height /15,
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[8] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1684,10 +1660,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[9] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1710,10 +1682,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[10] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1736,10 +1705,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[11] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1762,10 +1727,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[12] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1788,10 +1749,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[13] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1814,10 +1771,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[14] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1840,10 +1793,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[15] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                               ],
                             ),
@@ -1860,10 +1809,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .height /15,
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[16] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1886,10 +1831,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[17] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1912,10 +1853,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[18] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1938,10 +1875,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[19] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1964,10 +1897,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[20] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -1990,10 +1919,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[21] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2016,10 +1941,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[22] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2042,10 +1963,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[23] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                               ],
                             ),
@@ -2062,10 +1979,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .height /15,
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[24] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2088,10 +2001,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[25] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2114,10 +2024,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[26] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2140,10 +2046,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[27] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2166,10 +2068,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[28] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2192,10 +2090,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[29] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2218,10 +2113,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[30] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2244,10 +2136,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[31] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                               ],
                             ),
@@ -2265,10 +2153,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .height /15,
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[32] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2291,10 +2175,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[33] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2317,10 +2198,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[34] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2343,10 +2220,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[35] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2369,10 +2243,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[36] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2395,10 +2266,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[37] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2421,10 +2288,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[38] ? random_Color() : Colors.white,
-
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2447,10 +2310,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[39] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                               ],
                             ),
@@ -2468,10 +2328,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .height /15,
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[40] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2494,10 +2351,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[41] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2520,10 +2374,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[42] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2546,10 +2397,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[43] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2572,10 +2420,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[44] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2598,10 +2443,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[45] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2624,10 +2466,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[46] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2650,10 +2489,177 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[47] ? random_Color() : Colors.white,
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
 
-                                  ),
                                 ),
                               ],
                             ),
@@ -2671,210 +2677,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   alignment: Alignment.center,
                                   child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
                                   decoration: BoxDecoration(
-                                    color: is_Selected_Container[48] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[49] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[50] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[51] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[52] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[53] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[54] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[55] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[56] ? random_Color() : Colors.white,
-
+                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
                                   ),
                                 ),
                                 Container(
@@ -2898,10 +2701,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[57] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2924,10 +2724,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[58] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2950,10 +2747,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[59] ? random_Color() : Colors.white,
 
-                                  ),
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -2976,10 +2770,53 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[60] ? random_Color() : Colors.white,
 
-                                  ),
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+        .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+
+                                ),
+                                Container(
+                                  width:  MediaQuery
+                                      .of(context)
+                                      .size
+        .width/10*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /15,
+                                  alignment: Alignment.center,
+                                  child:
+                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) :
+                                  Text(write_Puzzle_Letter(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35),) ,
+
                                 ),
                                 Container(
                                   width:  MediaQuery
@@ -3003,59 +2840,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .size
                                         .height / 35),) ,
                                   decoration: BoxDecoration(
-                                    color: is_Selected_Container[61] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-        .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[62] ? random_Color() : Colors.white,
-
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-        .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    color: is_Selected_Container[63] ? random_Color() : Colors.white,
                                     borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
                                   ),
                                 ),
@@ -3142,6 +2926,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     ]
                       ),
                     ),
+                        ),
         ),
 
     );
@@ -3446,12 +3231,12 @@ class Countdown extends AnimatedWidget {
     Duration clockTimer = Duration(seconds: animation.value);
 
     String timerText =
-        '${clockTimer.inMinutes.remainder(80).toString()}:${clockTimer.inSeconds.remainder(80).toString().padLeft(2, '0')}';
+        '${clockTimer.inMinutes.remainder(60).toString()}:${clockTimer.inSeconds.remainder(60).toString().padLeft(2, '0')}';
 
     print('animation.value  ${animation.value} ');
     print('inMinutes ${clockTimer.inMinutes.toString()}');
     print('inSeconds ${clockTimer.inSeconds.toString()}');
-    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(80).toString()}');
+    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(60).toString()}');
 
     return Text(
       "$timerText",
@@ -3463,6 +3248,29 @@ class Countdown extends AnimatedWidget {
   }
 }
 
+class DrawingPainter extends CustomPainter {
 
+  Paint _paint;
+  DrawingPainter({this.pointsList});
+  List<DrawingPoints> pointsList;
+  List<Offset> offsetPoints = List();
+
+  void paint(Canvas canvas, Size size) {
+    for (int i = 0; i < pointsList.length; i++) {
+      if (pointsList[i] != null) {
+        canvas.drawCircle(pointsList[i].points, size.height/30,
+            pointsList[i].paint);
+      }
+    }
+  }
+      @override
+      bool shouldRepaint(DrawingPainter oldDelegate) => false;
+    }
+
+class DrawingPoints {
+  Paint paint;
+  Offset points;
+  DrawingPoints({this.points, this.paint});
+}
 
 
