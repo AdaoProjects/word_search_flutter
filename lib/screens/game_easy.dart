@@ -1336,6 +1336,13 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'block',
   ];
 //Paint
+  bool draw_circle_true_draw_rec_false;
+  bool sarted_Selection=false;
+  bool fisrt_Point_drawed=false;
+  double start_Of_Selection_dx;
+  double start_Of_Selection_dy;
+  double end_Of_Selection_dx;
+  double end_Of_Selection_dy;
   List<DrawingPoints> points = List();
   StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
   Color selected_color;
@@ -1358,37 +1365,165 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         body: Center(
                         child: GestureDetector(
                     onPanUpdate: (details) {
+                      draw_circle_true_draw_rec_false = false;
+                      RenderBox box = context.findRenderObject();
+                      final Offset local = box.globalToLocal(
+                          details.globalPosition);
+                      for (int row = 0; row < 8; row++) {
+                        for (int column = 0; column < 8; column++) {
+                          if (local.dx > MediaQuery
+                              .of(context)
+                              .size
+                              .width / 18.4
+                              + column * MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 9 && local.dx < MediaQuery
+                              .of(context)
+                              .size
+                              .width / 18.4 + (column + 1) * MediaQuery
+                              .of(context)
+                              .size
+                              .width / 9
+
+                              && local.dy > MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 3.732 + row * MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15 && local.dy < MediaQuery
+                              .of(context)
+                              .size
+                              .height / 3.732 + (row + 1) * MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15) {
+                            setState(() {
+                              draw_circle_true_draw_rec_false = true;
+                              end_Of_Selection_dx = MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 18.4 + (column + 1 / 2) * MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 9;
+                              end_Of_Selection_dy = MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 3.732 + (row + 1 / 2) * MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15;
+                              count = -1;
+                            });
+                          }
+                        }
+                      }
+
+                      //Draw Rec to the end_point
+                      //West
+                      if(start_Of_Selection_dx>end_Of_Selection_dx && start_Of_Selection_dy==end_Of_Selection_dy){
+                          puzzle[0]='West';
+                      }//East
+                      else if(start_Of_Selection_dx<end_Of_Selection_dx && start_Of_Selection_dy==end_Of_Selection_dy){
+                          puzzle[0]='East';
+                      }//South
+                      else if(start_Of_Selection_dx==end_Of_Selection_dx && start_Of_Selection_dy<end_Of_Selection_dy){
+                        puzzle[0]='Sourth';
+                      }
+                       //North
+                      else if(start_Of_Selection_dx==end_Of_Selection_dx && start_Of_Selection_dy>end_Of_Selection_dy){
+                        puzzle[0]='Nourth';
+                      }
+                       //Sudest
+                       else if(start_Of_Selection_dx<end_Of_Selection_dx && start_Of_Selection_dy<end_Of_Selection_dy)
+                        {
+                            puzzle[0]='SE';
+                        }//Nordest
+                       else if(start_Of_Selection_dx<end_Of_Selection_dx && start_Of_Selection_dy>end_Of_Selection_dy){
+                          puzzle[0]='NE';
+                      }///South west
+                      else if(start_Of_Selection_dx>end_Of_Selection_dx && start_Of_Selection_dy<end_Of_Selection_dy)
+                      {
+                        puzzle[0]='SO';
+                      }//Nourth west
+                      else if(start_Of_Selection_dx>end_Of_Selection_dx && start_Of_Selection_dy>end_Of_Selection_dy){
+                        puzzle[0]='NO';
+                      }
 
                     },
                     onPanStart: (details) {
+                      old_Puzzle = true;
                       RenderBox box = context.findRenderObject();
-                      final Offset local = box.globalToLocal(details.globalPosition);
-                            for(int row =0; row<8;row++) {
-                              for (int column = 0; column < 8; column++) {
-                                if (local.dx>MediaQuery.of(context).size.width/18.4
-                                    +column*MediaQuery.of(context).size.width/9&&local.dx<MediaQuery.of(context).size.width/18.4+(column+1)*MediaQuery.of(context).size.width/9
+                      if(!fisrt_Point_drawed) {
+                        final Offset local = box.globalToLocal(
+                            details.globalPosition);
+                        for (int row = 0; row < 8; row++) {
+                          for (int column = 0; column < 8; column++) {
+                            if (local.dx > MediaQuery
+                                .of(context)
+                                .size
+                                .width / 18.4
+                                + column * MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width / 9 && local.dx < MediaQuery
+                                .of(context)
+                                .size
+                                .width / 18.4 + (column + 1) * MediaQuery
+                                .of(context)
+                                .size
+                                .width / 9
 
-                                && local.dy>MediaQuery.of(context).size.height/3.732+row*MediaQuery.of(context).size.height/15 && local.dy<MediaQuery.of(context).size.height/3.732+(row+1)*MediaQuery.of(context).size.height/15) {
-                                  setState(() {
-                                    points.add(DrawingPoints(
-                                        points:  Offset(MediaQuery.of(context).size.width/18.4+(column+1/2)*MediaQuery.of(context).size.width/9, MediaQuery.of(context).size.height/3.732+(row+1/2)*MediaQuery.of(context).size.height/15),
-                                        paint: Paint()
-                                          ..strokeCap = strokeCap
-                                          ..isAntiAlias = true
-                                          ..color = random_Color().withOpacity(opacity)
-                                          ..strokeWidth = 10.0));
-                                    old_Puzzle = true;
-                                    count = -1;
-                                  });
-                                }
-                              }
+                                && local.dy > MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 3.732 + row * MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15 && local.dy < MediaQuery
+                                .of(context)
+                                .size
+                                .height / 3.732 + (row + 1) * MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15) {
+                              setState(() {
+                                start_Of_Selection_dx=MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width / 18.4 +
+                                    (column + 1 / 2) * MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width / 9;
+                                start_Of_Selection_dy=MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 3.732 +
+                                    (row + 1 / 2) * MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 15;
+                                draw_circle_true_draw_rec_false = true;
+
+                                points.add(DrawingPoints(
+                                    points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
+                                    paint: Paint()
+                                      ..strokeCap = strokeCap
+                                      ..isAntiAlias = true
+                                      ..color = random_Color().withOpacity(
+                                          opacity)
+                                      ..strokeWidth = 10.0));
+
+                                count = -1;
+                              });
                             }
-
-                      setState(() {
-                        RenderBox renderBox = context.findRenderObject();
-
-                      });
-
+                          }
+                        }
+                      }
+                            fisrt_Point_drawed=true;
                     },
                     onPanEnd: (details) {
 
