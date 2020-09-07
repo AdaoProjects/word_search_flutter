@@ -1347,7 +1347,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
   Color selected_color;
   bool old_Puzzle=false;
-  double opacity = 0.1;
+  double opacity = 0.15;
   List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -1414,26 +1414,27 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 .height / 15;
                             if(init_Pan_Update!=0) {
                               points.removeAt(number_Of_Words_Selected + 1);
-                            }init_Pan_Update++;
+                            }init_Pan_Update=1;
+                            setState(() {
+                              points.add(DrawingPoints(
+                                  points: Offset(
+                                    end_Of_Selection_dx,
+                                    end_Of_Selection_dy,),
+                                  paint: Paint()
+                                    ..strokeCap = strokeCap
+                                    ..isAntiAlias = true
+                                    ..color = selected_color.withOpacity(
+                                        opacity)
+                                    ..strokeWidth = MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 15,
+                                  circle: false));
+                            });
                             }
                         }
                       }
-                          setState(() {
-                            points.add(DrawingPoints(
-                                points: Offset(
-                                  end_Of_Selection_dx,
-                                  end_Of_Selection_dy,),
-                                paint: Paint()
-                                  ..strokeCap = strokeCap
-                                  ..isAntiAlias = true
-                                  ..color = selected_color.withOpacity(
-                                      opacity)
-                                  ..strokeWidth = MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 15,
-                                circle: false));
-                          });
+
                     },
                     onPanStart: (details) {
                       old_Puzzle = true;
@@ -1509,7 +1510,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                             fisrt_Point_drawed=true;
                     },
                     onPanEnd: (details) {
-                          fisrt_Point_drawed=false;
+
                     },
 
                     child: CustomPaint(
@@ -3309,7 +3310,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   Color random_Color(){
     Random random = new Random();
     selected_color=colors[random.nextInt(4)];
-    return colors[random.nextInt(4)];
+    return selected_color;
   }
 
 //Timer
