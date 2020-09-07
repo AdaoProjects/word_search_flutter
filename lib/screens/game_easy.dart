@@ -1336,9 +1336,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'block',
   ];
 //Paint
-  bool draw_circle_true_draw_rec_false;
-  bool sarted_Selection=false;
   bool fisrt_Point_drawed=false;
+  int number_Of_Words_Selected=0;
+  int init_Pan_Update=0;
   double start_Of_Selection_dx;
   double start_Of_Selection_dy;
   double end_Of_Selection_dx;
@@ -1347,7 +1347,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
   Color selected_color;
   bool old_Puzzle=false;
-  double opacity = 0.2;
+  double opacity = 0.1;
   List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -1365,7 +1365,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         body: Center(
                         child: GestureDetector(
                     onPanUpdate: (details) {
-                      draw_circle_true_draw_rec_false = false;
                       RenderBox box = context.findRenderObject();
                       final Offset local = box.globalToLocal(
                           details.globalPosition);
@@ -1399,59 +1398,42 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                               .of(context)
                               .size
                               .height / 15) {
-                            setState(() {
-                              draw_circle_true_draw_rec_false = true;
-                              end_Of_Selection_dx = MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 18.4 + (column + 1 / 2) * MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 9;
-                              end_Of_Selection_dy = MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 3.732 + (row + 1 / 2) * MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15;
-                              count = -1;
-                            });
-                          }
+                            end_Of_Selection_dx = MediaQuery
+                                .of(context)
+                                .size
+                                .width / 18.4 + (column + 1 / 2) * MediaQuery
+                                .of(context)
+                                .size
+                                .width / 9;
+                            end_Of_Selection_dy = MediaQuery
+                                .of(context)
+                                .size
+                                .height / 3.732 + (row + 1 / 2) * MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15;
+                            if(init_Pan_Update!=0) {
+                              points.removeAt(number_Of_Words_Selected + 1);
+                            }init_Pan_Update++;
+                            }
                         }
                       }
-
-                      //Draw Rec to the end_point
-                      //West
-                      if(start_Of_Selection_dx>end_Of_Selection_dx && start_Of_Selection_dy==end_Of_Selection_dy){
-                          puzzle[0]='West';
-                      }//East
-                      else if(start_Of_Selection_dx<end_Of_Selection_dx && start_Of_Selection_dy==end_Of_Selection_dy){
-                          puzzle[0]='East';
-                      }//South
-                      else if(start_Of_Selection_dx==end_Of_Selection_dx && start_Of_Selection_dy<end_Of_Selection_dy){
-                        puzzle[0]='Sourth';
-                      }
-                       //North
-                      else if(start_Of_Selection_dx==end_Of_Selection_dx && start_Of_Selection_dy>end_Of_Selection_dy){
-                        puzzle[0]='Nourth';
-                      }
-                       //Sudest
-                       else if(start_Of_Selection_dx<end_Of_Selection_dx && start_Of_Selection_dy<end_Of_Selection_dy)
-                        {
-                            puzzle[0]='SE';
-                        }//Nordest
-                       else if(start_Of_Selection_dx<end_Of_Selection_dx && start_Of_Selection_dy>end_Of_Selection_dy){
-                          puzzle[0]='NE';
-                      }///South west
-                      else if(start_Of_Selection_dx>end_Of_Selection_dx && start_Of_Selection_dy<end_Of_Selection_dy)
-                      {
-                        puzzle[0]='SO';
-                      }//Nourth west
-                      else if(start_Of_Selection_dx>end_Of_Selection_dx && start_Of_Selection_dy>end_Of_Selection_dy){
-                        puzzle[0]='NO';
-                      }
-
+                          setState(() {
+                            points.add(DrawingPoints(
+                                points: Offset(
+                                  end_Of_Selection_dx,
+                                  end_Of_Selection_dy,),
+                                paint: Paint()
+                                  ..strokeCap = strokeCap
+                                  ..isAntiAlias = true
+                                  ..color = selected_color.withOpacity(
+                                      opacity)
+                                  ..strokeWidth = MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 15,
+                                circle: false));
+                          });
                     },
                     onPanStart: (details) {
                       old_Puzzle = true;
@@ -1506,17 +1488,18 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         .of(context)
                                         .size
                                         .height / 15;
-                                draw_circle_true_draw_rec_false = true;
 
                                 points.add(DrawingPoints(
                                     points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
+                                    circle: true,
                                     paint: Paint()
                                       ..strokeCap = strokeCap
                                       ..isAntiAlias = true
                                       ..color = random_Color().withOpacity(
                                           opacity)
-                                      ..strokeWidth = 10.0));
+                                      ..strokeWidth = 10.0
 
+                                ));
                                 count = -1;
                               });
                             }
@@ -1526,7 +1509,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                             fisrt_Point_drawed=true;
                     },
                     onPanEnd: (details) {
-
+                          fisrt_Point_drawed=false;
                     },
 
                     child: CustomPaint(
@@ -3392,9 +3375,17 @@ class DrawingPainter extends CustomPainter {
 
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < pointsList.length; i++) {
-      if (pointsList[i] != null) {
-        canvas.drawCircle(pointsList[i].points, size.height/30,
-            pointsList[i].paint);
+      if(pointsList[i].circle) {
+        if (pointsList[i] != null) {
+          canvas.drawCircle(pointsList[i].points, size.height / 30,
+              pointsList[i].paint);
+        }
+      }else{
+        if (pointsList[i] != null) {
+          canvas.drawCircle(pointsList[i].points, size.height / 30,
+              pointsList[i].paint);
+          canvas.drawLine(pointsList[0].points, pointsList[i].points, pointsList[i].paint);
+        }
       }
     }
   }
@@ -3405,7 +3396,8 @@ class DrawingPainter extends CustomPainter {
 class DrawingPoints {
   Paint paint;
   Offset points;
-  DrawingPoints({this.points, this.paint});
+  bool circle;
+  DrawingPoints({this.points, this.paint, this.circle});
 }
 
 
