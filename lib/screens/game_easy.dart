@@ -1424,6 +1424,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   }init_Pan_Update=1;
                   setState(() {
                     points.add(DrawingPoints(
+                      first:false,
                       points: Offset(
                         end_Of_Selection_dx,
                         end_Of_Selection_dy,),
@@ -1500,6 +1501,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       row_start=row;
                       column_start=column;
                       points.add(DrawingPoints(
+                          first:true,
                           points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
                           paint: Paint()
                             ..strokeCap = strokeCap
@@ -1509,7 +1511,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                             ..strokeWidth = MediaQuery
                                 .of(context)
                                 .size
-                                .height / 15
+                                .height / 15,
+
 
                       ));
                       count = -1;
@@ -3442,33 +3445,300 @@ class Countdown extends AnimatedWidget {
 
 class DrawingPainter extends CustomPainter {
 
-  Paint _paint;
   DrawingPainter({this.pointsList});
   List<DrawingPoints> pointsList;
   List<Offset> offsetPoints = List();
 
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < pointsList.length; i++) {
-      if(i%2==0) {
-        canvas.drawCircle(pointsList[i].points, size.height / 30,
-            pointsList[i].paint);
+      if(pointsList[i].first) {
+        if(pointsList.length-1==i) {
+          canvas.drawCircle(
+              pointsList[i].points, size.height / 30, pointsList[i].paint);
+        }
       }else{
-        canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
-        canvas.drawCircle(pointsList[i].points, size.height / 30,
-            pointsList[i].paint);
+        // canvas.drawCircle(pointsList[i].points, size.height / 30,pointsList[i].paint);
 
-        /* Rework in the angle_start to draw a perfect selection
-        canvas.drawArc(
-          Rect.fromCenter(
-            center: pointsList[i].points,
-            height: size.height/15,
-            width: size.height/15,),
-          asin((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx))/2-3.1415926535897932/2,
-          3.1415926535897932,
-          true,
-          pointsList[i].paint,
-        );
-        */
+
+        if(pointsList[i-1].points.dx==pointsList[i].points.dx
+        &&pointsList[i-1].points.dy>pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            0,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx==pointsList[i].points.dx
+            &&pointsList[i-1].points.dy<pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            0,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx>pointsList[i].points.dx
+            &&pointsList[i-1].points.dy==pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932*3/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx<pointsList[i].points.dx
+            &&pointsList[i-1].points.dy==pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932*3/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx==pointsList[i].points.dx
+            &&pointsList[i-1].points.dy>pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            0,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx==pointsList[i].points.dx
+            &&pointsList[i-1].points.dy<pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            0,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx>pointsList[i].points.dx
+            &&pointsList[i-1].points.dy==pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932*3/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx<pointsList[i].points.dx
+            &&pointsList[i-1].points.dy==pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932*3/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx>pointsList[i].points.dx
+            &&pointsList[i-1].points.dy>pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            asin(size.height/15*9/size.width),
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932+asin(size.height/15*9/size.width),
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx>pointsList[i].points.dx
+            &&pointsList[i-1].points.dy<pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932+asin(size.height/15*9/size.width),
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            asin(size.height/15*9/size.width),
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx<pointsList[i].points.dx
+            &&pointsList[i-1].points.dy>pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            asin(size.height/15*9/size.width)+3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932+asin(size.height/15*9/size.width)+3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }else if(pointsList[i-1].points.dx<pointsList[i].points.dx
+            &&pointsList[i-1].points.dy<pointsList[i].points.dy){
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i-1].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            3.1415926535897932+asin(size.height/15*9/size.width)+3.1415926535897932/2,
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+          canvas.drawArc(
+            Rect.fromCenter(
+              center: pointsList[i].points,
+              height: size.height / 15,
+              width: size.height / 15,),
+            (asin(size.height/15*9/size.width)+3.1415926535897932/2),
+            3.1415926535897932,
+            true,
+            pointsList[i].paint,
+          );
+        }
+
+
 
       }
     }
@@ -3480,5 +3750,6 @@ class DrawingPainter extends CustomPainter {
 class DrawingPoints {
   Paint paint;
   Offset points;
-  DrawingPoints({this.points, this.paint});
+  bool first;
+  DrawingPoints({this.points, this.paint, this.first});
 }
