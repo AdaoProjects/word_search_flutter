@@ -1339,6 +1339,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   bool fisrt_Point_drawed=false;
   int number_Of_Words_Selected=0;
   int init_Pan_Update=0;
+  List<int> solution_positions=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
+  int row_start;
+  int column_start;
+  int row_end;
+  int column_end;
   double start_Of_Selection_dx;
   double start_Of_Selection_dy;
   double end_Of_Selection_dx;
@@ -1412,24 +1417,26 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       .of(context)
                       .size
                       .height / 15;
+                  row_end=row;
+                  column_end=column;
                   if(init_Pan_Update!=0) {
                     points.removeAt(2*number_Of_Words_Selected + 1);
                   }init_Pan_Update=1;
                   setState(() {
                     points.add(DrawingPoints(
-                        points: Offset(
-                          end_Of_Selection_dx,
-                          end_Of_Selection_dy,),
-                        paint: Paint()
-                          ..strokeCap = strokeCap
-                          ..isAntiAlias = true
-                          ..color = selected_color.withOpacity(
-                              opacity)
-                          ..strokeWidth = MediaQuery
-                              .of(context)
-                              .size
-                              .height / 15,
-                        ));
+                      points: Offset(
+                        end_Of_Selection_dx,
+                        end_Of_Selection_dy,),
+                      paint: Paint()
+                        ..strokeCap = strokeCap
+                        ..isAntiAlias = true
+                        ..color = selected_color.withOpacity(
+                            opacity)
+                        ..strokeWidth = MediaQuery
+                            .of(context)
+                            .size
+                            .height / 15,
+                    ));
                   });
                 }
               }
@@ -1490,6 +1497,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                               .size
                               .height / 15;
 
+                      row_start=row;
+                      column_start=column;
                       points.add(DrawingPoints(
                           points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
                           paint: Paint()
@@ -1513,8 +1522,28 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             fisrt_Point_drawed=true;
           },
           onPanEnd: (details) {
-            number_Of_Words_Selected++;
-                fisrt_Point_drawed=false;
+            bool found_word=false;
+            for(int i =0 ;i<words.length;i++){
+              if(
+              row_start==solution_positions[4*i]&&
+              column_start==solution_positions[4*i+1]&&
+                  row_end==solution_positions[4*i+2]&&
+                  column_end==solution_positions[4*i+3]
+              ||
+                  row_start==solution_positions[4*i+2]&&
+                      column_start==solution_positions[4*i+3]&&
+                      row_end==solution_positions[4*i]&&
+                      column_end==solution_positions[4*i+1]){
+                found_word=true;
+                number_Of_Words_Selected++;
+              }
+            }
+            if(!found_word){
+              points.removeAt(2*number_Of_Words_Selected+1);
+              points.removeAt(2*number_Of_Words_Selected);
+            }
+
+            fisrt_Point_drawed=false;
           },
 
           child: CustomPaint(
@@ -3289,6 +3318,33 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         }
       }
     }
+    solution_positions[0]=row_one;
+    solution_positions[1]=column_one;
+    solution_positions[2]=row_one;
+    solution_positions[3]=column_one+word_one.length-1;
+    solution_positions[4]=row_two;
+    solution_positions[5]=column_two;
+    solution_positions[6]=row_two;
+    solution_positions[7]=column_two+word_two.length-1;
+    solution_positions[8]=row_three;
+    solution_positions[9]=column_three;
+    solution_positions[10]=row_three+word_three.length-1;
+    solution_positions[11]=column_three;
+    solution_positions[12]=row_four;
+    solution_positions[13]=column_four;
+    solution_positions[14]=row_four+word_four.length-1;
+    solution_positions[15]=column_four;
+    if(direction_of_diagonal==0) {
+      solution_positions[16]=row_five;
+      solution_positions[17]=column_five;
+      solution_positions[18]=row_five+word_five.length-1;
+      solution_positions[19]=column_five+word_five.length-1;
+    }else{
+      solution_positions[16]=row_five;
+      solution_positions[17]=column_five;
+      solution_positions[18]=row_five+word_five.length-1;
+      solution_positions[19]=column_five-word_five.length+1;
+    }
   }
 
   pick_Random_Words() {
@@ -3381,10 +3437,10 @@ class DrawingPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < pointsList.length; i++) {
       if(i%2==0) {
-          canvas.drawCircle(pointsList[i].points, size.height / 30,
-              pointsList[i].paint);
+        canvas.drawCircle(pointsList[i].points, size.height / 30,
+            pointsList[i].paint);
       }else{
-          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+        canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
 
       }
     }
