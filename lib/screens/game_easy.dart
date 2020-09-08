@@ -1361,1692 +1361,1696 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-                        child: GestureDetector(
-                    onPanUpdate: (details) {
-                      RenderBox box = context.findRenderObject();
-                      final Offset local = box.globalToLocal(
-                          details.globalPosition);
-                      for (int row = 0; row < 8; row++) {
-                        for (int column = 0; column < 8; column++) {
-                          if (local.dx > MediaQuery
+      backgroundColor: Colors.black,
+      body: Center(
+        child: GestureDetector(
+          onPanUpdate: (details) {
+            RenderBox box = context.findRenderObject();
+            final Offset local = box.globalToLocal(
+                details.globalPosition);
+            for (int row = 0; row < 8; row++) {
+              for (int column = 0; column < 8; column++) {
+                if (local.dx > MediaQuery
+                    .of(context)
+                    .size
+                    .width / 18.4
+                    + column * MediaQuery
+                        .of(context)
+                        .size
+                        .width / 9 && local.dx < MediaQuery
+                    .of(context)
+                    .size
+                    .width / 18.4 + (column + 1) * MediaQuery
+                    .of(context)
+                    .size
+                    .width / 9
+
+                    && local.dy > MediaQuery
+                        .of(context)
+                        .size
+                        .height / 3.732 + row * MediaQuery
+                        .of(context)
+                        .size
+                        .height / 15 && local.dy < MediaQuery
+                    .of(context)
+                    .size
+                    .height / 3.732 + (row + 1) * MediaQuery
+                    .of(context)
+                    .size
+                    .height / 15) {
+                  end_Of_Selection_dx = MediaQuery
+                      .of(context)
+                      .size
+                      .width / 18.4 + (column + 1 / 2) * MediaQuery
+                      .of(context)
+                      .size
+                      .width / 9;
+                  end_Of_Selection_dy = MediaQuery
+                      .of(context)
+                      .size
+                      .height / 3.732 + (row + 1 / 2) * MediaQuery
+                      .of(context)
+                      .size
+                      .height / 15;
+                  if(init_Pan_Update!=0) {
+                    points.removeAt(2*number_Of_Words_Selected + 1);
+                  }init_Pan_Update=1;
+                  setState(() {
+                    points.add(DrawingPoints(
+                        points: Offset(
+                          end_Of_Selection_dx,
+                          end_Of_Selection_dy,),
+                        paint: Paint()
+                          ..strokeCap = strokeCap
+                          ..isAntiAlias = true
+                          ..color = selected_color.withOpacity(
+                              opacity)
+                          ..strokeWidth = MediaQuery
                               .of(context)
                               .size
-                              .width / 18.4
-                              + column * MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 9 && local.dx < MediaQuery
-                              .of(context)
-                              .size
-                              .width / 18.4 + (column + 1) * MediaQuery
-                              .of(context)
-                              .size
-                              .width / 9
+                              .height / 15,
+                        ));
+                  });
+                }
+              }
+            }
 
-                              && local.dy > MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 3.732 + row * MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15 && local.dy < MediaQuery
-                              .of(context)
-                              .size
-                              .height / 3.732 + (row + 1) * MediaQuery
-                              .of(context)
-                              .size
-                              .height / 15) {
-                            end_Of_Selection_dx = MediaQuery
-                                .of(context)
-                                .size
-                                .width / 18.4 + (column + 1 / 2) * MediaQuery
-                                .of(context)
-                                .size
-                                .width / 9;
-                            end_Of_Selection_dy = MediaQuery
-                                .of(context)
-                                .size
-                                .height / 3.732 + (row + 1 / 2) * MediaQuery
-                                .of(context)
-                                .size
-                                .height / 15;
-                            if(init_Pan_Update!=0) {
-                              points.removeAt(number_Of_Words_Selected + 1);
-                            }init_Pan_Update=1;
-                            setState(() {
-                              points.add(DrawingPoints(
-                                  points: Offset(
-                                    end_Of_Selection_dx,
-                                    end_Of_Selection_dy,),
-                                  paint: Paint()
-                                    ..strokeCap = strokeCap
-                                    ..isAntiAlias = true
-                                    ..color = selected_color.withOpacity(
-                                        opacity)
-                                    ..strokeWidth = MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 15,
-                                  circle: false));
-                            });
-                            }
-                        }
-                      }
-
-                    },
-                    onPanStart: (details) {
-                      old_Puzzle = true;
-                      RenderBox box = context.findRenderObject();
-                      if(!fisrt_Point_drawed) {
-                        final Offset local = box.globalToLocal(
-                            details.globalPosition);
-                        for (int row = 0; row < 8; row++) {
-                          for (int column = 0; column < 8; column++) {
-                            if (local.dx > MediaQuery
-                                .of(context)
-                                .size
-                                .width / 18.4
-                                + column * MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width / 9 && local.dx < MediaQuery
-                                .of(context)
-                                .size
-                                .width / 18.4 + (column + 1) * MediaQuery
-                                .of(context)
-                                .size
-                                .width / 9
-
-                                && local.dy > MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 3.732 + row * MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 15 && local.dy < MediaQuery
-                                .of(context)
-                                .size
-                                .height / 3.732 + (row + 1) * MediaQuery
-                                .of(context)
-                                .size
-                                .height / 15) {
-                              setState(() {
-                                start_Of_Selection_dx=MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width / 18.4 +
-                                    (column + 1 / 2) * MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width / 9;
-                                start_Of_Selection_dy=MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 3.732 +
-                                    (row + 1 / 2) * MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 15;
-
-                                points.add(DrawingPoints(
-                                    points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
-                                    circle: true,
-                                    paint: Paint()
-                                      ..strokeCap = strokeCap
-                                      ..isAntiAlias = true
-                                      ..color = random_Color().withOpacity(
-                                          opacity)
-                                      ..strokeWidth = 10.0
-
-                                ));
-                                count = -1;
-                              });
-                            }
-                          }
-                        }
-                      }
-                            fisrt_Point_drawed=true;
-                    },
-                    onPanEnd: (details) {
-
-                    },
-
-                    child: CustomPaint(
-    size: Size.infinite,
-    foregroundPainter:DrawingPainter(
-      pointsList: points,
-    ) ,
-    child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                      Image.asset('assets/images/artecriada.jpg',
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 7,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width),
-                      Row(
-                          children: [
-                            SizedBox(width: MediaQuery
-                                .of(context)
-                                .size
-                                .width / 10),
-                            Text('LEVEL: EASY',
-                              style: TextStyle(fontSize: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 25,
-                                color:Colors.white,),
-                            ),
-                            SizedBox(width: MediaQuery
-                                .of(context)
-                                .size
-                                .width / 10),
-                            //Timer
-                            Icon(Icons.timer,
-                              color: Colors.white,),
-                            Countdown(
-                              animation: StepTween(
-                                begin: levelClock,
-                                end: 0,
-                              ).animate(_controller),
-                            ),
-                          ]
-                      ),
-                      SizedBox(height:MediaQuery
+          },
+          onPanStart: (details) {
+            old_Puzzle = true;
+            RenderBox box = context.findRenderObject();
+            if(!fisrt_Point_drawed) {
+              final Offset local = box.globalToLocal(
+                  details.globalPosition);
+              for (int row = 0; row < 8; row++) {
+                for (int column = 0; column < 8; column++) {
+                  if (local.dx > MediaQuery
+                      .of(context)
+                      .size
+                      .width / 18.4
+                      + column * MediaQuery
                           .of(context)
                           .size
-                          .height / 25),
-                      Container(
-                        width:MediaQuery
-                            .of(context)
-                            .size
-                            .width* 8/ 10 *1.1,
-                        child:Table(
-                          children: [
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
+                          .width / 9 && local.dx < MediaQuery
+                      .of(context)
+                      .size
+                      .width / 18.4 + (column + 1) * MediaQuery
+                      .of(context)
+                      .size
+                      .width / 9
 
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                              ],
-                            ),
-
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                              ],
-                            ),
-
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                 old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                              ],
-                            ),
-                            TableRow(
-                              children: [
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
-                                  ),
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                        .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                             .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-                                    .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-        .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-        .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-
-                                ),
-                                Container(
-                                  width:  MediaQuery
-                                      .of(context)
-                                      .size
-        .width/10*1.1,
-                                  height:  MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height /15,
-                                  alignment: Alignment.center,
-                                  child:
-                                  old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) :
-                                  Text(write_Puzzle_Letter(),
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 35),) ,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          
-                          boxShadow: [
-                            BoxShadow(
-                                color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
-                          ],
-                            borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30)
-                        ),
-                      ),
-                      SizedBox(height:MediaQuery
+                      && local.dy > MediaQuery
                           .of(context)
                           .size
-                          .height / 25),
-                      Container(
-                        width:MediaQuery
+                          .height / 3.732 + row * MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15 && local.dy < MediaQuery
+                      .of(context)
+                      .size
+                      .height / 3.732 + (row + 1) * MediaQuery
+                      .of(context)
+                      .size
+                      .height / 15) {
+                    setState(() {
+                      start_Of_Selection_dx=MediaQuery
+                          .of(context)
+                          .size
+                          .width / 18.4 +
+                          (column + 1 / 2) * MediaQuery
+                              .of(context)
+                              .size
+                              .width / 9;
+                      start_Of_Selection_dy=MediaQuery
+                          .of(context)
+                          .size
+                          .height / 3.732 +
+                          (row + 1 / 2) * MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15;
+
+                      points.add(DrawingPoints(
+                          points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
+                          paint: Paint()
+                            ..strokeCap = strokeCap
+                            ..isAntiAlias = true
+                            ..color = random_Color().withOpacity(
+                                opacity)
+                            ..strokeWidth = MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15
+
+                      ));
+                      count = -1;
+                      init_Pan_Update=0;
+                    });
+                  }
+                }
+              }
+            }
+            fisrt_Point_drawed=true;
+          },
+          onPanEnd: (details) {
+            number_Of_Words_Selected++;
+                fisrt_Point_drawed=false;
+          },
+
+          child: CustomPaint(
+            size: Size.infinite,
+            foregroundPainter:DrawingPainter(
+              pointsList: points,
+            ) ,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset('assets/images/artecriada.jpg',
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width),
+                  Row(
+                      children: [
+                        SizedBox(width: MediaQuery
                             .of(context)
                             .size
-                            .width* 3/ 5 ,
-                        child: Table(
-                            children: [
-                              TableRow( children:[
-                                Column(children:[
-                                  Text(words[0] + ", " + words[1],
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 30,
-                                        color:Colors.black),
-                                  ),
-                                ]
-                                ),
-                              ]
-                              ),
-                              TableRow( children:[
-                                Column(children:[
-                                  Text(words[2] + ", " + words[3],
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 30,
-                                        color:Colors.black),
-                                  ),
+                            .width / 10),
+                        Text('LEVEL: EASY',
+                          style: TextStyle(fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 25,
+                            color:Colors.white,),
+                        ),
+                        SizedBox(width: MediaQuery
+                            .of(context)
+                            .size
+                            .width / 10),
+                        //Timer
+                        Icon(Icons.timer,
+                          color: Colors.white,),
+                        Countdown(
+                          animation: StepTween(
+                            begin: levelClock,
+                            end: 0,
+                          ).animate(_controller),
+                        ),
                       ]
-                                ),
-                              ]
+                  ),
+                  SizedBox(height:MediaQuery
+                      .of(context)
+                      .size
+                      .height / 25),
+                  Container(
+                    width:MediaQuery
+                        .of(context)
+                        .size
+                        .width* 8/ 10 *1.1,
+                    child:Table(
+                      children: [
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
                               ),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
 
-                              TableRow( children:[
-                                Column(children:[
-                                  Text(words[4] ,
-                                    style: TextStyle(fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 30,
-                                        color:Colors.black),
-                                  ),
-                                ]
-                                ),
-                              ]
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                          ],
+                        ),
+
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                          ],
+                        ),
+
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)) : Text(write_Puzzle_Letter() ,style:TextStyle(fontSize: MediaQuery.of(context).size.height/35)),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
+                              ),
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/10*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35),) ,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+
+                        boxShadow: [
+                          BoxShadow(
+                              color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
+                        ],
+                        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30)
+                    ),
+                  ),
+                  SizedBox(height:MediaQuery
+                      .of(context)
+                      .size
+                      .height / 25),
+                  Container(
+                    width:MediaQuery
+                        .of(context)
+                        .size
+                        .width* 3/ 5 ,
+                    child: Table(
+                        children: [
+                          TableRow( children:[
+                            Column(children:[
+                              Text(words[0] + ", " + words[1],
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
                               ),
                             ]
-                        ),
+                            ),
+                          ]
+                          ),
+                          TableRow( children:[
+                            Column(children:[
+                              Text(words[2] + ", " + words[3],
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
+                              ),
+                            ]
+                            ),
+                          ]
+                          ),
 
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-
-                          boxShadow: [
-                            BoxShadow(
-                                color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
-
-                          ],
-                          borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
-                        ),
-                      ),
-                    ]
-                      ),
+                          TableRow( children:[
+                            Column(children:[
+                              Text(words[4] ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
+                              ),
+                            ]
+                            ),
+                          ]
+                          ),
+                        ]
                     ),
-                        ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+
+                      boxShadow: [
+                        BoxShadow(
+                            color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
+
+                      ],
+                      borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
+                    ),
+                  ),
+                ]
+            ),
+          ),
         ),
+      ),
 
     );
   }
@@ -3083,24 +3087,24 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     Random random = new Random();
     return letters[random.nextInt(26)];
   }
- create_Puzzle_Random(){
-   if (count == -1) {
-     for (int i = 0; i < 64; i++) {
-       puzzle[i] = write_Random_Letter();
-     }
-     pick_Random_Words();
-     write_Puzzle_Words(
-         puzzle, words[0], words[1], words[2], words[3], words[4]);
-     words.sort();
-   }
- }
+  create_Puzzle_Random(){
+    if (count == -1) {
+      for (int i = 0; i < 64; i++) {
+        puzzle[i] = write_Random_Letter();
+      }
+      pick_Random_Words();
+      write_Puzzle_Words(
+          puzzle, words[0], words[1], words[2], words[3], words[4]);
+      words.sort();
+    }
+  }
   String write_Puzzle_Letter() {
     create_Puzzle_Random();
     count++;
     if (count == 64) {
       count=0;
     }
-      return puzzle[count];
+    return puzzle[count];
   }
   String get_Old_Puzzle_Letter(){
     count++;
@@ -3295,11 +3299,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     int four = random.nextInt(1200);
     int five = random.nextInt(1200);
     while (all[three].length == 5 || all[four].length == 5 || all[five].length == 5 || one==two || one==three || one == four || one==five || two==three || two==four||two==five||three==four||three==five||four==five) {
-       one = random.nextInt(1200);
-       two = random.nextInt(1200);
+      one = random.nextInt(1200);
+      two = random.nextInt(1200);
       three = random.nextInt(1200);
       four = random.nextInt(1200);
-       five = random.nextInt(1200);
+      five = random.nextInt(1200);
     }
     words[0] = all[one].toUpperCase();
     words[1] = all[two].toUpperCase();
@@ -3376,29 +3380,21 @@ class DrawingPainter extends CustomPainter {
 
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < pointsList.length; i++) {
-      if(pointsList[i].circle) {
-        if (pointsList[i] != null) {
+      if(i%2==0) {
           canvas.drawCircle(pointsList[i].points, size.height / 30,
               pointsList[i].paint);
-        }
       }else{
-        if (pointsList[i] != null) {
-          canvas.drawCircle(pointsList[i].points, size.height / 30,
-              pointsList[i].paint);
-          canvas.drawLine(pointsList[0].points, pointsList[i].points, pointsList[i].paint);
-        }
+          canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+
       }
     }
   }
-      @override
-      bool shouldRepaint(DrawingPainter oldDelegate) => false;
-    }
+  @override
+  bool shouldRepaint(DrawingPainter oldDelegate) => false;
+}
 
 class DrawingPoints {
   Paint paint;
   Offset points;
-  bool circle;
-  DrawingPoints({this.points, this.paint, this.circle});
+  DrawingPoints({this.points, this.paint});
 }
-
-
