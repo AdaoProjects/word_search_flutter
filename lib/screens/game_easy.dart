@@ -3174,6 +3174,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               row_five + word_five.length - 1 >= row_two))) {
         row_one = random.nextInt(8);
         row_two = random.nextInt(8);
+        column_one = random.nextInt(8 - word_one.length + 1);
+        column_two = random.nextInt(8 - word_two.length + 1);
       }
 
       while ((column_three >= column_one &&
@@ -3218,6 +3220,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               row_five - word_five.length + 1 >= row_two)) {
         row_one = random.nextInt(8);
         row_two = random.nextInt(8);
+        column_one = random.nextInt(8 - word_one.length + 1);
+        column_two = random.nextInt(8 - word_two.length + 1);
       }
 
       while ((column_three >= column_one &&
