@@ -3445,6 +3445,21 @@ class DrawingPainter extends CustomPainter {
             pointsList[i].paint);
       }else{
         canvas.drawLine(pointsList[i-1].points, pointsList[i].points, pointsList[i].paint);
+        canvas.drawCircle(pointsList[i].points, size.height / 30,
+            pointsList[i].paint);
+
+        /* Rework in the angle_start to draw a perfect selection
+        canvas.drawArc(
+          Rect.fromCenter(
+            center: pointsList[i].points,
+            height: size.height/15,
+            width: size.height/15,),
+          asin((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx))/2-3.1415926535897932/2,
+          3.1415926535897932,
+          true,
+          pointsList[i].paint,
+        );
+        */
 
       }
     }
