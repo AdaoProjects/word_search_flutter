@@ -3241,7 +3241,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                         row_five + word_five.length - 1 <=
                             row_four + word_two.length - 1)))) {
           if (tried_too_much_just_find_solution > 90) {
-            row_four = 7;
+            row_four = 7-word_four.length+1;
             if (tried_too_much_just_find_solution % 9 != 0) {
               row_four--;
             } else {
@@ -3256,6 +3256,22 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             column_four = 7;
           }
         }
+
+          if (random.nextInt(2) == 0) {
+            for (int i = 0; i < word_five.length; i++) {
+              puzzle[(row_five + i) * 8 + column_five + i] = word_five[i];
+            }
+          } else {
+            for (int i = 0; i < word_five.length; i++) {
+              puzzle[(row_five + i) * 8 + column_five + i] =
+              word_five[word_five.length - 1 - i];
+            }
+          }
+          solution_positions[16]=row_five;
+          solution_positions[17]=column_five;
+          solution_positions[18]=row_five+word_five.length-1;
+          solution_positions[19]=column_five+word_five.length-1;
+
       } else {
         row_five = random.nextInt(8 - word_five.length + 1);
         column_five = 7 - random.nextInt(8 - word_five.length + 1);
@@ -3327,7 +3343,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                         row_five + word_five.length - 1 <=
                             row_four + word_two.length - 1)))) {
           if (tried_too_much_just_find_solution > 90) {
-            row_four = 7;
+            row_four = 7-word_four.length+1;
             if (tried_too_much_just_find_solution % 9 != 0) {
               row_four--;
             } else {
@@ -3343,17 +3359,33 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           }
         }
       }
+
+        if (random.nextInt(2) == 0) {
+          for (int i = 0; i < word_five.length; i++) {
+            puzzle[(row_five + i) * 8 + column_five - i] = word_five[i];
+          }
+        } else {
+          for (int i = 0; i < word_five.length; i++) {
+            puzzle[(row_five + i) * 8 + column_five - i] =
+            word_five[word_five.length - 1 - i];
+          }
+        }
+        solution_positions[16]=row_five;
+        solution_positions[17]=column_five;
+        solution_positions[18]=row_five+word_five.length-1;
+        solution_positions[19]=column_five-word_five.length+1;
+
     }else{
       if(random.nextInt(2)==0){
        row_five=random.nextInt(8);
-       column_five=random.nextInt(8-word_five.length);
+       column_five=random.nextInt(8-word_five.length+1);
        while(row_five==row_one || row_five==row_two|| row_one==row_two){
           row_one = random.nextInt(8);
           row_two = random.nextInt(8);
           row_five=random.nextInt(8);
-          column_one=random.nextInt(8-word_five.length);
-          column_two=random.nextInt(8-word_five.length);
-          column_five=random.nextInt(8-word_five.length);
+          column_one=random.nextInt(8-word_one.length+1);
+          column_two=random.nextInt(8-word_two.length+1);
+          column_five=random.nextInt(8-word_five.length+1);
        }
        while ((column_three >= column_one &&
            column_three <= column_one + word_one.length - 1 &&
@@ -3383,14 +3415,28 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
          column_four = random.nextInt(8);
          row_four = random.nextInt(8 - word_four.length + 1);
        }
+       if (random.nextInt(2) == 0) {
+         for (int i = 0; i < word_five.length; i++) {
+           puzzle[row_five * 8 + i + column_five] = word_five[i];
+         }
+       } else {
+         for (int i = 0; i < word_five.length; i++) {
+           puzzle[row_five * 8 + i + column_five] =
+           word_five[word_five.length - 1 - i];
+         }
+       }
+       solution_positions[16]=row_five;
+       solution_positions[17]=column_five;
+       solution_positions[18]=row_five;
+       solution_positions[19]=column_five+word_five.length-1;
       }else{
         row_five=random.nextInt(8-word_five.length);
         column_five=random.nextInt(8);
         while(row_one==row_two){
           row_one = random.nextInt(8);
           row_two = random.nextInt(8);
-          column_one=random.nextInt(8-word_five.length);
-          column_two=random.nextInt(8-word_five.length);
+          column_one=random.nextInt(8-word_one.length+1);
+          column_two=random.nextInt(8-word_two.length+1);
         }
         while ((column_three >= column_one &&
             column_three <= column_one + word_one.length - 1 &&
@@ -3421,10 +3467,24 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             (column_five >= column_two &&
                 column_five <= column_two + word_two.length - 1 &&
                 row_five <= row_two &&
-                row_five + word_five.length - 1 >= row_two)||column_three==column_five||column_four==column_five){
+                row_five + word_five.length - 1 >= row_two)||column_three==column_five||column_four ==column_five){
           column_five = random.nextInt(8);
           row_five = random.nextInt(8 - word_five.length + 1);
         }
+        if (random.nextInt(2) == 0) {
+          for (int i = 0; i < word_five.length; i++) {
+            puzzle[(row_five + i) * 8 + column_five] = word_five[i];
+          }
+        } else {
+          for (int i = 0; i < word_five.length; i++) {
+            puzzle[(row_five + i) * 8 + column_five] =
+            word_five[word_five.length - 1 - i];
+          }
+        }
+        solution_positions[16]=row_five;
+        solution_positions[17]=column_five;
+        solution_positions[18]=row_five+word_five.length-1;
+        solution_positions[19]=column_five;
       }
     }
     // now it just needs to write  the letters in the list string puzzle which in two possible ways original order or reverse order
@@ -3469,30 +3529,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         word_four[word_four.length - 1 - i];
       }
     }
-
-    if (direction_of_diagonal == 0) {
-      if (random.nextInt(2) == 0) {
-        for (int i = 0; i < word_five.length; i++) {
-          puzzle[(row_five + i) * 8 + column_five + i] = word_five[i];
-        }
-      } else {
-        for (int i = 0; i < word_five.length; i++) {
-          puzzle[(row_five + i) * 8 + column_five + i] =
-          word_five[word_five.length - 1 - i];
-        }
-      }
-    } else {
-      if (random.nextInt(2) == 0) {
-        for (int i = 0; i < word_five.length; i++) {
-          puzzle[(row_five + i) * 8 + column_five - i] = word_five[i];
-        }
-      } else {
-        for (int i = 0; i < word_five.length; i++) {
-          puzzle[(row_five + i) * 8 + column_five - i] =
-          word_five[word_five.length - 1 - i];
-        }
-      }
-    }
     solution_positions[0]=row_one;
     solution_positions[1]=column_one;
     solution_positions[2]=row_one;
@@ -3509,17 +3545,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     solution_positions[13]=column_four;
     solution_positions[14]=row_four+word_four.length-1;
     solution_positions[15]=column_four;
-    if(direction_of_diagonal==0) {
-      solution_positions[16]=row_five;
-      solution_positions[17]=column_five;
-      solution_positions[18]=row_five+word_five.length-1;
-      solution_positions[19]=column_five+word_five.length-1;
-    }else{
-      solution_positions[16]=row_five;
-      solution_positions[17]=column_five;
-      solution_positions[18]=row_five+word_five.length-1;
-      solution_positions[19]=column_five-word_five.length+1;
-    }
+
   }
 
   pick_Random_Words() {
@@ -3536,11 +3562,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       four = random.nextInt(1200);
       five = random.nextInt(1200);
     }
-    words[0] = all[one].toUpperCase();
-    words[1] = all[two].toUpperCase();
-    words[2] = all[three].toUpperCase();
-    words[3] = all[four].toUpperCase();
-    words[4] = all[five].toUpperCase();
+    words[0] = all[one];
+    words[1] = all[two];
+    words[2] = all[three];
+    words[3] = all[four];
+    words[4] = all[five];
   }
   Color random_Color(){
     Random random = new Random();
