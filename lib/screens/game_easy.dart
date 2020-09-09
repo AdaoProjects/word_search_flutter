@@ -836,7 +836,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'wheat',
     'aisle',
     'vocal',
-    'risky',
+    'scratchy',
     'pasta',
     'genre',
     'merit',
@@ -1133,7 +1133,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'south',
     'floor',
     'close',
-    'risk',
+    'scratch',
     'fire',
     'wrong',
     'bank',
@@ -1337,6 +1337,22 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'tiny',
     'block',
   ];
+  int second_Count;
+  bool word_one_scratch =false;
+  bool word_two_scratch=false;
+  bool word_three_scratch=false;
+  bool word_four_scratch=false;
+  bool word_five_scratch=false;
+  int row_one;
+  int column_one;
+  int row_two;
+  int column_two;
+  int row_three;
+  int column_three;
+  int row_four;
+  int column_four;
+  int row_five;
+  int column_five;
 //Paint
   bool fisrt_Point_drawed=false;
   int number_Of_Words_Selected=0;
@@ -1545,6 +1561,27 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       column_end==solution_positions[4*i+1]){
                 found_word=true;
                 number_Of_Words_Selected++;
+                if((row_one==row_start && column_one==column_start) ||(row_one==row_end && column_one==column_end) ){
+                  setState(() {
+                    word_one_scratch=true;
+                  });
+                }else if((row_two==row_start && column_two==column_start) ||(row_two==row_end && column_two==column_end) ){
+                  setState(() {
+                    word_two_scratch=true;
+                  });
+                }else if((row_three==row_start && column_three==column_start) ||(row_three==row_end && column_three==column_end) ){
+                  setState(() {
+                    word_three_scratch=true;
+                  });
+                }else if((row_four==row_start && column_four==column_start) ||(row_four==row_end && column_four==column_end) ){
+                  setState(() {
+                    word_four_scratch=true;
+                  });
+                }else {
+                  setState(() {
+                    word_five_scratch=true;
+                  });
+                }
               }
             }
             if(!found_word){
@@ -3030,41 +3067,101 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     child: Table(
                         children: [
                           TableRow( children:[
-                            Column(children:[
-                              Text(words[0] + ", " + words[1],
+                            Row(children:[
+                              SizedBox(width:MediaQuery.of(context).size.width/10),
+                              word_one_scratch ? Center(child:Text(words[0]+', ' ,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                    color:Colors.black),
+                              )):Center(child:Text(words[0]+',' ,
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
                                     .height / 30,
                                     color:Colors.black),
-                              ),
+                              ),),
+                              SizedBox(width:MediaQuery.of(context).size.width/15),
+                              word_two_scratch ? Text(words[1] ,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                    color:Colors.black),
+                              ):Text(words[1] ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
+                              )
                             ]
                             ),
-                          ]
-                          ),
+          ]),
+
+
                           TableRow( children:[
-                            Column(children:[
-                              Text(words[2] + ", " + words[3],
+                            Row(children:[
+                              SizedBox(width:MediaQuery.of(context).size.width/10),
+                              word_three_scratch ? Center(child:Text(words[2]+', ' ,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                    color:Colors.black),
+                              )):Center(child:Text(words[2]+',' ,
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
                                     .height / 30,
                                     color:Colors.black),
-                              ),
+                              ),),
+                              SizedBox(width:MediaQuery.of(context).size.width/15),
+                              word_four_scratch ? Center(child:Text(words[3] ,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,
+                                    color:Colors.black),
+                              ),):Center(child:Text(words[3] ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,
+                                    color:Colors.black),
+                              ),),
                             ]
                             ),
                           ]
                           ),
 
                           TableRow( children:[
-                            Column(children:[
-                              Text(words[4] ,
+                            Column(
+                                children:[
+                              word_five_scratch ? Text(words[4] ,
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 30,
+                                  color:Colors.black),
+                            ):Text(words[4] ,
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
                                     .height / 30,
                                     color:Colors.black),
-                              ),
+                              )
                             ]
                             ),
                           ]
@@ -3132,7 +3229,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       pick_Random_Words();
       write_Puzzle_Words(
           puzzle, words[0], words[1], words[2], words[3], words[4]);
-      words.sort();
     }
   }
   String write_Puzzle_Letter() {
@@ -3155,21 +3251,21 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       String word_three, String word_four, String word_five) {
     Random random = new Random();
     // the row and column from the 'beginer of the words', rigth is positive and down is positive, later the word can be changed to reversed order so it makes more difficult the puzzle
-    int row_one = random.nextInt(8);
-    int row_two = random.nextInt(8);
-    int row_three = random.nextInt(8 - word_three.length + 1);
-    int row_four = random.nextInt(8 - word_four.length + 1);
-    int row_five;
-    int column_one = random.nextInt(8 - word_one.length + 1);
-    int column_two = random.nextInt(8 - word_two.length + 1);
-    int column_three = random.nextInt(8);
-    int column_four = random.nextInt(8);
-    int column_five;
+     row_one = random.nextInt(8);
+     row_two = random.nextInt(8);
+    row_three = random.nextInt(8 - word_three.length + 1);
+     row_four = random.nextInt(8 - word_four.length + 1);
+
+     column_one = random.nextInt(8 - word_one.length + 1);
+     column_two = random.nextInt(8 - word_two.length + 1);
+     column_three = random.nextInt(8);
+     column_four = random.nextInt(8);
+
 
     int direction_of_diagonal = random.nextInt(2);
     //  zero is SO, one is SE
     if(random.nextInt(2)==0) {
-      if (direction_of_diagonal == 0) {
+      if (random.nextInt(2)==0) {
         row_five = random.nextInt(8 - word_five.length + 1);
         column_five = random.nextInt(8 - word_five.length + 1);
 
@@ -3303,8 +3399,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_three <= column_two + word_two.length - 1 &&
                 row_three <= row_two &&
                 row_three + word_three.length - 1 >= row_two) ||
-            ((column_five <= column_three &&
-                column_five - word_five.length + 1 >= column_three) &&
+            ((column_five >= column_three &&
+                column_five - word_five.length + 1 <= column_three) &&
                 ((row_five >= row_three &&
                     row_five <= row_three + word_two.length - 1) ||
                     (row_five + word_five.length - 1 >= row_three &&
@@ -3335,8 +3431,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_four <= column_two + word_two.length - 1 &&
                 row_four <= row_two &&
                 row_four + word_four.length - 1 >= row_two) ||
-            ((column_five <= column_four &&
-                column_five - word_five.length + 1 >= column_four) &&
+            ((column_five >= column_four &&
+                column_five - word_five.length + 1 <= column_four) &&
                 ((row_five >= row_four &&
                     row_five <= row_four + word_two.length - 1) ||
                     (row_five + word_five.length - 1 >= row_four &&
@@ -3562,12 +3658,13 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       four = random.nextInt(1200);
       five = random.nextInt(1200);
     }
-    words[0] = all[one];
-    words[1] = all[two];
-    words[2] = all[three];
-    words[3] = all[four];
-    words[4] = all[five];
+    words[0] = all[one].toUpperCase();
+    words[1] = all[two].toUpperCase();
+    words[2] = all[three].toUpperCase();
+    words[3] = all[four].toUpperCase();
+    words[4] = all[five].toUpperCase();
   }
+
   Color random_Color(){
     Random random = new Random();
     selected_color=colors[random.nextInt(4)];
