@@ -3068,7 +3068,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                         children: [
                           TableRow( children:[
                             Row(children:[
-                              SizedBox(width:MediaQuery.of(context).size.width/10),
+                              SizedBox(width:MediaQuery.of(context).size.width/13),
                               word_one_scratch ? Center(child:Text(words[0]+', ' ,
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -3107,7 +3107,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
                           TableRow( children:[
                             Row(children:[
-                              SizedBox(width:MediaQuery.of(context).size.width/10),
+                              SizedBox(width:MediaQuery.of(context).size.width/13),
                               word_three_scratch ? Center(child:Text(words[2]+', ' ,
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -3264,7 +3264,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
     int direction_of_diagonal = random.nextInt(2);
     //  zero is SO, one is SE
-    if(random.nextInt(2)==0) {
+    if(false) {
       if (random.nextInt(2)==0) {
         row_five = random.nextInt(8 - word_five.length + 1);
         column_five = random.nextInt(8 - word_five.length + 1);
@@ -3472,7 +3472,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         solution_positions[19]=column_five-word_five.length+1;
 
     }else{
-      if(random.nextInt(2)==0){
+      if(true){
        row_five=random.nextInt(8);
        column_five=random.nextInt(8-word_five.length+1);
        while(row_five==row_one || row_five==row_two|| row_one==row_two){
