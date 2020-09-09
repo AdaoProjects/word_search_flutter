@@ -3163,28 +3163,18 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
     int direction_of_diagonal = random.nextInt(2);
     //  zero is SO, one is SE
-
     if (direction_of_diagonal == 0) {
       row_five = random.nextInt(8 - word_five.length + 1);
       column_five = random.nextInt(8 - word_five.length + 1);
 
-      while (row_one == row_two || ((((column_five >= column_one &&
-          column_five <= column_one + word_one.length - 1 )||(column_five+word_five.length-1 >= column_one &&
-          column_five+word_five.length-1 <= column_one +word_one.length-1 ))&&((row_five >= row_one &&
-          row_five <= row_one + word_one.length - 1 )||(row_five+word_five.length-1 >= row_one &&
-          row_five+word_five.length-1 <= row_one +word_one.length-1 )) )||
-          (((column_five >= column_two &&
-              column_five <= column_two + word_two.length - 1 )||(column_five+word_five.length-1 >= column_two &&
-              column_five+word_five.length-1 <= column_two +word_two.length-1 ))&&((row_five >= row_two &&
-              row_five <= row_two + word_two.length - 1 )||(row_five+word_five.length-1 >= row_two &&
-              row_five+word_five.length-1 <= row_two +word_two.length-1 )) ))) {
+      while (row_one == row_two || ((row_five<=row_one &&row_five+word_five.length-1>=row_one)&&((column_five>=column_one &&column_five<=column_one+word_one.length-1)||(column_five+word_five.length-1>=column_one&&column_five+word_five.length-1<=column_one+word_one.length-1)))
+||((row_five<=row_two &&row_five+word_five.length-1>=row_two)&&((column_five>=column_two &&column_five<=column_two+word_two.length-1)||(column_five+word_five.length-1>=column_two&&column_five+word_five.length-1<=column_two+word_two.length-1)))){
         row_one = random.nextInt(8);
         row_two = random.nextInt(8);
         column_one = random.nextInt(8 - word_one.length + 1);
         column_two = random.nextInt(8 - word_two.length + 1);
-        print('a');
       }
-
+      int tried_too_much_just_find_solution=0;
       while ((column_three >= column_one &&
           column_three <= column_one + word_one.length - 1 &&
           row_three <= row_one &&
@@ -3193,16 +3183,26 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               column_three <= column_two + word_two.length - 1 &&
               row_three <= row_two &&
               row_three + word_three.length - 1 >= row_two) ||
-          (((column_five >= column_three &&
-              column_five <= column_three + word_three.length - 1 )||(column_five+word_five.length-1 >= column_three &&
-              column_five+word_five.length-1 <= column_three +word_three.length-1 ))&&((row_five >= row_three &&
-              row_five <= row_three + word_three.length - 1 )||(row_five+word_five.length-1 >= row_three &&
-              row_five+word_five.length-1 <= row_three +word_three.length-1 )) )) {
-        column_three = random.nextInt(8);
-        row_three = random.nextInt(8 - word_three.length + 1);
-        print('b');
+          ((column_five<=column_three &&column_five+word_five.length-1>=column_three)&&((row_five>=row_three &&row_five<=row_three+word_two.length-1)||(row_five+word_five.length-1>=row_three&&row_five+word_five.length-1<=row_three+word_two.length-1)))) {
+
+        if(tried_too_much_just_find_solution>90){
+          row_three=0;
+          if(tried_too_much_just_find_solution%9!=0){
+            row_three++;
+          }else{
+            column_three++;
+          }
+        }else {
+          column_three = random.nextInt(8);
+          row_three = random.nextInt(8 - word_three.length + 1);
+        }
+        tried_too_much_just_find_solution++;
+        if(tried_too_much_just_find_solution==91){
+          column_three=0;
+        }
       }
-      while ((column_four >= column_one &&
+      tried_too_much_just_find_solution=0;
+      while (column_four==column_three||(column_four >= column_one &&
           column_four <= column_one + word_one.length - 1 &&
           row_four <= row_one &&
           row_four + word_four.length - 1 >= row_one) ||
@@ -3210,35 +3210,35 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               column_four <= column_two + word_two.length - 1 &&
               row_four <= row_two &&
               row_four + word_four.length - 1 >= row_two) ||
-          (((column_five >= column_four &&
-              column_five <= column_four + word_four.length - 1 )||(column_five+word_five.length-1 >= column_four &&
-              column_five+word_five.length-1 <= column_four +word_four.length-1 ))&&((row_five >= row_four &&
-              row_five <= row_four + word_four.length - 1 )||(row_five+word_five.length-1 >= row_four &&
-              row_five+word_five.length-1 <= row_four +word_four.length-1 )) )) {
-        column_four = random.nextInt(8);
-        row_four = random.nextInt(8 - word_four.length + 1);
-        print('c');
-    }
+          ((column_five<=column_four &&column_five+word_five.length-1>=column_four)&&((row_five>=row_four &&row_five<=row_four+word_two.length-1)||(row_five+word_five.length-1>=row_four&&row_five+word_five.length-1<=row_four+word_two.length-1))))
+       {
+         if(tried_too_much_just_find_solution>90){
+           row_four=7;
+           if(tried_too_much_just_find_solution%9!=0){
+             row_four--;
+           }else{
+             column_four--;
+           }
+         }else {
+           column_four = random.nextInt(8);
+           row_four = random.nextInt(8 - word_four.length + 1);
+         }
+         tried_too_much_just_find_solution++;
+         if(tried_too_much_just_find_solution==91){
+           column_four=7;
+         }
+       }
     }else {
       row_five = random.nextInt(8 - word_five.length + 1);
       column_five = 7 - random.nextInt(8 - word_five.length + 1);
-      while (row_one == row_two || ((((column_five >= column_one &&
-          column_five <= column_one + word_one.length - 1 )||(column_five-word_five.length+1 >= column_one &&
-          column_five-word_five.length+1 <= column_one +word_one.length-1 ))&&((row_five >= row_one &&
-          row_five <= row_one + word_one.length - 1 )||(row_five+word_five.length-1 >= row_one &&
-          row_five+word_five.length-1 <= row_one +word_one.length-1 )) )||
-          (((column_five >= column_two &&
-              column_five <= column_two + word_two.length - 1 )||(column_five-word_five.length+1 >= column_two &&
-              column_five-word_five.length+1 <= column_two +word_two.length-1 ))&&((row_five >= row_two &&
-              row_five <= row_two + word_two.length - 1 )||(row_five+word_five.length-1 >= row_two &&
-              row_five+word_five.length-1 <= row_two +word_two.length-1 )) ))) {
+      while (row_one == row_two || ((row_five<=row_one &&row_five+word_five.length-1>=row_one)&&((column_five>=column_one &&column_five<=column_one+word_one.length-1)||(column_five-word_five.length+1>=column_one&&column_five-word_five.length+1<=column_one+word_one.length-1)))
+          ||((row_five<=row_two &&row_five+word_five.length-1>=row_two)&&((column_five>=column_two &&column_five<=column_two+word_two.length-1)||(column_five-word_five.length+1>=column_two&&column_five-word_five.length+1<=column_two+word_two.length-1)))){
         row_one = random.nextInt(8);
         row_two = random.nextInt(8);
         column_one = random.nextInt(8 - word_one.length + 1);
         column_two = random.nextInt(8 - word_two.length + 1);
-        print('d');
       }
-
+      int tried_too_much_just_find_solution=0;
       while ((column_three >= column_one &&
           column_three <= column_one + word_one.length - 1 &&
           row_three <= row_one &&
@@ -3247,16 +3247,26 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               column_three <= column_two + word_two.length - 1 &&
               row_three <= row_two &&
               row_three + word_three.length - 1 >= row_two) ||
-          (((column_five >= column_three &&
-              column_five <= column_three + word_three.length - 1 )||(column_five-word_five.length+1 >= column_three &&
-              column_five-word_five.length+1 <= column_three +word_three.length-1 ))&&((row_five >= row_three &&
-              row_five <= row_three + word_three.length - 1 )||(row_five+word_five.length-1 >= row_three &&
-              row_five+word_five.length-1 <= row_three +word_three.length-1 )) )) {
-        column_three = random.nextInt(8);
-        row_three = random.nextInt(8 - word_three.length + 1);
-        print('e');
+          ((column_five<=column_three &&column_five-word_five.length+1>=column_three)&&((row_five>=row_three &&row_five<=row_three+word_two.length-1)||(row_five+word_five.length-1>=row_three&&row_five+word_five.length-1<=row_three+word_two.length-1)))) {
+
+        if(tried_too_much_just_find_solution>90){
+          row_three=0;
+          if(tried_too_much_just_find_solution%9!=0){
+            row_three++;
+          }else{
+            column_three++;
+          }
+        }else {
+          column_three = random.nextInt(8);
+          row_three = random.nextInt(8 - word_three.length + 1);
+        }
+        tried_too_much_just_find_solution++;
+        if(tried_too_much_just_find_solution==91){
+          column_three=0;
+        }
       }
-      while ((column_four >= column_one &&
+      tried_too_much_just_find_solution=0;
+      while (column_four==column_three||(column_four >= column_one &&
           column_four <= column_one + word_one.length - 1 &&
           row_four <= row_one &&
           row_four + word_four.length - 1 >= row_one) ||
@@ -3264,14 +3274,23 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               column_four <= column_two + word_two.length - 1 &&
               row_four <= row_two &&
               row_four + word_four.length - 1 >= row_two) ||
-          (((column_five >= column_four &&
-              column_five <= column_four + word_four.length - 1 )||(column_five-word_five.length+1 >= column_four &&
-              column_five-word_five.length+1 <= column_four +word_four.length-1 ))&&((row_five >= row_four &&
-              row_five <= row_four + word_four.length - 1 )||(row_five+word_five.length-1 >= row_four &&
-              row_five+word_five.length-1 <= row_four +word_four.length-1 )) )) {
-        column_four = random.nextInt(8);
-        row_four = random.nextInt(8 - word_four.length + 1);
-        print('f');
+          ((column_five<=column_four &&column_five-word_five.length+1>=column_four)&&((row_five>=row_four &&row_five<=row_four+word_two.length-1)||(row_five+word_five.length-1>=row_four&&row_five+word_five.length-1<=row_four+word_two.length-1))))
+      {
+        if(tried_too_much_just_find_solution>90){
+          row_four=7;
+          if(tried_too_much_just_find_solution%9!=0){
+            row_four--;
+          }else{
+            column_four--;
+          }
+        }else {
+          column_four = random.nextInt(8);
+          row_four = random.nextInt(8 - word_four.length + 1);
+        }
+        tried_too_much_just_find_solution++;
+        if(tried_too_much_just_find_solution==91){
+          column_four=7;
+        }
       }
     }
     // now it just needs to write  the letters in the list string puzzle which in two possible ways original order or reverse order
@@ -3760,7 +3779,7 @@ class DrawingPainter extends CustomPainter {
             );
           }
 
-        }//end else
+        }
       }
     }
   }
