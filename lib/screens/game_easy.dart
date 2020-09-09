@@ -1551,7 +1551,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               points.removeAt(2*number_Of_Words_Selected+1);
               points.removeAt(2*number_Of_Words_Selected);
             }
-
             fisrt_Point_drawed=false;
           },
 
@@ -3169,133 +3168,262 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
     int direction_of_diagonal = random.nextInt(2);
     //  zero is SO, one is SE
-    if (direction_of_diagonal == 0) {
-      row_five = random.nextInt(8 - word_five.length + 1);
-      column_five = random.nextInt(8 - word_five.length + 1);
+    if(random.nextInt(2)==0) {
+      if (direction_of_diagonal == 0) {
+        row_five = random.nextInt(8 - word_five.length + 1);
+        column_five = random.nextInt(8 - word_five.length + 1);
 
-      while (row_one == row_two || ((row_five<=row_one &&row_five+word_five.length-1>=row_one)&&((column_five>=column_one &&column_five<=column_one+word_one.length-1)||(column_five+word_five.length-1>=column_one&&column_five+word_five.length-1<=column_one+word_one.length-1)))
-||((row_five<=row_two &&row_five+word_five.length-1>=row_two)&&((column_five>=column_two &&column_five<=column_two+word_two.length-1)||(column_five+word_five.length-1>=column_two&&column_five+word_five.length-1<=column_two+word_two.length-1)))){
-        row_one = random.nextInt(8);
-        row_two = random.nextInt(8);
-        column_one = random.nextInt(8 - word_one.length + 1);
-        column_two = random.nextInt(8 - word_two.length + 1);
-      }
-      int tried_too_much_just_find_solution=0;
-      while ((column_three >= column_one &&
-          column_three <= column_one + word_one.length - 1 &&
-          row_three <= row_one &&
-          row_three + word_three.length - 1 >= row_one) ||
-          (column_three >= column_two &&
-              column_three <= column_two + word_two.length - 1 &&
-              row_three <= row_two &&
-              row_three + word_three.length - 1 >= row_two) ||
-          ((column_five<=column_three &&column_five+word_five.length-1>=column_three)&&((row_five>=row_three &&row_five<=row_three+word_two.length-1)||(row_five+word_five.length-1>=row_three&&row_five+word_five.length-1<=row_three+word_two.length-1)))) {
-
-        if(tried_too_much_just_find_solution>90){
-          row_three=0;
-          if(tried_too_much_just_find_solution%9!=0){
-            row_three++;
-          }else{
-            column_three++;
+        while (row_one == row_two || ((row_five <= row_one &&
+            row_five + word_five.length - 1 >= row_one) &&
+            ((column_five >= column_one &&
+                column_five <= column_one + word_one.length - 1) ||
+                (column_five + word_five.length - 1 >= column_one &&
+                    column_five + word_five.length - 1 <=
+                        column_one + word_one.length - 1)))
+            || ((row_five <= row_two &&
+                row_five + word_five.length - 1 >= row_two) &&
+                ((column_five >= column_two &&
+                    column_five <= column_two + word_two.length - 1) ||
+                    (column_five + word_five.length - 1 >= column_two &&
+                        column_five + word_five.length - 1 <=
+                            column_two + word_two.length - 1)))) {
+          row_one = random.nextInt(8);
+          row_two = random.nextInt(8);
+          column_one = random.nextInt(8 - word_one.length + 1);
+          column_two = random.nextInt(8 - word_two.length + 1);
+        }
+        int tried_too_much_just_find_solution = 0;
+        while ((column_three >= column_one &&
+            column_three <= column_one + word_one.length - 1 &&
+            row_three <= row_one &&
+            row_three + word_three.length - 1 >= row_one) ||
+            (column_three >= column_two &&
+                column_three <= column_two + word_two.length - 1 &&
+                row_three <= row_two &&
+                row_three + word_three.length - 1 >= row_two) ||
+            ((column_five <= column_three &&
+                column_five + word_five.length - 1 >= column_three) &&
+                ((row_five >= row_three &&
+                    row_five <= row_three + word_two.length - 1) ||
+                    (row_five + word_five.length - 1 >= row_three &&
+                        row_five + word_five.length - 1 <=
+                            row_three + word_two.length - 1)))) {
+          if (tried_too_much_just_find_solution > 90) {
+            row_three = 0;
+            if (tried_too_much_just_find_solution % 9 != 0) {
+              row_three++;
+            } else {
+              column_three++;
+            }
+          } else {
+            column_three = random.nextInt(8);
+            row_three = random.nextInt(8 - word_three.length + 1);
           }
-        }else {
-          column_three = random.nextInt(8);
-          row_three = random.nextInt(8 - word_three.length + 1);
+          tried_too_much_just_find_solution++;
+          if (tried_too_much_just_find_solution == 91) {
+            column_three = 0;
+          }
         }
-        tried_too_much_just_find_solution++;
-        if(tried_too_much_just_find_solution==91){
-          column_three=0;
+        tried_too_much_just_find_solution = 0;
+        while (column_four == column_three || (column_four >= column_one &&
+            column_four <= column_one + word_one.length - 1 &&
+            row_four <= row_one &&
+            row_four + word_four.length - 1 >= row_one) ||
+            (column_four >= column_two &&
+                column_four <= column_two + word_two.length - 1 &&
+                row_four <= row_two &&
+                row_four + word_four.length - 1 >= row_two) ||
+            ((column_five <= column_four &&
+                column_five + word_five.length - 1 >= column_four) &&
+                ((row_five >= row_four &&
+                    row_five <= row_four + word_two.length - 1) ||
+                    (row_five + word_five.length - 1 >= row_four &&
+                        row_five + word_five.length - 1 <=
+                            row_four + word_two.length - 1)))) {
+          if (tried_too_much_just_find_solution > 90) {
+            row_four = 7;
+            if (tried_too_much_just_find_solution % 9 != 0) {
+              row_four--;
+            } else {
+              column_four--;
+            }
+          } else {
+            column_four = random.nextInt(8);
+            row_four = random.nextInt(8 - word_four.length + 1);
+          }
+          tried_too_much_just_find_solution++;
+          if (tried_too_much_just_find_solution == 91) {
+            column_four = 7;
+          }
+        }
+      } else {
+        row_five = random.nextInt(8 - word_five.length + 1);
+        column_five = 7 - random.nextInt(8 - word_five.length + 1);
+        while (row_one == row_two || ((row_five <= row_one &&
+            row_five + word_five.length - 1 >= row_one) &&
+            ((column_five >= column_one &&
+                column_five <= column_one + word_one.length - 1) ||
+                (column_five - word_five.length + 1 >= column_one &&
+                    column_five - word_five.length + 1 <=
+                        column_one + word_one.length - 1)))
+            || ((row_five <= row_two &&
+                row_five + word_five.length - 1 >= row_two) &&
+                ((column_five >= column_two &&
+                    column_five <= column_two + word_two.length - 1) ||
+                    (column_five - word_five.length + 1 >= column_two &&
+                        column_five - word_five.length + 1 <=
+                            column_two + word_two.length - 1)))) {
+          row_one = random.nextInt(8);
+          row_two = random.nextInt(8);
+          column_one = random.nextInt(8 - word_one.length + 1);
+          column_two = random.nextInt(8 - word_two.length + 1);
+        }
+        int tried_too_much_just_find_solution = 0;
+        while ((column_three >= column_one &&
+            column_three <= column_one + word_one.length - 1 &&
+            row_three <= row_one &&
+            row_three + word_three.length - 1 >= row_one) ||
+            (column_three >= column_two &&
+                column_three <= column_two + word_two.length - 1 &&
+                row_three <= row_two &&
+                row_three + word_three.length - 1 >= row_two) ||
+            ((column_five <= column_three &&
+                column_five - word_five.length + 1 >= column_three) &&
+                ((row_five >= row_three &&
+                    row_five <= row_three + word_two.length - 1) ||
+                    (row_five + word_five.length - 1 >= row_three &&
+                        row_five + word_five.length - 1 <=
+                            row_three + word_two.length - 1)))) {
+          if (tried_too_much_just_find_solution > 90) {
+            row_three = 0;
+            if (tried_too_much_just_find_solution % 9 != 0) {
+              row_three++;
+            } else {
+              column_three++;
+            }
+          } else {
+            column_three = random.nextInt(8);
+            row_three = random.nextInt(8 - word_three.length + 1);
+          }
+          tried_too_much_just_find_solution++;
+          if (tried_too_much_just_find_solution == 91) {
+            column_three = 0;
+          }
+        }
+        tried_too_much_just_find_solution = 0;
+        while (column_four == column_three || (column_four >= column_one &&
+            column_four <= column_one + word_one.length - 1 &&
+            row_four <= row_one &&
+            row_four + word_four.length - 1 >= row_one) ||
+            (column_four >= column_two &&
+                column_four <= column_two + word_two.length - 1 &&
+                row_four <= row_two &&
+                row_four + word_four.length - 1 >= row_two) ||
+            ((column_five <= column_four &&
+                column_five - word_five.length + 1 >= column_four) &&
+                ((row_five >= row_four &&
+                    row_five <= row_four + word_two.length - 1) ||
+                    (row_five + word_five.length - 1 >= row_four &&
+                        row_five + word_five.length - 1 <=
+                            row_four + word_two.length - 1)))) {
+          if (tried_too_much_just_find_solution > 90) {
+            row_four = 7;
+            if (tried_too_much_just_find_solution % 9 != 0) {
+              row_four--;
+            } else {
+              column_four--;
+            }
+          } else {
+            column_four = random.nextInt(8);
+            row_four = random.nextInt(8 - word_four.length + 1);
+          }
+          tried_too_much_just_find_solution++;
+          if (tried_too_much_just_find_solution == 91) {
+            column_four = 7;
+          }
         }
       }
-      tried_too_much_just_find_solution=0;
-      while (column_four==column_three||(column_four >= column_one &&
-          column_four <= column_one + word_one.length - 1 &&
-          row_four <= row_one &&
-          row_four + word_four.length - 1 >= row_one) ||
-          (column_four >= column_two &&
-              column_four <= column_two + word_two.length - 1 &&
-              row_four <= row_two &&
-              row_four + word_four.length - 1 >= row_two) ||
-          ((column_five<=column_four &&column_five+word_five.length-1>=column_four)&&((row_five>=row_four &&row_five<=row_four+word_two.length-1)||(row_five+word_five.length-1>=row_four&&row_five+word_five.length-1<=row_four+word_two.length-1))))
-       {
-         if(tried_too_much_just_find_solution>90){
-           row_four=7;
-           if(tried_too_much_just_find_solution%9!=0){
-             row_four--;
-           }else{
-             column_four--;
-           }
-         }else {
-           column_four = random.nextInt(8);
-           row_four = random.nextInt(8 - word_four.length + 1);
-         }
-         tried_too_much_just_find_solution++;
-         if(tried_too_much_just_find_solution==91){
-           column_four=7;
-         }
+    }else{
+      if(random.nextInt(2)==0){
+       row_five=random.nextInt(8);
+       column_five=random.nextInt(8-word_five.length);
+       while(row_five==row_one || row_five==row_two|| row_one==row_two){
+          row_one = random.nextInt(8);
+          row_two = random.nextInt(8);
+          row_five=random.nextInt(8);
+          column_one=random.nextInt(8-word_five.length);
+          column_two=random.nextInt(8-word_five.length);
+          column_five=random.nextInt(8-word_five.length);
        }
-    }else {
-      row_five = random.nextInt(8 - word_five.length + 1);
-      column_five = 7 - random.nextInt(8 - word_five.length + 1);
-      while (row_one == row_two || ((row_five<=row_one &&row_five+word_five.length-1>=row_one)&&((column_five>=column_one &&column_five<=column_one+word_one.length-1)||(column_five-word_five.length+1>=column_one&&column_five-word_five.length+1<=column_one+word_one.length-1)))
-          ||((row_five<=row_two &&row_five+word_five.length-1>=row_two)&&((column_five>=column_two &&column_five<=column_two+word_two.length-1)||(column_five-word_five.length+1>=column_two&&column_five-word_five.length+1<=column_two+word_two.length-1)))){
-        row_one = random.nextInt(8);
-        row_two = random.nextInt(8);
-        column_one = random.nextInt(8 - word_one.length + 1);
-        column_two = random.nextInt(8 - word_two.length + 1);
-      }
-      int tried_too_much_just_find_solution=0;
-      while ((column_three >= column_one &&
-          column_three <= column_one + word_one.length - 1 &&
-          row_three <= row_one &&
-          row_three + word_three.length - 1 >= row_one) ||
-          (column_three >= column_two &&
-              column_three <= column_two + word_two.length - 1 &&
-              row_three <= row_two &&
-              row_three + word_three.length - 1 >= row_two) ||
-          ((column_five<=column_three &&column_five-word_five.length+1>=column_three)&&((row_five>=row_three &&row_five<=row_three+word_two.length-1)||(row_five+word_five.length-1>=row_three&&row_five+word_five.length-1<=row_three+word_two.length-1)))) {
-
-        if(tried_too_much_just_find_solution>90){
-          row_three=0;
-          if(tried_too_much_just_find_solution%9!=0){
-            row_three++;
-          }else{
-            column_three++;
-          }
-        }else {
+       while ((column_three >= column_one &&
+           column_three <= column_one + word_one.length - 1 &&
+           row_three <= row_one &&
+           row_three + word_three.length - 1 >= row_one) ||
+           (column_three >= column_two &&
+               column_three <= column_two + word_two.length - 1 &&
+               row_three <= row_two &&
+               row_three + word_three.length - 1 >= row_two)||(column_three >= column_five &&
+           column_three <= column_five + word_five.length - 1 &&
+           row_three <= row_five &&
+           row_three + word_three.length - 1 >= row_five)){
+         column_three = random.nextInt(8);
+         row_three = random.nextInt(8 - word_three.length + 1);
+       }
+       while ((column_four >= column_one &&
+           column_four <= column_one + word_one.length - 1 &&
+           row_four <= row_one &&
+           row_four + word_four.length - 1 >= row_one) ||
+           (column_four >= column_two &&
+               column_four <= column_two + word_two.length - 1 &&
+               row_four <= row_two &&
+               row_four + word_four.length - 1 >= row_two)||(column_four >= column_five &&
+           column_four <= column_five + word_five.length - 1 &&
+           row_four <= row_five &&
+           row_four + word_four.length - 1 >= row_five)||column_four==column_three){
+         column_four = random.nextInt(8);
+         row_four = random.nextInt(8 - word_four.length + 1);
+       }
+      }else{
+        row_five=random.nextInt(8-word_five.length);
+        column_five=random.nextInt(8);
+        while(row_one==row_two){
+          row_one = random.nextInt(8);
+          row_two = random.nextInt(8);
+          column_one=random.nextInt(8-word_five.length);
+          column_two=random.nextInt(8-word_five.length);
+        }
+        while ((column_three >= column_one &&
+            column_three <= column_one + word_one.length - 1 &&
+            row_three <= row_one &&
+            row_three + word_three.length - 1 >= row_one) ||
+            (column_three >= column_two &&
+                column_three <= column_two + word_two.length - 1 &&
+                row_three <= row_two &&
+                row_three + word_three.length - 1 >= row_two)){
           column_three = random.nextInt(8);
           row_three = random.nextInt(8 - word_three.length + 1);
         }
-        tried_too_much_just_find_solution++;
-        if(tried_too_much_just_find_solution==91){
-          column_three=0;
-        }
-      }
-      tried_too_much_just_find_solution=0;
-      while (column_four==column_three||(column_four >= column_one &&
-          column_four <= column_one + word_one.length - 1 &&
-          row_four <= row_one &&
-          row_four + word_four.length - 1 >= row_one) ||
-          (column_four >= column_two &&
-              column_four <= column_two + word_two.length - 1 &&
-              row_four <= row_two &&
-              row_four + word_four.length - 1 >= row_two) ||
-          ((column_five<=column_four &&column_five-word_five.length+1>=column_four)&&((row_five>=row_four &&row_five<=row_four+word_two.length-1)||(row_five+word_five.length-1>=row_four&&row_five+word_five.length-1<=row_four+word_two.length-1))))
-      {
-        if(tried_too_much_just_find_solution>90){
-          row_four=7;
-          if(tried_too_much_just_find_solution%9!=0){
-            row_four--;
-          }else{
-            column_four--;
-          }
-        }else {
+        while ((column_four >= column_one &&
+            column_four <= column_one + word_one.length - 1 &&
+            row_four <= row_one &&
+            row_four + word_four.length - 1 >= row_one) ||
+            (column_four >= column_two &&
+                column_four <= column_two + word_two.length - 1 &&
+                row_four <= row_two &&
+                row_four + word_four.length - 1 >= row_two)||column_three==column_four){
           column_four = random.nextInt(8);
           row_four = random.nextInt(8 - word_four.length + 1);
         }
-        tried_too_much_just_find_solution++;
-        if(tried_too_much_just_find_solution==91){
-          column_four=7;
+        while ((column_five >= column_one &&
+            column_five <= column_one + word_one.length - 1 &&
+            row_five <= row_one &&
+            row_five + word_five.length - 1 >= row_one) ||
+            (column_five >= column_two &&
+                column_five <= column_two + word_two.length - 1 &&
+                row_five <= row_two &&
+                row_five + word_five.length - 1 >= row_two)||column_three==column_five||column_four==column_five){
+          column_five = random.nextInt(8);
+          row_five = random.nextInt(8 - word_five.length + 1);
         }
       }
     }
@@ -3484,8 +3612,7 @@ class DrawingPainter extends CustomPainter {
     for (int i = 0; i < pointsList.length; i++) {
       if (pointsList[i].first) {
         if (pointsList.length - 1 == i) {
-          canvas.drawCircle(
-              pointsList[i].points, size.height / 30, pointsList[i].paint);
+          canvas.drawCircle(pointsList[i].points, size.height / 30, pointsList[i].paint);
         }
       } else {
         if (pointsList[i - 1].points.dx == pointsList[i].points.dx
