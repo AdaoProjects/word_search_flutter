@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
+import 'package:audioplayers/audio_cache.dart';
+AudioCache audioPlayer = AudioCache();
 class Game_Easy extends StatefulWidget {
 
   @override
@@ -1342,8 +1344,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   List<int> solution_positions=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
   int row_start;
   int column_start;
-  int row_end;
-  int column_end;
+  int row_end=0;
+  int column_end=0;
   double start_Of_Selection_dx;
   double start_Of_Selection_dy;
   double end_Of_Selection_dx;
@@ -1352,7 +1354,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
   Color selected_color;
   bool old_Puzzle=false;
-  double opacity = 0.15;
+  double opacity = 0.2;
   List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -1417,6 +1419,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       .of(context)
                       .size
                       .height / 15;
+                  if(row_end!=row || column_end!=column){
+                    audioPlayer.play('sounds/selectionsound.mp3');
+                  }
                   row_end=row;
                   column_end=column;
                   if(init_Pan_Update!=0) {
@@ -1480,6 +1485,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       .of(context)
                       .size
                       .height / 15) {
+                    audioPlayer.play('sounds/selectionsound.mp3');
                     setState(() {
                       start_Of_Selection_dx=MediaQuery
                           .of(context)
@@ -3482,9 +3488,6 @@ class DrawingPainter extends CustomPainter {
               pointsList[i].points, size.height / 30, pointsList[i].paint);
         }
       } else {
-        // canvas.drawCircle(pointsList[i].points, size.height / 30,pointsList[i].paint);
-
-
         if (pointsList[i - 1].points.dx == pointsList[i].points.dx
             && pointsList[i - 1].points.dy > pointsList[i].points.dy) {
           canvas.drawLine(pointsList[i - 1].points, pointsList[i].points,
