@@ -49,7 +49,7 @@ flutter:
 
   assets:
     - assets/images/artecriada.jpg
-    - assets/sounds/selectionsound.mp3
+    - assets/sounds/selectionsound.wav
   # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
