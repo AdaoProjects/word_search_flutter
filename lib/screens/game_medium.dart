@@ -1392,7 +1392,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     'added',
 
   ];
-  bool alert_dialog_congratulations=false;
   int num_rows_and_columns=10;
   bool word_one_scratch =false;
   bool word_two_scratch=false;
@@ -1647,7 +1646,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               points.removeAt(2*number_Of_Words_Selected);
             }
             if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
-              alert_dialog_congratulations=true;
+              showAlertDialog(context,'You won');
             }
             fisrt_Point_drawed=false;
           },
@@ -1671,7 +1670,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                           .width),
                   Row(
                       children: [
-                       alert_dialog_congratulations? showAlertDialog(context,'You won'):SizedBox(width: MediaQuery
+                       SizedBox(width: MediaQuery
                             .of(context)
                             .size
                             .width / 10),

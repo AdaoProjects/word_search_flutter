@@ -1642,6 +1642,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               points.removeAt(2*number_Of_Words_Selected+1);
               points.removeAt(2*number_Of_Words_Selected);
             }
+            if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
+              showAlertDialog(context,'You won');
+            }
             fisrt_Point_drawed=false;
           },
 
@@ -5878,4 +5881,31 @@ class DrawingPoints {
   Offset points;
   bool first;
   DrawingPoints({this.points, this.paint, this.first});
+}
+showAlertDialog(BuildContext context, String alert_string) {
+
+
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Game_Hard()),
+    );},
+  );
+
+
+  AlertDialog alert = AlertDialog(
+    title: Text(alert_string.toUpperCase()),
+    content: Text('Try again.'),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

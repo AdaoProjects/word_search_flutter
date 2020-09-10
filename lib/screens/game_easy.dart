@@ -1358,7 +1358,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   bool old_Puzzle=false;
 
 //Paint
-  bool alert_dialog_congratulations = false;
   bool fisrt_Point_drawed = false;
   int number_Of_Words_Selected = 0;
   int init_Pan_Update = 0;
@@ -1629,9 +1628,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             if (word_one_scratch == true && word_two_scratch == true &&
                 word_three_scratch == true && word_four_scratch == true &&
                 word_five_scratch == true) {
-              setState(() {
-                alert_dialog_congratulations = true;
-              });
+                showAlertDialog(context, 'You won');
             }
             fisrt_Point_drawed = false;
           },
@@ -1655,8 +1652,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                           .width),
                   Row(
                       children: [
-                        alert_dialog_congratulations ? showAlertDialog(
-                            context, 'You won') : SizedBox(width: MediaQuery
+                          SizedBox(width: MediaQuery
                             .of(context)
                             .size
                             .width / 10),
