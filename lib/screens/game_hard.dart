@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'dart:async';
 AudioCache audioPlayer = AudioCache();
 class Game_Hard extends StatefulWidget {
 
@@ -1429,10 +1430,10 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     Colors.blue,
     Colors.amber,
   ];
+  int next_Color=0;
   //Timer
-  int _counter = 0;
-  AnimationController _controller;
-  int levelClock = 180;
+  int _seconds=0;
+  int _minutes=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1581,7 +1582,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                         paint: Paint()
                           ..strokeCap = strokeCap
                           ..isAntiAlias = true
-                          ..color = random_Color().withOpacity(
+                          ..color = serie_Color().withOpacity(
                               opacity)
                           ..strokeWidth = MediaQuery
                               .of(context)
@@ -1672,13 +1673,12 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                             .width / 10),
                         //Timer
                         Icon(Icons.timer,
-                          color: Colors.white,),
-                        Countdown(
-                          animation: StepTween(
-                            begin: levelClock,
-                            end: 0,
-                          ).animate(_controller),
-                        ),
+                          color: Colors.white,
+                          size: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 25,),
+                        return_Timer()
                       ]
                   ),
                   SizedBox(height:MediaQuery
@@ -5094,9 +5094,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       pick_Random_Words();
       write_Puzzle_Words(
           puzzle, words[0], words[1], words[2], words[3], words[4]);
+      sorted_Num_Words=random.nextInt(5)-1;
     }
-    sorted_Num_Words=random.nextInt(5)-1;
-    print('Here');
   }
   String return_Sorted_Words(){
     sorted_Num_Words++;
@@ -5520,7 +5519,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     words[4] = all[five].toUpperCase();
   }
 
-  Color random_Color(){
+  Color serie_Color(){
     Random random = new Random();
     selected_color=colors[random.nextInt(4)];
     return selected_color;
@@ -5528,55 +5527,35 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
 //Timer
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
-  }
 
+  }
   @override
   void initState() {
+
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
     super.initState();
-
-    _controller = AnimationController(
-        vsync: this,
-        duration: Duration(
-            seconds:
-            levelClock)
-    );
-
-    _controller.forward();
   }
-}
-class Countdown extends AnimatedWidget {
-  Countdown({Key key, this.animation}) : super(key: key, listenable: animation);
-  Animation<int> animation;
 
-  @override
-  build(BuildContext context) {
-    Duration clockTimer = Duration(seconds: animation.value);
-
-    String timerText =
-        '${clockTimer.inMinutes.remainder(60).toString()}:${clockTimer.inSeconds.remainder(60).toString().padLeft(2, '0')}';
-
-    print('animation.value  ${animation.value} ');
-    print('inMinutes ${clockTimer.inMinutes.toString()}');
-    print('inSeconds ${clockTimer.inSeconds.toString()}');
-    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(60).toString()}');
-
-    return Text(
-      "$timerText",
-      style: TextStyle(
-        fontSize: MediaQuery.of(context).size.height/25,
-        color: Colors.white,
-      ),
-    );
+  void _getTime() {
+    _seconds++;
+    if(_seconds==60){
+      _minutes++;
+      _seconds=0;
+    }
+    setState(() {
+    });
+  }
+  Text return_Timer(){
+    return Text("${_minutes} :${_seconds.toString().padLeft(2, '0')}",
+      style: TextStyle(fontSize: MediaQuery
+          .of(context)
+          .size
+          .height / 25,
+        color: Colors.white,),);
   }
 }
 class DrawingPainter extends CustomPainter {

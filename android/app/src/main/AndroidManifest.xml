@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Finders of Words"
+        android:label="Find The Words"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

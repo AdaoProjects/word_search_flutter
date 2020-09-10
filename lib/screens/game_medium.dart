@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'dart:ui';
 import 'dart:math';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'dart:async';
 AudioCache audioPlayer = AudioCache();
 class Game_Medium extends StatefulWidget {
 
@@ -1390,6 +1392,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     'added',
 
   ];
+  bool alert_dialog_congratulations=false;
   int num_rows_and_columns=10;
   bool word_one_scratch =false;
   bool word_two_scratch=false;
@@ -1431,10 +1434,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     Colors.blue,
     Colors.amber,
   ];
+  int next_Color=0;
   //Timer
-  int _counter = 0;
-  AnimationController _controller;
-  int levelClock = 180;
+  int _seconds=0;
+  int _minutes=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1583,7 +1586,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         paint: Paint()
                           ..strokeCap = strokeCap
                           ..isAntiAlias = true
-                          ..color = random_Color().withOpacity(
+                          ..color = serie_Color().withOpacity(
                               opacity)
                           ..strokeWidth = MediaQuery
                               .of(context)
@@ -1643,6 +1646,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               points.removeAt(2*number_Of_Words_Selected+1);
               points.removeAt(2*number_Of_Words_Selected);
             }
+            if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
+              alert_dialog_congratulations=true;
+            }
             fisrt_Point_drawed=false;
           },
 
@@ -1665,7 +1671,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                           .width),
                   Row(
                       children: [
-                        SizedBox(width: MediaQuery
+                       alert_dialog_congratulations? showAlertDialog(context,'You won'):SizedBox(width: MediaQuery
                             .of(context)
                             .size
                             .width / 10),
@@ -1682,13 +1688,12 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             .width / 10),
                         //Timer
                         Icon(Icons.timer,
-                          color: Colors.white,),
-                        Countdown(
-                          animation: StepTween(
-                            begin: levelClock,
-                            end: 0,
-                          ).animate(_controller),
-                        ),
+                          color: Colors.white,
+                          size: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 25,),
+                        return_Timer()
                       ]
                   ),
                   SizedBox(height:MediaQuery
@@ -4136,9 +4141,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       pick_Random_Words();
       write_Puzzle_Words(
           puzzle, words[0], words[1], words[2], words[3], words[4]);
+      sorted_Num_Words=random.nextInt(5)-1;
     }
-    sorted_Num_Words=random.nextInt(5)-1;
-    print('Here');
   }
   String return_Sorted_Words(){
     sorted_Num_Words++;
@@ -4563,64 +4567,72 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     words[4] = all[five].toUpperCase();
   }
 
-  Color random_Color(){
-    Random random = new Random();
-    selected_color=colors[random.nextInt(4)];
+  Color serie_Color(){
+    next_Color++;
+    if(next_Color==5){
+      next_Color=-1;
+    }
+    selected_color=colors[next_Color];
     return selected_color;
   }
 
 //Timer
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
-  }
 
+  }
   @override
   void initState() {
+
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
     super.initState();
+  }
 
-    _controller = AnimationController(
-        vsync: this,
-        duration: Duration(
-            seconds:
-            levelClock)
-    );
-
-    _controller.forward();
+  void _getTime() {
+    _seconds++;
+    if(_seconds==60){
+      _minutes++;
+      _seconds=0;
+    }
+    setState(() {
+    });
+  }
+  Text return_Timer(){
+    return Text("${_minutes} :${_seconds.toString().padLeft(2, '0')}",
+      style: TextStyle(fontSize: MediaQuery
+          .of(context)
+          .size
+          .height / 25,
+        color: Colors.white,),);
   }
 }
-class Countdown extends AnimatedWidget {
-  Countdown({Key key, this.animation}) : super(key: key, listenable: animation);
-  Animation<int> animation;
+showAlertDialog(BuildContext context, String alert_string) {
 
-  @override
-  build(BuildContext context) {
-    Duration clockTimer = Duration(seconds: animation.value);
 
-    String timerText =
-        '${clockTimer.inMinutes.remainder(60).toString()}:${clockTimer.inSeconds.remainder(60).toString().padLeft(2, '0')}';
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Game_Medium()),
+    );},
+  );
 
-    print('animation.value  ${animation.value} ');
-    print('inMinutes ${clockTimer.inMinutes.toString()}');
-    print('inSeconds ${clockTimer.inSeconds.toString()}');
-    print('inSeconds.remainder ${clockTimer.inSeconds.remainder(60).toString()}');
 
-    return Text(
-      "$timerText",
-      style: TextStyle(
-        fontSize: MediaQuery.of(context).size.height/25,
-        color: Colors.white,
-      ),
-    );
-  }
+  AlertDialog alert = AlertDialog(
+    title: Text(alert_string.toUpperCase()),
+    content: Text('Try again.'),
+    actions: [
+      okButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
 
 class DrawingPainter extends CustomPainter {
