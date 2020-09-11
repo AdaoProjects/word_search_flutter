@@ -12,8 +12,11 @@ void main() {
         home: new MyApp(),
         routes: <String, WidgetBuilder>{
           "/stats" : (BuildContext context)=> new Stats(),
-        }
+        },
     ));
+
+
+
   });
 }
 

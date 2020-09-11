@@ -1645,6 +1645,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               points.removeAt(2*number_Of_Words_Selected);
             }
             if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
+              set_Best_Time();
               showAlertDialog(context,'You won');
             }
             fisrt_Point_drawed=false;
@@ -5585,10 +5586,26 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     selected_color=colors[next_Color];
     return selected_color;
   }
-
+  set_Best_Time() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int time_now=_minutes*60+_seconds;
+    int old_best_time_minutes = (prefs.getInt('best_time_hard_minutes') ?? null);
+    int old_best_time_seconds=(prefs.getInt('best_time_hard_seconds') ?? null);
+    int old_time;
+    if(old_best_time_minutes==null ||old_best_time_seconds==null){
+      old_time=0;
+    }else {
+      old_time = old_best_time_minutes * 60 + old_best_time_seconds;
+    }
+    if(time_now<old_time || old_time==0){
+      await prefs.setInt('best_time_hard_minutes', _minutes);
+      await prefs.setInt('best_time_hard_seconds', _seconds);
+      String best_time=_minutes.toString()+":"+_seconds.toString();
+      prefs.setString('best_time_hard', best_time);
+      Navigator.of(context).pushNamed("/stats");
+    }
+  }
 //Timer
-
-
   @override
   void dispose() {
     super.dispose();
@@ -5941,8 +5958,6 @@ class DrawingPoints {
   DrawingPoints({this.points, this.paint, this.first});
 }
 showAlertDialog(BuildContext context, String alert_string) {
-
-
   Widget okButton = FlatButton(
     child: Text("OK"),
     onPressed: () {Navigator.push(

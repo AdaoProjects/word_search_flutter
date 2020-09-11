@@ -10,13 +10,18 @@ class Stats extends StatefulWidget {
 }
 class _StatsState extends State<Stats> {
   String best_time_easy;
+  String best_time_medium;
+  String best_time_hard;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-            child: Text(get_best_time_easy())
-        )
+            child:Column(children:[ Text(get_best_time_easy()),
+              Text(get_best_time_medium()),
+              Text(get_best_time_hard())]
+        ),
+    )
     );
   }
   get_Best_Time_Easy() async{
@@ -31,5 +36,31 @@ class _StatsState extends State<Stats> {
   String get_best_time_easy(){
     get_Best_Time_Easy();
     return best_time_easy;
+  }
+  get_Best_Time_Medium() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      best_time_medium=prefs.getString('best_time_medium');
+      if(best_time_medium==null){
+        best_time_medium='--:--';
+      }
+    });
+  }
+  String get_best_time_medium(){
+    get_Best_Time_Medium();
+    return best_time_medium;
+  }
+  get_Best_Time_Hard() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      best_time_hard=prefs.getString('best_time_hard');
+      if(best_time_hard==null){
+        best_time_hard='--:--';
+      }
+    });
+  }
+  String get_best_time_hard(){
+    get_Best_Time_Hard();
+    return best_time_hard;
   }
 }

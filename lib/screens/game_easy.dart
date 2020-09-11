@@ -3968,7 +3968,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       prefs.setString('best_time_easy', best_time);
       Navigator.of(context).pushNamed("/stats");
     }
-
   }
 
 }
