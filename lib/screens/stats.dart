@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:huntersofwords/screens/game_easy.dart';
-import 'package:huntersofwords/screens/game_medium.dart';
-import 'package:huntersofwords/screens/game_hard.dart';
 import 'package:huntersofwords/utilites/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Stats extends StatefulWidget {
@@ -9,17 +6,86 @@ class Stats extends StatefulWidget {
   _StatsState createState() => _StatsState();
 }
 class _StatsState extends State<Stats> {
-  String best_time_easy;
-  String best_time_medium;
-  String best_time_hard;
+  String best_time_easy='';
+  String best_time_medium='';
+  String best_time_hard='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: Center(
-            child:Column(children:[ Text(get_best_time_easy()),
-              Text(get_best_time_medium()),
-              Text(get_best_time_hard())]
+            child:Column(children:[
+              SizedBox(height:MediaQuery.of(context).size.height/5),
+              Text('BEST RESULTS',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontSize: MediaQuery. of(context). size. height/15)
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height/10),
+              Container(
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 7 / 10,
+                child:Column(
+                children: [
+                      Text('Easy  '+ get_best_time_easy(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: MediaQuery. of(context). size. height/20)
+                      ),
+SizedBox(height:MediaQuery. of(context). size. height/30),
+                        Text('Medium  '+get_best_time_medium(),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: MediaQuery. of(context). size. height/20)
+                        ),
+                  SizedBox(height:MediaQuery. of(context). size. height/30),
+                  Text('Hard  '+get_best_time_hard
+                    (),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery. of(context). size. height/20)
+                  ),
+                  SizedBox(height:MediaQuery. of(context). size. height/30),
+      FlatButton.icon(onPressed:()=> {
+      setState(() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("best_time_easy", null);
+      prefs.setString("best_time_medium", null);
+      prefs.setString("best_time_hard", null);
+      })
+      }, icon: Icon(Icons.autorenew,
+        color: GameColors.button_Background,
+        size: MediaQuery
+            .of(context)
+            .size
+            .height / 15,),
+      label:Text(''))
+                      ]
+                  ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: GameColors.button_Background,
+                          spreadRadius: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 100),
+                    ],
+                    borderRadius: BorderRadius.circular(MediaQuery
+                        .of(context)
+                        .size
+                        .height / 30)
+                ),
+              ),
+            ]
         ),
     )
     );
