@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Medium extends StatefulWidget {
 
@@ -4168,7 +4169,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
   write_Puzzle_Words(List<String> puzzle, String word_one, String word_two,
       String word_three, String word_four, String word_five) {
-    Random random = new Random();
+
     // the row and column from the 'beginer of the words', rigth is positive and down is positive, later the word can be changed to reversed order so it makes more difficult the puzzle
     row_one = random.nextInt(num_rows_and_columns);
     row_two = random.nextInt(num_rows_and_columns);
@@ -4183,10 +4184,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
     int direction_of_diagonal = random.nextInt(2);
     //  zero is SO, one is SE
-    if(random.nextInt(2)==0) {
-      if (random.nextInt(2)==0) {
+    if (random.nextInt(2) == 0) {
+      if (random.nextInt(2) == 0) {
         row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
-        column_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
+        column_five =
+            random.nextInt(num_rows_and_columns - word_five.length + 1);
 
         while (row_one == row_two || ((row_five <= row_one &&
             row_five + word_five.length - 1 >= row_one) &&
@@ -4204,8 +4206,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             column_two + word_two.length - 1)))) {
           row_one = random.nextInt(num_rows_and_columns);
           row_two = random.nextInt(num_rows_and_columns);
-          column_one = random.nextInt(num_rows_and_columns - word_one.length + 1);
-          column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
+          column_one =
+              random.nextInt(num_rows_and_columns - word_one.length + 1);
+          column_two =
+              random.nextInt(num_rows_and_columns - word_two.length + 1);
         }
         int tried_too_much_just_find_solution = 0;
         while ((column_three >= column_one &&
@@ -4224,7 +4228,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_five + word_five.length - 1 <=
                             row_three + word_two.length - 1)))) {
           if (tried_too_much_just_find_solution > 90) {
-            if (tried_too_much_just_find_solution % word_four.length+1 != 0) {
+            if (tried_too_much_just_find_solution % word_four.length + 1 != 0) {
               row_three++;
             } else {
               column_three++;
@@ -4232,7 +4236,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
           } else {
             column_three = random.nextInt(num_rows_and_columns);
-            row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
+            row_three =
+                random.nextInt(num_rows_and_columns - word_three.length + 1);
           }
           tried_too_much_just_find_solution++;
           if (tried_too_much_just_find_solution == 91) {
@@ -4257,26 +4262,28 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_five + word_five.length - 1 <=
                             row_four + word_two.length - 1)))) {
           if (tried_too_much_just_find_solution > 90) {
-            if (tried_too_much_just_find_solution % word_four.length+1 != 0) {
+            if (tried_too_much_just_find_solution % word_four.length + 1 != 0) {
               row_four--;
             } else {
               column_four--;
-              row_four = num_rows_and_columns-word_four.length;
+              row_four = num_rows_and_columns - word_four.length;
             }
           } else {
             column_four = random.nextInt(num_rows_and_columns);
-            row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+            row_four =
+                random.nextInt(num_rows_and_columns - word_four.length + 1);
           }
           tried_too_much_just_find_solution++;
           if (tried_too_much_just_find_solution == 91) {
-            column_four = num_rows_and_columns-1;
-            row_four = num_rows_and_columns-word_four.length;
+            column_four = num_rows_and_columns - 1;
+            row_four = num_rows_and_columns - word_four.length;
           }
         }
 
         if (random.nextInt(2) == 0) {
           for (int i = 0; i < word_five.length; i++) {
-            puzzle[(row_five + i) * num_rows_and_columns + column_five + i] = word_five[i];
+            puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
+            word_five[i];
           }
         } else {
           for (int i = 0; i < word_five.length; i++) {
@@ -4284,14 +4291,14 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             word_five[word_five.length - 1 - i];
           }
         }
-        solution_positions[16]=row_five;
-        solution_positions[17]=column_five;
-        solution_positions[18]=row_five+word_five.length-1;
-        solution_positions[19]=column_five+word_five.length-1;
-
+        solution_positions[16] = row_five;
+        solution_positions[17] = column_five;
+        solution_positions[18] = row_five + word_five.length - 1;
+        solution_positions[19] = column_five + word_five.length - 1;
       } else {
         row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
-        column_five = num_rows_and_columns-1 - random.nextInt(num_rows_and_columns - word_five.length + 1);
+        column_five = num_rows_and_columns - 1 -
+            random.nextInt(num_rows_and_columns - word_five.length + 1);
         while (row_one == row_two || ((row_five <= row_one &&
             row_five + word_five.length - 1 >= row_one) &&
             ((column_five >= column_one &&
@@ -4308,8 +4315,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             column_two + word_two.length - 1)))) {
           row_one = random.nextInt(num_rows_and_columns);
           row_two = random.nextInt(num_rows_and_columns);
-          column_one = random.nextInt(num_rows_and_columns - word_one.length + 1);
-          column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
+          column_one =
+              random.nextInt(num_rows_and_columns - word_one.length + 1);
+          column_two =
+              random.nextInt(num_rows_and_columns - word_two.length + 1);
         }
         int tried_too_much_just_find_solution = 0;
         while ((column_three >= column_one &&
@@ -4328,8 +4337,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_five + word_five.length - 1 <=
                             row_three + word_two.length - 1)))) {
           if (tried_too_much_just_find_solution > 90) {
-
-            if (tried_too_much_just_find_solution % word_three.length+1 != 0) {
+            if (tried_too_much_just_find_solution % word_three.length + 1 !=
+                0) {
               row_three++;
             } else {
               row_three = 0;
@@ -4362,11 +4371,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_five + word_five.length - 1 <=
                             row_four + word_two.length - 1)))) {
           if (tried_too_much_just_find_solution > 90) {
-
-            if (tried_too_much_just_find_solution % word_four.length+1 != 0) {
+            if (tried_too_much_just_find_solution % word_four.length + 1 != 0) {
               row_four--;
             } else {
-              row_four = num_rows_and_columns-word_four.length;
+              row_four = num_rows_and_columns - word_four.length;
               column_four--;
             }
           } else {
@@ -4375,13 +4383,14 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           }
           tried_too_much_just_find_solution++;
           if (tried_too_much_just_find_solution == 91) {
-            column_four = num_rows_and_columns-1;
-            row_four = num_rows_and_columns-word_four.length;
+            column_four = num_rows_and_columns - 1;
+            row_four = num_rows_and_columns - word_four.length;
           }
         }
         if (random.nextInt(2) == 0) {
           for (int i = 0; i < word_five.length; i++) {
-            puzzle[(row_five + i) * num_rows_and_columns + column_five - i] = word_five[i];
+            puzzle[(row_five + i) * num_rows_and_columns + column_five - i] =
+            word_five[i];
           }
         } else {
           for (int i = 0; i < word_five.length; i++) {
@@ -4389,12 +4398,12 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             word_five[word_five.length - 1 - i];
           }
         }
-        solution_positions[16]=row_five;
-        solution_positions[17]=column_five;
-        solution_positions[18]=row_five+word_five.length-1;
-        solution_positions[19]=column_five-word_five.length+1;
+        solution_positions[16] = row_five;
+        solution_positions[17] = column_five;
+        solution_positions[18] = row_five + word_five.length - 1;
+        solution_positions[19] = column_five - word_five.length + 1;
       }
-    }else {
+    } else {
       if (random.nextInt(2) == 0) {
         row_five = random.nextInt(num_rows_and_columns);
         column_five =
@@ -4525,25 +4534,67 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[19] = column_five;
       }
     }
-    solution_positions[0]=row_one;
-    solution_positions[1]=column_one;
-    solution_positions[2]=row_one;
-    solution_positions[3]=column_one+word_one.length-1;
-    solution_positions[4]=row_two;
-    solution_positions[5]=column_two;
-    solution_positions[6]=row_two;
-    solution_positions[7]=column_two+word_two.length-1;
-    solution_positions[8]=row_three;
-    solution_positions[9]=column_three;
-    solution_positions[10]=row_three+word_three.length-1;
-    solution_positions[11]=column_three;
-    solution_positions[12]=row_four;
-    solution_positions[13]=column_four;
-    solution_positions[14]=row_four+word_four.length-1;
-    solution_positions[15]=column_four;
+    // now it just needs to write  the letters in the list string puzzle which in two possible ways original order or reverse order
+    if (random.nextInt(2) == 0) {
+      for (int i = 0; i < word_one.length; i++) {
+        puzzle[row_one * num_rows_and_columns + i + column_one] = word_one[i];
+      }
+    } else {
+      for (int i = 0; i < word_one.length; i++) {
+        puzzle[row_one * num_rows_and_columns + i + column_one] =
+        word_one[word_one.length - 1 - i];
+      }
+    }
+    if (random.nextInt(2) == 0) {
+      for (int i = 0; i < word_two.length; i++) {
+        puzzle[row_two * num_rows_and_columns + i + column_two] = word_two[i];
+      }
+    } else {
+      for (int i = 0; i < word_two.length; i++) {
+        puzzle[row_two * num_rows_and_columns + i + column_two] =
+        word_two[word_two.length - 1 - i];
+      }
+    }
 
+    if (random.nextInt(2) == 0) {
+      for (int i = 0; i < word_three.length; i++) {
+        puzzle[(row_three + i) * num_rows_and_columns + column_three] =
+        word_three[i];
+      }
+    } else {
+      for (int i = 0; i < word_three.length; i++) {
+        puzzle[(row_three + i) * num_rows_and_columns + column_three] =
+        word_three[word_three.length - 1 - i];
+      }
+    }
+    if (random.nextInt(2) == 0) {
+      for (int i = 0; i < word_four.length; i++) {
+        puzzle[(row_four + i) * num_rows_and_columns + column_four] =
+        word_four[i];
+      }
+    } else {
+      for (int i = 0; i < word_four.length; i++) {
+        puzzle[(row_four + i) * num_rows_and_columns + column_four] =
+        word_four[word_four.length - 1 - i];
+      }
+    }
+    solution_positions[0] = row_one;
+    solution_positions[1] = column_one;
+    solution_positions[2] = row_one;
+    solution_positions[3] = column_one + word_one.length - 1;
+    solution_positions[4] = row_two;
+    solution_positions[5] = column_two;
+    solution_positions[6] = row_two;
+    solution_positions[7] = column_two + word_two.length - 1;
+    solution_positions[8] = row_three;
+    solution_positions[9] = column_three;
+    solution_positions[10] = row_three + word_three.length - 1;
+    solution_positions[11] = column_three;
+    solution_positions[12] = row_four;
+    solution_positions[13] = column_four;
+    solution_positions[14] = row_four + word_four.length - 1;
+    solution_positions[15] = column_four;
   }
-
 
   pick_Random_Words() {
     Random random = new Random();

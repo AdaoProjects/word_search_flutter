@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:huntersofwords/utilites/colors.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Easy extends StatefulWidget {
-
   @override
   _Game_EasyState createState() => _Game_EasyState();
+
 }
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
@@ -1629,6 +1630,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 word_three_scratch == true && word_four_scratch == true &&
                 word_five_scratch == true) {
                 showAlertDialog(context, 'You won');
+                set_Best_Time();
             }
             fisrt_Point_drawed = false;
           },
@@ -3948,6 +3950,21 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           .height / 25,
         color: Colors.white,),);
   }
+  set_Best_Time() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int time_now=_minutes*60+_seconds;
+    int old_best_time_minutes = (prefs.getInt('best_time_minutes') ?? null);
+    int old_best_time_seconds=(prefs.getInt('best_time_seconds') ?? null);
+    int old_time=old_best_time_minutes*60+old_best_time_seconds;
+    if(time_now<old_time || old_time==null){
+      await prefs.setInt('best_time_minutes', _minutes);
+      await prefs.setInt('best_time_second', _seconds);
+    }
+    String best_time=(prefs.getInt('best_time_minutes') ?? null).toString()+":"+(prefs.getInt('best_time_seconds') ?? null).toString();
+    prefs.setString('best_time_easy', best_time);
+    Navigator.of(context).pushNamed("/stats");
+  }
+
 }
 
 showAlertDialog(BuildContext context, String alert_string) {
@@ -3976,6 +3993,7 @@ showAlertDialog(BuildContext context, String alert_string) {
       return alert;
     },
   );
+
 }
 class DrawingPainter extends CustomPainter {
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:huntersofwords/screens/levels.dart';
+import 'package:huntersofwords/screens/stats.dart';
 import 'package:huntersofwords/utilites/colors.dart';
 
 class Home extends StatefulWidget {
@@ -99,7 +100,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Level()),
+                  MaterialPageRoute(builder: (context) => Stats()),
                 );
               } ,
               color:Colors.black,
