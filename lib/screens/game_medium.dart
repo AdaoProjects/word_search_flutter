@@ -1433,6 +1433,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     Colors.green,
     Colors.blue,
     Colors.amber,
+    Colors.pink
   ];
   int next_Color=0;
   //Timer
@@ -4142,6 +4143,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       write_Puzzle_Words(
           puzzle, words[0], words[1], words[2], words[3], words[4]);
       sorted_Num_Words=random.nextInt(5)-1;
+      next_Color=random.nextInt(5);
     }
   }
   String return_Sorted_Words(){
@@ -4182,7 +4184,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     column_four = random.nextInt(num_rows_and_columns);
 
 
-    int direction_of_diagonal = random.nextInt(2);
+
     //  zero is SO, one is SE
     if (random.nextInt(2) == 0) {
       if (random.nextInt(2) == 0) {
@@ -4620,7 +4622,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   Color serie_Color(){
     next_Color++;
     if(next_Color==5){
-      next_Color=-1;
+      next_Color=0;
     }
     selected_color=colors[next_Color];
     return selected_color;
