@@ -1649,7 +1649,22 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
               set_Best_Time();
-              showAlertDialog(context,'You won');
+              showDialog(
+                context: context,
+                builder: (alertContext) => AlertDialog(
+                  title: const Text("You won"),
+                  content:  Text('Congratulations your time was '+_minutes.toString()+':'+_seconds.toString()),
+                  actions: [
+                    new FlatButton(
+                      child: const Text("Ok"),
+                      onPressed: () {
+                        Navigator.pop(alertContext);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              );
             }
             fisrt_Point_drawed=false;
           },
@@ -4678,31 +4693,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       Navigator.of(context).pushNamed("/stats");
     }
   }
-}
-showAlertDialog(BuildContext context, String alert_string) {
-  Widget okButton = FlatButton(
-    child: Text("OK"),
-    onPressed: () {Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Game_Medium()),
-    );},
-  );
-
-
-  AlertDialog alert = AlertDialog(
-    title: Text(alert_string.toUpperCase()),
-    content: Text('Try again.'),
-    actions: [
-      okButton,
-    ],
-  );
-
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
 
 class DrawingPainter extends CustomPainter {
