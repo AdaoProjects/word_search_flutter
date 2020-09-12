@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
                 child: Container(
                     constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                     alignment: Alignment.center,
-                    child: Text('CHALLENGE',
+                    child: Text('SHARE',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
