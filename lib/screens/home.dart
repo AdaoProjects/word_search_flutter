@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:huntersofwords/screens/levels.dart';
 import 'package:huntersofwords/screens/stats.dart';
 import 'package:huntersofwords/utilites/colors.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class Home extends StatefulWidget {
   @override
