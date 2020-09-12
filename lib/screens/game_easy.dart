@@ -838,7 +838,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'wheat',
     'aisle',
     'vocal',
-    'scratchy',
     'pasta',
     'genre',
     'merit',
@@ -1135,7 +1134,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     'south',
     'floor',
     'close',
-    'scratch',
     'fire',
     'wrong',
     'bank',
@@ -3475,6 +3473,89 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     return puzzle[count];
   }
 
+  pick_Random_Words() {
+
+    int one = random.nextInt(1200);
+    int two = random.nextInt(1200);
+    int three = random.nextInt(1200);
+    int four = random.nextInt(1200);
+    int five = random.nextInt(1200);
+    while ((all[one].length!=5 && all[one].length!=4 )||(all[two].length!=5 && all[two].length!=4 )||all[three].length != 4 || all[four].length != 4 ||
+        all[five].length != 4 || one == two || three==four  || three == five || four == five) {
+      one = random.nextInt(1200);
+      two = random.nextInt(1200);
+      three = random.nextInt(1200);
+      four = random.nextInt(1200);
+      five = random.nextInt(1200);
+    }
+    words[0] = all[one].toUpperCase();
+    words[1] = all[two].toUpperCase();
+    words[2] = all[three].toUpperCase();
+    words[3] = all[four].toUpperCase();
+    words[4] = all[five].toUpperCase();
+  }
+
+
+
+  Color serie_Color() {
+    next_Color++;
+    if(next_Color==5){
+      next_Color=0;
+    }
+    selected_color = colors[next_Color];
+    return selected_color;
+  }
+
+//Timer
+
+  @override
+  void dispose() {
+    super.dispose();
+
+  }
+  @override
+  void initState() {
+
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    super.initState();
+  }
+  void _getTime() {
+    _seconds++;
+    if(_seconds==60){
+      _minutes++;
+      _seconds=0;
+    }
+    setState(() {
+    });
+  }
+
+  Text return_Timer(){
+    return Text("${_minutes} :${_seconds.toString().padLeft(2, '0')}",
+      style: TextStyle(fontSize: MediaQuery
+          .of(context)
+          .size
+          .height / 25,
+        color: Colors.white,),);
+  }
+  set_Best_Time() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int time_now=_minutes*60+_seconds;
+    int old_best_time_minutes = (prefs.getInt('best_time_easy_minutes') ?? null);
+    int old_best_time_seconds=(prefs.getInt('best_time_easy_seconds') ?? null);
+    int old_time;
+    if(old_best_time_minutes==null ||old_best_time_seconds==null){
+    old_time=0;
+    }else {
+      old_time = old_best_time_minutes * 60 + old_best_time_seconds;
+    }
+    if(time_now<old_time || old_time==0){
+      await prefs.setInt('best_time_easy_minutes', _minutes);
+      await prefs.setInt('best_time_easy_seconds', _seconds);
+      String best_time=_minutes.toString()+":"+_seconds.toString();
+      prefs.setString('best_time_easy', best_time);
+      Navigator.of(context).pushNamed("/stats");
+    }
+  }
   write_Puzzle_Words(List<String> puzzle, String word_one, String word_two,
       String word_three, String word_four, String word_five) {
 
@@ -3489,9 +3570,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     column_three = random.nextInt(num_rows_and_columns);
     column_four = random.nextInt(num_rows_and_columns);
 
-    //  zero is SO, one is SE
-    if (random.nextInt(2) == 0) {
-      if (random.nextInt(2) == 0) {
+    //zero is word five diagonal, 1 is word five horizontal or vertical
+    if (random.nextInt(2)==0) {
+      //  zero is diagonal direciton SO, one is diagonal in direction SE
+      if (random.nextInt(2)==0) {
         row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
         column_five =
             random.nextInt(num_rows_and_columns - word_five.length + 1);
@@ -3517,8 +3599,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           column_two =
               random.nextInt(num_rows_and_columns - word_two.length + 1);
         }
-        int tried_too_much_just_find_solution = 0;
-        while ((column_three >= column_one &&
+        int num_of_tentatives = 0;
+       while ((column_three >= column_one &&
             column_three <= column_one + word_one.length - 1 &&
             row_three <= row_one &&
             row_three + word_three.length - 1 >= row_one) ||
@@ -3533,25 +3615,14 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     (row_five + word_five.length - 1 >= row_three &&
                         row_five + word_five.length - 1 <=
                             row_three + word_two.length - 1)))) {
-          if (tried_too_much_just_find_solution > 90) {
-            if (tried_too_much_just_find_solution % word_four.length + 1 != 0) {
-              row_three++;
-            } else {
-              column_three++;
-              row_three = 0;
-            }
-          } else {
             column_three = random.nextInt(num_rows_and_columns);
-            row_three =
-                random.nextInt(num_rows_and_columns - word_three.length + 1);
-          }
-          tried_too_much_just_find_solution++;
-          if (tried_too_much_just_find_solution == 91) {
-            column_three = 0;
-            row_three = 0;
-          }
+            row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
+            num_of_tentatives++;
+            if(num_of_tentatives==100){
+              write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
+            }
         }
-        tried_too_much_just_find_solution = 0;
+        num_of_tentatives=0;
         while (column_four == column_three || (column_four >= column_one &&
             column_four <= column_one + word_one.length - 1 &&
             row_four <= row_one &&
@@ -3567,25 +3638,13 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     (row_five + word_five.length - 1 >= row_four &&
                         row_five + word_five.length - 1 <=
                             row_four + word_two.length - 1)))) {
-          if (tried_too_much_just_find_solution > 90) {
-            if (tried_too_much_just_find_solution % word_four.length + 1 != 0) {
-              row_four--;
-            } else {
-              column_four--;
-              row_four = num_rows_and_columns - word_four.length;
-            }
-          } else {
             column_four = random.nextInt(num_rows_and_columns);
-            row_four =
-                random.nextInt(num_rows_and_columns - word_four.length + 1);
-          }
-          tried_too_much_just_find_solution++;
-          if (tried_too_much_just_find_solution == 91) {
-            column_four = num_rows_and_columns - 1;
-            row_four = num_rows_and_columns - word_four.length;
-          }
+            row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+            num_of_tentatives++;
+            if(num_of_tentatives==100){
+              write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
+            }
         }
-
         if (random.nextInt(2) == 0) {
           for (int i = 0; i < word_five.length; i++) {
             puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
@@ -3626,7 +3685,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           column_two =
               random.nextInt(num_rows_and_columns - word_two.length + 1);
         }
-        int tried_too_much_just_find_solution = 0;
+        int num_of_tentatives=0;
         while ((column_three >= column_one &&
             column_three <= column_one + word_one.length - 1 &&
             row_three <= row_one &&
@@ -3642,25 +3701,14 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     (row_five + word_five.length - 1 >= row_three &&
                         row_five + word_five.length - 1 <=
                             row_three + word_two.length - 1)))) {
-          if (tried_too_much_just_find_solution > 90) {
-            if (tried_too_much_just_find_solution % word_three.length + 1 !=
-                0) {
-              row_three++;
-            } else {
-              row_three = 0;
-              column_three++;
-            }
-          } else {
-            column_three = random.nextInt(8);
-            row_three = random.nextInt(8 - word_three.length + 1);
-          }
-          tried_too_much_just_find_solution++;
-          if (tried_too_much_just_find_solution == 91) {
-            column_three = 0;
-            row_three = 0;
+          column_three = random.nextInt(num_rows_and_columns);
+          row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
+          num_of_tentatives++;
+          if(num_of_tentatives==100){
+            write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
           }
         }
-        tried_too_much_just_find_solution = 0;
+        num_of_tentatives=0;
         while (column_four == column_three || (column_four >= column_one &&
             column_four <= column_one + word_one.length - 1 &&
             row_four <= row_one &&
@@ -3676,21 +3724,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     (row_five + word_five.length - 1 >= row_four &&
                         row_five + word_five.length - 1 <=
                             row_four + word_two.length - 1)))) {
-          if (tried_too_much_just_find_solution > 90) {
-            if (tried_too_much_just_find_solution % word_four.length + 1 != 0) {
-              row_four--;
-            } else {
-              row_four = num_rows_and_columns - word_four.length;
-              column_four--;
-            }
-          } else {
-            column_four = random.nextInt(8);
-            row_four = random.nextInt(8 - word_four.length + 1);
-          }
-          tried_too_much_just_find_solution++;
-          if (tried_too_much_just_find_solution == 91) {
-            column_four = num_rows_and_columns - 1;
-            row_four = num_rows_and_columns - word_four.length;
+          column_four = random.nextInt(num_rows_and_columns);
+          row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+          num_of_tentatives++;
+          if(num_of_tentatives==100){
+            write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
           }
         }
         if (random.nextInt(2) == 0) {
@@ -3759,6 +3797,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           row_four =
               random.nextInt(num_rows_and_columns - word_four.length + 1);
         }
+
         if (random.nextInt(2) == 0) {
           for (int i = 0; i < word_five.length; i++) {
             puzzle[row_five * num_rows_and_columns + i + column_five] =
@@ -3900,89 +3939,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     solution_positions[13] = column_four;
     solution_positions[14] = row_four + word_four.length - 1;
     solution_positions[15] = column_four;
-  }
-
-  pick_Random_Words() {
-
-    int one = random.nextInt(1200);
-    int two = random.nextInt(1200);
-    int three = random.nextInt(1200);
-    int four = random.nextInt(1200);
-    int five = random.nextInt(1200);
-    while (all[three].length == 5 || all[four].length == 5 ||
-        all[five].length == 5 || one == two || one == three || one == four ||
-        one == five || two == three || two == four || two == five ||
-        three == four || three == five || four == five) {
-      one = random.nextInt(1200);
-      two = random.nextInt(1200);
-      three = random.nextInt(1200);
-      four = random.nextInt(1200);
-      five = random.nextInt(1200);
-    }
-    words[0] = all[one].toUpperCase();
-    words[1] = all[two].toUpperCase();
-    words[2] = all[three].toUpperCase();
-    words[3] = all[four].toUpperCase();
-    words[4] = all[five].toUpperCase();
-  }
-
-  Color serie_Color() {
-    next_Color++;
-    if(next_Color==5){
-      next_Color=0;
-    }
-    selected_color = colors[next_Color];
-    return selected_color;
-  }
-
-//Timer
-  @override
-  void dispose() {
-    super.dispose();
-
-  }
-  @override
-  void initState() {
-
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
-    super.initState();
-  }
-
-  void _getTime() {
-    _seconds++;
-    if(_seconds==60){
-      _minutes++;
-      _seconds=0;
-    }
-    setState(() {
-    });
-  }
-  Text return_Timer(){
-    return Text("${_minutes} :${_seconds.toString().padLeft(2, '0')}",
-      style: TextStyle(fontSize: MediaQuery
-          .of(context)
-          .size
-          .height / 25,
-        color: Colors.white,),);
-  }
-  set_Best_Time() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int time_now=_minutes*60+_seconds;
-    int old_best_time_minutes = (prefs.getInt('best_time_easy_minutes') ?? null);
-    int old_best_time_seconds=(prefs.getInt('best_time_easy_seconds') ?? null);
-    int old_time;
-    if(old_best_time_minutes==null ||old_best_time_seconds==null){
-    old_time=0;
-    }else {
-      old_time = old_best_time_minutes * 60 + old_best_time_seconds;
-    }
-    if(time_now<old_time || old_time==0){
-      await prefs.setInt('best_time_easy_minutes', _minutes);
-      await prefs.setInt('best_time_easy_seconds', _seconds);
-      String best_time=_minutes.toString()+":"+_seconds.toString();
-      prefs.setString('best_time_easy', best_time);
-      Navigator.of(context).pushNamed("/stats");
-    }
   }
 
 }

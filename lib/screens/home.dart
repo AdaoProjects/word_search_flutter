@@ -10,8 +10,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  //width=  MediaQuery. of(context). size. width;
-  //heigth = MediaQuery. of(context). size. height;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
