@@ -2164,12 +2164,24 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   }
 
   pick_Random_Words() {
-
-    words[0] = 'banana';
-    words[1] = 'guava';
-    words[2] = 'banana';
-    words[3] = all[3];
-    words[4] = 'cherryby';
+    Random random = new Random();
+    int one = random.nextInt(25);
+    int two = random.nextInt(25);
+    int three = random.nextInt(25);
+    int four = random.nextInt(25);
+    int five = random.nextInt(25);
+    while ((all[one].length!=4 && all[one].length!=5)||(all[two].length!=4 && all[two].length!=5)||all[three].length != 4 || all[four].length !=4 || all[five].length != 4 || one==two ||three==four||three==five||four==five) {
+      one = random.nextInt(25);
+      two = random.nextInt(25);
+      three = random.nextInt(25);
+      four = random.nextInt(25);
+      five = random.nextInt(25);
+    }
+    words[0] = all[one].toUpperCase();
+    words[1] = all[two].toUpperCase();
+    words[2] = all[three].toUpperCase();
+    words[3] = all[four].toUpperCase();
+    words[4] = all[five].toUpperCase();
   }
 
 
@@ -2615,35 +2627,129 @@ set_language(){
     String language=AppLocalizations.of(context).translate("game_language");
     if(language=='en'){
       all=[
-        "figs",
-        "figs",
-        "figs",
-        "figs",
-        "figs",
+        "acid",
+        "area",
+        "baby",
+        "apps",
+        "ball",
+        "bank",
+        "cake",
+        "boys",
+        "care",
+
+        "club",
+        "code",
+        "cute",
+        "crew",
+        "deal",
+        "diet",
+        "dogs",
+        "exam",
+        "eyes",
+        "feet",
+
+        "adult",
+        "album",
+        "agent",
+        "angle",
+        "apple",
+        "blood",
       ];
     }else if (language=='pt'){
       all=[
-        "figs",
-        "figs",
-        "figs",
-        "figs",
-        "figs",
+        "área" ,
+        "bebê" ,
+        "bola",
+        "banco",
+        "bolo",
+
+        "clube",
+        "exame",
+        "olhos",
+        "album",
+         "maçã" ,
+
+        "amor",
+        "fato",
+        "tolo",
+        "medo",
+        "vida" ,
+
+        "casa",
+        "cela",
+        "base",
+        "alta",
+        "frio" ,
+
+        "alma",
+        "luta",
+        "nada",
+        "selo",
+        "pneu" ,
       ];
     }else if(language=='fr'){
       all=[
-        "figs",
-        "figs",
-        "figs",
-        "figs",
-        "figs",
+
+        "acide",
+        "zone" ,
+        "bebe" ,
+        "Balle" ,
+
+        "club" ,
+        "code",
+        "deal",
+        "yeux" ,
+
+        "APAX" ,
+        "MIXE",
+        "AXEE",
+        "FIXE" ,
+
+        "BOXE" ,
+        "TAXE",
+        "EXIL",
+        "DOUX" ,
+
+        "FOXE" ,
+        "EXAM",
+        "EXIT",
+        "PRIX" ,
+
+        "pieds" ,
+        "album",
+        "agent",
+        "angle" ,
+        "Pomme" ,
       ];
     }else if (language=='es'){
       all=[
-        "figs",
-        "figs",
-        "figs",
-        "figs",
-        "figs",
+        "acido",
+        "zona" ,
+        "bebé",
+        "banco",
+        "club",
+        "lindo" ,
+        "dieta",
+        "ojos",
+        "pies",
+        "album",
+
+        "DUDE",
+        "ECHO" ,
+        "ERRE",
+        "FAMA",
+        "COXA",
+        "CAGO" ,
+        "BOIL",
+        "BOZO",
+        "CHIP",
+        "CAMA",
+
+        "CAOS",
+        "CAIS" ,
+        "CEBO",
+        "ABES",
+        "ALUD",
       ];
     }
 }
