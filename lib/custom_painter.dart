@@ -20,8 +20,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             0,
             3.1415926535897932,
             true,
@@ -30,8 +30,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932,
             3.1415926535897932,
             true,
@@ -44,8 +44,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932,
             3.1415926535897932,
             true,
@@ -54,8 +54,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             0,
             3.1415926535897932,
             true,
@@ -68,8 +68,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 * 3 / 2,
             3.1415926535897932,
             true,
@@ -78,8 +78,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 / 2,
             3.1415926535897932,
             true,
@@ -92,8 +92,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 / 2,
             3.1415926535897932,
             true,
@@ -102,8 +102,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 * 3 / 2,
             3.1415926535897932,
             true,
@@ -116,8 +116,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             0,
             3.1415926535897932,
             true,
@@ -126,8 +126,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932,
             3.1415926535897932,
             true,
@@ -140,8 +140,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932,
             3.1415926535897932,
             true,
@@ -150,8 +150,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             0,
             3.1415926535897932,
             true,
@@ -164,8 +164,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 * 3 / 2,
             3.1415926535897932,
             true,
@@ -174,8 +174,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 / 2,
             3.1415926535897932,
             true,
@@ -188,8 +188,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i - 1].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 / 2,
             3.1415926535897932,
             true,
@@ -198,8 +198,8 @@ class DrawingPainter extends CustomPainter {
           canvas.drawArc(
             Rect.fromCenter(
               center: pointsList[i].points,
-              height: size.height / 15,
-              width: size.height / 15,),
+              height: pointsList[i-1].radius,
+              width: pointsList[i-1].radius,),
             3.1415926535897932 * 3 / 2,
             3.1415926535897932,
             true,
@@ -214,8 +214,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i - 1].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -224,8 +224,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               -3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -238,8 +238,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i - 1].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -248,8 +248,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               -3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -263,8 +263,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i - 1].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               -3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -273,8 +273,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -288,8 +288,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i - 1].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               -3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -298,8 +298,8 @@ class DrawingPainter extends CustomPainter {
             canvas.drawArc(
               Rect.fromCenter(
                 center: pointsList[i].points,
-                height: size.height / 15,
-                width: size.height / 15,),
+                height: pointsList[i-1].radius,
+                width: pointsList[i-1].radius,),
               3.1415926535897932 / 2+atan((pointsList[i].points.dy-pointsList[i-1].points.dy)/(pointsList[i].points.dx-pointsList[i-1].points.dx)),
               3.1415926535897932,
               true,
@@ -320,6 +320,7 @@ class DrawingPoints {
   Paint paint;
   Offset points;
   bool first;
+  double radius;
 
-  DrawingPoints({this.points, this.paint, this.first});
+  DrawingPoints({this.points, this.paint, this.first,this.radius});
 }

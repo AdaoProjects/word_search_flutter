@@ -13,7 +13,6 @@ AudioCache audioPlayer = AudioCache();
 class Game_Easy extends StatefulWidget {
   @override
   _Game_EasyState createState() => _Game_EasyState();
-
 }
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
@@ -159,6 +158,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   }init_Pan_Update=1;
                   setState(() {
                     points.add(DrawingPoints(
+                      radius: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15,
                       first:false,
                       points: Offset(
                         end_Of_Selection_dx,
@@ -238,6 +241,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       row_start=row;
                       column_start=column;
                       points.add(DrawingPoints(
+                        radius: MediaQuery
+                            .of(context)
+                            .size
+                            .height / 15,
                         first:true,
                         points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
                         paint: Paint()
@@ -408,12 +415,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold,)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(MediaQuery
                                     .of(context)
@@ -435,12 +442,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -457,12 +464,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -479,12 +486,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -500,12 +507,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -522,12 +529,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -544,12 +551,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -566,12 +573,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(MediaQuery
                                     .of(context)
@@ -598,12 +605,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               width: MediaQuery
@@ -620,12 +627,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -642,12 +649,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -665,12 +672,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -687,12 +694,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -709,12 +716,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -731,12 +738,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -753,12 +760,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                           ],
                         ),
@@ -778,12 +785,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               width: MediaQuery
@@ -800,12 +807,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -822,12 +829,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -844,12 +851,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -866,12 +873,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -888,12 +895,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -910,12 +917,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -932,12 +939,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                           ],
                         ),
@@ -957,12 +964,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               width: MediaQuery
@@ -979,12 +986,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1002,12 +1009,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1024,12 +1031,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1046,12 +1053,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1068,12 +1075,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1091,12 +1098,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1114,196 +1121,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
-                            ),
-                          ],
-                        ),
-
-                        TableRow(
-                          children: [
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                  style: TextStyle(fontSize: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 35)) : Text(
-                                  write_Puzzle_Letter(),
-                                  style: TextStyle(fontSize: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 35)),
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-                            ),
-                            Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 10 * 1.1,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 15,
-                              alignment: Alignment.center,
-                              child:
-                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35),),
-
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                           ],
                         ),
@@ -1324,12 +1147,34 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1347,12 +1192,34 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1370,12 +1237,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1393,12 +1260,83 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
+
+                            ),
+                          ],
+                        ),
+
+                        TableRow(
+                          children: [
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child: old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                  style: TextStyle(fontSize: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
+                                  write_Puzzle_Letter(),
+                                  style: TextStyle(fontSize: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 35,fontWeight: FontWeight.bold)),
 
                             ),
                             Container(
@@ -1416,12 +1354,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1439,12 +1377,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1462,12 +1400,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1485,12 +1423,81 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
+
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
+
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
+
+                            ),
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 10 * 1.1,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
+                              alignment: Alignment.center,
+                              child:
+                              old_Puzzle ? Text(get_Old_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                           ],
                         ),
@@ -1510,12 +1517,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               width: MediaQuery
@@ -1532,12 +1539,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1554,12 +1561,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1576,12 +1583,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1598,12 +1605,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1620,12 +1627,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1642,12 +1649,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                             ),
                             Container(
                               width: MediaQuery
@@ -1664,12 +1671,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                           ],
@@ -1690,12 +1697,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)) : Text(
+                                      .height / 35,fontWeight: FontWeight.bold)) : Text(
                                   write_Puzzle_Letter(),
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35)),
+                                      .height / 35,fontWeight: FontWeight.bold)),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(MediaQuery
                                     .of(context)
@@ -1718,12 +1725,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1741,12 +1748,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1764,12 +1771,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1787,12 +1794,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1810,12 +1817,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1833,12 +1840,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
 
                             ),
                             Container(
@@ -1856,12 +1863,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) :
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35),),
+                                    .height / 35,fontWeight: FontWeight.bold),),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(MediaQuery
                                     .of(context)
@@ -1922,7 +1929,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         fontSize: MediaQuery
                                             .of(context)
                                             .size
-                                            .height / 30,
+                                            .height / 30,fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ))
                                   : Center(
@@ -1930,7 +1937,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 30,
+                                      .height / 30,fontWeight: FontWeight.bold,
                                       color: Colors.black),
                                 ),),
                               SizedBox(width: MediaQuery
@@ -1950,14 +1957,14 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                     fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 30,
+                                        .height / 30,fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               )
                                   : Text(return_Sorted_Words(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 30,
+                                    .height / 30,fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               )
                             ]
@@ -1985,7 +1992,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         fontSize: MediaQuery
                                             .of(context)
                                             .size
-                                            .height / 30,
+                                            .height / 30,fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ))
                                   : Center(
@@ -1993,7 +2000,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   style: TextStyle(fontSize: MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 30,
+                                      .height / 30,fontWeight: FontWeight.bold,
                                       color: Colors.black),
                                 ),),
                               SizedBox(width: MediaQuery
@@ -2013,14 +2020,14 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                     fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 30,
+                                        .height / 30,fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               ),)
                                   : Center(child: Text(return_Sorted_Words(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 30,
+                                    .height / 30,fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               ),),
                             ]
@@ -2046,13 +2053,13 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                         fontSize: MediaQuery
                                             .of(context)
                                             .size
-                                            .height / 30,
+                                            .height / 30,fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ) : Text(return_Sorted_Words(),
                                     style: TextStyle(fontSize: MediaQuery
                                         .of(context)
                                         .size
-                                        .height / 30,
+                                        .height / 30,fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   )
                                 ]
