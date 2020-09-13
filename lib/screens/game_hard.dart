@@ -5524,17 +5524,17 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
   }
   pick_Random_Words() {
     Random random = new Random();
-    int one = random.nextInt(1200);
-    int two = random.nextInt(1200);
-    int three = random.nextInt(1200);
-    int four = random.nextInt(1200);
-    int five = random.nextInt(1200);
+    int one = random.nextInt(25);
+    int two = random.nextInt(25);
+    int three = random.nextInt(25);
+    int four = random.nextInt(25);
+    int five = random.nextInt(25);
     while ((all[one].length!=6 && all[one].length!=7)||(all[two].length!=6 && all[two].length!=7)||all[three].length != 6 || all[four].length !=6 || all[five].length != 6 || one==two ||three==four||three==five||four==five) {
-      one = random.nextInt(1200);
-      two = random.nextInt(1200);
-      three = random.nextInt(1200);
-      four = random.nextInt(1200);
-      five = random.nextInt(1200);
+      one = random.nextInt(25);
+      two = random.nextInt(25);
+      three = random.nextInt(25);
+      four = random.nextInt(25);
+      five = random.nextInt(25);
     }
     words[0] = all[one].toUpperCase();
     words[1] = all[two].toUpperCase();
@@ -5599,5 +5599,130 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
           .size
           .height / 25,
         color: Colors.white,),);
+  }
+  set_language(){
+    String language=AppLocalizations.of(context).translate("game_language");
+    if(language=='en'){
+      all=[
+        "afford",
+        "allows",
+        "animal",
+        "annual",
+        "advice",
+        "actual",
+        "action",
+
+        "beauty",
+        "battle",
+        "backup",
+        "begins",
+        "cities",
+        "circle",
+        "church",
+
+        "cheese",
+        "damage",
+        "decent",
+        "device",
+        "domain",
+        "dreams",
+        "action",
+
+        "academy",
+        "account",
+        "address",
+        "achieve",
+      ];
+    }else if (language=='pt'){
+      all=[
+        "biblia",
+        "animal" ,
+        "permite",
+        "adendo" ,
+        "beleza",
+        "batalha",
+        "começa",
+        "cidades" ,
+        "Igreja" ,
+        "queijo",
+        "domínio",
+
+
+        "exceto",
+        "escopo" ,
+        "pressa",
+        "difuso" ,
+        "julgar",
+        "acento",
+        "isento",
+        "ciente" ,
+        "mazela" ,
+        "enxuto",
+        "faceta",
+        "prazer" ,
+        "apatia",
+        "inibir",
+
+
+      ];
+    }else if(language=='fr'){
+      all=[
+        "adulte",
+        "filles" ,
+        "planche" ,
+        "bloquer" ,
+        "animal" ,
+        "annuel",
+        "action",
+        "permet" ,
+        "Conseil" ,
+        "beaute" ,
+        " villes " ,
+        "cercle",
+        "fromage" ,
+        "dommage" ,
+
+        "SWITCH" ,
+        "WOMBAT",
+        "OUTLAW",
+        "WALLON" ,
+        "WIDIAS" ,
+        "SWEATS" ,
+        "SWAPPA" ,
+        "SANDOW",
+        "SWAZIS" ,
+        "TWISTA" ,
+
+      ];
+    }else if (language=='es'){
+      all=[
+        "agente" ,
+        "sangre",
+        "biblia",
+        "animal",
+        "Consejo" ,
+        "actual",
+        "accion",
+        "academia",
+        "decente",
+        "Iglesia" ,
+        "belleza" ,
+
+        "asiese" ,
+        "bacano",
+        "echare",
+        "fabula",
+        "gabata" ,
+        "hacera",
+        "jabato",
+        "labore",
+        "macelo",
+        "nacion" ,
+        "obesos" ,
+        "oblata",
+        "pacota" ,
+        "quebro" ,
+      ];
+    }
   }
 }
