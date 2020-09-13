@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:huntersofwords/screens/levels.dart';
 import 'package:huntersofwords/screens/stats.dart';
 import 'package:huntersofwords/utilites/colors.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:huntersofwords/app_localizations.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
                   child: Container(
                       constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                       alignment: Alignment.center,
-                      child: Text('PLAY',
+                      child: Text(AppLocalizations.of(context).translate("home_play"),
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                 child: Container(
                     constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                     alignment: Alignment.center,
-                    child: Text('SHARE',
+                    child: Text(AppLocalizations.of(context).translate("home_share"),
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                 child: Container(
                     constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                     alignment: Alignment.center,
-                    child: Text('STATS',
+                    child: Text(AppLocalizations.of(context).translate("home_stats"),
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class _HomeState extends State<Home> {
                 child: Container(
                     constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                     alignment: Alignment.center,
-                    child: Text('SETTINGS',
+                    child: Text(AppLocalizations.of(context).translate("home_settings"),
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
