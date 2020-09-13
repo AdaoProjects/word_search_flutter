@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:huntersofwords/utilites/colors.dart';
-import 'package:huntersofwords/custom_painter.dart';
+import 'package:findthewords/utilites/colors.dart';
+import 'package:findthewords/custom_painter.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:findthewords/app_localizations.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Hard extends StatefulWidget {
 
@@ -1682,7 +1683,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                             .of(context)
                             .size
                             .width / 10),
-                        Text('LEVEL: HARD',
+                        Text(AppLocalizations.of(context).translate("game_level_hard"),
                           style: TextStyle(fontSize: MediaQuery
                               .of(context)
                               .size
@@ -5148,90 +5149,88 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
     // the row and column from the 'beginer of the words', rigth is positive and down is positive, later the word can be changed to reversed order so it makes more difficult the puzzle
     row_one = random.nextInt(num_rows_and_columns);
-    row_two = random.nextInt(num_rows_and_columns);
-    row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
-    row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
-
     column_one = random.nextInt(num_rows_and_columns - word_one.length + 1);
+    row_two = random.nextInt(num_rows_and_columns);
     column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
+    row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
     column_three = random.nextInt(num_rows_and_columns);
+    row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
     column_four = random.nextInt(num_rows_and_columns);
+
+    int num_of_tentatives;
 
     //zero is word five diagonal, 1 is word five horizontal or vertical
     if (random.nextInt(2)==0) {
       //  zero is diagonal direciton SO, one is diagonal in direction SE
       if (random.nextInt(2)==0) {
         row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
-        column_five =
-            random.nextInt(num_rows_and_columns - word_five.length + 1);
+        column_five =  random.nextInt(num_rows_and_columns - word_five.length + 1);
 
-        while (row_one == row_two || ((row_five <= row_one &&
-            row_five + word_five.length - 1 >= row_one) &&
-            ((column_five >= column_one &&
-                column_five <= column_one + word_one.length - 1) ||
-                (column_five + word_five.length - 1 >= column_one &&
-                    column_five + word_five.length - 1 <=
-                        column_one + word_one.length - 1)))
-            || ((row_five <= row_two &&
-                row_five + word_five.length - 1 >= row_two) &&
-                ((column_five >= column_two &&
-                    column_five <= column_two + word_two.length - 1) ||
-                    (column_five + word_five.length - 1 >= column_two &&
-                        column_five + word_five.length - 1 <=
-                            column_two + word_two.length - 1)))) {
-          row_one = random.nextInt(num_rows_and_columns);
-          row_two = random.nextInt(num_rows_and_columns);
-          column_one =
-              random.nextInt(num_rows_and_columns - word_one.length + 1);
-          column_two =
-              random.nextInt(num_rows_and_columns - word_two.length + 1);
+        int k=0;
+        while(k<word_five.length*word_one.length) {
+          k = 0;
+          row_one =random.nextInt(num_rows_and_columns - word_five.length + 1);
+          column_one = random.nextInt(num_rows_and_columns - word_one.length + 1);
+          for (int i = 0; i < word_five.length; i++) {
+            for (int j = 0; j < word_one.length; j++) {
+              if (!(row_five + i == row_one &&
+                  column_five + i == column_one + j)) {
+                k++;
+              }
+            }
+          }
         }
-        int num_of_tentatives = 0;
-        while ((column_three >= column_one &&
-            column_three <= column_one + word_one.length - 1 &&
-            row_three <= row_one &&
-            row_three + word_three.length - 1 >= row_one) ||
-            (column_three >= column_two &&
-                column_three <= column_two + word_two.length - 1 &&
-                row_three <= row_two &&
-                row_three + word_three.length - 1 >= row_two) ||
-            ((column_five <= column_three &&
-                column_five + word_five.length - 1 >= column_three) &&
-                ((row_five >= row_three &&
-                    row_five <= row_three + word_two.length - 1) ||
-                    (row_five + word_five.length - 1 >= row_three &&
-                        row_five + word_five.length - 1 <=
-                            row_three + word_two.length - 1)))) {
-          column_three = random.nextInt(num_rows_and_columns);
-          row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
-          num_of_tentatives++;
-          if(num_of_tentatives==100){
-            write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
+        k=0;
+        while(k<word_five.length*word_two.length){
+          k=0;
+          row_two = random.nextInt(num_rows_and_columns);
+          column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
+          for(int i=0;i<word_five.length;i++){
+            for(int j=0;j<word_two.length;j++){
+              if(!(row_two==row_one||(row_five+i==row_two && column_five+i==column_two+j))){
+                k++;
+              }
+            }
           }
         }
         num_of_tentatives=0;
-        while (column_four == column_three || (column_four >= column_one &&
-            column_four <= column_one + word_one.length - 1 &&
-            row_four <= row_one &&
-            row_four + word_four.length - 1 >= row_one) ||
-            (column_four >= column_two &&
-                column_four <= column_two + word_two.length - 1 &&
-                row_four <= row_two &&
-                row_four + word_four.length - 1 >= row_two) ||
-            ((column_five <= column_four &&
-                column_five + word_five.length - 1 >= column_four) &&
-                ((row_five >= row_four &&
-                    row_five <= row_four + word_two.length - 1) ||
-                    (row_five + word_five.length - 1 >= row_four &&
-                        row_five + word_five.length - 1 <=
-                            row_four + word_two.length - 1)))) {
-          column_four = random.nextInt(num_rows_and_columns);
-          row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+        k=0;
+        while(k<word_five.length*word_three.length){
+          k=0;
+          row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
+          column_three = random.nextInt(num_rows_and_columns);
           num_of_tentatives++;
-          if(num_of_tentatives==100){
+          if(num_of_tentatives>100){
             write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
           }
+          for(int i=0;i<word_five.length;i++){
+            for(int j=0;j<word_three.length;j++){
+              if(!((row_five+i==row_three+j && column_five+i==column_three)||((row_three<=row_one&& row_three+word_three.length-1>=row_one)&&(column_three>=column_one && column_three<=column_one+word_one.length-1))||((row_three<=row_two&& row_three+word_three.length-1>=row_two)&&(column_three>=column_two && column_three<=column_two+word_two.length-1)))){
+                k++;
+              }
+            }
+          }
         }
+        num_of_tentatives=0;
+        k=0;
+        while(k<word_five.length*word_four.length){
+          k=0;
+          row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+          column_four = random.nextInt(num_rows_and_columns);
+          num_of_tentatives++;
+          if(num_of_tentatives>100){
+            write_Puzzle_Words(puzzle, word_one, word_two, word_four, word_four, word_five);
+          }
+          for(int i=0;i<word_five.length;i++){
+            for(int j=0;j<word_four.length;j++){
+              if(!(column_four==column_three||((row_five+i==row_four+j && column_five+i==column_four)||((row_four<=row_one&& row_four+word_four.length-1>=row_one)&&(column_four>=column_one && column_four<=column_one+word_one.length-1))||((row_four<=row_two&& row_four+word_four.length-1>=row_two)&&(column_four>=column_two && column_four<=column_two+word_two.length-1))))){
+                k++;
+              }
+            }
+          }
+        }
+
+
         if (random.nextInt(2) == 0) {
           for (int i = 0; i < word_five.length; i++) {
             puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
@@ -5251,71 +5250,67 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
         column_five = num_rows_and_columns - 1 -
             random.nextInt(num_rows_and_columns - word_five.length + 1);
-        while (row_one == row_two || ((row_five <= row_one &&
-            row_five + word_five.length - 1 >= row_one) &&
-            ((column_five >= column_one &&
-                column_five <= column_one + word_one.length - 1) ||
-                (column_five - word_five.length + 1 >= column_one &&
-                    column_five - word_five.length + 1 <=
-                        column_one + word_one.length - 1)))
-            || ((row_five <= row_two &&
-                row_five + word_five.length - 1 >= row_two) &&
-                ((column_five >= column_two &&
-                    column_five <= column_two + word_two.length - 1) ||
-                    (column_five - word_five.length + 1 >= column_two &&
-                        column_five - word_five.length + 1 <=
-                            column_two + word_two.length - 1)))) {
-          row_one = random.nextInt(num_rows_and_columns);
-          row_two = random.nextInt(num_rows_and_columns);
-          column_one =
-              random.nextInt(num_rows_and_columns - word_one.length + 1);
-          column_two =
-              random.nextInt(num_rows_and_columns - word_two.length + 1);
+        int k=0;
+        while(k<word_five.length*word_one.length) {
+          k = 0;
+          row_one =random.nextInt(num_rows_and_columns - word_five.length + 1);
+          column_one = random.nextInt(num_rows_and_columns - word_one.length + 1);
+          for (int i = 0; i < word_five.length; i++) {
+            for (int j = 0; j < word_one.length; j++) {
+              if (!(row_five + i == row_one &&
+                  column_five - i == column_one + j)) {
+                k++;
+              }
+            }
+          }
         }
-        int num_of_tentatives=0;
-        while ((column_three >= column_one &&
-            column_three <= column_one + word_one.length - 1 &&
-            row_three <= row_one &&
-            row_three + word_three.length - 1 >= row_one) ||
-            (column_three >= column_two &&
-                column_three <= column_two + word_two.length - 1 &&
-                row_three <= row_two &&
-                row_three + word_three.length - 1 >= row_two) ||
-            ((column_five >= column_three &&
-                column_five - word_five.length + 1 <= column_three) &&
-                ((row_five >= row_three &&
-                    row_five <= row_three + word_two.length - 1) ||
-                    (row_five + word_five.length - 1 >= row_three &&
-                        row_five + word_five.length - 1 <=
-                            row_three + word_two.length - 1)))) {
-          column_three = random.nextInt(num_rows_and_columns);
-          row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
-          num_of_tentatives++;
-          if(num_of_tentatives==100){
-            write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
+        k=0;
+        while(k<word_five.length*word_two.length){
+          k=0;
+          row_two = random.nextInt(num_rows_and_columns);
+          column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
+          for(int i=0;i<word_five.length;i++){
+            for(int j=0;j<word_two.length;j++){
+              if(!(row_two==row_one||(row_five+i==row_two && column_five-i==column_two+j))){
+                k++;
+              }
+            }
           }
         }
         num_of_tentatives=0;
-        while (column_four == column_three || (column_four >= column_one &&
-            column_four <= column_one + word_one.length - 1 &&
-            row_four <= row_one &&
-            row_four + word_four.length - 1 >= row_one) ||
-            (column_four >= column_two &&
-                column_four <= column_two + word_two.length - 1 &&
-                row_four <= row_two &&
-                row_four + word_four.length - 1 >= row_two) ||
-            ((column_five >= column_four &&
-                column_five - word_five.length + 1 <= column_four) &&
-                ((row_five >= row_four &&
-                    row_five <= row_four + word_two.length - 1) ||
-                    (row_five + word_five.length - 1 >= row_four &&
-                        row_five + word_five.length - 1 <=
-                            row_four + word_two.length - 1)))) {
-          column_four = random.nextInt(num_rows_and_columns);
-          row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+        k=0;
+        while(k<word_five.length*word_three.length){
+          k=0;
+          row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
+          column_three = random.nextInt(num_rows_and_columns);
           num_of_tentatives++;
-          if(num_of_tentatives==100){
+          if(num_of_tentatives>100){
             write_Puzzle_Words(puzzle, word_one, word_two, word_three, word_four, word_five);
+          }
+          for(int i=0;i<word_five.length;i++){
+            for(int j=0;j<word_three.length;j++){
+              if(!((row_five+i==row_three+j && column_five-i==column_three)||((row_three<=row_one&& row_three+word_three.length-1>=row_one)&&(column_three>=column_one && column_three<=column_one+word_one.length-1))||((row_three<=row_two&& row_three+word_three.length-1>=row_two)&&(column_three>=column_two && column_three<=column_two+word_two.length-1)))){
+                k++;
+              }
+            }
+          }
+        }
+        num_of_tentatives=0;
+        k=0;
+        while(k<word_five.length*word_four.length){
+          k=0;
+          row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+          column_four = random.nextInt(num_rows_and_columns);
+          num_of_tentatives++;
+          if(num_of_tentatives>100){
+            write_Puzzle_Words(puzzle, word_one, word_two, word_four, word_four, word_five);
+          }
+          for(int i=0;i<word_five.length;i++){
+            for(int j=0;j<word_four.length;j++){
+              if(!(column_four==column_three||((row_five+i==row_four+j && column_five-i==column_four)||((row_four<=row_one&& row_four+word_four.length-1>=row_one)&&(column_four>=column_one && column_four<=column_one+word_one.length-1))||((row_four<=row_two&& row_four+word_four.length-1>=row_two)&&(column_four>=column_two && column_four<=column_two+word_two.length-1))))){
+                k++;
+              }
+            }
           }
         }
         if (random.nextInt(2) == 0) {
@@ -5527,7 +5522,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     solution_positions[14] = row_four + word_four.length - 1;
     solution_positions[15] = column_four;
   }
-
   pick_Random_Words() {
     Random random = new Random();
     int one = random.nextInt(1200);

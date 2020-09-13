@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:huntersofwords/screens/game_easy.dart';
-import 'package:huntersofwords/screens/game_medium.dart';
-import 'package:huntersofwords/screens/game_hard.dart';
-import 'package:huntersofwords/utilites/colors.dart';
+import 'package:findthewords/screens/game_easy.dart';
+import 'package:findthewords/screens/game_medium.dart';
+import 'package:findthewords/screens/game_hard.dart';
+import 'package:findthewords/utilites/colors.dart';
+import 'package:findthewords/app_localizations.dart';
 class Level extends StatefulWidget {
   @override
   _LevelState createState() => _LevelState();
@@ -26,7 +27,7 @@ class _LevelState extends State<Level> {
                           .of(context)
                           .size
                           .width),
-                Text('LEVELS',
+                Text(AppLocalizations.of(context).translate("levels_level"),
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -54,7 +55,7 @@ class _LevelState extends State<Level> {
                       child: Container(
                           constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                           alignment: Alignment.center,
-                          child: Text('EASY',
+                          child: Text(AppLocalizations.of(context).translate("levels_easy"),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -86,7 +87,7 @@ class _LevelState extends State<Level> {
                       child: Container(
                           constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                           alignment: Alignment.center,
-                          child: Text('MEDIUM',
+                          child: Text(AppLocalizations.of(context).translate("levels_medium"),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -119,7 +120,7 @@ class _LevelState extends State<Level> {
                       child: Container(
                           constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
                           alignment: Alignment.center,
-                          child: Text('HARD',
+                          child: Text(AppLocalizations.of(context).translate("levels_hard"),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

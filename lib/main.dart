@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:huntersofwords/screens/home.dart';
-import 'package:huntersofwords/screens/stats.dart';
+import 'package:findthewords/screens/home.dart';
+import 'package:findthewords/screens/stats.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app_localizations.dart';
 
@@ -17,9 +17,6 @@ void main() {
           "/stats" : (BuildContext context)=> new Stats(),
         },
     ));
-
-
-
   });
 }
 
@@ -36,8 +33,6 @@ class MyApp extends StatelessWidget {
       ],
       localizationsDelegates: [
         AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {

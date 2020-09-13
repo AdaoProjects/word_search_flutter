@@ -2,7 +2,23 @@
   "home_play": "JOGAR",
   "home_share" : "COMPARTILHAR",
   "home_stats" : "ESTATÍSTICAS",
-  "home_settings" : "CONFIGURAÇÕES",
+  "home_settings" : "CONFIGURAÇÃO",
+
+  "levels_level": "NÍVEL",
+  "levels_easy" :"FÁCIL",
+  "levels_medium" :"MÉDIO",
+  "levels_hard" :"DIFÍCIL",
+
+  "stats_results" : "RESULTADOS",
+  "stats_easy" : "Fácil",
+  "stats_medium" : "Médio",
+  "stats_hard" : "Difícil",
+
+  "game_level_easy" : "Nínel: FÁCIL",
+
+  "game_level_medium" : "Nível: MÉDIO",
+
+  "game_level_hard" : "Nível: DIFÍCIL",
 
   "game_language": "pt"
 }

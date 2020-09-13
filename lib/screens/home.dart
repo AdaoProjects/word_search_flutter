@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:huntersofwords/screens/levels.dart';
-import 'package:huntersofwords/screens/stats.dart';
-import 'package:huntersofwords/utilites/colors.dart';
-import 'package:huntersofwords/app_localizations.dart';
+import 'package:findthewords/screens/levels.dart';
+import 'package:findthewords/screens/stats.dart';
+import 'package:findthewords/utilites/colors.dart';
+import 'package:findthewords/app_localizations.dart';
 
 class Home extends StatefulWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:huntersofwords/utilites/colors.dart';
+import 'package:findthewords/utilites/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:findthewords/app_localizations.dart';
 class Stats extends StatefulWidget {
   @override
   _StatsState createState() => _StatsState();
@@ -16,7 +17,7 @@ class _StatsState extends State<Stats> {
         body: Center(
             child:Column(children:[
               SizedBox(height:MediaQuery.of(context).size.height/5),
-              Text('BEST RESULTS',
+              Text(AppLocalizations.of(context).translate("stats_results"),
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -31,21 +32,21 @@ class _StatsState extends State<Stats> {
                     .width * 7 / 10,
                 child:Column(
                 children: [
-                      Text('Easy  '+ get_best_time_easy(),
+                      Text(AppLocalizations.of(context).translate("stats_easy")+'  '+ get_best_time_easy(),
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: MediaQuery. of(context). size. height/20)
                       ),
-SizedBox(height:MediaQuery. of(context). size. height/30),
-                        Text('Medium  '+get_best_time_medium(),
+                  SizedBox(height:MediaQuery. of(context). size. height/30),
+                        Text(AppLocalizations.of(context).translate("stats_medium")+'  '+get_best_time_medium(),
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: MediaQuery. of(context). size. height/20)
                         ),
                   SizedBox(height:MediaQuery. of(context). size. height/30),
-                  Text('Hard  '+get_best_time_hard
+                  Text(AppLocalizations.of(context).translate("stats_hard")+'  '+get_best_time_hard
                     (),
                       style: TextStyle(
                           color: Colors.black,

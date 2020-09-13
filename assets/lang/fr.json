@@ -4,5 +4,21 @@
   "home_stats" : "STATISTIQUES",
   "home_settings" : "PARAMÈTRES",
 
+  "levels_level": "NIVEAU",
+  "levels_easy" :"FACILE",
+  "levels_medium" :"MOYEN",
+  "levels_hard" :"DIFFICILE",
+
+  "stats_results" : "BEST RESULTS",
+  "stats_easy" : "Facile",
+  "stats_medium" : "Moyen",
+  "stats_hard" : "Difficile",
+
+  "game_level_easy" : "NIVEAU: FACILE",
+
+  "game_level_medium" : "NIVEAU: MOYEN",
+
+  "game_level_hard" : "NIVEAU: DIFFICILE",
+
   "game_language": "fr"
 }

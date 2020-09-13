@@ -4,7 +4,23 @@
   "home_share" : "SHARE",
   "home_stats" : "STATS",
   "home_settings" : "SETTINGS",
-  
+
+  "levels_level" : "LEVEL",
+  "levels_easy" :"EASY",
+  "levels_medium" :"MEDIUM",
+  "levels_hard" :"HARD",
+
+  "stats_results" : "BEST RESULTS",
+  "stats_easy" : "Easy",
+  "stats_medium" : "Medium",
+  "stats_hard" : "Hard",
+
+  "game_level_easy" : "LEVEL: EASY",
+
+  "game_level_medium" : "LEVEL: MEDIUM",
+
+  "game_level_hard" : "LEVEL: HARD",
+
   "game_language": "en"
 
 }
