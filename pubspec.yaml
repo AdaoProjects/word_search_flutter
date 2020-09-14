@@ -54,6 +54,8 @@ flutter:
   assets:
     - assets/images/artecriada.jpg
     - assets/sounds/selectionsound.wav
+    - assets/sounds/wrongsound.wav
+    - assets/sounds/foundsound.wav
     - assets/lang/es.json
     - assets/lang/fr.json
     - assets/lang/pt.json

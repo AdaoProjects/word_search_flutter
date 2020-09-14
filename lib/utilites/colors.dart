@@ -5,7 +5,7 @@ class GameColors {
   GameColors._();
 
   /// Primary color.
-  static const primary = Color(0xFFA80054);
+  static const primary = Color(0xFFD44500);
 
   /// The color used.
   static const button_Background = Color(0xFFFE7C00);

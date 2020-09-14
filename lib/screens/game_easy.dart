@@ -281,6 +281,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     row_end == solution_positions[4 * i] &&
     column_end == solution_positions[4 * i + 1]) {
     found_word = true;
+    audioPlayer.play('sounds/foundsound.wav');
     number_Of_Words_Selected++;
     if ((row_one == row_start && column_one == column_start) ||
     (row_one == row_end && column_one == column_end)) {
@@ -315,6 +316,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     if (!found_word) {
     points.removeAt(2 * number_Of_Words_Selected + 1);
     points.removeAt(2 * number_Of_Words_Selected);
+    audioPlayer.play('sounds/wrongsound.wav');
     }
     if (word_one_scratch == true && word_two_scratch == true &&
     word_three_scratch == true && word_four_scratch == true &&
@@ -1961,14 +1963,20 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     setState(() {
     });
   }
-
   Text return_Timer(){
-    return Text("${_minutes} :${_seconds.toString().padLeft(2, '0')}",
+    Duration duration =Duration(seconds:_seconds+60*_minutes);
+    return Text(_stringDuration(duration),
       style: TextStyle(fontSize: MediaQuery
           .of(context)
           .size
           .height / 25,
         color: Colors.white,),);
+  }
+  String _stringDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$twoDigitMinutes:$twoDigitSeconds";
   }
   set_Best_Time() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();

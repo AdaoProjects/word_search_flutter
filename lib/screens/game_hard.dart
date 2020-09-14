@@ -401,6 +401,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       row_end==solution_positions[4*i]&&
                       column_end==solution_positions[4*i+1]){
                 found_word=true;
+                audioPlayer.play('sounds/foundsound.wav');
                 number_Of_Words_Selected++;
                 if((row_one==row_start && column_one==column_start) ||(row_one==row_end && column_one==column_end) ){
                   setState(() {
@@ -428,6 +429,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             if(!found_word){
               points.removeAt(2*number_Of_Words_Selected+1);
               points.removeAt(2*number_Of_Words_Selected);
+              audioPlayer.play('sounds/wrongsound.wav');
             }
             if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
               set_Best_Time();
@@ -3151,12 +3153,12 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                     width:MediaQuery
                         .of(context)
                         .size
-                        .width* 2/ 3 ,
+                        .width* 2/ 3,
                     child: Table(
                         children: [
                           TableRow( children:[
                             Row(children:[
-                              SizedBox(width:MediaQuery.of(context).size.width/25),
+                              SizedBox(width:MediaQuery.of(context).size.width/30),
                               (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words()+', ' ,
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -3172,7 +3174,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .height / 30,fontWeight: FontWeight.bold,
                                     color:Colors.black),
                               ),),
-                              SizedBox(width:MediaQuery.of(context).size.width/27),
+                              SizedBox(width:MediaQuery.of(context).size.width/35),
                               (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Text(return_Sorted_Words() ,
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -3195,7 +3197,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
                           TableRow( children:[
                             Row(children:[
-                              SizedBox(width:MediaQuery.of(context).size.width/25),
+                              SizedBox(width:MediaQuery.of(context).size.width/30),
                               (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words()+', ' ,
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -3211,7 +3213,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .height / 30,fontWeight: FontWeight.bold,
                                     color:Colors.black),
                               ),),
-                              SizedBox(width:MediaQuery.of(context).size.width/27),
+                              SizedBox(width:MediaQuery.of(context).size.width/35),
                               (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words(),
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -3788,12 +3790,19 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     });
   }
   Text return_Timer(){
-    return Text("${_minutes} :${_seconds.toString().padLeft(2, '0')}",
+    Duration duration =Duration(seconds:_seconds+60*_minutes);
+    return Text(_stringDuration(duration),
       style: TextStyle(fontSize: MediaQuery
           .of(context)
           .size
           .height / 25,
         color: Colors.white,),);
+  }
+  String _stringDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "$twoDigitMinutes:$twoDigitSeconds";
   }
   set_language(){
     String language=AppLocalizations.of(context).translate("game_language");
@@ -3840,7 +3849,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         "cidades" ,
         "Igreja" ,
         "queijo",
-        "domínio",
+        "dominio",
 
 
         "exceto",
