@@ -121,7 +121,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     '',
     '',
   ];
-  int count = -1;
+  int count = -2;
   Random random = new Random();
   List<String> words = ['', '', '', '', ''];
   List<String> all;
@@ -158,7 +158,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   List<DrawingPoints> points = List();
   StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
   Color selected_color;
-  bool old_Puzzle=false;
   double opacity = 0.2;
   List<Color> colors = [
     Colors.red,
@@ -261,7 +260,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
           },
           onPanStart: (details) {
-            old_Puzzle = true;
             RenderBox box = context.findRenderObject();
             if(!fisrt_Point_drawed) {
               final Offset local = box.globalToLocal(
@@ -476,11 +474,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -498,11 +492,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -520,11 +510,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -542,11 +528,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -564,11 +546,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -586,11 +564,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -608,11 +582,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -630,11 +600,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -652,11 +618,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -674,11 +636,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -701,11 +659,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -723,11 +677,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -745,11 +695,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -767,11 +713,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -789,11 +731,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -811,11 +749,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -833,11 +767,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -855,11 +785,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -877,11 +803,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -899,11 +821,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -925,11 +843,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -947,11 +861,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -969,11 +879,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -991,11 +897,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1013,11 +915,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1035,11 +933,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1057,11 +951,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1079,11 +969,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1101,11 +987,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1123,11 +1005,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1137,7 +1015,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             ),
                           ],
                         ),
-
                         TableRow(
                           children: [
                             Container(
@@ -1150,11 +1027,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1172,11 +1045,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1194,11 +1063,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1216,11 +1081,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1238,11 +1099,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1260,11 +1117,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1282,11 +1135,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1304,11 +1153,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1326,11 +1171,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1348,237 +1189,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                          ],
-                        ),
-
-
-                        TableRow(
-                          children: [
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1601,11 +1212,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1623,11 +1230,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1645,11 +1248,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1667,11 +1266,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1689,11 +1284,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1711,11 +1302,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1733,11 +1320,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1755,11 +1338,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1777,11 +1356,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1799,11 +1374,191 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
+                              child:
+                              Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1826,11 +1581,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1848,11 +1599,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1870,11 +1617,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1892,11 +1635,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1914,11 +1653,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1936,11 +1671,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1958,11 +1689,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -1980,11 +1707,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2002,11 +1725,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2024,236 +1743,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                          ],
-                        ),
-
-                        TableRow(
-                          children: [
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
-                              Text(write_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) ,
-
-                            ),
-                            Container(
-                              width:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width/12*1.1,
-                              height:  MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height /18.75,
-                              alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2275,11 +1765,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2297,11 +1783,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2319,11 +1801,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2341,11 +1819,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2363,11 +1837,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2385,11 +1855,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2407,11 +1873,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2429,11 +1891,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2451,11 +1909,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2473,11 +1927,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2499,11 +1949,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2521,11 +1967,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2543,11 +1985,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2565,11 +2003,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2587,11 +2021,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2609,11 +2039,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2631,11 +2057,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2653,11 +2075,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2675,11 +2093,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
@@ -2697,16 +2111,196 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .height /18.75,
                               alignment: Alignment.center,
-                              child: old_Puzzle ?  Text(get_Old_Puzzle_Letter(),
-                                style: TextStyle(fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 35,fontWeight: FontWeight.bold),) :
+                              child:
                               Text(write_Puzzle_Letter(),
                                 style: TextStyle(fontSize: MediaQuery
                                     .of(context)
                                     .size
-                                    .height / 35,fontWeight: FontWeight.bold,),) ,
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
+
+                            ),
+                            Container(
+                              width:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width/12*1.1,
+                              height:  MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height /18.75,
+                              alignment: Alignment.center,
+                              child:
+                              Text(write_Puzzle_Letter(),
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 35,fontWeight: FontWeight.bold),) ,
 
                             ),
                           ],
@@ -2891,7 +2485,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   }
 
   create_Puzzle_Random(){
-    if (count == -1) {
+    if (count == -2) {
+      count++;
       set_language();
       for (int i = 0; i < num_rows_and_columns*num_rows_and_columns; i++) {
         puzzle[i] = write_Random_Letter();
@@ -2918,14 +2513,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     }
     return puzzle[count];
   }
-  String get_Old_Puzzle_Letter(){
-    count++;
-    if (count == num_rows_and_columns*num_rows_and_columns) {
-      count=0;
-    }
-    return puzzle[count];
-  }
-
   write_Puzzle_Words(List<String> puzzle, String word_one, String word_two,
       String word_three, String word_four, String word_five) {
 
@@ -3312,7 +2899,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     int three = random.nextInt(25);
     int four = random.nextInt(25);
     int five = random.nextInt(25);
-    while ((all[one].length!=5 && all[one].length!=6)||(all[two].length!=5 && all[two].length!=6)||all[three].length != 5 || all[four].length !=5 || all[five].length != 5 || one==two ||three==four||three==five||four==five) {
+    while ((all[one].length!=5 && all[one].length!=6)||(all[two].length!=5 && all[two].length!=6)||all[three].length != 5 || all[four].length !=5 || all[five].length != 5|| one==two||one==three||one==four||one==five||two==three||two==four||two==five ||three==four||three==five||four==five) {
       one = random.nextInt(25);
       two = random.nextInt(25);
       three = random.nextInt(25);
