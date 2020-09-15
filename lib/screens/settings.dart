@@ -1,4 +1,5 @@
-
+import 'package:findthewords/utilites/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:findthewords/main.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/app_localizations.dart';
@@ -9,6 +10,7 @@ class Settings extends StatefulWidget {
 }
 class _SettingsState extends State<Settings> {
   Language _selectedLanguage;
+  bool checkValue=true;
   @override
   Widget build(BuildContext context) {
 
@@ -28,7 +30,44 @@ class _SettingsState extends State<Settings> {
                       fontSize: MediaQuery. of(context). size. height/15)
               ),
 
-              SizedBox(height:MediaQuery.of(context).size.height/15),
+              SizedBox(height:MediaQuery.of(context).size.height/20),
+
+              Row(children:[
+                SizedBox(width:MediaQuery.of(context).size. width/3),
+                Text(AppLocalizations.of(context).translate("settings_sound"),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: MediaQuery. of(context). size. height/20)
+                ),
+                Checkbox(
+                  hoverColor: Colors.white,
+                  activeColor: Colors.white,
+                  checkColor: GameColors.primary,
+                  value:checkValue,
+                  onChanged: (bool newValue)async{
+                    setState(() {
+                      checkValue=newValue;
+                    });
+                    if(checkValue==false){
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setBool('has_Sound', false);
+                      Navigator.of(context).pushNamed("/game_easy");
+                      Navigator.of(context).pushNamed("/game_medium");
+                      Navigator.of(context).pushNamed("/game_hard");
+                    }else{
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setBool('has_Sound', true);
+                      Navigator.of(context).pushNamed("/game_easy");
+                      Navigator.of(context).pushNamed("/game_medium");
+                      Navigator.of(context).pushNamed("/game_hard");
+                    }
+                  },
+                )
+              ]
+              ),
+              SizedBox(height:MediaQuery.of(context).size.height/25),
 
               DropdownButton(
                 iconSize:MediaQuery. of(context). size. height/10 ,
@@ -58,20 +97,6 @@ class _SettingsState extends State<Settings> {
                   MyApp.setLocale(context, Locale(val.languageCode,''));
                 },
               ),
-              SizedBox(height:MediaQuery.of(context).size.height/5),
-
-              CheckboxListTile(
-                title: Text(AppLocalizations.of(context).translate("settings_sound"),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
-                        fontSize: MediaQuery. of(context). size. height/20)
-                ),
-                value: true,
-                onChanged: (newValue) { },
-
-              )
             ]
         )
     )

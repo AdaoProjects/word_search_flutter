@@ -1,3 +1,6 @@
+import 'package:findthewords/screens/game_easy.dart';
+import 'package:findthewords/screens/game_hard.dart';
+import 'package:findthewords/screens/game_medium.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:findthewords/screens/home.dart';
@@ -15,7 +18,11 @@ void main() {
         home: new MyApp(),
         routes: <String, WidgetBuilder>{
           "/stats" : (BuildContext context)=> new Stats(),
+          "/game_easy" : (BuildContext context) => new Game_Easy(),
+          "/game_medium" : (BuildContext context) => new Game_Medium(),
+          "/game_hard" : (BuildContext context) => new Game_Hard(),
         },
+
     ));
   });
 

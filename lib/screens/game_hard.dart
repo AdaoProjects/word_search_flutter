@@ -220,7 +220,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       backgroundColor: Colors.black,
       body: Center(
         child: GestureDetector(
-          onPanUpdate: (details) {
+          onPanUpdate: (details) async {
             RenderBox box = context.findRenderObject();
             final Offset local = box.globalToLocal(
                 details.globalPosition);
@@ -269,7 +269,10 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       .size
                       .height / 20;
                   if(row_end!=row || column_end!=column){
-                    audioPlayer.play('sounds/selectionsound.wav');
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    if(prefs.getBool("has_Sounds")==true) {
+                      audioPlayer.play('sounds/selectionsound.wav');
+                    }
                   }
                   row_end=row;
                   column_end=column;
@@ -303,7 +306,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             }
 
           },
-          onPanStart: (details) {
+          onPanStart: (details) async {
             RenderBox box = context.findRenderObject();
             if(!fisrt_Point_drawed) {
               final Offset local = box.globalToLocal(
@@ -338,7 +341,10 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       .of(context)
                       .size
                       .height / 20) {
-                    audioPlayer.play('sounds/selectionsound.wav');
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    if(prefs.getBool("has_Sounds")==true) {
+                      audioPlayer.play('sounds/selectionsound.wav');
+                    }
                     setState(() {
                       start_Of_Selection_dx=MediaQuery
                           .of(context)
@@ -387,7 +393,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             }
             fisrt_Point_drawed=true;
           },
-          onPanEnd: (details) {
+          onPanEnd: (details) async{
             bool found_word=false;
             for(int i =0 ;i<words.length;i++){
               if(
@@ -401,7 +407,10 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       row_end==solution_positions[4*i]&&
                       column_end==solution_positions[4*i+1]){
                 found_word=true;
-                audioPlayer.play('sounds/foundsound.wav');
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                if(prefs.getBool("has_Sounds")==true) {
+                  audioPlayer.play('sounds/foundsound.wav');
+                }
                 number_Of_Words_Selected++;
                 if((row_one==row_start && column_one==column_start) ||(row_one==row_end && column_one==column_end) ){
                   setState(() {
@@ -429,7 +438,10 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             if(!found_word){
               points.removeAt(2*number_Of_Words_Selected+1);
               points.removeAt(2*number_Of_Words_Selected);
-              audioPlayer.play('sounds/wrongsound.wav');
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              if(prefs.getBool("has_Sounds")==true) {
+                audioPlayer.play('sounds/wrongsound.wav');
+              }
             }
             if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
               set_Best_Time();
