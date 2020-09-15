@@ -1,14 +1,13 @@
 {
-  
-  "home_play": "PLAY",
-  "home_share" : "SHARE",
-  "home_stats" : "STATS",
-  "home_settings" : "SETTINGS",
 
   "levels_level" : "LEVEL",
   "levels_easy" :"EASY",
   "levels_medium" :"MEDIUM",
   "levels_hard" :"HARD",
+
+  "settings_settings": "SETTINGS",
+  "settings_language": "Language",
+  "settings_sound": "Sound",
 
   "stats_results" : "BEST RESULTS",
   "stats_easy" : "Easy",

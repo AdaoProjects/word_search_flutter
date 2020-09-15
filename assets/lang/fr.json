@@ -1,13 +1,13 @@
 {
-  "home_play": "JOUER",
-  "home_share" : "PARTAGER",
-  "home_stats" : "STATISTIQUES",
-  "home_settings" : "PARAMÈTRES",
 
   "levels_level": "NIVEAU",
   "levels_easy" :"FACILE",
   "levels_medium" :"MOYEN",
   "levels_hard" :"DIFFICILE",
+
+  "settings_settings": "PARAMÈTRES",
+  "settings_language": "Langue",
+  "settings_sound": "Du son",
 
   "stats_results" : "BEST RESULTS",
   "stats_easy" : "Facile",
