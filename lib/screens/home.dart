@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                   ),
                   decoration:  BoxDecoration(
                     gradient: LinearGradient(
-                      colors: <Color>[GameColors.button_Background_Light, Colors.black],),
+                      colors: <Color>[GameColors.primary, Colors.black],),
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/5)),
                   ),
                 ),

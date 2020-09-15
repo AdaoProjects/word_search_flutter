@@ -1931,18 +1931,21 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     int three = random.nextInt(25);
     int four = random.nextInt(25);
     int five = random.nextInt(25);
-    while ((all[one].length!=4 && all[one].length!=5)||(all[two].length!=4 && all[two].length!=5)||all[three].length != 4 || all[four].length !=4 || all[five].length != 4 || one==two||one==three||one==four||one==five||two==three||two==four||two==five ||three==four||three==five||four==five) {
+    int six = -1;
+    while ((all[one].length!=4 && all[one].length!=5)||(all[two].length!=4 && all[two].length!=5)||all[three].length != 4 || all[four].length !=4 || all[five].length != 4 || one==two||one==three||one==four||one==five||one==six||two==three||two==four||two==five||two==six ||three==four||three==five||three==six||four==five ||four==six ||five==six) {
       one = random.nextInt(25);
       two = random.nextInt(25);
       three = random.nextInt(25);
       four = random.nextInt(25);
       five = random.nextInt(25);
+
     }
     words[0] = all[one].toUpperCase();
     words[1] = all[two].toUpperCase();
     words[2] = all[three].toUpperCase();
     words[3] = all[four].toUpperCase();
     words[4] = all[five].toUpperCase();
+
   }
 
 
@@ -2026,43 +2029,90 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     column_four = random.nextInt(num_rows_and_columns);
 
     int num_of_tentatives;
+    bool conection=false;
+    int word_one_reverse=random.nextInt(2);
+    int word_two_reverse=random.nextInt(2);
+    int word_three_reverse=random.nextInt(2);
+    int word_four_reverse=random.nextInt(2);
+    int word_five_reverse=random.nextInt(2);
 
     //zero is word five diagonal, 1 is word five horizontal or vertical
-    if (random.nextInt(2)==0) {
+    if (true) {
       //  zero is diagonal direciton SO, one is diagonal in direction SE
-      if (random.nextInt(2)==0) {
+      if (true) {
         row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
         column_five =  random.nextInt(num_rows_and_columns - word_five.length + 1);
 
-        int k=0;
-        while(k<word_five.length*word_one.length) {
-          k = 0;
-          row_one =random.nextInt(num_rows_and_columns - word_five.length + 1);
-          column_one = random.nextInt(num_rows_and_columns - word_one.length + 1);
-          for (int i = 0; i < word_five.length; i++) {
-            for (int j = 0; j < word_one.length; j++) {
-              if (!(row_five + i == row_one &&
-                  column_five + i == column_one + j)) {
-                k++;
+        for (int i = 0; i < word_five.length; i++) {
+          for (int j = 0; j < word_one.length; j++) {
+            if (word_five[i]==word_one[j]) {
+              conection=true;
+              if(random.nextInt(2)==0) {
+                row_one = row_five + i;
+                column_one = column_five + i - j;
+                if (column_one < 0 ||
+                    column_one > num_rows_and_columns - word_one.length) {
+                  write_Puzzle_Words(
+                      puzzle, word_one, word_two, word_three, word_four,
+                      word_five);
+                } else {
+                  word_one_reverse = 0;
+                  word_five_reverse = 0;
+                }
+              }else{
+                row_one = row_five +word_five.length -i-1;
+                column_one = column_five +word_five.length -i-1 + j-word_one.length;
+                if (column_one < 0 ||
+                    column_one > num_rows_and_columns - word_one.length) {
+                  write_Puzzle_Words(
+                      puzzle, word_one, word_two, word_three, word_four,
+                      word_five);
+                } else {
+                  word_one_reverse = 1;
+                  word_five_reverse = 1;
+                }
               }
             }
           }
         }
-        k=0;
-        while(k<word_five.length*word_two.length){
-          k=0;
-          row_two = random.nextInt(num_rows_and_columns);
-          column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
-          for(int i=0;i<word_five.length;i++){
-            for(int j=0;j<word_two.length;j++){
-              if(!(row_two==row_one||(row_five+i==row_two && column_five+i==column_two+j))){
-                k++;
+        if(!conection) {
+          int k = 0;
+          while (k < word_five.length * word_one.length) {
+            k = 0;
+            row_one =
+                random.nextInt(num_rows_and_columns - word_five.length + 1);
+            column_one =
+                random.nextInt(num_rows_and_columns - word_one.length + 1);
+            for (int i = 0; i < word_five.length; i++) {
+              for (int j = 0; j < word_one.length; j++) {
+                if (!(row_five + i == row_one &&
+                    column_five + i == column_one + j)) {
+                  k++;
+                }
+              }
+            }
+          }
+        }
+        conection=false;
+        if(!conection) {
+          int k = 0;
+          while (k < word_five.length * word_two.length) {
+            k = 0;
+            row_two = random.nextInt(num_rows_and_columns);
+            column_two =
+                random.nextInt(num_rows_and_columns - word_two.length + 1);
+            for (int i = 0; i < word_five.length; i++) {
+              for (int j = 0; j < word_two.length; j++) {
+                if (!(row_two == row_one || (row_five + i == row_two &&
+                    column_five + i == column_two + j))) {
+                  k++;
+                }
               }
             }
           }
         }
         num_of_tentatives=0;
-        k=0;
+       int k=0;
         while(k<word_five.length*word_three.length){
           k=0;
           row_three = random.nextInt(num_rows_and_columns - word_three.length + 1);
@@ -2099,7 +2149,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         }
 
 
-        if (random.nextInt(2) == 0) {
+        if (word_five_reverse==0) {
           for (int i = 0; i < word_five.length; i++) {
             puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
             word_five[i];
@@ -2330,7 +2380,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       }
     }
     // now it just needs to write  the letters in the list string puzzle which in two possible ways original order or reverse order
-    if (random.nextInt(2) == 0) {
+    if (word_one_reverse == 0) {
       for (int i = 0; i < word_one.length; i++) {
         puzzle[row_one * num_rows_and_columns + i + column_one] = word_one[i];
       }
@@ -2340,7 +2390,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         word_one[word_one.length - 1 - i];
       }
     }
-    if (random.nextInt(2) == 0) {
+    if (word_three_reverse == 0) {
       for (int i = 0; i < word_two.length; i++) {
         puzzle[row_two * num_rows_and_columns + i + column_two] = word_two[i];
       }
@@ -2351,7 +2401,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       }
     }
 
-    if (random.nextInt(2) == 0) {
+    if (word_three_reverse == 0) {
       for (int i = 0; i < word_three.length; i++) {
         puzzle[(row_three + i) * num_rows_and_columns + column_three] =
         word_three[i];
@@ -2362,7 +2412,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         word_three[word_three.length - 1 - i];
       }
     }
-    if (random.nextInt(2) == 0) {
+    if (word_four_reverse == 0) {
       for (int i = 0; i < word_four.length; i++) {
         puzzle[(row_four + i) * num_rows_and_columns + column_four] =
         word_four[i];
@@ -2424,8 +2474,8 @@ set_language(){
       ];
     }else if (language=='pt'){
       all=[
-        "área" ,
-        "bebê" ,
+        "area" ,
+        "bebe" ,
         "bola",
         "banco",
         "bolo",
@@ -2434,7 +2484,7 @@ set_language(){
         "exame",
         "olhos",
         "album",
-         "maçã" ,
+         "maça" ,
 
         "amor",
         "fato",
