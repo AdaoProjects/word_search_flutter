@@ -130,4 +130,5 @@ class _StatsState extends State<Stats> {
     get_Best_Time_Hard();
     return best_time_hard;
   }
+
 }

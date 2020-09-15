@@ -2975,7 +2975,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     if(time_now<old_time || old_time==0){
       await prefs.setInt('best_time_medium_minutes', _minutes);
       await prefs.setInt('best_time_medium_seconds', _seconds);
-      String best_time=_minutes.toString()+":"+_seconds.toString();
+      String best_time=_stringDuration(Duration(seconds:60*_minutes+_seconds));
       prefs.setString('best_time_medium', best_time);
       Navigator.of(context).pushNamed("/stats");
     }

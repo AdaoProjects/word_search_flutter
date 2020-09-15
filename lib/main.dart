@@ -6,6 +6,7 @@ import 'app_localizations.dart';
 
 
 void main() {
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
@@ -17,19 +18,32 @@ void main() {
         },
     ));
   });
+
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _MyAppState state =
+    context.findAncestorStateOfType<_MyAppState>();
+    state.changeLanguage(newLocale);
+  }
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+class _MyAppState extends State<MyApp> {
+  Locale _locale;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       supportedLocales: [
+        Locale ('en', ''),
         Locale ('es', ''),
         Locale ('fr', ''),
         Locale ('pt', ''),
-        Locale ('en', ''),
       ],
+      locale: _locale,
       localizationsDelegates: [
         AppLocalizations.delegate,
       ],
@@ -42,7 +56,11 @@ class MyApp extends StatelessWidget {
         return supportedLocales.first;
       },
       home: Home(),
-
     );
+  }
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
   }
 }
