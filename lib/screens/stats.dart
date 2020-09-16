@@ -57,6 +57,9 @@ class _StatsState extends State<Stats> {
       FlatButton.icon(onPressed:()=> {
       setState(() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("best_time_easy_minutes", null);
+      prefs.setString("best_time_medium_minutes", null);
+      prefs.setString("best_time_hard_minutes", null);
       prefs.setString("best_time_easy", null);
       prefs.setString("best_time_medium", null);
       prefs.setString("best_time_hard", null);

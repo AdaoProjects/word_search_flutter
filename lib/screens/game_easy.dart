@@ -1699,7 +1699,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   .of(context)
                                   .size
                                   .width / 13),
-                              (word_six_scratch && sorted_Num_Words == 5) ||   (word_one_scratch && sorted_Num_Words == 4) ||
+                              (word_six_scratch && sorted_Num_Words == 4) ||   (word_one_scratch && sorted_Num_Words == 5) ||
                                   (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
@@ -1728,7 +1728,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   .of(context)
                                   .size
                                   .width / 15),
-                              (word_six_scratch && sorted_Num_Words == 5) ||(word_one_scratch && sorted_Num_Words == 4) ||
+                              (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 5) ||
                                   (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
@@ -1762,7 +1762,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   .of(context)
                                   .size
                                   .width / 13),
-                              (word_six_scratch && sorted_Num_Words == 5) ||(word_one_scratch && sorted_Num_Words == 4) ||
+                              (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 5) ||
                                   (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
@@ -1791,7 +1791,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   .of(context)
                                   .size
                                   .width / 15),
-                              (word_six_scratch && sorted_Num_Words == 5) ||(word_one_scratch && sorted_Num_Words == 4) ||
+                              (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 5) ||
                                   (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
@@ -1826,7 +1826,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   .of(context)
                                   .size
                                   .width / 13),
-                              (word_six_scratch && sorted_Num_Words == 5) ||(word_one_scratch && sorted_Num_Words == 4) ||
+                              (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 5) ||
                                   (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
@@ -1855,7 +1855,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                   .of(context)
                                   .size
                                   .width / 15),
-                              (word_six_scratch && sorted_Num_Words == 5) ||(word_one_scratch && sorted_Num_Words == 4) ||
+                              (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 5) ||
                                   (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
