@@ -52,13 +52,13 @@ class _SettingsState extends State<Settings> {
                     });
                     if(checkValue==false){
                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('has_Sound', false);
+                      prefs.setBool('has_Sounds', false);
                       Navigator.of(context).pushNamed("/game_easy");
                       Navigator.of(context).pushNamed("/game_medium");
                       Navigator.of(context).pushNamed("/game_hard");
                     }else{
                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('has_Sound', true);
+                      prefs.setBool('has_Sounds', true);
                       Navigator.of(context).pushNamed("/game_easy");
                       Navigator.of(context).pushNamed("/game_medium");
                       Navigator.of(context).pushNamed("/game_hard");
