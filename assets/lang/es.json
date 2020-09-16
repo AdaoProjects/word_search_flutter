@@ -1,0 +1,25 @@
+{
+
+  "levels_level": "NIVEL",
+  "levels_easy" :"FÁCIL",
+  "levels_medium" :"MEDIO",
+  "levels_hard" :"DIFÍCIL",
+
+  "settings_settings": "AJUSTES",
+  "settings_language": "Idioma",
+  "settings_sound": "Sonido",
+
+  "stats_results" : "BEST RESULTS",
+  "stats_easy" : "Fácil",
+  "stats_medium" : "Medio",
+  "stats_hard" : "Difícil",
+
+  "game_level_easy" : "NIVEL: FÁCIL",
+
+  "game_level_medium" : "NIVEL: MEDIO",
+
+  "game_level_hard" : "NIVEL: DIFÍCIL",
+
+  "game_language": "es"
+
+}
