@@ -2066,6 +2066,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     word_five);
               }else {
                 conection = false;
+
               }
             } else {
               word_one_reverse = 0;
@@ -2167,7 +2168,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               }
             }else{
               row_three = row_two -word_three.length +j+1;
-              column_three = column_two+word_two.length -i+1;
+              column_three = column_two+word_two.length -i-1;
               k = 0;
               for (int p = 0; p < word_five.length; p++) {
                 for (int l = 0; l < word_three.length; l++) {
