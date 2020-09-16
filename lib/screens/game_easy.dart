@@ -2365,7 +2365,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     }
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six){
-    int num_rotates=1;
+    int num_rotates=3;
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
@@ -2403,38 +2403,116 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           old_puzzle[num_rows_and_columns * (num_rows_and_columns-1-j) + l];
         }
       }
+      row_one=solution_positions[0];
+      column_one=solution_positions[1];
+
+      row_two=solution_positions[4];
+      column_two=solution_positions[5];
+
+      row_three=solution_positions[8];
+      column_three=solution_positions[9];
+
+      row_four=solution_positions[12];
+      column_four=solution_positions[13];
+
+      row_five=solution_positions[16];
+      column_five=solution_positions[17];
+
+      row_six=solution_positions[20];
+      column_six=solution_positions[21];
+      if(num_rotates==1) {
+        solution_positions[0] = column_one;
+        solution_positions[1] = num_rows_and_columns-1-row_one;
+        solution_positions[2] = column_one + word_one.length - 1;
+        solution_positions[3] =num_rows_and_columns-1-row_one ;
+
+        solution_positions[4] = column_two;
+        solution_positions[5] = num_rows_and_columns-1-row_two;
+        solution_positions[6] = column_two + word_two.length - 1;
+        solution_positions[7] =num_rows_and_columns-1-row_two;
+
+        solution_positions[8] =column_three;
+        solution_positions[9] = num_rows_and_columns-1-row_three;
+        solution_positions[10] =  column_three;
+        solution_positions[11] = num_rows_and_columns-1-row_three - word_three.length + 1;
+
+        solution_positions[12] =column_four;
+        solution_positions[13] = num_rows_and_columns-1-row_four;
+        solution_positions[14] =  column_four;
+        solution_positions[15] = num_rows_and_columns-1-row_four - word_four.length + 1;
+
+        solution_positions[16] = column_five;
+        solution_positions[17] = num_rows_and_columns-1-row_five;
+        solution_positions[18] =  column_five + word_five.length - 1;
+        solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
+
+        solution_positions[20] = column_six;
+        solution_positions[21] = num_rows_and_columns-1-row_six;
+        solution_positions[22] = column_six + word_six.length - 1;
+        solution_positions[23] =num_rows_and_columns-1-row_six;
+      }else if(num_rotates==2){
+        solution_positions[0] =column_one;
+        solution_positions[1] = num_rows_and_columns-1-row_one;
+        solution_positions[2] =  column_one;
+        solution_positions[3] = num_rows_and_columns-1-row_one - word_one.length + 1;
+
+        solution_positions[4] =column_two;
+        solution_positions[5] = num_rows_and_columns-1-row_two;
+        solution_positions[6] =  column_two;
+        solution_positions[7] = num_rows_and_columns-1-row_two - word_two.length + 1;
+
+        solution_positions[8] = column_three;
+        solution_positions[9] = num_rows_and_columns-1-row_three;
+        solution_positions[10] = column_three - word_three.length + 1;
+        solution_positions[11] =num_rows_and_columns-1-row_three ;
+
+        solution_positions[12] = column_four;
+        solution_positions[13] = num_rows_and_columns-1-row_four;
+        solution_positions[14] = column_four - word_four.length + 1;
+        solution_positions[15] =num_rows_and_columns-1-row_four ;
+
+        solution_positions[16] = column_five;
+        solution_positions[17] = num_rows_and_columns-1-row_five;
+        solution_positions[18] =  column_five - word_five.length + 1;
+        solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
+
+        solution_positions[20] =column_six;
+        solution_positions[21] = num_rows_and_columns-1-row_six;
+        solution_positions[22] =  column_six;
+        solution_positions[23] = num_rows_and_columns-1-row_six - word_six.length + 1;
+      }else if(num_rotates==3){
+        solution_positions[0] = column_one;
+        solution_positions[1] = num_rows_and_columns-1-row_one;
+        solution_positions[2] = column_one - word_one.length + 1;
+        solution_positions[3] =num_rows_and_columns-1-row_one ;
+
+        solution_positions[4] = column_two;
+        solution_positions[5] = num_rows_and_columns-1-row_two;
+        solution_positions[6] = column_two - word_two.length + 1;
+        solution_positions[7] =num_rows_and_columns-1-row_two;
+
+        solution_positions[8] =column_three;
+        solution_positions[9] = num_rows_and_columns-1-row_three;
+        solution_positions[10] =  column_three;
+        solution_positions[11] = num_rows_and_columns-1-row_three + word_three.length - 1;
+
+        solution_positions[12] =column_four;
+        solution_positions[13] = num_rows_and_columns-1-row_four;
+        solution_positions[14] =  column_four;
+        solution_positions[15] = num_rows_and_columns-1-row_four + word_four.length - 1;
+
+        solution_positions[16] = column_five;
+        solution_positions[17] = num_rows_and_columns-1-row_five;
+        solution_positions[18] =  column_five - word_five.length + 1;
+        solution_positions[19] = num_rows_and_columns-1-row_five + word_five.length - 1;
+
+        solution_positions[20] = column_six;
+        solution_positions[21] = num_rows_and_columns-1-row_six;
+        solution_positions[22] = column_six - word_six.length + 1;
+        solution_positions[23] =num_rows_and_columns-1-row_six;
+      }
     }
-    if(num_rotates==1) {
-      solution_positions[0] = column_one;
-      solution_positions[1] = num_rows_and_columns-1-row_one;
-      solution_positions[2] = column_one + word_one.length - 1;
-      solution_positions[3] =num_rows_and_columns-1-row_one ;
 
-      solution_positions[4] = column_two;
-      solution_positions[5] = num_rows_and_columns-1-row_two;
-      solution_positions[6] = column_two + word_two.length - 1;
-      solution_positions[7] =num_rows_and_columns-1-row_two;
-
-      solution_positions[8] =column_three;
-      solution_positions[9] = num_rows_and_columns-1-row_three;
-      solution_positions[10] =  column_three;
-      solution_positions[11] = num_rows_and_columns-1-row_three - word_three.length + 1;
-
-      solution_positions[12] =column_four;
-      solution_positions[13] = num_rows_and_columns-1-row_four;
-      solution_positions[14] =  column_four;
-      solution_positions[15] = num_rows_and_columns-1-row_four - word_four.length + 1;
-
-      solution_positions[16] = column_five;
-      solution_positions[17] = num_rows_and_columns-1-row_five;
-      solution_positions[18] =  column_five + word_five.length - 1;
-      solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
-
-      solution_positions[20] = column_six;
-      solution_positions[21] = num_rows_and_columns-1-row_six;
-      solution_positions[22] = column_six + word_six.length - 1;
-      solution_positions[23] =num_rows_and_columns-1-row_six;
-    }
     }
   write_Words_Puzzle(List<String> puzzle, String word_one,String word_two,String word_three,String word_four,String word_five,String word_six) {
     if (word_five_reverse == 0) {
