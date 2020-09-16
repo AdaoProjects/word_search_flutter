@@ -123,7 +123,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   ];
   int count = -2;
   Random random = new Random();
-  List<String> words = ['', '', '', '', ''];
+  List<String> words = ['', '', '', '', '','','',''];
   List<String> all;
   int num_rows_and_columns=10;
   bool word_one_scratch =false;
@@ -131,6 +131,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   bool word_three_scratch=false;
   bool word_four_scratch=false;
   bool word_five_scratch=false;
+  bool word_six_scratch=false;
+  bool word_seven_scratch=false;
+  bool word_eight_scratch=false;
   int row_one;
   int column_one;
   int row_two;
@@ -141,12 +144,18 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   int column_four;
   int row_five;
   int column_five;
+  int row_six;
+  int column_six;
+  int row_seven;
+  int column_seven;
+  int row_eight;
+  int column_eight;
   int sorted_Num_Words;
 //Paint
   bool fisrt_Point_drawed=false;
   int number_Of_Words_Selected=0;
   int init_Pan_Update=0;
-  List<int> solution_positions=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
+  List<int> solution_positions=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
   int row_start;
   int column_start;
   int row_end=0;
@@ -200,13 +209,13 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     && local.dy > MediaQuery
                         .of(context)
                         .size
-                        .height / 3.732 + row * MediaQuery
+                        .height / 3.97 + row * MediaQuery
                         .of(context)
                         .size
                         .height / 18.75 && local.dy < MediaQuery
                     .of(context)
                     .size
-                    .height / 3.732 + (row + 1) * MediaQuery
+                    .height / 3.97 + (row + 1) * MediaQuery
                     .of(context)
                     .size
                     .height / 18.75) {
@@ -220,7 +229,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   end_Of_Selection_dy = MediaQuery
                       .of(context)
                       .size
-                      .height / 3.732 + (row + 1 / 2) * MediaQuery
+                      .height / 3.97 + (row + 1 / 2) * MediaQuery
                       .of(context)
                       .size
                       .height / 18.75;
@@ -288,13 +297,13 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       && local.dy > MediaQuery
                           .of(context)
                           .size
-                          .height / 3.732 + row * MediaQuery
+                          .height / 3.97 + row * MediaQuery
                           .of(context)
                           .size
                           .height / 18.75 && local.dy < MediaQuery
                       .of(context)
                       .size
-                      .height / 3.732 + (row + 1) * MediaQuery
+                      .height / 3.97 + (row + 1) * MediaQuery
                       .of(context)
                       .size
                       .height / 18.75) {
@@ -315,7 +324,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       start_Of_Selection_dy=MediaQuery
                           .of(context)
                           .size
-                          .height / 3.732 +
+                          .height / 3.97 +
                           (row + 1 / 2) * MediaQuery
                               .of(context)
                               .size
@@ -370,23 +379,36 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   audioPlayer.play('sounds/foundsound.wav');
                 }
                 number_Of_Words_Selected++;
-                if((row_one==row_start && column_one==column_start) ||(row_one==row_end && column_one==column_end) ){
+                if(i==0 ){
                   setState(() {
                     word_one_scratch=true;
                   });
-                }else if((row_two==row_start && column_two==column_start) ||(row_two==row_end && column_two==column_end) ){
+                }else if(i==1 ){
                   setState(() {
                     word_two_scratch=true;
                   });
-                }else if((row_three==row_start && column_three==column_start) ||(row_three==row_end && column_three==column_end) ){
+                }else if(i==2 ){
                   setState(() {
                     word_three_scratch=true;
                   });
-                }else if((row_four==row_start && column_four==column_start) ||(row_four==row_end && column_four==column_end) ){
+                }else if(i==3){
                   setState(() {
                     word_four_scratch=true;
                   });
-                }else {
+                }else if(i==5){
+                  setState(() {
+                    word_six_scratch=true;
+                  });
+                }else if(i==6){
+                  setState(() {
+                    word_seven_scratch=true;
+                  });
+                }else if(i==7){
+                  setState(() {
+                    word_eight_scratch=true;
+                  });
+                }
+                else {
                   setState(() {
                     word_five_scratch=true;
                   });
@@ -2422,28 +2444,86 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                           ]
                           ),
 
+
                           TableRow( children:[
-                            Column(
-                                children:[
-                                  (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Text(return_Sorted_Words() ,
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 30,fontWeight: FontWeight.bold,
-                                        color:Colors.black),
-                                  ):Text(return_Sorted_Words() ,
-                                    style: TextStyle(fontSize: MediaQuery
+                            Row(children:[
+                              SizedBox(width:MediaQuery.of(context).size.width/15),
+                              (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words()+', ' ,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
                                         .of(context)
                                         .size
                                         .height / 30,fontWeight: FontWeight.bold,
-                                        color:Colors.black),
-                                  )
-                                ]
+                                    color:Colors.black),
+                              )):Center(child:Text(return_Sorted_Words()+',' ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              ),),
+                              SizedBox(width:MediaQuery.of(context).size.width/17),
+                              (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words(),
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              ),):Center(child:Text(return_Sorted_Words() ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              ),),
+                            ]
                             ),
                           ]
                           ),
+
+
+                          TableRow( children:[
+                            Row(children:[
+                              SizedBox(width:MediaQuery.of(context).size.width/15),
+                              (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words()+', ' ,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              )):Center(child:Text(return_Sorted_Words()+',' ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              ),),
+                              SizedBox(width:MediaQuery.of(context).size.width/17),
+                              (word_one_scratch && sorted_Num_Words==4) ||(word_two_scratch && sorted_Num_Words==0)||(word_three_scratch && sorted_Num_Words==1)||(word_four_scratch && sorted_Num_Words==2)||(word_five_scratch && sorted_Num_Words==3) ? Center(child:Text(return_Sorted_Words(),
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              ),):Center(child:Text(return_Sorted_Words() ,
+                                style: TextStyle(fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 30,fontWeight: FontWeight.bold,
+                                    color:Colors.black),
+                              ),),
+                            ]
+                            ),
+                          ]
+                          ),
+
                         ]
                     ),
 
@@ -2510,13 +2590,13 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       pick_Random_Words();
       write_Puzzle_Words(
           puzzle, words[0], words[1], words[2], words[3], words[4]);
-      sorted_Num_Words=random.nextInt(5)-1;
+      sorted_Num_Words=random.nextInt(8)-1;
       next_Color=random.nextInt(5);
     }
   }
   String return_Sorted_Words(){
     sorted_Num_Words++;
-    if(sorted_Num_Words==5){
+    if(sorted_Num_Words==8){
       sorted_Num_Words=0;
     }
     return words[sorted_Num_Words];
@@ -2915,18 +2995,28 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     int three = random.nextInt(25);
     int four = random.nextInt(25);
     int five = random.nextInt(25);
-    while ((all[one].length!=5 && all[one].length!=6)||(all[two].length!=5 && all[two].length!=6)||all[three].length != 5 || all[four].length !=5 || all[five].length != 5|| one==two||one==three||one==four||one==five||two==three||two==four||two==five ||three==four||three==five||four==five) {
+    int six =random.nextInt(25);
+    int seven=random.nextInt(25);
+    int eight= random.nextInt(25);
+    while ((all[one].length!=5 && all[one].length!=6)||(all[two].length!=5 && all[two].length!=6)||all[three].length != 5 || all[four].length !=5 || all[five].length != 5||all[six].length != 5||all[seven].length != 5||all[eight].length != 5|| one==two||one==three||one==four||one==five||one==six||one==seven||one==eight||two==three||two==four||two==five||two==six||two==seven||two==eight ||three==four||three==five||three==six||three==seven||three==eight||four==five||four==six||four==seven||four==eight||five==six||five==seven||five==eight||six==seven||six==eight||seven==eight) {
       one = random.nextInt(25);
       two = random.nextInt(25);
       three = random.nextInt(25);
       four = random.nextInt(25);
       five = random.nextInt(25);
+      six = random.nextInt(25);
+      seven = random.nextInt(25);
+      eight = random.nextInt(25);
     }
+
     words[0] = all[one].toUpperCase();
     words[1] = all[two].toUpperCase();
     words[2] = all[three].toUpperCase();
     words[3] = all[four].toUpperCase();
     words[4] = all[five].toUpperCase();
+    words[5] = all[six].toUpperCase();
+    words[6] = all[seven].toUpperCase();
+    words[7] = all[eight].toUpperCase();
   }
 
   Color serie_Color(){
