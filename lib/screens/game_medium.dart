@@ -2819,7 +2819,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               }
             } else {
               word_three_reverse = 0;
-              word_two_reverse = 1;
+              word_two_reverse = 0;
             }
           } else {
             row_three = row_two - word_three.length + j + 1;
@@ -2866,7 +2866,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               }
             } else {
               word_three_reverse = 1;
-              word_two_reverse = 0;
+              word_two_reverse = 1;
             }
           }
         }
