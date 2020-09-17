@@ -2122,7 +2122,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           } else {
             row_one = row_five + word_five.length - i - 1;
             column_one =
-                column_five + word_five.length - i + j - word_one.length;
+                column_five + word_five.length - i-1 + j ;
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length) {
               no_conection_count++;
@@ -2221,7 +2221,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               }
             } else {
               word_three_reverse = 0;
-              word_two_reverse = 0;
+              word_two_reverse = 1;
             }
           } else {
             row_three = row_two - word_three.length + j + 1;
@@ -2257,8 +2257,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 conection = false;
               }
             } else {
-              word_three_reverse = 0;
-              word_two_reverse = 1;
+              word_three_reverse = 1;
+              word_two_reverse = 0;
             }
           }
         }
