@@ -477,7 +477,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                        SizedBox(width: MediaQuery
                             .of(context)
                             .size
-                            .width / 10),
+                            .width / 15),
                         Text(AppLocalizations.of(context).translate("game_level_medium"),
                           style: TextStyle(fontSize: MediaQuery
                               .of(context)
@@ -488,7 +488,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         SizedBox(width: MediaQuery
                             .of(context)
                             .size
-                            .width / 10),
+                            .width / 15),
                         //Timer
                         Icon(Icons.timer,
                           color: Colors.white,
@@ -2633,8 +2633,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
     column_four = random.nextInt(num_rows_and_columns);
 
-    column_five = random.nextInt(((num_rows_and_columns-word_five.length+1)/2).toInt())*2;
     row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
+    column_five = random.nextInt(((num_rows_and_columns-word_five.length+1)/2).toInt())*2+row_five%2;
+
 
     row_six = random.nextInt(num_rows_and_columns);
     column_six = random.nextInt(num_rows_and_columns - word_one.length + 1);
@@ -2642,8 +2643,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     row_seven = random.nextInt(num_rows_and_columns - word_seven.length + 1);
     column_seven = random.nextInt(num_rows_and_columns);
 
-    column_eight = 9-random.nextInt(((num_rows_and_columns-word_eight.length+1)/2).toInt())*2;
     row_eight = random.nextInt(num_rows_and_columns - word_eight.length + 1);
+    column_eight = 9-random.nextInt(((num_rows_and_columns-word_eight.length+1)/2).toInt())*2+row_eight%2;
+
 
     int num_of_tentatives=0;
     bool conection = false;
@@ -2698,8 +2700,16 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             row_one = row_five + word_five.length - i - 1;
             column_one =
                 column_five + word_five.length - i + j -1;
+            for (int i = 0; i < word_eight.length; i++) {
+              for (int j = 0; j < word_one.length; j++) {
+                if (!(row_eight + i == row_one &&
+                    column_eight - i == column_one+j ) ){
+                  k++;
+                }
+              }
+            }
             if (column_one < 0 ||
-                column_one > num_rows_and_columns - word_one.length) {
+                column_one > num_rows_and_columns - word_one.length ||k!=0) {
               no_conection_count++;
               if (no_conection_count < 5) {
                 fit_Words_Puzzle(
@@ -2962,7 +2972,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       }
     }
     for (int f = 0; f < num_rows_and_columns; f++) {
-      for (int l = 0; l < num_rows_and_columns-word_six.length+1; l++) {
+      for (int l = 0; l < num_rows_and_columns-word_six.length; l++) {
         k = 0;
         row_six = f;
         column_six = l;
@@ -2999,11 +3009,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         break;
       }
     }
-    for (int f = 0; f < num_rows_and_columns-word_seven.length+1; f++) {
+    for (int f = 0; f < num_rows_and_columns-word_seven.length; f++) {
       for (int l = 0; l < num_rows_and_columns; l++) {
         k = 0;
-        row_six = f;
-        column_six = l;
+        row_seven = f;
+        column_seven = l;
         for (int i = 0; i < word_five.length; i++) {
           for (int j = 0; j < word_seven.length; j++) {
             if (!((row_five + i == row_seven+j &&
@@ -3093,6 +3103,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         word_four[word_four.length - 1 - i];
       }
     }
+
     if (word_six_reverse == 0) {
       for (int i = 0; i < word_six.length; i++) {
         puzzle[row_six * num_rows_and_columns + i + column_six] = word_six[i];
