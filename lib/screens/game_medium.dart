@@ -3232,7 +3232,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         "agent",
         "angle",
         "apple",
-        "blood",
+        "pixel",
 
         "labor",
         "gifts",

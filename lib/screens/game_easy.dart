@@ -2610,7 +2610,7 @@ set_language(){
         "agent",
         "angle",
         "apple",
-        "blood",
+        "push",
       ];
     }else if (language=='pt'){
       all=[
