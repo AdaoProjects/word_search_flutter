@@ -2803,8 +2803,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
             for (int i = 0; i < word_eight.length; i++) {
               for (int j = 0; j < word_three.length; j++) {
-                if (!(row_eight + i == row_three +j &&
-                    column_eight - i == column_three)) {
+                if (!(row_eight + i == row_three &&
+                    column_eight - i == column_three+j)) {
                   k++;
                 }
               }
@@ -2972,7 +2972,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       }
     }
     for (int f = 0; f < num_rows_and_columns; f++) {
-      for (int l = 0; l < num_rows_and_columns-word_six.length; l++) {
+      for (int l = 0; l < num_rows_and_columns-word_six.length+1; l++) {
         k = 0;
         row_six = f;
         column_six = l;
@@ -3009,7 +3009,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         break;
       }
     }
-    for (int f = 0; f < num_rows_and_columns-word_seven.length; f++) {
+    for (int f = 0; f < num_rows_and_columns-word_seven.length+1; f++) {
       for (int l = 0; l < num_rows_and_columns; l++) {
         k = 0;
         row_seven = f;
@@ -3026,7 +3026,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 || (row_seven <= row_two &&
                     row_seven + word_seven.length - 1 >= row_two &&
                     column_seven >= column_two &&
-                    column_seven<= column_two + word_two.length - 1)) ){
+                    column_seven<= column_two + word_two.length - 1)
+                || (row_seven <= row_six &&
+                    row_seven + word_seven.length - 1 >= row_six &&
+                    column_seven >= column_six &&
+                    column_seven<= column_six + word_six.length - 1)) ){
               k++;
             }
           }
