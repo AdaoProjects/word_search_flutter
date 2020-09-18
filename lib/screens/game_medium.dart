@@ -3281,7 +3281,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six, String word_seven,String word_eight){
-    int num_rotates=3;
+    int num_rotates=random.nextInt(4);
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
