@@ -167,7 +167,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   bool fisrt_Point_drawed=false;
   int number_Of_Words_Selected=0;
   int init_Pan_Update=0;
-  List<int> solution_positions=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
+  List<int> solution_positions=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
   int row_start;
   int column_start;
   int row_end=0;
@@ -2603,6 +2603,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       fit_Words_Puzzle(
           puzzle, words[0], words[1], words[2], words[3], words[4],words[5],words[6],words[7]);
       write_Words_Puzzle(puzzle, words[0], words[1], words[2], words[3], words[4],words[5],words[6],words[7]);
+      rotate_puzzle(puzzle, words[0], words[1], words[2], words[3], words[4], words[5], words[6], words[7]);
       sorted_Num_Words=random.nextInt(8)-1;
       next_Color=random.nextInt(5);
     }
@@ -2722,7 +2723,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   word_five_reverse=1;
                 }
               }
-            }
+            }else{
+          conection_one=false;
+        }
           }
         }
 
@@ -2881,6 +2884,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 word_two_reverse = 1;
               }
             }
+          }else{
+            conection_two=false;
           }
         }
       }
@@ -3134,6 +3139,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               word_six_reverse = 1;
             }
           }
+        }else{
+          conection_three=false;
         }
       }
     }
@@ -3271,6 +3278,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         word_eight[word_eight.length - 1 - i];
       }
     }
+
+  }
+  rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six, String word_seven,String word_eight){
+    int num_rotates=3;
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
@@ -3303,6 +3314,167 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     solution_positions[29] = column_eight;
     solution_positions[30] = row_eight+ word_eight.length - 1;
     solution_positions[31] = column_eight - word_eight.length + 1;
+    for(int i =0;i<num_rotates;i++) {
+      List<String> old_puzzle=['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
+
+      for(int i=0;i<num_rows_and_columns*num_rows_and_columns;i++){
+        old_puzzle[i]=puzzle[i];
+      }
+
+      for (int j = 0; j < num_rows_and_columns; j++) {
+        for (int l = 0; l < num_rows_and_columns; l++) {
+          puzzle[num_rows_and_columns * l + j] =
+          old_puzzle[num_rows_and_columns * (num_rows_and_columns-1-j) + l];
+        }
+      }
+      row_one=solution_positions[0];
+      column_one=solution_positions[1];
+
+      row_two=solution_positions[4];
+      column_two=solution_positions[5];
+
+      row_three=solution_positions[8];
+      column_three=solution_positions[9];
+
+      row_four=solution_positions[12];
+      column_four=solution_positions[13];
+
+      row_five=solution_positions[16];
+      column_five=solution_positions[17];
+
+      row_six=solution_positions[20];
+      column_six=solution_positions[21];
+
+      row_seven=solution_positions[24];
+      column_seven=solution_positions[25];
+
+      row_eight=solution_positions[28];
+      column_eight=solution_positions[29];
+
+      if(num_rotates==1) {
+        solution_positions[0] = column_one;
+        solution_positions[1] = num_rows_and_columns-1-row_one;
+        solution_positions[2] = column_one + word_one.length - 1;
+        solution_positions[3] =num_rows_and_columns-1-row_one ;
+
+        solution_positions[4] = column_two;
+        solution_positions[5] = num_rows_and_columns-1-row_two;
+        solution_positions[6] = column_two + word_two.length - 1;
+        solution_positions[7] =num_rows_and_columns-1-row_two;
+
+        solution_positions[8] =column_three;
+        solution_positions[9] = num_rows_and_columns-1-row_three;
+        solution_positions[10] =  column_three;
+        solution_positions[11] = num_rows_and_columns-1-row_three - word_three.length + 1;
+
+        solution_positions[12] =column_four;
+        solution_positions[13] = num_rows_and_columns-1-row_four;
+        solution_positions[14] =  column_four;
+        solution_positions[15] = num_rows_and_columns-1-row_four - word_four.length + 1;
+
+        solution_positions[16] = column_five;
+        solution_positions[17] = num_rows_and_columns-1-row_five;
+        solution_positions[18] =  column_five + word_five.length - 1;
+        solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
+
+        solution_positions[20] = column_six;
+        solution_positions[21] = num_rows_and_columns-1-row_six;
+        solution_positions[22] = column_six + word_six.length - 1;
+        solution_positions[23] =num_rows_and_columns-1-row_six;
+
+        solution_positions[24] =column_seven;
+        solution_positions[25] = num_rows_and_columns-1-row_seven;
+        solution_positions[26] =  column_seven;
+        solution_positions[27] = num_rows_and_columns-1-row_seven - word_seven.length + 1;
+
+        solution_positions[28] = column_eight;
+        solution_positions[29] = num_rows_and_columns-1-row_eight;
+        solution_positions[30] =  column_eight - word_eight.length + 1;
+        solution_positions[31] = num_rows_and_columns-1-row_eight - word_eight.length + 1;
+
+      }else if(num_rotates==2){
+        solution_positions[0] =column_one;
+        solution_positions[1] = num_rows_and_columns-1-row_one;
+        solution_positions[2] =  column_one;
+        solution_positions[3] = num_rows_and_columns-1-row_one - word_one.length + 1;
+
+        solution_positions[4] =column_two;
+        solution_positions[5] = num_rows_and_columns-1-row_two;
+        solution_positions[6] =  column_two;
+        solution_positions[7] = num_rows_and_columns-1-row_two - word_two.length + 1;
+
+        solution_positions[8] = column_three;
+        solution_positions[9] = num_rows_and_columns-1-row_three;
+        solution_positions[10] = column_three - word_three.length + 1;
+        solution_positions[11] =num_rows_and_columns-1-row_three ;
+
+        solution_positions[12] = column_four;
+        solution_positions[13] = num_rows_and_columns-1-row_four;
+        solution_positions[14] = column_four - word_four.length + 1;
+        solution_positions[15] =num_rows_and_columns-1-row_four ;
+
+        solution_positions[16] = column_five;
+        solution_positions[17] = num_rows_and_columns-1-row_five;
+        solution_positions[18] =  column_five - word_five.length + 1;
+        solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
+
+        solution_positions[20] =column_six;
+        solution_positions[21] = num_rows_and_columns-1-row_six;
+        solution_positions[22] =  column_six;
+        solution_positions[23] = num_rows_and_columns-1-row_six - word_six.length + 1;
+
+        solution_positions[24] = column_seven;
+        solution_positions[25] = num_rows_and_columns-1-row_seven;
+        solution_positions[26] = column_seven - word_seven.length + 1;
+        solution_positions[27] =num_rows_and_columns-1-row_seven ;
+
+        solution_positions[28] = column_eight;
+        solution_positions[29] = num_rows_and_columns-1-row_eight;
+        solution_positions[30] =  column_eight - word_eight.length + 1;
+        solution_positions[31] = num_rows_and_columns-1-row_eight + word_eight.length - 1;
+      }else if(num_rotates==3){
+        solution_positions[0] = column_one;
+        solution_positions[1] = num_rows_and_columns-1-row_one;
+        solution_positions[2] = column_one - word_one.length + 1;
+        solution_positions[3] =num_rows_and_columns-1-row_one ;
+
+        solution_positions[4] = column_two;
+        solution_positions[5] = num_rows_and_columns-1-row_two;
+        solution_positions[6] = column_two - word_two.length + 1;
+        solution_positions[7] =num_rows_and_columns-1-row_two;
+
+        solution_positions[8] =column_three;
+        solution_positions[9] = num_rows_and_columns-1-row_three;
+        solution_positions[10] =  column_three;
+        solution_positions[11] = num_rows_and_columns-1-row_three + word_three.length - 1;
+
+        solution_positions[12] =column_four;
+        solution_positions[13] = num_rows_and_columns-1-row_four;
+        solution_positions[14] =  column_four;
+        solution_positions[15] = num_rows_and_columns-1-row_four + word_four.length - 1;
+
+        solution_positions[16] = column_five;
+        solution_positions[17] = num_rows_and_columns-1-row_five;
+        solution_positions[18] =  column_five - word_five.length + 1;
+        solution_positions[19] = num_rows_and_columns-1-row_five + word_five.length - 1;
+
+        solution_positions[20] = column_six;
+        solution_positions[21] = num_rows_and_columns-1-row_six;
+        solution_positions[22] = column_six - word_six.length + 1;
+        solution_positions[23] =num_rows_and_columns-1-row_six;
+
+        solution_positions[24] =column_seven;
+        solution_positions[25] = num_rows_and_columns-1-row_seven;
+        solution_positions[26] =  column_seven;
+        solution_positions[27] = num_rows_and_columns-1-row_seven + word_seven.length - 1;
+
+        solution_positions[28] = column_eight;
+        solution_positions[29] = num_rows_and_columns-1-row_eight;
+        solution_positions[30] =  column_five - word_eight.length + 1;
+        solution_positions[31] = num_rows_and_columns-1-row_eight + word_eight.length - 1;
+      }
+    }
+
   }
 
   pick_Random_Words() {
@@ -3326,14 +3498,14 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       eight = random.nextInt(25);
     }
 
-    words[0] = all[one];
-    words[1] =  all[two];
-    words[2] = all[three];
-    words[3] =all[four];
-    words[4] = all[five];
-    words[5] = all[six];
-    words[6] = all[seven];
-    words[7] =  all[eight];
+    words[0] = all[one].toUpperCase();
+    words[1] =  all[two].toUpperCase();
+    words[2] = all[three].toUpperCase();
+    words[3] =all[four].toUpperCase();
+    words[4] = all[five].toUpperCase();
+    words[5] = all[six].toUpperCase();
+    words[6] = all[seven].toUpperCase();
+    words[7] =  all[eight].toUpperCase();
 
   }
 
