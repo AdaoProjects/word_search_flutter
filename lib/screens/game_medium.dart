@@ -3532,13 +3532,15 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   }
 
   void _getTime() {
-    _seconds++;
-    if(_seconds==60){
-      _minutes++;
-      _seconds=0;
+    if (!word_one_scratch && !word_two_scratch && !word_three_scratch &&
+        !word_five_scratch && !word_six_scratch) {
+      _seconds++;
+      if (_seconds == 60) {
+        _minutes++;
+        _seconds = 0;
+      }
+      setState(() {});
     }
-    setState(() {
-    });
   }
   Text return_Timer(){
     Duration duration =Duration(seconds:_seconds+60*_minutes);

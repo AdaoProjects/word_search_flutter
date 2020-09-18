@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:findthewords/screens/categories.dart';
+import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/screens/stats.dart';
 import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                   ),
                   decoration:  BoxDecoration(
                     gradient: LinearGradient(
-                      colors: <Color>[GameColors.primary, Colors.black],),
+                      colors: <Color>[GameColors.button_Background, Colors.black],),
                     borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/5)),
                   ),
                 ),
@@ -168,6 +168,7 @@ class _HomeState extends State<Home> {
                     colors: <Color>[GameColors.button_Background_Light, Colors.black],),
                   borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
                 ),
+
               )
             ])
 

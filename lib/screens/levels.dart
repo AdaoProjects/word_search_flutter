@@ -45,11 +45,11 @@ class _LevelState extends State<Level> {
                       );
                     } ,
                     color:Colors.black,
-                    highlightColor: GameColors.button_Background_Light,
+                    highlightColor: GameColors.button_Background,
                     child:Ink(
                       decoration:  BoxDecoration(
                         gradient: LinearGradient(
-                          colors: <Color>[GameColors.button_Background, Colors.black],),
+                          colors: <Color>[GameColors.button_Background_Light, Colors.black],),
                         borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
                       ),
                       child: Container(
@@ -77,11 +77,11 @@ class _LevelState extends State<Level> {
                       );
                     } ,
                     color:Colors.black,
-                    highlightColor: GameColors.button_Background_Light,
+                    highlightColor: GameColors.button_Background,
                     child:Ink(
                       decoration:  BoxDecoration(
                         gradient: LinearGradient(
-                          colors: <Color>[GameColors.button_Background, Colors.black],),
+                          colors: <Color>[GameColors.button_Background_Light, Colors.black],),
                         borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
                       ),
                       child: Container(
@@ -110,11 +110,11 @@ class _LevelState extends State<Level> {
                       );
                     } ,
                     color:Colors.black,
-                    highlightColor: GameColors.button_Background_Light,
+                    highlightColor: GameColors.button_Background,
                     child:Ink(
                       decoration:  BoxDecoration(
                         gradient: LinearGradient(
-                          colors: <Color>[GameColors.button_Background, Colors.black],),
+                          colors: <Color>[GameColors.button_Background_Light, Colors.black],),
                         borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
                       ),
                       child: Container(

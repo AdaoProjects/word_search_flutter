@@ -16,90 +16,90 @@ class _SettingsState extends State<Settings> {
 
     return MaterialApp(
         home:
-    Scaffold(
-        backgroundColor: Colors.black,
-        body:Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-            children:[ SizedBox(height:MediaQuery.of(context).size.height/5),
+        Scaffold(
+            backgroundColor: Colors.black,
+            body:Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:[ SizedBox(height:MediaQuery.of(context).size.height/5),
 
-                Text(AppLocalizations.of(context).translate("settings_settings"),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      fontSize: MediaQuery. of(context). size. height/15)
-              ),
+                  Text(AppLocalizations.of(context).translate("settings_settings"),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: MediaQuery. of(context). size. height/15)
+                  ),
 
-              SizedBox(height:MediaQuery.of(context).size.height/20),
+                  SizedBox(height:MediaQuery.of(context).size.height/20),
 
-              Row(children:[
-                SizedBox(width:MediaQuery.of(context).size. width/3),
-                Text(AppLocalizations.of(context).translate("settings_sound"),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
-                        fontSize: MediaQuery. of(context). size. height/20)
-                ),
-                Checkbox(
-                  hoverColor: Colors.white,
-                  activeColor: Colors.white,
-                  checkColor: GameColors.primary,
-                  value:checkValue,
-                  onChanged: (bool newValue)async{
-                    setState(() {
-                      checkValue=newValue;
-                    });
-                    if(checkValue==false){
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('has_Sounds', false);
-                      Navigator.of(context).pushNamed("/game_easy");
-                      Navigator.of(context).pushNamed("/game_medium");
-                      Navigator.of(context).pushNamed("/game_hard");
-                    }else{
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('has_Sounds', true);
-                      Navigator.of(context).pushNamed("/game_easy");
-                      Navigator.of(context).pushNamed("/game_medium");
-                      Navigator.of(context).pushNamed("/game_hard");
-                    }
-                  },
-                )
-              ]
-              ),
-              SizedBox(height:MediaQuery.of(context).size.height/25),
-
-              DropdownButton(
-                iconSize:MediaQuery. of(context). size. height/10 ,
-                dropdownColor: Colors.white,
-                underline: Text(AppLocalizations.of(context).translate("settings_language"),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic,
-                        fontSize: MediaQuery. of(context). size. height/20)
-                ),
-                items: Language.getLanguages().map((Language lang) {
-                  return DropdownMenuItem<Language>(
-                    value: lang,
-                    child: Text(lang.name,
+                  Row(children:[
+                    SizedBox(width:MediaQuery.of(context).size. width/3),
+                    Text(AppLocalizations.of(context).translate("settings_sound"),
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic,
                             fontSize: MediaQuery. of(context). size. height/20)
                     ),
-                  );
-                }).toList(),
+                    Checkbox(
+                      hoverColor: Colors.white,
+                      activeColor: Colors.white,
+                      checkColor: GameColors.primary,
+                      value:checkValue,
+                      onChanged: (bool newValue)async{
+                        setState(() {
+                          checkValue=newValue;
+                        });
+                        if(checkValue==false){
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          prefs.setBool('has_Sounds', false);
+                          Navigator.of(context).pushNamed("/game_easy");
+                          Navigator.of(context).pushNamed("/game_medium");
+                          Navigator.of(context).pushNamed("/game_hard");
+                        }else{
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          prefs.setBool('has_Sounds', true);
+                          Navigator.of(context).pushNamed("/game_easy");
+                          Navigator.of(context).pushNamed("/game_medium");
+                          Navigator.of(context).pushNamed("/game_hard");
+                        }
+                      },
+                    )
+                  ]
+                  ),
+                  SizedBox(height:MediaQuery.of(context).size.height/25),
 
-                onChanged: (Language val) {
-                  _selectedLanguage = val;
-                  MyApp.setLocale(context, Locale(val.languageCode,''));
-                },
-              ),
-            ]
+                  DropdownButton(
+                    iconSize:MediaQuery. of(context). size. height/10 ,
+                    dropdownColor: Colors.white,
+                    underline: Text(AppLocalizations.of(context).translate("settings_language"),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                            fontSize: MediaQuery. of(context). size. height/20)
+                    ),
+                    items: Language.getLanguages().map((Language lang) {
+                      return DropdownMenuItem<Language>(
+                        value: lang,
+                        child: Text(lang.name,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                fontSize: MediaQuery. of(context). size. height/20)
+                        ),
+                      );
+                    }).toList(),
+
+                    onChanged: (Language val) {
+                      _selectedLanguage = val;
+                      MyApp.setLocale(context, Locale(val.languageCode,''));
+                    },
+                  ),
+                ]
+            )
         )
-    )
     );
   }
 }
