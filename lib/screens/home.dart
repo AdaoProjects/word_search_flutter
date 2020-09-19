@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/screens/stats.dart';
+import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/app_localizations.dart';
 
@@ -131,7 +132,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Level()),
+                  MaterialPageRoute(builder: (context) => Settings()),
                 );
               } ,
               color:Colors.black,
