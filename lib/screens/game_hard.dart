@@ -476,7 +476,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                 audioPlayer.play('sounds/wrongsound.wav');
               }
             }
-            if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true){
+            if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true&&word_six_scratch==true&&word_seven_scratch==true&&word_eight_scratch==true){
               set_Best_Time();
               showDialog(
                 context: context,
