@@ -1,6 +1,6 @@
-# huntersofwords
+# Find the words
 
-Hunters of Words
+Find the words
 
 ## Getting Started
 
