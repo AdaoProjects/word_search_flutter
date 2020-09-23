@@ -3198,7 +3198,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                     width:MediaQuery
                         .of(context)
                         .size
-                        .width* 2/ 3,
+                        .width* 7/ 10,
                     child:Table(
                         children: [
                           TableRow( children:[

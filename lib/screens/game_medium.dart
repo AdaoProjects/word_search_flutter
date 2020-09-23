@@ -2375,7 +2375,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     width:MediaQuery
                         .of(context)
                         .size
-                        .width* 3/ 5 ,
+                        .width* 7/ 10 ,
                     child: Table(
                         children: [
                           TableRow( children:[
