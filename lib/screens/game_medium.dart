@@ -3189,6 +3189,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         }
       }
     }
+    if(row_seven==0 && column_seven==num_rows_and_columns-1){
+      fit_Words_Puzzle(puzzle, word_one, word_two, word_three, word_four, word_five, word_six, word_seven, word_eight);
+    }
   }
   write_Words_Puzzle(List<String> puzzle, String word_one,String word_two,String word_three,String word_four,String word_five,String word_six,String word_seven,String word_eight) {
     if (word_five_reverse == 0) {
