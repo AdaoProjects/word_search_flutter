@@ -7,7 +7,7 @@ import 'package:findthewords/screens/home.dart';
 import 'package:findthewords/screens/stats.dart';
 import 'app_localizations.dart';
 
-
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ void main() {
           "/game_medium" : (BuildContext context) => new Game_Medium(),
           "/game_hard" : (BuildContext context) => new Game_Hard(),
         },
-
+      navigatorKey: navigatorKey,
     ));
   });
 

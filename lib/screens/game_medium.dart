@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'dart:math';
 import 'package:findthewords/custom_painter.dart';
+import 'package:findthewords/main.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
@@ -3695,25 +3696,30 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     }
   }
 
-  show_Congrats(){
+  show_Congrats() {
+
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () { Navigator.pop(navigatorKey.currentState.overlay.context,);
+      Navigator.pop(context);},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("You won"),
+      content:  Text('Congratulations your time was '+_minutes.toString()+':'+_seconds.toString()),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
     showDialog(
-      context: context,
-      builder: (alertContext) =>
-          AlertDialog(
-            title: const Text("You won"),
-            content: Text(
-                'Congratulations your time was ' + _minutes.toString() +
-                    ':' + _seconds.toString()),
-            actions: [
-              new FlatButton(
-                child: const Text("Ok"),
-                onPressed: () {
-                  Navigator.pop(alertContext);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
+      context: navigatorKey.currentState.overlay.context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

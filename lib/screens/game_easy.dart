@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/custom_painter.dart';
+import 'package:findthewords/main.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -2716,7 +2717,7 @@ play_Selection_Sound() async{
     // set up the button
     Widget okButton = FlatButton(
       child: Text("OK"),
-      onPressed: () { Navigator.pop(context);
+      onPressed: () { Navigator.pop(navigatorKey.currentState.overlay.context,);
       Navigator.pop(context);},
     );
 
@@ -2731,7 +2732,7 @@ play_Selection_Sound() async{
 
     // show the dialog
     showDialog(
-      context: context,
+      context: navigatorKey.currentState.overlay.context,
       builder: (BuildContext context) {
         return alert;
       },
