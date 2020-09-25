@@ -437,22 +437,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             if(word_one_scratch==true && word_two_scratch==true && word_three_scratch==true&&word_four_scratch==true&&word_five_scratch==true&&word_six_scratch==true&&word_seven_scratch==true&&word_eight_scratch==true){
               set_Best_Time();
-              showDialog(
-                context: context,
-                builder: (alertContext) => AlertDialog(
-                  title: const Text("You won"),
-                  content:  Text('Congratulations your time was '+_minutes.toString()+':'+_seconds.toString()),
-                  actions: [
-                    new FlatButton(
-                      child: const Text("Ok"),
-                      onPressed: () {
-                        Navigator.pop(alertContext);
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              );
+              show_Congrats();
             }
             fisrt_Point_drawed=false;
           },
@@ -3535,8 +3520,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   }
 
   void _getTime() {
-    if (!word_one_scratch && !word_two_scratch && !word_three_scratch &&
-        !word_five_scratch && !word_six_scratch) {
+    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
+        !word_five_scratch || !word_six_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;
@@ -3708,5 +3693,27 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         "ALBOS",
       ];
     }
+  }
+
+  show_Congrats(){
+    showDialog(
+      context: context,
+      builder: (alertContext) =>
+          AlertDialog(
+            title: const Text("You won"),
+            content: Text(
+                'Congratulations your time was ' + _minutes.toString() +
+                    ':' + _seconds.toString()),
+            actions: [
+              new FlatButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.pop(alertContext);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+    );
   }
 }

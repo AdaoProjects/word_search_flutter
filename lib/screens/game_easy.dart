@@ -113,7 +113,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       backgroundColor: Colors.black,
       body: Center(
         child: GestureDetector(
-          onPanUpdate: (details) async {
+          onPanUpdate: (details) {
             RenderBox box = context.findRenderObject();
             final Offset local = box.globalToLocal(
                 details.globalPosition);
@@ -162,10 +162,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       .size
                       .height / 15;
                   if(row_end!=row || column_end!=column){
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                    if(prefs.getBool("has_Sounds")==true) {
-                      audioPlayer.play('sounds/selectionsound.wav');
-                    }
+                    play_Selection_Sound();
+
                   }
                   row_end=row;
                   column_end=column;
@@ -199,7 +197,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             }
 
           },
-          onPanStart: (details) async {
+          onPanStart: (details)  async{
             RenderBox box = context.findRenderObject();
             if(!fisrt_Point_drawed) {
               final Offset local = box.globalToLocal(
@@ -235,10 +233,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       .size
                       .height / 15) {
 
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                    if(prefs.getBool("has_Sounds")==true) {
-                      audioPlayer.play('sounds/selectionsound.wav');
-                    }
+                    play_Selection_Sound();
 
                     setState(() {
                       start_Of_Selection_dx=MediaQuery
@@ -289,43 +284,41 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             fisrt_Point_drawed=true;
           },
 
-    onPanEnd: (details) async {
+    onPanEnd: (details) {
     bool found_word = false;
     for (int i = 0; i < words.length; i++) {
     if (
+    (
     row_start == solution_positions[4 * i] &&
     column_start == solution_positions[4 * i + 1] &&
     row_end == solution_positions[4 * i + 2] &&
-    column_end == solution_positions[4 * i + 3]
+    column_end == solution_positions[4 * i + 3])
     ||
-    row_start == solution_positions[4 * i + 2] &&
+        (row_start == solution_positions[4 * i + 2] &&
     column_start == solution_positions[4 * i + 3] &&
     row_end == solution_positions[4 * i] &&
-    column_end == solution_positions[4 * i + 1]) {
+    column_end == solution_positions[4 * i + 1])) {
     found_word = true;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("has_Sounds") == true) {
-    audioPlayer.play('sounds/foundsound.wav');
-    }
+    play_Found_Sound();
     number_Of_Words_Selected++;
-    if (i == 0) {
+    if (words[i]==words[0]) {
     setState(() {
     word_one_scratch = true;
     });
-    } else if (i == 1) {
+    } else if (words[i]==words[1]) {
     setState(() {
     word_two_scratch = true;
     });
-    } else if (i == 2) {
+    } else if (words[i]==words[2]) {
     setState(() {
     word_three_scratch = true;
     });
     }
-    else if (i == 3) {
+    else if (words[i]==words[3]) {
     setState(() {
     word_four_scratch = true;
     });
-    } else if (i == 5) {
+    } else if (words[i]==words[5]) {
     setState(() {
     word_six_scratch = true;
     });
@@ -339,34 +332,13 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       if (!found_word) {
         points.removeAt(2 * number_Of_Words_Selected + 1);
         points.removeAt(2 * number_Of_Words_Selected);
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        if (prefs.getBool("has_Sounds") == true) {
-          audioPlayer.play('sounds/wrongsound.wav');
-        }
+        play_Wrong_Sound();
       }
       if (word_one_scratch == true && word_two_scratch == true &&
           word_three_scratch == true && word_four_scratch == true &&
           word_five_scratch == true && word_six_scratch == true) {
         set_Best_Time();
-        showDialog(
-          context: context,
-          builder: (alertContext) =>
-              AlertDialog(
-                title: const Text("You won"),
-                content: Text(
-                    'Congratulations your time was ' + _minutes.toString() +
-                        ':' + _seconds.toString()),
-                actions: [
-                  new FlatButton(
-                    child: const Text("Ok"),
-                    onPressed: () {
-                      Navigator.pop(alertContext);
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-        );
+        show_Congrats();
       }
       fisrt_Point_drawed = false;
     },
@@ -2022,8 +1994,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     super.initState();
   }
   void _getTime() {
-    if (!word_one_scratch && !word_two_scratch && !word_three_scratch &&
-        !word_five_scratch && !word_six_scratch) {
+    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
+        !word_five_scratch || !word_six_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;
@@ -2712,5 +2684,44 @@ set_language(){
         "ALUD",
       ];
     }
+}
+play_Found_Sound () async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (prefs.getBool("has_Sounds") == true) {
+    audioPlayer.play('sounds/foundsound.wav');
+  }
+}
+play_Wrong_Sound() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (prefs.getBool("has_Sounds") == true) {
+    audioPlayer.play('sounds/wrongsound.wav');
+  }
+}
+play_Selection_Sound() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if(prefs.getBool("has_Sounds")==true) {
+    audioPlayer.play('sounds/selectionsound.wav');
+  }
+}
+show_Congrats(){
+  showDialog(
+    context: context,
+    builder: (alertContext) =>
+        AlertDialog(
+          title: const Text("You won"),
+          content: Text(
+              'Congratulations your time was ' + _minutes.toString() +
+                  ':' + _seconds.toString()),
+          actions: [
+            new FlatButton(
+              child: const Text("Ok"),
+              onPressed: () {
+                Navigator.pop(alertContext);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+  );
 }
 }
