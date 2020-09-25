@@ -393,35 +393,67 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 }
                 number_Of_Words_Selected++;
                 if(i==0 ){
+                  if(word_one_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_one_scratch=true;
                   });
                 }else if(i==1 ){
+                  if(word_two_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_two_scratch=true;
                   });
                 }else if(i==2 ){
+                  if(word_three_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_three_scratch=true;
                   });
                 }else if(i==3){
+                  if(word_four_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_four_scratch=true;
                   });
                 }else if(i==5){
+                  if(word_six_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_six_scratch=true;
                   });
                 }else if(i==6){
+                  if(word_seven_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_seven_scratch=true;
                   });
                 }else if(i==7){
+                  if(word_eight_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_eight_scratch=true;
                   });
                 }
                 else {
+                  if(word_five_scratch==true){
+                    number_Of_Words_Selected--;
+                    found_word=false;
+                  }
                   setState(() {
                     word_five_scratch=true;
                   });
@@ -2657,7 +2689,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     int k = 0;
     for(int i =0;i<word_five.length;i++){
       for(int j=0;j<word_one.length;j++){
-        if(word_one[j]==word_five[i]){
+        if(words[0][j]==words[4][i]){
           conection_one=true;
           if(random.nextInt(2)==0){
           row_one=row_five+i;
@@ -2771,7 +2803,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
       for (int i=0;i<word_two.length;i++){
         for (int j=0;j<word_three.length;j++){
-          if(word_two[i]==word_three[j]){
+          if(words[1][i]==words[2][j]){
             conection_two=true;
             if(random.nextInt(2)==0) {
               row_three = row_two - j;
@@ -3006,7 +3038,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     }
     for (int i=0;i<word_six.length;i++){
       for (int j=0;j<word_seven.length;j++){
-        if(word_six[i]==word_seven[j]){
+        if(words[5][i]==words[6][j]){
           conection_three=true;
           if(random.nextInt(2)==0) {
             row_seven = row_six - j;
@@ -3708,7 +3740,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("You won"),
-      content:  Text('Congratulations your time was '+_minutes.toString()+':'+_seconds.toString()),
+      content:  Text('Congratulations your time was '+_stringDuration(Duration(seconds: _seconds + 60 * _minutes))),
       actions: [
         okButton,
       ],

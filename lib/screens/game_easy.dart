@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
@@ -304,28 +305,64 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                    found_word = true;
                    play_Found_Sound();
                    number_Of_Words_Selected++;
-                   if (words[i]==words[0]) {
+                   if (i==0) {
+                     if(word_one_scratch==true){
+                       number_Of_Words_Selected--;
+                       points.removeAt(2 * number_Of_Words_Selected + 1);
+                       points.removeAt(2 * number_Of_Words_Selected);
+
+                     }
                      setState(() {
                        word_one_scratch = true;
                      });
-                   } else if (words[i]==words[1]) {
+
+                   } else if (i==1) {
+                     if(word_two_scratch==true){
+                       number_Of_Words_Selected--;
+                       points.removeAt(2 * number_Of_Words_Selected + 1);
+                       points.removeAt(2 * number_Of_Words_Selected);
+
+                     }
                      setState(() {
                        word_two_scratch = true;
                      });
-                   } else if (words[i]==words[2]) {
+                   } else if (i==2) {
+                     if(word_three_scratch==true){
+                       number_Of_Words_Selected--;
+                       points.removeAt(2 * number_Of_Words_Selected + 1);
+                       points.removeAt(2 * number_Of_Words_Selected);
+                     }
                      setState(() {
                        word_three_scratch = true;
                      });
                    }
-                   else if (words[i]==words[3]) {
+                   else if (i==3) {
+                     if(word_four_scratch==true){
+                       number_Of_Words_Selected--;
+                       points.removeAt(2 * number_Of_Words_Selected + 1);
+                       points.removeAt(2 * number_Of_Words_Selected);
+
+                     }
                      setState(() {
                        word_four_scratch = true;
                      });
-                   } else if (words[i]==words[5]) {
+                   } else if (i==5) {
+                     if(word_six_scratch==true){
+                       number_Of_Words_Selected--;
+                       points.removeAt(2 * number_Of_Words_Selected + 1);
+                       points.removeAt(2 * number_Of_Words_Selected);
+
+                     }
                      setState(() {
                        word_six_scratch = true;
                      });
                    } else {
+                     if(word_five_scratch==true){
+                       number_Of_Words_Selected--;
+                       points.removeAt(2 * number_Of_Words_Selected + 1);
+                       points.removeAt(2 * number_Of_Words_Selected);
+
+                     }
                      setState(() {
                        word_five_scratch = true;
                      });
@@ -1975,6 +2012,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     words[4] = all[five].toUpperCase();
     words[5] = all[six].toUpperCase();
 
+
   }
 
 
@@ -2013,6 +2051,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     }
   }
   Text return_Timer() {
+
     Duration duration = Duration(seconds: _seconds + 60 * _minutes);
     return Text(_stringDuration(duration),
       style: TextStyle(fontSize: MediaQuery
@@ -2078,9 +2117,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
     for (int i = 0; i < word_five.length; i++) {
       for (int j = 0; j < word_one.length; j++) {
-        if (word_five[i] == word_one[j]) {
+        if (words[4][i]==words[0][j]) {
           conection = true;
-          if (random.nextInt(2) == 0) {
+          if (true) {
             row_one = row_five + i;
             column_one = column_five + i - j;
             if (column_one < 0 ||
@@ -2105,7 +2144,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           } else {
             row_one = row_five + word_five.length - i - 1;
             column_one =
-                column_five + word_five.length - i-1 + j ;
+                column_five + word_five.length - i - 1 + j;
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length) {
               no_conection_count++;
@@ -2122,13 +2161,14 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 conection = false;
               }
             } else {
-              word_one_reverse = 1;
-              word_five_reverse = 1;
+              word_one_reverse = 0;
+              word_five_reverse = 0;
             }
           }
         }
       }
     }
+
     if (!conection) {
       int k = 0;
       while (k < word_five.length * word_one.length) {
@@ -2167,7 +2207,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     conection = false;
     for (int i = 0; i < word_two.length; i++) {
       for (int j = 0; j < word_three.length; j++) {
-        if (word_two[i] == word_three[j]) {
+        if (words[1][i] == words[2][j]) {
           conection = true;
           if (random.nextInt(2) == 0) {
             row_three = row_two - j;
@@ -2348,7 +2388,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     }
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six){
-    int num_rotates=random.nextInt(4);
+    int num_rotates=0;
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
@@ -2601,7 +2641,7 @@ set_language(){
         "bebe" ,
         "bola",
         "banco",
-        "bolo",
+        "BOLO",
 
         "clube",
         "exame",
@@ -2613,7 +2653,7 @@ set_language(){
         "fato",
         "tolo",
         "medo",
-        "vida" ,
+        "VIDA" ,
 
         "casa",
         "cela",
@@ -2724,7 +2764,7 @@ play_Selection_Sound() async{
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("You won"),
-      content:  Text('Congratulations your time was '+_minutes.toString()+':'+_seconds.toString()),
+      content:  Text('Congratulations your time was '+_stringDuration(Duration(seconds: _seconds + 60 * _minutes))),
       actions: [
         okButton,
       ],
