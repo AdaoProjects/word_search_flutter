@@ -3491,7 +3491,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
         solution_positions[28] = column_eight;
         solution_positions[29] = num_rows_and_columns-1-row_eight;
-        solution_positions[30] =  column_five - word_eight.length + 1;
+        solution_positions[30] =  column_eight + word_eight.length - 1;
         solution_positions[31] = num_rows_and_columns-1-row_eight + word_eight.length - 1;
       }
     }

@@ -17,6 +17,8 @@ class Game_Hard extends StatefulWidget {
   _Game_HardState createState() => _Game_HardState();
 }
 
+// is possible to put more words like 10 with for loop starting in a random position
+
 class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
   //Puzzle
@@ -4122,7 +4124,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six, String word_seven,String word_eight){
-    int num_rotates=random.nextInt(4);
+    int num_rotates=3;
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
@@ -4311,7 +4313,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
         solution_positions[28] = column_eight;
         solution_positions[29] = num_rows_and_columns-1-row_eight;
-        solution_positions[30] =  column_five - word_eight.length + 1;
+        solution_positions[30] =  column_eight + word_eight.length - 1;
         solution_positions[31] = num_rows_and_columns-1-row_eight + word_eight.length - 1;
       }
     }
@@ -4443,7 +4445,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         "device",
         "domain",
         "dreams",
-        "action",
+        "likely",
 
         "academy",
         "account",

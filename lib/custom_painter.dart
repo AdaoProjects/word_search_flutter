@@ -10,7 +10,7 @@ class DrawingPainter extends CustomPainter {
     for (int i = 0; i < pointsList.length; i++) {
       if (pointsList[i].first) {
         if (pointsList.length - 1 == i) {
-          canvas.drawCircle(pointsList[i].points, size.height / 30, pointsList[i].paint);
+          canvas.drawCircle(pointsList[i].points, pointsList[i].radius, pointsList[i].paint);
         }
       } else {
         if (pointsList[i - 1].points.dx == pointsList[i].points.dx
