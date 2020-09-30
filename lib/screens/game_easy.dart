@@ -1130,7 +1130,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length) {
               no_conection_one_count++;
-              if (no_conection_one_count < 3) {
+              if (no_conection_one_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1157,7 +1157,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length) {
               no_conection_one_count++;
-              if (no_conection_one_count < 3) {
+              if (no_conection_one_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1193,7 +1193,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_two > num_rows_and_columns - word_two.length ||
                 row_two == row_one) {
               no_conection_two_count++;
-              if (no_conection_two_count < 3) {
+              if (no_conection_two_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1220,7 +1220,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_two > num_rows_and_columns - word_two.length ||
                 row_one == row_two) {
               no_conection_two_count++;
-              if (no_conection_two_count < 3) {
+              if (no_conection_two_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1307,7 +1307,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 row_three > num_rows_and_columns - word_three.length ||
                 k != 0) {
               no_conection_three_count++;
-              if (no_conection_three_count < 3) {
+              if (no_conection_three_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1348,7 +1348,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 row_three > num_rows_and_columns - word_three.length ||
                 k != 0) {
               no_conection_three_count++;
-              if (no_conection_three_count < 3) {
+              if (no_conection_three_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1483,7 +1483,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_six > num_rows_and_columns - word_six.length ||
                 k != 0) {
               no_conection_four_count++;
-              if (no_conection_four_count < 3) {
+              if (no_conection_four_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1530,7 +1530,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_six > num_rows_and_columns - word_six.length ||
                 k != 0) {
               no_conection_four_count++;
-              if (no_conection_four_count < 3) {
+              if (no_conection_four_count < 5) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
