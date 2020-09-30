@@ -2202,6 +2202,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     solution_positions[33] = column_nine;
     solution_positions[34] = row_nine;
     solution_positions[35] = column_nine + word_nine.length - 1;
+    solution_positions[36] = row_ten;
+    solution_positions[37] = column_ten;
+    solution_positions[38] = row_ten+word_ten.length-1;
+    solution_positions[39] = column_ten - word_ten.length + 1;
     for(int i =0;i<num_rotates;i++) {
       List<String> old_puzzle=['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
 
@@ -2241,6 +2245,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
       row_nine=solution_positions[32];
       column_nine=solution_positions[33];
+
+      row_ten=solution_positions[36];
+      column_ten=solution_positions[37];
 
       if(num_rotates==1) {
         solution_positions[0] = column_one;
@@ -2287,6 +2294,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[33] = num_rows_and_columns-1-row_nine;
         solution_positions[34] = column_nine + word_nine.length - 1;
         solution_positions[35] =num_rows_and_columns-1-row_nine;
+
+        solution_positions[36] = column_ten;
+        solution_positions[37] = num_rows_and_columns-1-row_ten;
+        solution_positions[38] =  column_ten - word_ten.length + 1;
+        solution_positions[39] = num_rows_and_columns-1-row_ten - word_ten.length + 1;
       }else if(num_rotates==2){
         solution_positions[0] =column_one;
         solution_positions[1] = num_rows_and_columns-1-row_one;
@@ -2332,6 +2344,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[33] = num_rows_and_columns-1-row_nine;
         solution_positions[34] =  column_nine;
         solution_positions[35] = num_rows_and_columns-1-row_nine - word_nine.length + 1;
+
+        solution_positions[36] = column_ten;
+        solution_positions[37] = num_rows_and_columns-1-row_ten;
+        solution_positions[38] =  column_ten - word_ten.length + 1;
+        solution_positions[39] = num_rows_and_columns-1-row_ten + word_ten.length - 1;
       }else if(num_rotates==3){
         solution_positions[0] = column_one;
         solution_positions[1] = num_rows_and_columns-1-row_one;
@@ -2377,6 +2394,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[33] = num_rows_and_columns-1-row_nine;
         solution_positions[34] = column_nine - word_nine.length + 1;
         solution_positions[35] =num_rows_and_columns-1-row_nine;
+
+        solution_positions[36] = column_ten;
+        solution_positions[37] = num_rows_and_columns-1-row_ten;
+        solution_positions[38] =  column_ten + word_ten.length - 1;
+        solution_positions[39] = num_rows_and_columns-1-row_ten + word_ten.length - 1;
       }
     }
 
