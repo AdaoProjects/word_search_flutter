@@ -1745,7 +1745,7 @@ if(!connection_four) {
       }
     }
     if(!connection_five) {
-      for (int f = 0; f < num_rows_and_columns; f++) {
+      for (int f = 0; f < num_rows_and_columns-word_eight.length+1; f++) {
         int k = 0;
         for (int l = 0; l < num_rows_and_columns; l++) {
           row_eight = f;
@@ -1794,7 +1794,7 @@ if(!connection_four) {
           break;
         }
       }
-      if (row_eight == num_rows_and_columns - 1 &&
+      if (row_eight == num_rows_and_columns - word_eight.length &&
           column_eight == num_rows_and_columns - 1) {
         fit_Words_Puzzle(
             puzzle,
@@ -1810,7 +1810,7 @@ if(!connection_four) {
       }
     }
     for (int i = 0; i < word_eight.length; i++) {
-      for (int j = 0; j < word_nine.length; j++) {
+      for (int j = 0; j < words[8].length; j++) {
         if (words[7][i] == words[8][j]) {
           connection_six = true;
           if (!word_eight_reverse) {
@@ -2214,16 +2214,6 @@ if(!connection_four) {
       for (int i = 0; i < word_four.length; i++) {
         puzzle[(row_four + i) * num_rows_and_columns + column_four] =
         word_four[word_four.length - 1 - i];
-      }
-    }
-    if (word_six_reverse == false) {
-      for (int i = 0; i < word_six.length; i++) {
-        puzzle[row_six * num_rows_and_columns + i + column_six] = word_six[i];
-      }
-    } else {
-      for (int i = 0; i < word_six.length; i++) {
-        puzzle[row_six * num_rows_and_columns + i + column_six] =
-        word_six[word_six.length - 1 - i];
       }
     }
     if (word_six_reverse == false) {
