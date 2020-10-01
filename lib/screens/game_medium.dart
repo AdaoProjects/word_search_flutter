@@ -1430,7 +1430,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     bool connection_six = false;
     bool connection_seven = false;
     bool connection_eight = false;
-    bool connection_nine = false;
+
     random.nextInt(2) == 0 ? word_one_reverse = false : word_one_reverse = true;
     random.nextInt(2) == 0 ? word_two_reverse = false : word_two_reverse = true;
     random.nextInt(2) == 0 ? word_three_reverse = false : word_three_reverse =
@@ -1464,7 +1464,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_one.length; l++) {
                 if (row_ten + p == row_one &&
-                    column_ten - l == column_one + l) {
+                    column_ten - p == column_one + l) {
                   k++;
                 }
               }
@@ -1503,7 +1503,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_one.length; l++) {
                 if (row_ten + p == row_one &&
-                    column_ten - l == column_one + l) {
+                    column_ten - p == column_one + l) {
                   k++;
                 }
               }
@@ -1550,7 +1550,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_two.length; l++) {
                 if (row_ten + p == row_two &&
-                    column_ten - l == column_two + l) {
+                    column_ten - p == column_two + l) {
                   k++;
                 }
               }
@@ -1588,7 +1588,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_two.length; l++) {
                 if (row_ten + p == row_two &&
-                    column_ten - l == column_two + l) {
+                    column_ten - p == column_two + l) {
                   k++;
                 }
               }
@@ -1642,7 +1642,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         for (int p = 0; p < word_ten.length; p++) {
           for (int l = 0; l < word_one.length; l++) {
             if (!(row_ten + p == row_one &&
-                column_ten - l == column_one + l)) {
+                column_ten - p == column_one + l)) {
               k++;
             }
           }
@@ -1668,7 +1668,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         for (int p = 0; p < word_ten.length; p++) {
           for (int l = 0; l < word_two.length; l++) {
             if (!(row_ten + p == row_two &&
-                column_ten - l == column_two + l)) {
+                column_ten - p== column_two + l)) {
               k++;
             }
           }
@@ -1701,7 +1701,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_three.length; l++) {
                 if (row_ten + p == row_three + l &&
-                    column_ten - l == column_three) {
+                    column_ten - p == column_three) {
                   k++;
                 }
               }
@@ -1752,7 +1752,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_three.length; l++) {
                 if (row_ten + p == row_three + l &&
-                    column_ten - l == column_three) {
+                    column_ten - p == column_three) {
                   k++;
                 }
               }
@@ -1880,7 +1880,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       for (int p = 0; p < word_ten.length; p++) {
         for (int l = 0; l < word_four.length; l++) {
           if (!(row_ten + p == row_four + l &&
-              column_ten - l == column_four)) {
+              column_ten - p == column_four)) {
             k++;
           }
         }
@@ -1899,7 +1899,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_six.length; l++) {
                 if (row_ten + p == row_six &&
-                    column_ten - l == column_six + l) {
+                    column_ten - p == column_six + l) {
                   k++;
                 }
               }
@@ -1957,7 +1957,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_six.length; l++) {
                 if (row_ten + p == row_six &&
-                    column_ten - l == column_six + l) {
+                    column_ten - p == column_six + l) {
                   k++;
                 }
               }
@@ -2023,7 +2023,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           for (int p = 0; p < word_ten.length; p++) {
             for (int l = 0; l < word_six.length; l++) {
               if (!(row_ten + p == row_six &&
-                  column_ten - l == column_six + l)) {
+                  column_ten - p == column_six + l)) {
                 k++;
               }
             }
@@ -2084,7 +2084,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         for (int p = 0; p < word_ten.length; p++) {
           for (int l = 0; l < word_seven.length; l++) {
             if (!(row_ten + p == row_seven &&
-                column_ten - l == column_seven + l)) {
+                column_ten - p == column_seven + l)) {
               k++;
             }
           }
@@ -2129,7 +2129,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_eight.length; l++) {
                 if (row_ten + p == row_eight + l &&
-                    column_ten - l == column_eight) {
+                    column_ten - p == column_eight) {
                   k++;
                 }
               }
@@ -2186,7 +2186,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_eight.length; l++) {
                 if (row_ten + p == row_eight + l &&
-                    column_ten - l == column_eight) {
+                    column_ten - p == column_eight) {
                   k++;
                 }
               }
@@ -2284,7 +2284,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           for (int p = 0; p < word_ten.length; p++) {
             for (int l = 0; l < word_eight.length; l++) {
               if (!(row_ten + p == row_eight + l &&
-                  column_ten - l == column_eight)) {
+                  column_ten - p == column_eight)) {
                 k++;
               }
             }
@@ -2453,8 +2453,12 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           }
           for (int p = 0; p < word_ten.length; p++) {
             for (int l = 0; l < word_nine.length; l++) {
-              if (!(row_ten + p == row_nine &&
-                  column_ten - p == column_nine + l)) {
+              if (!((row_ten + p == row_nine &&
+                  column_ten - p == column_nine + l)
+                  ||
+                  row_nine == row_seven || row_nine == row_six ||
+                  row_nine == row_one ||
+                  row_nine == row_two)) {
                 k++;
               }
             }
@@ -2501,6 +2505,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 if ((row_five + i == row_eleven + j &&
                     column_eleven + i == column_eleven) ||
                     column_eleven == column_three || column_eleven == column_four ||
+                    column_eleven==column_eight||
                     (
                         row_eleven <= row_one &&
                             row_eleven + word_eleven.length - 1 >= row_one &&
@@ -2542,7 +2547,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_eleven.length; l++) {
                 if (row_ten + p == row_eleven + l &&
-                    column_ten - l == column_eleven) {
+                    column_ten - p == column_eleven) {
                   k++;
                 }
               }
@@ -2566,6 +2571,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 if ((row_five + i == row_eleven + j &&
                     column_eleven + i == column_eleven) ||
                     column_eleven == column_three || column_eleven == column_four ||
+                    column_eleven==column_eight||
                     (
                         row_eleven <= row_one &&
                             row_eleven + word_eleven.length - 1 >= row_one &&
@@ -2607,7 +2613,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_eleven.length; l++) {
                 if (row_ten + p == row_eleven + l &&
-                    column_ten - l == column_eleven) {
+                    column_ten - p == column_eleven) {
                   k++;
                 }
               }
@@ -2639,6 +2645,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   column_eleven + i == column_eleven) ||
                   column_eleven == column_three ||
                   column_eleven == column_four ||
+                  column_eleven==column_eight||
                   (
                       row_eleven <= row_one &&
                           row_eleven + word_eleven.length - 1 >= row_one &&
@@ -2680,7 +2687,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           for (int p = 0; p < word_ten.length; p++) {
             for (int l = 0; l < word_eleven.length; l++) {
               if (!(row_ten + p == row_eleven + l &&
-                  column_ten - l == column_eleven)) {
+                  column_ten - p == column_eleven)) {
                 k++;
               }
             }
@@ -3027,7 +3034,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six, String word_seven,String word_eight
       ,String word_nine,String word_ten,String word_eleven,String word_twelve){
-    int num_rotates=0;
+    int num_rotates=random.nextInt(4);
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
@@ -3326,18 +3333,18 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
        twelve=25+random.nextInt(5);
     }
 
-    words[0] = all[one];
-    words[1] =  all[two];
-    words[2] = all[three];
-    words[3] =all[four];
-    words[4] = all[five];
-    words[5] = all[six];
-    words[6] = all[seven];
-    words[7] =  all[eight];
-    words[8] =  'all';
-    words[9] =  all[ten];
-    words[10] =  all[eleven];
-    words[11] =  all[twelve];
+    words[0] = all[one].toUpperCase();
+    words[1] =  all[two].toUpperCase();
+    words[2] = all[three].toUpperCase();
+    words[3] =all[four].toUpperCase();
+    words[4] = all[five].toUpperCase();
+    words[5] = all[six].toUpperCase();
+    words[6] = all[seven].toUpperCase();
+    words[7] =  all[eight].toUpperCase();
+    words[8] =  all[nine].toUpperCase();
+    words[9] =  all[ten].toUpperCase();
+    words[10] =  all[eleven].toUpperCase();
+    words[11] =  all[twelve].toUpperCase();
 
   }
 
@@ -3443,11 +3450,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         "actual",
         "action",
 
-        "eyes",
-        "feet",
-        "push",
-        "easy",
-        "even",
+        "art",
+        "war",
+        "age",
+        "tax",
+        "red"
 
       ];
     }else if (language=='pt'){
