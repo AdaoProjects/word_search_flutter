@@ -3347,18 +3347,18 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       twelve=25+random.nextInt(5);
     }
 
-    words[0] = all[one];
-    words[1] =  all[two];
-    words[2] = all[three];
-    words[3] =all[four];
-    words[4] = all[five];
-    words[5] = all[six];
-    words[6] = all[seven];
-    words[7] =  all[eight];
-    words[8] =  all[nine];
-    words[9] =  all[ten];
-    words[10] =  all[eleven];
-    words[11] =  all[twelve];
+    words[0] = all[one].toUpperCase();
+    words[1] =  all[two].toUpperCase();
+    words[2] = all[three].toUpperCase();
+    words[3] =all[four].toUpperCase();
+    words[4] = all[five].toUpperCase();
+    words[5] = all[six].toUpperCase();
+    words[6] = all[seven].toUpperCase();
+    words[7] =  all[eight].toUpperCase();
+    words[8] =  all[nine].toUpperCase();
+    words[9] =  all[ten].toUpperCase();
+    words[10] =  all[eleven].toUpperCase();
+    words[11] =  all[twelve].toUpperCase();
 
   }
 
