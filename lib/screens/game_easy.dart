@@ -2329,7 +2329,13 @@ set_language(){
         "luta",
         "nada",
         "selo",
-        "pneu" ,
+        "pneu",
+
+        "aba",
+        "rio",
+        "sul",
+        "fax",
+        "app"
       ];
     }else if(language=='fr'){
       all=[
@@ -2364,6 +2370,12 @@ set_language(){
         "agent",
         "angle" ,
         "Pomme" ,
+
+        "age",
+        "eux",
+        "dab",
+        "dan",
+        "cal"
       ];
     }else if (language=='es'){
       all=[
@@ -2394,6 +2406,12 @@ set_language(){
         "CEBO",
         "ABES",
         "ALUD",
+
+        "can",
+        "cao",
+        "cap",
+        "car",
+        "cas"
       ];
     }
 }

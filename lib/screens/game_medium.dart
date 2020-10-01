@@ -147,17 +147,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   bool word_eleven_scratch = false;
   bool word_twelve_scratch = false;
   bool word_one_reverse;
-
   bool word_two_reverse;
-
   bool word_three_reverse;
-
   bool word_four_reverse;
-
   bool word_five_reverse;
-
   bool word_six_reverse;
-
   bool word_seven_reverse;
   bool word_eight_reverse;
   bool word_nine_reverse;
@@ -1557,7 +1551,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             if (column_two < 0 ||
                 column_two > num_rows_and_columns - word_two.length ||
-                row_two == row_one) {
+                row_two == row_one||k!=0) {
               no_connection_two_count++;
               if (no_connection_two_count < 5) {
                 fit_Words_Puzzle(
@@ -1595,7 +1589,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             if (column_two < 0 ||
                 column_two > num_rows_and_columns - word_two.length ||
-                row_one == row_two) {
+                row_one == row_two || k!=0) {
               no_connection_two_count++;
               if (no_connection_two_count < 5) {
                 fit_Words_Puzzle(
@@ -3183,6 +3177,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[38] =  column_ten - word_ten.length + 1;
         solution_positions[39] = num_rows_and_columns-1-row_ten - word_ten.length + 1;
 
+        solution_positions[40] =column_eleven;
+        solution_positions[41] = num_rows_and_columns-1-row_eleven;
+        solution_positions[42] =  column_eleven;
+        solution_positions[43] = num_rows_and_columns-1-row_eleven - word_eleven.length + 1;
+
         solution_positions[44] = column_twelve;
         solution_positions[45] = num_rows_and_columns-1-row_twelve;
         solution_positions[46] = column_twelve + word_twelve.length - 1;
@@ -3238,6 +3237,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[38] =  column_ten - word_ten.length + 1;
         solution_positions[39] = num_rows_and_columns-1-row_ten + word_ten.length - 1;
 
+        solution_positions[40] = column_eleven;
+        solution_positions[41] = num_rows_and_columns-1-row_eleven;
+        solution_positions[42] = column_eleven - word_eleven.length + 1;
+        solution_positions[43] =num_rows_and_columns-1-row_eleven ;
+
         solution_positions[44] =column_twelve;
         solution_positions[45] = num_rows_and_columns-1-row_twelve;
         solution_positions[46] =  column_twelve;
@@ -3292,6 +3296,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         solution_positions[37] = num_rows_and_columns-1-row_ten;
         solution_positions[38] =  column_ten + word_ten.length - 1;
         solution_positions[39] = num_rows_and_columns-1-row_ten + word_ten.length - 1;
+
+        solution_positions[40] =column_eleven;
+        solution_positions[41] = num_rows_and_columns-1-row_eleven;
+        solution_positions[42] =  column_eleven;
+        solution_positions[43] = num_rows_and_columns-1-row_eleven + word_eleven.length - 1;
 
         solution_positions[44] = column_twelve;
         solution_positions[45] = num_rows_and_columns-1-row_twelve;
@@ -3487,6 +3496,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         "fugaz",
         "sonho" ,
 
+        "aba",
+        "rio",
+        "sul",
+        "fax",
+        "app"
       ];
     }else if(language=='fr'){
       all=[
@@ -3520,6 +3534,12 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         "WALES",
         "WAGON" ,
         "KIWIS" ,
+
+        "age",
+        "eux",
+        "dab",
+        "dan",
+        "cal"
       ];
     }else if (language=='es'){
       all=[
@@ -3549,6 +3569,12 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         "AGUAN",
         "AGRIO",
         "ALBOS",
+
+        "can",
+        "cao",
+        "cap",
+        "car",
+        "cas"
       ];
     }
   }
