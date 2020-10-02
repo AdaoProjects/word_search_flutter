@@ -20,11 +20,11 @@
   "stats_hard" : "Difícil",
 
   "game_level_easy" : "NIVEL: FÁCIL",
-
   "game_level_medium" : "NIVEL: MEDIO",
-
   "game_level_hard" : "NIVEL: DIFÍCIL",
-
+  "game_level_type_food": "Comida",
+  "game_level_type_animals": "Animales",
+  "game_level_type_diverse": "Diverso",
   "game_language": "es"
 
 }
