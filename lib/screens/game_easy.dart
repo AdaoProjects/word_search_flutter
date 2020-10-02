@@ -1139,7 +1139,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               no_connection_one_count++;
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
-              if (no_connection_one_count < 5) {
+              if (no_connection_one_count < 15) {
                   fit_Words_Puzzle(
                       puzzle,
                       word_one,
@@ -1174,7 +1174,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
               no_connection_one_count++;
-              if (no_connection_one_count < 5) {
+              if (no_connection_one_count < 15) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -1219,7 +1219,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     column_two > num_rows_and_columns - word_two.length ||
                     row_one == row_two) {
                   no_connection_two_count++;
-                  if (no_connection_two_count < 5) {
+                  if (no_connection_two_count < 15) {
                     fit_Words_Puzzle(
                         puzzle,
                         word_one,
@@ -1254,7 +1254,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       column_two > num_rows_and_columns - word_two.length ||
                       row_one == row_two) {
                     no_connection_two_count++;
-                    if (no_connection_two_count < 5) {
+                    if (no_connection_two_count < 15) {
                       fit_Words_Puzzle(
                           puzzle,
                           word_one,
@@ -2155,13 +2155,13 @@ if(!connection_five) {
             word_nine);
       }
     }
-    for (int i = 0; i < word_six.length; i++) {
+    for (int i = 0; i < word_seven.length; i++) {
       for (int j = 0; j < word_eight.length; j++) {
-        if (words[5][i] == words[7][j]) {
+        if (words[6][i] == words[7][j]) {
           connection_eight = true;
-          if (!word_six_reverse) {
-            row_eight = row_six -j;
-            column_eight = column_six + i;
+          if (!word_seven_reverse) {
+            row_eight = row_seven -j;
+            column_eight = column_seven + i;
 
             int k=0;
 
@@ -2258,8 +2258,8 @@ if(!connection_five) {
               word_eight_reverse = false;
             }
           } else {
-            row_eight = row_six-j;
-            column_eight=column_six+word_six.length-1-i;
+            row_eight = row_seven-j;
+            column_eight=column_seven+word_seven.length-1-i;
             int k=0;
 
 
@@ -2623,6 +2623,7 @@ if(!connection_five) {
           word_nine);
     }
   }
+
 
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six
