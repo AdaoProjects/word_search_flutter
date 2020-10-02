@@ -104,14 +104,9 @@ class _LevelState extends State<Level> {
                           .height / 15),
                   RaisedButton(
                     onPressed: () async {
-                      SharedPreferences prefs = await SharedPreferences
-                          .getInstance();
-                      String type = 'food';
-                      await prefs.setString('game_type', type);
-                      Navigator.of(context).pushNamed("/game_medium");
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Game_Medium()),
+                        MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("food"))),
                       );
                     },
                     color: Colors.black,
@@ -167,7 +162,7 @@ class _LevelState extends State<Level> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Game_Hard()),
+                        MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("food"))),
                       );
                     },
                     color: Colors.black,

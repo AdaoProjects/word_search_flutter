@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'dart:math';
 import 'package:findthewords/custom_painter.dart';
+import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/main.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:findthewords/app_localizations.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Medium extends StatefulWidget {
-
+  Game_Type game_type;
+  Game_Medium({Key key, @required this.game_type}) : super(key: key);
   @override
   _Game_MediumState createState() => _Game_MediumState();
 }
@@ -1324,7 +1326,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       for (int i = 0; i < num_rows_and_columns * num_rows_and_columns; i++) {
         puzzle[i] = write_Random_Letter();
       }
-      pick_Random_Words();
       fit_Words_Puzzle(
           puzzle,
           words[0],
@@ -3313,51 +3314,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
   }
 
-  pick_Random_Words() {
-    Random random = new Random();
-    int one = random.nextInt(25);
-    int two = random.nextInt(25);
-    int three = random.nextInt(25);
-    int four = random.nextInt(25);
-    int five = random.nextInt(25);
-    int six =random.nextInt(25);
-    int seven=random.nextInt(25);
-    int eight= random.nextInt(25);
-    int nine=25+random.nextInt(5);
-    int ten=25+random.nextInt(5);
-    int eleven=25+random.nextInt(5);
-    int twelve=25+random.nextInt(5);
-    while (all[one].length!=6||all[two].length!=6||all[three].length != 5 || all[four].length !=5 || all[five].length != 5||all[six].length != 5||all[seven].length != 5||all[eight].length != 5|| one==two||one==three||one==four||one==five||one==six||one==seven||one==eight||two==three||two==four||two==five||two==six||two==seven||two==eight ||three==four||three==five||three==six||three==seven||three==eight||four==five||four==six||four==seven||four==eight||five==six||five==seven||five==eight||six==seven||six==eight||seven==eight) {
-      one = random.nextInt(25);
-      two = random.nextInt(25);
-      three = random.nextInt(25);
-      four = random.nextInt(25);
-      five = random.nextInt(25);
-      six = random.nextInt(25);
-      seven = random.nextInt(25);
-      eight = random.nextInt(25);
-    }
-    while(nine==ten||nine==eleven||nine==twelve||ten==eleven||ten==twelve||eleven==twelve){
-       nine=25+random.nextInt(5);
-       ten=25+random.nextInt(5);
-       eleven=25+random.nextInt(5);
-       twelve=25+random.nextInt(5);
-    }
-
-    words[0] = all[one].toUpperCase();
-    words[1] =  all[two].toUpperCase();
-    words[2] = all[three].toUpperCase();
-    words[3] =all[four].toUpperCase();
-    words[4] = all[five].toUpperCase();
-    words[5] = all[six].toUpperCase();
-    words[6] = all[seven].toUpperCase();
-    words[7] =  all[eight].toUpperCase();
-    words[8] =  all[nine].toUpperCase();
-    words[9] =  all[ten].toUpperCase();
-    words[10] =  all[eleven].toUpperCase();
-    words[11] =  all[twelve].toUpperCase();
-
-  }
 
   Color serie_Color(){
     next_Color++;
@@ -3428,160 +3384,173 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       Navigator.of(context).pushNamed("/stats");
     }
   }
-  set_language(){
-    String language=AppLocalizations.of(context).translate("game_language");
-    if(language=='en'){
-      all=[
-        "adult",
-        "album",
-        "agent",
-        "angle",
-        "apple",
-        "pixel",
-
-        "labor",
-        "gifts",
-        "girls",
-        "forum",
-        "dress",
-        "dance",
-
-        "bonus",
-        "board",
-        "blade",
-        "block",
-        "bills",
-        "bible",
-
-        "afford",
-        "allows",
-        "animal",
-        "annual",
-        "advice",
-        "actual",
-        "action",
-
-        "art",
-        "war",
-        "age",
-        "tax",
-        "red"
-
-      ];
-    }else if (language=='pt'){
-      all=[
-        "banco",
-        "clube",
-        "exame",
-        "olhos",
-        "album",
-        "forum",
-        "dança",
-        "bonus",
-        "borda" ,
-        "quadra" ,
-        "contas" ,
-        "biblia",
-        "animal" ,
-        "anual",
-        "adendo" ,
-
-        "sagaz" ,
-        "algoz",
-        "sutil" ,
-        "ideia",
-        "moral" ,
-
-        "gleba" ,
-        "denso",
-        "causa" ,
-        "fugaz",
-        "sonho" ,
-
-        "aba",
-        "rio",
-        "sul",
-        "fax",
-        "app"
-      ];
-    }else if(language=='fr'){
-      all=[
-
-        "acide",
-        "Balle" ,
-        "pieds" ,
-        "album",
-        "agent",
-        "angle" ,
-        "Pomme" ,
-
-        "adulte",
-         "filles" ,
-        "forum",
-        "Danse" ,
-
-        "prime" ,
-        "planche" ,
-        "bloquer" ,
-        "bible",
-
-        "animal" ,
-        "annuel",
-        "action",
-
-        "TWILL",
-        "TWINS" ,
-        "WOLOF" ,
-        "AWELE",
-        "WALES",
-        "WAGON" ,
-        "KIWIS" ,
-
-        "age",
-        "eux",
-        "dab",
-        "dan",
-        "cal"
-      ];
-    }else if (language=='es'){
-      all=[
-        "album",
-        "agente" ,
-        "sangre",
-        "labor" ,
-        "baile" ,
-        "biblia",
-        "pagar",
-        "animal",
-        "anual",
-        "Consejo" ,
-        "actual",
-        "accion",
-
-        "ANOLE",
-        "ANUDO" ,
-        "APITA",
-        "AGITA" ,
-        "AHORA" ,
-        "AFARA",
-        "AFATO",
-        "AILLO",
-        "AGORA",
-        "AGNUS" ,
-        "AGUAN",
-        "AGRIO",
-        "ALBOS",
-
-        "can",
-        "cao",
-        "cap",
-        "car",
-        "cas"
-        "cas"
-      ];
+  set_language() {
+    String language = AppLocalizations.of(context).translate("game_language");
+    if (widget.game_type.type == 'food') {
+      if (language == 'en') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      } else if (language == 'pt') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      } else if (language == 'fr') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      } else if (language == 'es') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      }
+    } else if (widget.game_type.type == 'animals') {
+      if (language == 'en') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      } else if (language == 'pt') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      } else if (language == 'fr') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      } else if (language == 'es') {
+        words[0] = "pickle".toUpperCase();
+        words[1] = "bacon".toUpperCase();
+        words[2] = "honey".toUpperCase();
+        words[3] = "lemon".toUpperCase();
+        words[4] = "melon".toUpperCase();
+        words[5] = "patty".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+        words[9] = "pop".toUpperCase();
+        words[10] = "pie".toUpperCase();
+        words[11] = "pizza".toUpperCase();
+      }
+      else if (widget.game_type.type == 'diverse') {
+        if (language == 'en') {
+          words[0] = "pickle".toUpperCase();
+          words[1] = "bacon".toUpperCase();
+          words[2] = "honey".toUpperCase();
+          words[3] = "lemon".toUpperCase();
+          words[4] = "melon".toUpperCase();
+          words[5] = "patty".toUpperCase();
+          words[6] = "Fig".toUpperCase();
+          words[7] = "bean".toUpperCase();
+          words[8] = "Pea".toUpperCase();
+          words[9] = "pop".toUpperCase();
+          words[10] = "pie".toUpperCase();
+          words[11] = "pizza".toUpperCase();
+        } else if (language == 'pt') {
+          words[0] = "pickle".toUpperCase();
+          words[1] = "bacon".toUpperCase();
+          words[2] = "honey".toUpperCase();
+          words[3] = "lemon".toUpperCase();
+          words[4] = "melon".toUpperCase();
+          words[5] = "patty".toUpperCase();
+          words[6] = "Fig".toUpperCase();
+          words[7] = "bean".toUpperCase();
+          words[8] = "Pea".toUpperCase();
+          words[9] = "pop".toUpperCase();
+          words[10] = "pie".toUpperCase();
+          words[11] = "pizza".toUpperCase();
+        } else if (language == 'fr') {
+          words[0] = "pickle".toUpperCase();
+          words[1] = "bacon".toUpperCase();
+          words[2] = "honey".toUpperCase();
+          words[3] = "lemon".toUpperCase();
+          words[4] = "melon".toUpperCase();
+          words[5] = "patty".toUpperCase();
+          words[6] = "Fig".toUpperCase();
+          words[7] = "bean".toUpperCase();
+          words[8] = "Pea".toUpperCase();
+          words[9] = "pop".toUpperCase();
+          words[10] = "pie".toUpperCase();
+          words[11] = "pizza".toUpperCase();
+        } else if (language == 'es') {
+          words[0] = "pickle".toUpperCase();
+          words[1] = "bacon".toUpperCase();
+          words[2] = "honey".toUpperCase();
+          words[3] = "lemon".toUpperCase();
+          words[4] = "melon".toUpperCase();
+          words[5] = "patty".toUpperCase();
+          words[6] = "Fig".toUpperCase();
+          words[7] = "bean".toUpperCase();
+          words[8] = "Pea".toUpperCase();
+          words[9] = "pop".toUpperCase();
+          words[10] = "pie".toUpperCase();
+          words[11] = "pizza".toUpperCase();
+        }
+      }
     }
   }
-
   show_Congrats() {
 
     // set up the button

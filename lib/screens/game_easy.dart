@@ -14,7 +14,6 @@ import 'package:findthewords/app_localizations.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Easy extends StatefulWidget {
   Game_Type game_type;
-  // In the constructor, require a Person
   Game_Easy({Key key, @required this.game_type}) : super(key: key);
   @override
   _Game_EasyState createState() => _Game_EasyState();
@@ -2920,6 +2919,91 @@ if(!connection_five) {
 set_language() {
     String language=AppLocalizations.of(context).translate("game_language");
     if(widget.game_type.type=='food') {
+      if (language == 'en') {
+        words[0] = "Apple".toUpperCase();
+        words[1] = "Mango".toUpperCase();
+        words[2] = "Date".toUpperCase();
+        words[3] = "Lime".toUpperCase();
+        words[4] = "Pear".toUpperCase();
+        words[5] = "Abiu".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+      } else if (language == 'pt') {
+        words[0] = "Jambo".toUpperCase();
+        words[1] = "Manga".toUpperCase();
+        words[2] = "Baru".toUpperCase();
+        words[3] = "Akee".toUpperCase();
+        words[4] = "Lima".toUpperCase();
+        words[5] = "Abiu".toUpperCase();
+        words[6] = "Ata".toUpperCase();
+        words[7] = "Uva".toUpperCase();
+        words[8] = "Uxi".toUpperCase();
+      } else if (language == 'fr') {
+        words[0] = "pomme".toUpperCase();
+        words[1] = "Coing".toUpperCase();
+        words[2] = "chou".toUpperCase();
+        words[3] = "noix".toUpperCase();
+        words[4] = "lime".toUpperCase();
+        words[5] = "coco".toUpperCase();
+        words[6] = "Taxo".toUpperCase();
+        words[7] = "Kaki".toUpperCase();
+        words[8] = "Kiwi".toUpperCase();
+      } else if (language == 'es') {
+        words[0] = "limon".toUpperCase();
+        words[1] = "mango".toUpperCase();
+        words[2] = "coco".toUpperCase();
+        words[3] = "higo".toUpperCase();
+        words[4] = "lima".toUpperCase();
+        words[5] = "kiwi".toUpperCase();
+        words[6] = "mora".toUpperCase();
+        words[7] = "uva".toUpperCase();
+        words[8] = "yaca".toUpperCase();
+      }
+    }else if (widget.game_type.type=='animals'){
+      if (language == 'en') {
+        words[0] = "Apple".toUpperCase();
+        words[1] = "Mango".toUpperCase();
+        words[2] = "Date".toUpperCase();
+        words[3] = "Lime".toUpperCase();
+        words[4] = "Pear".toUpperCase();
+        words[5] = "Abiu".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+      } else if (language == 'pt') {
+        words[0] = "Jambo".toUpperCase();
+        words[1] = "Manga".toUpperCase();
+        words[2] = "Baru".toUpperCase();
+        words[3] = "Akee".toUpperCase();
+        words[4] = "Lima".toUpperCase();
+        words[5] = "Abiu".toUpperCase();
+        words[6] = "Ata".toUpperCase();
+        words[7] = "Uva".toUpperCase();
+        words[8] = "Uxi".toUpperCase();
+      } else if (language == 'fr') {
+        words[0] = "pomme".toUpperCase();
+        words[1] = "Coing".toUpperCase();
+        words[2] = "chou".toUpperCase();
+        words[3] = "noix".toUpperCase();
+        words[4] = "lime".toUpperCase();
+        words[5] = "coco".toUpperCase();
+        words[6] = "Taxo".toUpperCase();
+        words[7] = "Kaki".toUpperCase();
+        words[8] = "Kiwi".toUpperCase();
+      } else if (language == 'es') {
+        words[0] = "limon".toUpperCase();
+        words[1] = "mango".toUpperCase();
+        words[2] = "coco".toUpperCase();
+        words[3] = "higo".toUpperCase();
+        words[4] = "lima".toUpperCase();
+        words[5] = "kiwi".toUpperCase();
+        words[6] = "mora".toUpperCase();
+        words[7] = "uva".toUpperCase();
+        words[8] = "yaca".toUpperCase();
+      }
+    }
+    else if (widget.game_type.type=='diverse'){
       if (language == 'en') {
         words[0] = "Apple".toUpperCase();
         words[1] = "Mango".toUpperCase();
