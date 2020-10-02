@@ -2639,6 +2639,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         for (int l = num_rows_and_columns - 1; l > -1; l--) {
           row_eleven = f;
           column_eleven = l;
+          k=0;
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_eleven.length; j++) {
               if (!((row_five + i == row_eleven + j &&
@@ -2834,6 +2835,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         for (int l = num_rows_and_columns - word_twelve.length; l > -1; l--) {
           row_twelve = f;
           column_twelve = l;
+          k=0;
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_twelve.length; j++) {
               if (!((row_five + i == row_twelve &&
