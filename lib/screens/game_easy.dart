@@ -1079,6 +1079,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     bool connection_seven=false;
     bool connection_eight=false;
     bool connection_nine=false;
+    bool connection_ten=false;
     random.nextInt(2) == 0 ? word_one_reverse = false : word_one_reverse = true;
     random.nextInt(2) == 0 ? word_two_reverse = false : word_two_reverse = true;
     random.nextInt(2) == 0 ? word_three_reverse = false : word_three_reverse =
@@ -1110,7 +1111,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               no_connection_one_count++;
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
-              if (no_connection_one_count < 15) {
+              if (no_connection_one_count < 20) {
                   fit_Words_Puzzle(
                       puzzle,
                       word_one,
@@ -1145,7 +1146,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
               no_connection_one_count++;
-              if (no_connection_one_count < 15) {
+              if (no_connection_one_count < 20) {
                 fit_Words_Puzzle(
                     puzzle,
                     word_one,
@@ -2327,7 +2328,7 @@ if(!connection_five) {
       }
     }
     if(!connection_eight) {
-      for (int f = 1; f < num_rows_and_columns-word_eight.length+1; f++) {
+      for (int f = 0; f < num_rows_and_columns-word_eight.length+1; f++) {
         int k = 0;
         for (int l = 0; l < num_rows_and_columns; l++) {
           row_eight = f;
@@ -2542,7 +2543,157 @@ if(!connection_five) {
         }
       }
     }
-  if(!connection_nine) {
+    for (int i = 0; i < word_four.length; i++) {
+      for (int j = 0; j < word_nine.length; j++) {
+        if (words[3][i] == words[8][j]) {
+          connection_ten = true;
+          if (!word_four_reverse) {
+            row_nine = row_four +i;
+            column_nine = column_four - j;
+
+            int k=0;
+
+            for (int p = 0; p < word_five.length; p++) {
+              for (int l = 0; l < word_nine.length; l++) {
+                if ((row_five + p == row_nine &&
+                    column_five + p == column_nine + l) ||
+                    row_nine == row_seven || row_nine == row_six ||
+                    row_nine == row_one ||
+                    row_nine == row_two ||
+                    (column_nine <= column_four &&
+                        column_nine + word_nine.length - 1 >= column_four &&
+                        row_nine >= row_four &&
+                        row_nine <= row_four + word_four.length - 1)
+                    || (column_nine <= column_three &&
+                        column_nine + word_nine.length - 1 >= column_three &&
+                        row_nine >= row_three &&
+                        row_nine <= row_three + word_three.length - 1) ||
+                    (column_nine <= column_four &&
+                        column_nine + word_nine.length - 1 >= column_four &&
+                        row_nine >= row_four &&
+                        row_nine <= row_four + word_four.length - 1)) {
+                  k++;
+                }
+              }
+            }
+
+            if (column_nine < 0 ||
+                column_nine > num_rows_and_columns - word_nine.length || k!=0) {
+              row_nine = row_four + i;
+              column_nine = column_four+word_nine.length-1 - j;
+
+              int k = 0;
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if ((row_five + p == row_nine &&
+                      column_five + p == column_nine + l) ||
+                      row_nine == row_seven || row_nine == row_six ||
+                      row_nine == row_one ||
+                      row_nine == row_two ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)
+                      || (column_nine <= column_three &&
+                          column_nine + word_nine.length - 1 >= column_three &&
+                          row_nine >= row_three &&
+                          row_nine <= row_three + word_three.length - 1) ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_nine < 0 ||
+                  column_nine > num_rows_and_columns - word_nine.length ||
+                  k != 0) {
+                connection_ten = false;
+              }else {
+                word_nine_reverse = true;
+              }
+            }else {
+              word_nine_reverse = false;
+            }
+          } else {
+            row_nine = row_four+word_four.length-1-i;
+            column_nine=column_four-j;
+
+            int k=0;
+
+            for (int p = 0; p < word_five.length; p++) {
+              for (int l = 0; l < word_nine.length; l++) {
+                if ((row_five + p == row_nine &&
+                    column_five + p == column_nine + l) ||
+                    row_nine == row_seven || row_nine == row_six ||
+                    row_nine == row_one ||
+                    row_nine == row_two ||
+                    (column_nine <= column_four &&
+                        column_nine + word_nine.length - 1 >= column_four &&
+                        row_nine >= row_four &&
+                        row_nine <= row_four + word_four.length - 1)
+                    || (column_nine <= column_three &&
+                        column_nine + word_nine.length - 1 >= column_three &&
+                        row_nine >= row_three &&
+                        row_nine <= row_three + word_three.length - 1) ||
+                    (column_nine <= column_four &&
+                        column_nine + word_nine.length - 1 >= column_four &&
+                        row_nine >= row_four &&
+                        row_nine <= row_four + word_four.length - 1)) {
+                  k++;
+                }
+              }
+            }
+
+            if (column_nine < 0 ||
+                column_nine > num_rows_and_columns - word_nine.length || k!=0) {
+              row_nine = row_four + word_four.length - 1 - i;
+              column_nine = column_four+word_nine.length-1 - j;
+
+              int k = 0;
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if ((row_five + p == row_nine &&
+                      column_five + p == column_nine + l) ||
+                      row_nine == row_seven || row_nine == row_six ||
+                      row_nine == row_one ||
+                      row_nine == row_two ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)
+                      || (column_nine <= column_three &&
+                          column_nine + word_nine.length - 1 >= column_three &&
+                          row_nine >= row_three &&
+                          row_nine <= row_three + word_three.length - 1) ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_nine < 0 ||
+                  column_nine > num_rows_and_columns - word_nine.length ||
+                  k != 0) {
+                connection_ten = false;
+              }else {
+                word_nine_reverse = true;
+              }
+            }else {
+              word_nine_reverse = false;
+            }
+          }
+        }
+      }
+    }
+  if(!connection_nine && !connection_ten) {
     for (int f = 0; f < num_rows_and_columns; f++) {
       int k = 0;
       for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
@@ -2817,6 +2968,7 @@ if(!connection_five) {
     }
   write_Words_Puzzle(List<String> puzzle, String word_one,String word_two,String word_three,String word_four,String word_five,String word_six
       ,String word_seven, String word_eight,String word_nine) {
+
     if (word_five_reverse == false) {
       for (int i = 0; i < word_five.length; i++) {
         puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
@@ -2881,6 +3033,7 @@ if(!connection_five) {
         word_six[word_six.length - 1 - i];
       }
     }
+
     if (word_seven_reverse == false) {
       for (int i = 0; i < word_seven.length; i++) {
         puzzle[row_seven * num_rows_and_columns + i + column_seven] = word_seven[i];
@@ -2914,20 +3067,21 @@ if(!connection_five) {
         word_nine[word_nine.length - 1 - i];
       }
     }
+
   }
 
 set_language() {
     String language=AppLocalizations.of(context).translate("game_language");
     if(widget.game_type.type=='food') {
       if (language == 'en') {
-        words[0] = "Apple".toUpperCase();
+        words[0] = "Date".toUpperCase();
         words[1] = "Mango".toUpperCase();
-        words[2] = "Date".toUpperCase();
-        words[3] = "Lime".toUpperCase();
-        words[4] = "Pear".toUpperCase();
-        words[5] = "Abiu".toUpperCase();
+        words[2] = "abiu".toUpperCase();
+        words[3] = "apple".toUpperCase();
+        words[4] = "bean".toUpperCase();
+        words[5] = "lime".toUpperCase();
         words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
+        words[7] = "egg".toUpperCase();
         words[8] = "Pea".toUpperCase();
       } else if (language == 'pt') {
         words[0] = "Jambo".toUpperCase();
