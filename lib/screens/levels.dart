@@ -4,6 +4,7 @@ import 'package:findthewords/screens/game_medium.dart';
 import 'package:findthewords/screens/game_hard.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Level extends StatefulWidget {
   @override
   _LevelState createState() => _LevelState();
@@ -27,80 +28,140 @@ class _LevelState extends State<Level> {
                           .of(context)
                           .size
                           .width),
-                Text(AppLocalizations.of(context).translate("levels_level"),
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                    fontSize: MediaQuery. of(context). size. height/15)
-            ),
-          SizedBox(width:MediaQuery. of(context). size. width/10,
-              height: MediaQuery. of(context). size. height/10),
+                  Text(AppLocalizations.of(context).translate("levels_level"),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15)
+                  ),
+                  SizedBox(width: MediaQuery
+                      .of(context)
+                      .size
+                      .width / 10,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 10),
 
                   RaisedButton(
                     onPressed: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Game_Easy()),
-                      );
-                    } ,
-                    color:Colors.black,
+                          context,
+                          MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("food")
+                          )));
+                    },
+                    color: Colors.black,
                     highlightColor: GameColors.button_Background,
-                    child:Ink(
-                      decoration:  BoxDecoration(
+                    child: Ink(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: <Color>[GameColors.button_Background_Light, Colors.black],),
-                        borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
+                          colors: <Color>[
+                            GameColors.button_Background_Light,
+                            Colors.black
+                          ],),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15)),
                       ),
                       child: Container(
-                          constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
+                          constraints: BoxConstraints(minWidth: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 4 / 5, minHeight: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15), // min sizes for Material buttons
                           alignment: Alignment.center,
-                          child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                          child: Text(AppLocalizations.of(context).translate(
+                              "levels_easy"),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.italic,
-                                fontSize: MediaQuery. of(context). size. height/15),
+                                fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15),
                             textAlign: TextAlign.center,
                           )
                       ),
                     ),
                   ),
 
-          SizedBox(width:MediaQuery. of(context). size. width/15,
-              height: MediaQuery. of(context). size. height/15),
+                  SizedBox(width: MediaQuery
+                      .of(context)
+                      .size
+                      .width / 15,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15),
                   RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences
+                          .getInstance();
+                      String type = 'food';
+                      await prefs.setString('game_type', type);
+                      Navigator.of(context).pushNamed("/game_medium");
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Game_Medium()),
                       );
-                    } ,
-                    color:Colors.black,
+                    },
+                    color: Colors.black,
                     highlightColor: GameColors.button_Background,
-                    child:Ink(
-                      decoration:  BoxDecoration(
+                    child: Ink(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: <Color>[GameColors.button_Background_Light, Colors.black],),
-                        borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
+                          colors: <Color>[
+                            GameColors.button_Background_Light,
+                            Colors.black
+                          ],),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15)),
                       ),
                       child: Container(
-                          constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
+                          constraints: BoxConstraints(minWidth: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 4 / 5, minHeight: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15), // min sizes for Material buttons
                           alignment: Alignment.center,
-                          child: Text(AppLocalizations.of(context).translate("levels_medium"),
+                          child: Text(AppLocalizations.of(context).translate(
+                              "levels_medium"),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.italic,
-                                fontSize: MediaQuery. of(context). size. height/15),
+                                fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15),
                             textAlign: TextAlign.center,
                           )
                       ),
                     ),
                   ),
 
-          SizedBox(width:MediaQuery. of(context). size. width/15,
-              height: MediaQuery. of(context). size. height/15),
+                  SizedBox(width: MediaQuery
+                      .of(context)
+                      .size
+                      .width / 15,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15),
 
                   RaisedButton(
                     onPressed: () {
@@ -108,32 +169,53 @@ class _LevelState extends State<Level> {
                         context,
                         MaterialPageRoute(builder: (context) => Game_Hard()),
                       );
-                    } ,
-                    color:Colors.black,
+                    },
+                    color: Colors.black,
                     highlightColor: GameColors.button_Background,
-                    child:Ink(
-                      decoration:  BoxDecoration(
+                    child: Ink(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: <Color>[GameColors.button_Background_Light, Colors.black],),
-                        borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
+                          colors: <Color>[
+                            GameColors.button_Background_Light,
+                            Colors.black
+                          ],),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15)),
                       ),
                       child: Container(
-                          constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
+                          constraints: BoxConstraints(minWidth: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 4 / 5, minHeight: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15), // min sizes for Material buttons
                           alignment: Alignment.center,
-                          child: Text(AppLocalizations.of(context).translate("levels_hard"),
+                          child: Text(AppLocalizations.of(context).translate(
+                              "levels_hard"),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.italic,
-                                fontSize: MediaQuery. of(context). size. height/15),
+                                fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15),
                             textAlign: TextAlign.center,
                           )
                       ),
                     ),
                   ),
-        ]
+                ]
             )
         )
     );
   }
+}
+class Game_Type{
+  String type;
+  Game_Type(this.type);
 }

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
+import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/custom_painter.dart';
 import 'package:findthewords/main.dart';
 import 'package:audioplayers/audio_cache.dart';
@@ -12,18 +13,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:findthewords/app_localizations.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Easy extends StatefulWidget {
+  Game_Type game_type;
+  // In the constructor, require a Person
+  Game_Easy({Key key, @required this.game_type}) : super(key: key);
   @override
   _Game_EasyState createState() => _Game_EasyState();
+
 }
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
-
   //Puzzle
   List<String> all;
   List<String> puzzle=['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
 
   bool created_puzzle=false;
-
   int no_connection_one_count=0;
   int no_connection_two_count=0;
   int no_connection_three_count=0;
@@ -1044,8 +1047,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       old_time = old_best_time_minutes * 60 + old_best_time_seconds;
     }
     if(time_now<old_time || old_time==0){
-      await prefs.setInt('best_time_easy_minutes', _minutes);
-      await prefs.setInt('best_time_easy_seconds', _seconds);
+      prefs.setInt('best_time_easy_minutes', _minutes);
+      prefs.setInt('best_time_easy_seconds', _seconds);
       String best_time=_stringDuration(Duration(seconds:60*_minutes+_seconds));
       prefs.setString('best_time_easy', best_time);
       Navigator.of(context).pushNamed("/stats");
@@ -2913,49 +2916,51 @@ if(!connection_five) {
       }
     }
   }
-set_language(){
-    String language=AppLocalizations.of(context).translate("game_language");
-    if(language=='en'){
-  words[0] = "Apple".toUpperCase();
-  words[1] = "Mango".toUpperCase();
-  words[2] = "Date".toUpperCase();
-  words[3] = "Lime".toUpperCase();
-  words[4] = "Pear".toUpperCase();
-  words[5] = "Abiu".toUpperCase();
-  words[6]= "Fig".toUpperCase();
-  words[7]= "bean".toUpperCase();
-  words[8]= "Pea".toUpperCase();
 
-    }else if (language=='pt'){
-      words[0] = "Jambo".toUpperCase();
-      words[1] = "Manga".toUpperCase();
-      words[2] = "Baru".toUpperCase();
-      words[3] = "Akee".toUpperCase();
-      words[4] = "Lima".toUpperCase();
-      words[5] = "Abiu".toUpperCase();
-      words[6]= "Ata".toUpperCase();
-      words[7]= "Uva".toUpperCase();
-      words[8]= "Uxi".toUpperCase();
-    }else if(language=='fr'){
-      words[0] = "pomme".toUpperCase();
-      words[1] = "Coing".toUpperCase();
-      words[2] = "chou".toUpperCase();
-      words[3] = "noix".toUpperCase();
-      words[4] = "lime".toUpperCase();
-      words[5] = "coco".toUpperCase();
-      words[6]= "Taxo".toUpperCase();
-      words[7]= "Kaki".toUpperCase();
-      words[8]= "Kiwi".toUpperCase();
-    }else if (language=='es'){
-      words[0] = "limon".toUpperCase();
-      words[1] = "mango".toUpperCase();
-      words[2] = "coco".toUpperCase();
-      words[3] = "higo".toUpperCase();
-      words[4] = "lima".toUpperCase();
-      words[5] = "kiwi".toUpperCase();
-      words[6]= "mora".toUpperCase();
-      words[7]= "uva".toUpperCase();
-      words[8]= "yaca".toUpperCase();
+set_language() {
+    String language=AppLocalizations.of(context).translate("game_language");
+    if(widget.game_type.type=='food') {
+      if (language == 'en') {
+        words[0] = "Apple".toUpperCase();
+        words[1] = "Mango".toUpperCase();
+        words[2] = "Date".toUpperCase();
+        words[3] = "Lime".toUpperCase();
+        words[4] = "Pear".toUpperCase();
+        words[5] = "Abiu".toUpperCase();
+        words[6] = "Fig".toUpperCase();
+        words[7] = "bean".toUpperCase();
+        words[8] = "Pea".toUpperCase();
+      } else if (language == 'pt') {
+        words[0] = "Jambo".toUpperCase();
+        words[1] = "Manga".toUpperCase();
+        words[2] = "Baru".toUpperCase();
+        words[3] = "Akee".toUpperCase();
+        words[4] = "Lima".toUpperCase();
+        words[5] = "Abiu".toUpperCase();
+        words[6] = "Ata".toUpperCase();
+        words[7] = "Uva".toUpperCase();
+        words[8] = "Uxi".toUpperCase();
+      } else if (language == 'fr') {
+        words[0] = "pomme".toUpperCase();
+        words[1] = "Coing".toUpperCase();
+        words[2] = "chou".toUpperCase();
+        words[3] = "noix".toUpperCase();
+        words[4] = "lime".toUpperCase();
+        words[5] = "coco".toUpperCase();
+        words[6] = "Taxo".toUpperCase();
+        words[7] = "Kaki".toUpperCase();
+        words[8] = "Kiwi".toUpperCase();
+      } else if (language == 'es') {
+        words[0] = "limon".toUpperCase();
+        words[1] = "mango".toUpperCase();
+        words[2] = "coco".toUpperCase();
+        words[3] = "higo".toUpperCase();
+        words[4] = "lima".toUpperCase();
+        words[5] = "kiwi".toUpperCase();
+        words[6] = "mora".toUpperCase();
+        words[7] = "uva".toUpperCase();
+        words[8] = "yaca".toUpperCase();
+      }
     }
 }
 play_Found_Sound () async{
