@@ -1130,10 +1130,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             }else{
                 word_one_reverse = true;
                 word_five_reverse = false;
+                break;
             }
             } else {
               word_one_reverse = false;
               word_five_reverse = false;
+              break;
             }
           } else {
             row_one = row_five + word_five.length - i - 1;
@@ -1165,13 +1167,18 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               } else {
                 word_one_reverse = true;
                 word_five_reverse = true;
+                break;
               }
             } else {
               word_one_reverse = false;
               word_five_reverse = true;
+              break;
             }
           }
         }
+      }
+      if(connection_one){
+        break;
       }
     }
 
@@ -1209,9 +1216,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   }
                 } else {
                   word_two_reverse = true;
+                  break;
                 }
               } else {
                 word_two_reverse = false;
+                break;
               }
             } else {
               row_two = row_five + word_five.length - i - 1;
@@ -1244,12 +1253,17 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     }
                   } else {
                     word_two_reverse = true;
+                    break;
                   }
               } else {
                 word_two_reverse = false;
+                break;
               }
             }
           }
+      }
+      if(connection_two){
+        break;
       }
     }
 
@@ -1354,10 +1368,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             }  else {
                 word_three_reverse = true;
                 word_two_reverse = false;
+                break;
               }
             }else {
               word_three_reverse = false;
               word_two_reverse = false;
+              break;
             }
           } else {
             row_three = row_two - j;
@@ -1379,9 +1395,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             if (row_three < 0 ||
                 row_three > num_rows_and_columns - word_three.length ||
                 k != 0) {
-              row_three = row_two+word_three.length-1 - j;
+              row_three = row_two + word_three.length - 1 - j;
               column_three = column_two + word_two.length - i - 1;
-              k=0;
+              k = 0;
               for (int p = 0; p < word_five.length; p++) {
                 for (int l = 0; l < word_three.length; l++) {
                   if (((row_five + p == row_three + l &&
@@ -1395,6 +1411,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   }
                 }
               }
+              if (row_three < 0 ||
+                  row_three > num_rows_and_columns - word_three.length ||
+                  k != 0) {
               no_connection_three_count++;
               if (no_connection_three_count < 5) {
                 fit_Words_Puzzle(
@@ -1412,12 +1431,21 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               } else {
                 connection_three = false;
               }
+            }else{
+                word_three_reverse = true;
+                word_two_reverse = true;
+                break;
+            }
             } else {
               word_three_reverse = false;
               word_two_reverse = true;
+              break;
             }
           }
         }
+      }
+      if(connection_three){
+        break;
       }
     }
 
@@ -1532,9 +1560,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 }
               }else {
                 word_four_reverse = true;
+                break;
               }
             } else {
               word_four_reverse = false;
+              break;
             }
           } else {
             row_four = row_one - j;
@@ -1601,12 +1631,17 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 }
               } else {
                 word_four_reverse = true;
+                break;
               }
             } else {
               word_four_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_four){
+        break;
       }
     }
 
@@ -1708,9 +1743,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 connection_five = false;
               } else {
                 word_six_reverse = true;
+                break;
               }
             } else {
               word_six_reverse = false;
+              break;
             }
 
           } else {
@@ -1768,13 +1805,18 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 connection_five = false;
               } else {
                 word_six_reverse = true;
+                break;
               }
             }
               else {
               word_six_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_five){
+        break;
       }
     }
 
@@ -1874,10 +1916,12 @@ if(!connection_five) {
               connection_six = false;
             }else{
                 word_seven_reverse = true;
+                break;
               }
             }
               else {
               word_seven_reverse = false;
+              break;
             }
           } else {
             column_seven = column_three-j;
@@ -1936,12 +1980,17 @@ if(!connection_five) {
                 connection_six = false;
               }else{
                 word_seven_reverse = true;
+                break;
               }
             }else {
               word_seven_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_six){
+        break;
       }
     }
 
@@ -2007,9 +2056,11 @@ if(!connection_five) {
                 connection_seven = false;
               }else {
                 word_seven_reverse = true;
+                break;
               }
             }else {
               word_seven_reverse = false;
+              break;
             }
           } else {
             column_seven = column_four-j;
@@ -2067,12 +2118,17 @@ if(!connection_five) {
               connection_seven = false;
             }else{
                 word_seven_reverse = true;
+                break;
               }
             } else {
               word_seven_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_seven){
+        break;
       }
     }
 
@@ -2224,10 +2280,12 @@ if(!connection_five) {
                 connection_eight = false;
               }else {
                 word_eight_reverse = true;
+                break;
               }
             }
             else {
               word_eight_reverse = false;
+              break;
             }
           } else {
             row_eight = row_six-j;
@@ -2319,12 +2377,17 @@ if(!connection_five) {
               connection_eight = false;
             }else {
                 word_eight_reverse = true;
+                break;
               }
             }else {
               word_eight_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_eight){
+        break;
       }
     }
     if(!connection_eight) {
@@ -2464,9 +2527,11 @@ if(!connection_five) {
                 connection_nine = false;
               }else {
                 word_nine_reverse = true;
+                break;
               }
             }else {
               word_nine_reverse = false;
+              break;
             }
           } else {
             row_nine = row_eight+word_eight.length-1-i;
@@ -2535,12 +2600,17 @@ if(!connection_five) {
                 connection_nine = false;
               }else {
                 word_nine_reverse = true;
+                break;
               }
             }else {
               word_nine_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_nine){
+        break;
       }
     }
     for (int i = 0; i < word_four.length; i++) {
@@ -2614,9 +2684,11 @@ if(!connection_five) {
                 connection_ten = false;
               }else {
                 word_nine_reverse = true;
+                break;
               }
             }else {
               word_nine_reverse = false;
+              break;
             }
           } else {
             row_nine = row_four+word_four.length-1-i;
@@ -2685,13 +2757,17 @@ if(!connection_five) {
                 connection_ten = false;
               }else {
                 word_nine_reverse = true;
+                break;
               }
             }else {
               word_nine_reverse = false;
+              break;
             }
           }
         }
       }
+      if(connection_ten){
+        break;      }
     }
   if(!connection_nine && !connection_ten) {
     for (int f = 0; f < num_rows_and_columns; f++) {
@@ -3076,20 +3152,20 @@ set_language() {
       if (language == 'en') {
         words[0] = "Date".toUpperCase();
         words[1] = "Mango".toUpperCase();
-        words[2] = "abiu".toUpperCase();
+        words[2] = "coco".toUpperCase();
         words[3] = "apple".toUpperCase();
         words[4] = "bean".toUpperCase();
         words[5] = "lime".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "egg".toUpperCase();
+        words[6] = "egg".toUpperCase();
+        words[7] = "meat".toUpperCase();
         words[8] = "Pea".toUpperCase();
       } else if (language == 'pt') {
         words[0] = "Jambo".toUpperCase();
-        words[1] = "Manga".toUpperCase();
+        words[1] = "Abiu".toUpperCase();
         words[2] = "Baru".toUpperCase();
-        words[3] = "Akee".toUpperCase();
+        words[3] = "Manga".toUpperCase();
         words[4] = "Lima".toUpperCase();
-        words[5] = "Abiu".toUpperCase();
+        words[5] = "Akee".toUpperCase();
         words[6] = "Ata".toUpperCase();
         words[7] = "Uva".toUpperCase();
         words[8] = "Uxi".toUpperCase();
