@@ -925,7 +925,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       for (int i = 0; i < num_rows_and_columns * num_rows_and_columns; i++) {
         puzzle[i] = write_Random_Letter();
       }
-      pick_Random_Words();
       fit_Words_Puzzle(
           puzzle,
           words[0],
@@ -976,41 +975,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     create_Puzzle_Random();
     return puzzle[i];
   }
-  pick_Random_Words() {
-    Random random = new Random();
-    int one = random.nextInt(25);
-    int two = random.nextInt(25);
-    int three = random.nextInt(25);
-    int four = random.nextInt(25);
-    int five = random.nextInt(25);
-    int six = random.nextInt(25);
-    int seven= 25+random.nextInt(5);
-    int eight= 25+random.nextInt(5);
-    int nine= 25+random.nextInt(5);
-    while (all[one].length!=5|| all[two].length!=5||all[three].length != 4 || all[four].length !=4 || all[five].length != 4|| all[six].length!=4 || one==two||one==three||one==four||one==five||one==six||two==three||two==four||two==five||two==six ||three==four||three==five||three==six||four==five ||four==six ||five==six) {
-      one = random.nextInt(25);
-      two = random.nextInt(25);
-      three = random.nextInt(25);
-      four = random.nextInt(25);
-      five = random.nextInt(25);
-      six = random.nextInt(25);
-    }
-    while(seven==eight || seven==nine || eight==nine){
-      seven= 25+random.nextInt(5);
-      eight= 25+random.nextInt(5);
-      nine= 25+random.nextInt(5);
-    }
-    words[0] = all[one].toUpperCase();
-    words[1] = all[two].toUpperCase();
-    words[2] = all[three].toUpperCase();
-    words[3] = all[four].toUpperCase();
-    words[4] = all[five].toUpperCase();
-    words[5] = all[six].toUpperCase();
-    words[6]= all[seven].toUpperCase();
-    words[7]= all[eight].toUpperCase();
-    words[8]= all[nine].toUpperCase();
 
-  }
+
+
+
+
 
 
 
@@ -2155,13 +2124,13 @@ if(!connection_five) {
             word_nine);
       }
     }
-    for (int i = 0; i < word_seven.length; i++) {
+    for (int i = 0; i < word_six.length; i++) {
       for (int j = 0; j < word_eight.length; j++) {
-        if (words[6][i] == words[7][j]) {
+        if (words[5][i] == words[7][j]) {
           connection_eight = true;
           if (!word_seven_reverse) {
-            row_eight = row_seven -j;
-            column_eight = column_seven + i;
+            row_eight = row_six -j;
+            column_eight = column_six + i;
 
             int k=0;
 
@@ -2258,8 +2227,8 @@ if(!connection_five) {
               word_eight_reverse = false;
             }
           } else {
-            row_eight = row_seven-j;
-            column_eight=column_seven+word_seven.length-1-i;
+            row_eight = row_six-j;
+            column_eight=column_six+word_seven.length-1-i;
             int k=0;
 
 
@@ -2947,156 +2916,46 @@ if(!connection_five) {
 set_language(){
     String language=AppLocalizations.of(context).translate("game_language");
     if(language=='en'){
-      all=[
-        "acid",
-        "area",
-        "baby",
-        "apps",
-        "ball",
-        "bank",
-        "cake",
-        "boys",
-        "care",
+  words[0] = "Apple".toUpperCase();
+  words[1] = "Mango".toUpperCase();
+  words[2] = "Date".toUpperCase();
+  words[3] = "Lime".toUpperCase();
+  words[4] = "Pear".toUpperCase();
+  words[5] = "Abiu".toUpperCase();
+  words[6]= "Fig".toUpperCase();
+  words[7]= "bean".toUpperCase();
+  words[8]= "Pea".toUpperCase();
 
-        "club",
-        "code",
-        "cute",
-        "crew",
-        "deal",
-        "diet",
-        "dogs",
-        "exam",
-        "eyes",
-        "feet",
-
-        "adult",
-        "album",
-        "agent",
-        "angle",
-        "apple",
-        "push",
-
-        "art",
-        "war",
-        "age",
-        "tax",
-        "red"
-
-      ];
     }else if (language=='pt'){
-      all=[
-        "area" ,
-        "bebe" ,
-        "bola",
-        "banco",
-        "BOLO",
-
-        "clube",
-        "exame",
-        "olhos",
-        "album",
-         "coisa" ,
-
-        "amor",
-        "fato",
-        "tolo",
-        "medo",
-        "VIDA" ,
-
-        "casa",
-        "cela",
-        "base",
-        "alta",
-        "frio" ,
-
-        "alma",
-        "luta",
-        "nada",
-        "selo",
-        "pneu",
-
-        "aba",
-        "rio",
-        "sul",
-        "fax",
-        "app"
-      ];
+      words[0] = "Jambo".toUpperCase();
+      words[1] = "Manga".toUpperCase();
+      words[2] = "Baru".toUpperCase();
+      words[3] = "Akee".toUpperCase();
+      words[4] = "Lima".toUpperCase();
+      words[5] = "Abiu".toUpperCase();
+      words[6]= "Ata".toUpperCase();
+      words[7]= "Uva".toUpperCase();
+      words[8]= "Uxi".toUpperCase();
     }else if(language=='fr'){
-      all=[
-
-        "acide",
-        "zone" ,
-        "bebe" ,
-        "Balle" ,
-
-        "club" ,
-        "code",
-        "deal",
-        "yeux" ,
-
-        "APAX" ,
-        "MIXE",
-        "AXEE",
-        "FIXE" ,
-
-        "BOXE" ,
-        "TAXE",
-        "EXIL",
-        "DOUX" ,
-
-        "FOXE" ,
-        "EXAM",
-        "EXIT",
-        "PRIX" ,
-
-        "pieds" ,
-        "album",
-        "agent",
-        "angle" ,
-        "Pomme" ,
-
-        "age",
-        "eux",
-        "dab",
-        "dan",
-        "cal"
-      ];
+      words[0] = "pomme".toUpperCase();
+      words[1] = "Coing".toUpperCase();
+      words[2] = "chou".toUpperCase();
+      words[3] = "noix".toUpperCase();
+      words[4] = "lime".toUpperCase();
+      words[5] = "coco".toUpperCase();
+      words[6]= "Taxo".toUpperCase();
+      words[7]= "Kaki".toUpperCase();
+      words[8]= "Kiwi".toUpperCase();
     }else if (language=='es'){
-      all=[
-        "acido",
-        "zona" ,
-        "bebe",
-        "banco",
-        "club",
-        "lindo" ,
-        "dieta",
-        "ojos",
-        "pies",
-        "album",
-
-        "DUDE",
-        "ECHO" ,
-        "ERRE",
-        "FAMA",
-        "COXA",
-        "CAGO" ,
-        "BOIL",
-        "BOZO",
-        "CHIP",
-        "CAMA",
-
-        "CAOS",
-        "CAIS" ,
-        "CEBO",
-        "ABES",
-        "ALUD",
-
-        "can",
-        "cao",
-        "cap",
-        "car",
-        "cas"
-      ];
+      words[0] = "limon".toUpperCase();
+      words[1] = "mango".toUpperCase();
+      words[2] = "coco".toUpperCase();
+      words[3] = "higo".toUpperCase();
+      words[4] = "lima".toUpperCase();
+      words[5] = "kiwi".toUpperCase();
+      words[6]= "mora".toUpperCase();
+      words[7]= "uva".toUpperCase();
+      words[8]= "yaca".toUpperCase();
     }
 }
 play_Found_Sound () async{
