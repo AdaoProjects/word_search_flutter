@@ -48,6 +48,8 @@ class _HomeState extends State<Home> {
                   Container(
                       child:
                       IconButton(
+                        splashRadius: MediaQuery.of(context).size.height/10,
+                        splashColor:Colors.yellowAccent,
                         color:GameColors.secondary,
                         icon: Icon(Icons.trending_up),
                         iconSize: MediaQuery.of(context).size.height/7,
@@ -69,6 +71,8 @@ class _HomeState extends State<Home> {
                   SizedBox(width:MediaQuery.of(context).size.width/20),
                   Container(child:
                   IconButton(
+                    splashRadius: MediaQuery.of(context).size.height/10,
+                    splashColor:Colors.yellowAccent,
                     color:GameColors.primary,
                     icon: Icon(Icons.play_arrow),
                     iconSize: MediaQuery.of(context).size.height/7,
@@ -90,6 +94,8 @@ class _HomeState extends State<Home> {
                   SizedBox(width:MediaQuery.of(context).size.width/20),
                   Container(child:
                   IconButton(
+                    splashRadius: MediaQuery.of(context).size.height/10,
+                    splashColor:Colors.yellowAccent,
                     color:GameColors.secondary,
                     icon: Icon(Icons.share),
                     iconSize: MediaQuery.of(context).size.height/7,
@@ -111,6 +117,8 @@ class _HomeState extends State<Home> {
                   SizedBox(width:MediaQuery.of(context).size.width/20),
                   Container(child:
                   IconButton(
+                    splashRadius: MediaQuery.of(context).size.height/10,
+                    splashColor:Colors.yellowAccent,
                     color:GameColors.secondary,
                     icon: Icon(Icons.settings),
                     iconSize: MediaQuery.of(context).size.height/7,
