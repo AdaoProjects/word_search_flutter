@@ -31,9 +31,21 @@ class _HomeState extends State<Home> {
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/20),
 
-            Icon(Icons.star,
-            color: GameColors.secondary,
-            size:MediaQuery.of(context).size.height/12),
+            Row(children:[
+              SizedBox(width:MediaQuery.of(context).size.width/5),
+              Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:MediaQuery.of(context).size.width/10),
+              SizedBox(width:MediaQuery.of(context).size.width/10),
+              Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:MediaQuery.of(context).size.width/5),
+              SizedBox(width:MediaQuery.of(context).size.width/10),
+              Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:MediaQuery.of(context).size.width/10),
+            ]),
+
 
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/10),
