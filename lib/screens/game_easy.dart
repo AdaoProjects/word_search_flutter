@@ -1108,9 +1108,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 column_one > num_rows_and_columns - word_one.length) {
               row_one = row_five + i;
               column_one = column_five + i + word_one.length - 1 - j;
-              no_connection_one_count++;
+
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
+                no_connection_one_count++;
               if (no_connection_one_count < 20) {
                   fit_Words_Puzzle(
                       puzzle,

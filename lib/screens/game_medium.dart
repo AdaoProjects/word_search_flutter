@@ -1394,19 +1394,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       , String word_nine, String word_ten, String word_eleven,
       String word_twelve) {
 
-    // the row and column from the 'beginer of the words', rigth is positive and down is positive, later the word can be changed to reversed order so it makes more difficult the puzzle
-    //word one is always in horizontal and can be connected with the diagonal
-    //word two is always in horizontal and never is connected to three
-    //word three is always in vertical and cab be connected with word two
-    //word four is always in vertical and never is connected
-    //word five is diagnol in even cells can be connected to word one or two
-    //word six is horizontal connected to word four
-    // word seven is horizontal connected with eight
-    // word eight is vertical connected to word seven
-    //word nine is horizontal connected no conected
-    //word ten is diagnol in odds cells and can be connected to word eleven
-    // word eleven is vertical and can be connected to word ten and twelve
-    // word twelve is horizontal and can be connected to word eleven
     row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
     column_five = random.nextInt(
         ((num_rows_and_columns - word_five.length + 1) / 2).toInt()) * 2 +
@@ -1416,16 +1403,19 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         ((num_rows_and_columns - word_ten.length + 1) / 2).toInt()) * 2 -
         row_ten % 2;
 
-    int num_of_tentatives = 0;
+    int num_of_tentatives=0;
     bool connection_one = false;
     bool connection_two = false;
     bool connection_three = false;
     bool connection_four = false;
-    bool connection_five = false;
-    bool connection_six = false;
-    bool connection_seven = false;
-    bool connection_eight = false;
-
+    bool connection_five=false;
+    bool connection_six=false;
+    bool connection_seven=false;
+    bool connection_eight=false;
+    bool connection_nine=false;
+    bool connection_ten=false;
+    bool connection_eleven=false;
+    bool connection_twelve=false;
     random.nextInt(2) == 0 ? word_one_reverse = false : word_one_reverse = true;
     random.nextInt(2) == 0 ? word_two_reverse = false : word_two_reverse = true;
     random.nextInt(2) == 0 ? word_three_reverse = false : word_three_reverse =
@@ -1448,6 +1438,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     random.nextInt(2) == 0 ? word_twelve_reverse = false : word_twelve_reverse =
     true;
 
+
     for (int i = 0; i < word_five.length; i++) {
       for (int j = 0; j < word_one.length; j++) {
         if (words[4][i] == words[0][j]) {
@@ -1455,82 +1446,124 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           if (random.nextInt(2) == 0) {
             row_one = row_five + i;
             column_one = column_five + i - j;
-            int k = 0;
+            int k=0;
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_one.length; l++) {
-                if (row_ten + p == row_one &&
-                    column_ten - p == column_one + l) {
+                if ((row_ten + p == row_one &&
+                    column_ten - p == column_one + l) ){
                   k++;
                 }
               }
             }
             if (column_one < 0 ||
-                column_one > num_rows_and_columns - word_one.length
-                || k != 0) {
-              no_connection_one_count++;
-              if (no_connection_one_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
+                column_one > num_rows_and_columns - word_one.length||k!=0) {
+              row_one = row_five + i;
+              column_one = column_five + i + word_one.length - 1 - j;
+              int k=0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_one.length; l++) {
+                  if ((row_ten + p == row_one &&
+                      column_ten - p == column_one + l) ){
+                    k++;
+                  }
+                }
+              }
+              if (column_one < 0 ||
+                  column_one > num_rows_and_columns - word_one.length ||k!=0) {
+                no_connection_one_count++;
+                if (no_connection_one_count < 20) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine,
                     word_ten,
                     word_eleven,
-                    word_twelve);
-              } else {
-                connection_one = false;
+                    word_twelve
+                  );
+                }else {
+                  connection_one = false;
+                }
+              }else{
+                word_one_reverse = true;
+                word_five_reverse = false;
+                break;
               }
             } else {
               word_one_reverse = false;
               word_five_reverse = false;
+              break;
             }
           } else {
             row_one = row_five + word_five.length - i - 1;
             column_one =
                 column_five + word_five.length - i - 1 - j;
-            int k = 0;
+            int k=0;
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_one.length; l++) {
-                if (row_ten + p == row_one &&
-                    column_ten - p == column_one + l) {
+                if ((row_ten + p == row_one &&
+                    column_ten - p == column_one + l) ){
                   k++;
                 }
               }
             }
             if (column_one < 0 ||
-                column_one > num_rows_and_columns - word_one.length
-                || k != 0) {
-              no_connection_one_count++;
-              if (no_connection_one_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
-                    word_ten,
+                column_one > num_rows_and_columns - word_one.length ||k!=0) {
+              row_one = row_five + word_five.length - i - 1;
+              column_one = column_five + word_five.length - i - 1+word_one.length-1 - j;
+              int k=0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_one.length; l++) {
+                  if ((row_ten + p == row_one &&
+                      column_ten - p == column_one + l) ){
+                    k++;
+                  }
+                }
+              }
+              if (column_one < 0 ||
+                  column_one > num_rows_and_columns - word_one.length||
+                  k!=0) {
+                no_connection_one_count++;
+                if (no_connection_one_count < 20) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine,
+                      word_ten,
                     word_eleven,
-                    word_twelve);
+                    word_twelve
+                  );
+                }else {
+                  connection_one = false;
+                }
               } else {
-                connection_one = false;
+                word_one_reverse = true;
+                word_five_reverse = true;
+                break;
               }
             } else {
               word_one_reverse = false;
               word_five_reverse = true;
+              break;
             }
           }
         }
+      }
+      if(connection_one){
+        break;
       }
     }
 
@@ -1541,86 +1574,120 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           if (!word_five_reverse) {
             row_two = row_five + i;
             column_two = column_five + i - j;
-            int k = 0;
+            int k=0;
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_two.length; l++) {
-                if (row_ten + p == row_two &&
-                    column_ten - p == column_two + l) {
+                if ((row_ten + p == row_two &&
+                    column_ten - p == column_two + l) ){
                   k++;
                 }
               }
             }
             if (column_two < 0 ||
                 column_two > num_rows_and_columns - word_two.length ||
-                row_two == row_one||k!=0) {
-              no_connection_two_count++;
-              if (no_connection_two_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
+                row_one == row_two ||k!=0) {
+              row_two = row_five + i;
+              column_two = column_five + i +word_two.length-1 - j;
+              int k=0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_two.length; l++) {
+                  if ((row_ten + p == row_two &&
+                      column_ten - p == column_two + l) ){
+                    k++;
+                  }
+                }
+              }
+              if (column_two < 0 ||
+                  column_two > num_rows_and_columns - word_two.length ||
+                  row_one == row_two || k!=0) {
+                no_connection_two_count++;
+                if (no_connection_two_count < 15) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine,
                     word_ten,
                     word_eleven,
-                    word_twelve);
+                    word_twelve
+                  );
+                } else {
+                  connection_two = false;
+                }
               } else {
-                connection_two = false;
+                word_two_reverse = true;
+                break;
               }
             } else {
               word_two_reverse = false;
+              break;
             }
           } else {
             row_two = row_five + word_five.length - i - 1;
             column_two =
                 column_five + word_five.length - i - 1 - j;
-            int k = 0;
+            int k=0;
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_two.length; l++) {
-                if (row_ten + p == row_two &&
-                    column_ten - p == column_two + l) {
+                if ((row_ten + p == row_two &&
+                    column_ten - p == column_two + l) ){
                   k++;
                 }
               }
             }
             if (column_two < 0 ||
                 column_two > num_rows_and_columns - word_two.length ||
-                row_one == row_two || k!=0) {
-              no_connection_two_count++;
-              if (no_connection_two_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
+                row_one == row_two) {
+              row_two = row_five + word_five.length - i - 1;
+              column_two = column_five + word_five.length - i - 1+word_two.length-1 - j;
+              if (column_two < 0 ||
+                  column_two > num_rows_and_columns - word_two.length ||
+                  row_one == row_two) {
+                no_connection_two_count++;
+                if (no_connection_two_count < 15) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine,
                     word_ten,
                     word_eleven,
-                    word_twelve);
+                    word_twelve
+                  );
+                } else {
+                  connection_two = false;
+                }
               } else {
-                connection_two = false;
+                word_two_reverse = true;
+                break;
               }
             } else {
               word_two_reverse = false;
+              break;
             }
           }
         }
+      }
+      if(connection_two){
+        break;
       }
     }
 
     if (!connection_one) {
       int k = 0;
-      while (k < (word_five.length + word_ten.length) * word_one.length) {
+      while (k < (word_five.length+word_ten.length) * word_one.length) {
         k = 0;
         row_one =
             random.nextInt(num_rows_and_columns);
@@ -1647,7 +1714,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
     if (!connection_two) {
       int k = 0;
-      while (k < (word_five.length + word_ten.length) * word_two.length) {
+      while (k < (word_five.length+word_ten.length) * word_two.length) {
         k = 0;
         row_two =
             random.nextInt(num_rows_and_columns);
@@ -1663,7 +1730,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         for (int p = 0; p < word_ten.length; p++) {
           for (int l = 0; l < word_two.length; l++) {
             if (!(row_ten + p == row_two &&
-                column_ten - p== column_two + l)) {
+                column_ten - p == column_two + l)) {
               k++;
             }
           }
@@ -1695,8 +1762,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_three.length; l++) {
-                if (row_ten + p == row_three + l &&
-                    column_ten - p == column_three) {
+                if (row_ten + p == row_three+l &&
+                    column_ten - p == column_three ) {
                   k++;
                 }
               }
@@ -1704,31 +1771,65 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (row_three < 0 ||
                 row_three > num_rows_and_columns - word_three.length ||
                 k != 0) {
-              no_connection_three_count++;
-              if (no_connection_three_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
+              row_three = row_two-word_three.length+1 + j;
+              column_three = column_two + i;
+              k=0;
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_three.length; l++) {
+                  if (((row_five + p == row_three + l &&
+                      column_five + p == column_three) ||
+                      ((row_three <= row_one &&
+                          row_three + word_three.length - 1 >= row_one) &&
+                          (column_three >= column_one &&
+                              column_three <=
+                                  column_one + word_one.length - 1)))) {
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_three.length; l++) {
+                  if (row_ten + p == row_three+l &&
+                      column_ten - p == column_three ) {
+                    k++;
+                  }
+                }
+              }
+              if (row_three < 0 ||
+                  row_three > num_rows_and_columns - word_three.length ||
+                  k != 0) {
+                no_connection_three_count++;
+                if (no_connection_three_count < 5) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine,
                     word_ten,
                     word_eleven,
-                    word_twelve);
-              } else {
-                connection_three = false;
+                    word_twelve
+                  );
+                } else {
+                  connection_three = false;
+                }
+              }  else {
+                word_three_reverse = true;
+                word_two_reverse = false;
+                break;
               }
-            } else {
+            }else {
               word_three_reverse = false;
               word_two_reverse = false;
+              break;
             }
           } else {
-            row_three = row_two + j;
+            row_three = row_two - j;
             column_three = column_two + word_two.length - i - 1;
             int k = 0;
             for (int p = 0; p < word_five.length; p++) {
@@ -1746,8 +1847,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_three.length; l++) {
-                if (row_ten + p == row_three + l &&
-                    column_ten - p == column_three) {
+                if (row_ten + p == row_three +l &&
+                    column_ten - p == column_three ) {
                   k++;
                 }
               }
@@ -1755,31 +1856,68 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (row_three < 0 ||
                 row_three > num_rows_and_columns - word_three.length ||
                 k != 0) {
-              no_connection_three_count++;
-              if (no_connection_three_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
+              row_three = row_two - word_three.length + 1 + j;
+              column_three = column_two + word_two.length - i - 1;
+              k = 0;
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_three.length; l++) {
+                  if (((row_five + p == row_three + l &&
+                      column_five + p == column_three) ||
+                      ((row_three <= row_one &&
+                          row_three + word_three.length - 1 >= row_one) &&
+                          (column_three >= column_one &&
+                              column_three <=
+                                  column_one + word_one.length - 1)))) {
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_three.length; l++) {
+                  if (row_ten + p == row_three +l &&
+                      column_ten - p == column_three ) {
+                    k++;
+                  }
+                }
+              }
+              if (row_three < 0 ||
+                  row_three > num_rows_and_columns - word_three.length ||
+                  k != 0) {
+                no_connection_three_count++;
+                if (no_connection_three_count < 5) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine,
                     word_ten,
                     word_eleven,
-                    word_twelve);
-              } else {
-                connection_three = false;
+                    word_twelve
+                  );
+                } else {
+                  connection_three = false;
+                }
+              }else{
+                word_three_reverse = true;
+                word_two_reverse = true;
+                break;
               }
             } else {
               word_three_reverse = false;
               word_two_reverse = true;
+              break;
             }
           }
         }
+      }
+      if(connection_three){
+        break;
       }
     }
 
@@ -1787,7 +1925,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     if (!connection_three) {
       num_of_tentatives = 0;
       int k = 0;
-      while (k < (word_five.length + word_ten.length) * word_three.length) {
+      while (k < (word_five.length+word_ten.length) * word_three.length) {
         k = 0;
         row_three =
             random.nextInt(num_rows_and_columns - word_three.length + 1);
@@ -1805,9 +1943,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               word_seven,
               word_eight,
               word_nine,
-              word_ten,
-              word_eleven,
-              word_twelve);
+            word_ten,
+            word_eleven,
+            word_twelve
+          );
         }
         for (int i = 0; i < word_five.length; i++) {
           for (int j = 0; j < word_three.length; j++) {
@@ -1826,133 +1965,214 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         }
         for (int p = 0; p < word_ten.length; p++) {
           for (int l = 0; l < word_three.length; l++) {
-            if (!(row_ten + p == row_three + l &&
-                column_ten - p == column_three)) {
+            if (!(row_ten + p == row_three+l &&
+                column_ten - p == column_three) ){
               k++;
             }
           }
         }
       }
     }
-    num_of_tentatives = 0;
-    int k = 0;
-    while (k < (word_five.length + word_ten.length) * word_four.length) {
-      k = 0;
-      row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
-      column_four = random.nextInt(num_rows_and_columns);
-      num_of_tentatives++;
-      if (num_of_tentatives > 100) {
-        fit_Words_Puzzle(
-            puzzle,
-            word_one,
-            word_two,
-            word_three,
-            word_four,
-            word_five,
-            word_six,
-            word_seven,
-            word_eight,
-            word_nine,
-            word_ten,
-            word_eleven,
-            word_twelve);
-      }
-      for (int i = 0; i < word_five.length; i++) {
-        for (int j = 0; j < word_four.length; j++) {
-          if (!(column_four == column_three || (row_five + i == row_four + j &&
-              column_five + i == column_four) || ((row_four <= row_one &&
-              row_four + word_four.length - 1 >= row_one) &&
-              (column_four >= column_one &&
-                  column_four <= column_one + word_one.length - 1)) ||
-              (row_four <= row_two &&
-                  row_four + word_four.length - 1 >= row_two) &&
-                  (column_four >= column_two &&
-                      column_four <= column_two + word_two.length - 1))) {
-            k++;
-          }
-        }
-      }
-      for (int p = 0; p < word_ten.length; p++) {
-        for (int l = 0; l < word_four.length; l++) {
-          if (!(row_ten + p == row_four + l &&
-              column_ten - p == column_four)) {
-            k++;
-          }
-        }
-      }
-    }
 
-    for (int i = 0; i < word_four.length; i++) {
-      for (int j = 0; j < word_six.length; j++) {
-        if (words[3][i] == words[5][j]) {
+
+    for (int i=0;i<word_one.length;i++ ) {
+      for (int j = 0; j < word_four.length; j++) {
+        if (word_one[i] == words[3][j]) {
           connection_four = true;
-          if (random.nextInt == 0) {
-            row_six = row_four + i;
-            column_six = row_four - j;
+          if (!word_one_reverse) {
+            row_four = row_one - j;
+            column_four = column_one + i;
             int k = 0;
-
+            for(int y=0;y<word_five.length;y++){
+              for (int x=0;x<word_four.length;x++){
+                if((row_five+y==row_four+x && column_five+y==column_four)||
+                    column_four==column_three  ||
+                    (column_four>=column_two && column_four<=column_two+word_two.length-1
+                        && row_four<=row_two && row_four+word_four.length-1>=row_two)){
+                  k++;
+                }
+              }
+            }
             for (int p = 0; p < word_ten.length; p++) {
-              for (int l = 0; l < word_six.length; l++) {
-                if (row_ten + p == row_six &&
-                    column_ten - p == column_six + l) {
+              for (int l = 0; l < word_four.length; l++) {
+                if (row_ten + p == row_four+l &&
+                    column_ten - p == column_four  ){
                   k++;
                 }
               }
             }
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_six.length; l++) {
-                if ((row_five + p == row_six &&
-                    column_five + p == column_six + l) || row_six == row_one ||
-                    row_six == row_two ||
-                    (column_six <= column_four &&
-                        column_six + word_six.length - 1 >= column_four &&
-                        row_six >= row_four &&
-                        row_six <= row_four + word_four.length - 1)
-                    || (column_six <= column_three &&
-                        column_six + word_six.length - 1 >= column_three &&
-                        row_six >= row_three &&
-                        row_six <= row_three + word_three.length - 1)) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_six < 0 ||
-                column_six > num_rows_and_columns - word_six.length ||
+            if (row_four < 0 ||
+                row_four > num_rows_and_columns - word_four.length ||
                 k != 0) {
-              no_connection_four_count++;
-              if (no_connection_four_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve);
-              } else {
+              row_four = row_one-word_four.length+1 + j;
+              column_four = column_one + i;
+              k=0;
+              for(int y=0;y<word_five.length;y++){
+                for (int x=0;x<word_four.length;x++){
+                  if((row_five+y==row_four+x && column_five+y==column_four)||
+                      column_four==column_three  ||
+                      (column_four>=column_two && column_four<=column_two+word_two.length-1
+                          && row_four<=row_two && row_four+word_four.length-1>=row_two)){
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_four.length; l++) {
+                  if (row_ten + p == row_four+l &&
+                      column_ten - p == column_four  ){
+                    k++;
+                  }
+                }
+              }
+              if (row_four < 0 ||
+                  row_four > num_rows_and_columns - word_four.length ||
+                  k != 0) {
                 connection_four = false;
+              }
+              else {
+                word_four_reverse = true;
+                word_one_reverse = false;
+                break;
+              }
+            }else {
+              word_four_reverse = false;
+              word_one_reverse = false;
+              break;
+            }
+          } else {
+            row_four = row_one - j;
+            column_four = column_one + word_one.length - i - 1;
+            int k = 0;
+            for (int p = 0; p < word_ten.length; p++) {
+              for (int l = 0; l < word_four.length; l++) {
+                if (row_ten + p == row_four+l &&
+                    column_ten - p == column_four ){
+                  k++;
+                }
+              }
+            }
+            for(int y=0;y<word_five.length;y++){
+              for (int x=0;x<word_four.length;x++){
+                if((row_five+y==row_four+x && column_five+y==column_four)||
+                    column_four==column_three  ||
+                    (column_four>=column_two && column_four<=column_two+word_two.length-1
+                        && row_four<=row_two && row_four+word_four.length-1>=row_two)){
+                  k++;
+                }
+              }
+            }
+
+            if (row_four < 0 ||
+                row_four > num_rows_and_columns - word_four.length ||
+                k != 0) {
+              row_four = row_one - word_four.length + 1 + j;
+              column_four = column_one + word_one.length - i - 1;
+              k = 0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_four.length; l++) {
+                  if (row_ten + p == row_four+l &&
+                      column_ten - p == column_four ){
+                    k++;
+                  }
+                }
+              }
+
+              for(int y=0;y<word_five.length;y++){
+                for (int x=0;x<word_four.length;x++){
+                  if((row_five+y==row_four+x && column_five+y==column_four)||
+                      column_four==column_three  ||
+                      (column_four>=column_two && column_four<=column_two+word_two.length-1
+                          && row_four<=row_two && row_four+word_four.length-1>=row_two)){
+                    k++;
+                  }
+                }
+              }
+
+
+              if (row_four < 0 ||
+                  row_four > num_rows_and_columns - word_four.length ||
+                  k != 0) {
+                connection_four = false;
+              } else{
+                word_four_reverse = true;
+                word_one_reverse = true;
+                break;
               }
             } else {
               word_four_reverse = false;
-              word_six_reverse = false;
+              word_one_reverse = true;
+              break;
             }
-          } else {
+          }
+
+        }
+      }
+      if(connection_four){
+        break;
+      }
+    }
+
+
+    if(!connection_four) {
+      num_of_tentatives = 0;
+      int k = 0;
+      while (k < word_five.length * word_four.length) {
+        k = 0;
+        row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
+        column_four = random.nextInt(num_rows_and_columns);
+        num_of_tentatives++;
+        if (num_of_tentatives > 100) {
+          fit_Words_Puzzle(
+              puzzle,
+              word_one,
+              word_two,
+              word_three,
+              word_four,
+              word_five,
+              word_six,
+              word_seven,
+              word_eight,
+              word_nine,
+            word_ten,
+            word_eleven,
+            word_twelve
+          );
+        }
+        for(int y=0;y<word_five.length;y++){
+          for (int x=0;x<word_four.length;x++){
+            if((row_five+y==row_four+x && column_five+y==column_four)||
+                column_four==column_three || (column_four>=column_one && column_four<=column_one+word_one.length-1
+                && row_four<=row_one && row_four+word_four.length-1>=row_one) ||
+                (column_four>=column_two && column_four<=column_two+word_two.length-1
+                    && row_four<=row_two && row_four+word_four.length-1>=row_two)){
+              k++;
+            }
+          }
+        }
+        for (int p = 0; p < word_ten.length; p++) {
+          for (int l = 0; l < word_four.length; l++) {
+            if (!(row_ten + p == row_four &&
+                column_ten - p == column_four + l )){
+              k++;
+            }
+          }
+        }
+      }
+    }
+    for (int i = 0; i < word_four.length; i++) {
+      for (int j = 0; j < word_six.length; j++) {
+        if (words[3][i] == words[5][j]) {
+          connection_five = true;
+          if (!word_four_reverse) {
+            row_six = row_four + i;
             column_six = column_four - j;
-            row_six = row_four + word_four.length - 1 - i;
             int k = 0;
 
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_six.length; l++) {
                 if (row_ten + p == row_six &&
-                    column_ten - p == column_six + l) {
+                    column_ten - p == column_six + l ){
                   k++;
                 }
               }
@@ -1962,11 +2182,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               for (int l = 0; l < word_six.length; l++) {
                 if ((row_five + p == row_six &&
                     column_five + p == column_six + l) || row_six == row_one ||
-                    row_six == row_two ||
-                    (column_six <= column_four &&
-                        column_six + word_six.length - 1 >= column_four &&
-                        row_six >= row_four &&
-                        row_six <= row_four + word_four.length - 1)
+                    row_six == row_two
                     || (column_six <= column_three &&
                         column_six + word_six.length - 1 >= column_three &&
                         row_six >= row_three &&
@@ -1979,51 +2195,131 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (column_six < 0 ||
                 column_six > num_rows_and_columns - word_six.length ||
                 k != 0) {
-              no_connection_four_count++;
-              if (no_connection_four_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve);
+              row_six = row_four + i;
+              column_six = column_four - word_six.length + 1 + j;
+              int k = 0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_six.length; l++) {
+                  if (row_ten + p == row_six &&
+                      column_ten - p == column_six + l ){
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_six.length; l++) {
+                  if ((row_five + p == row_six &&
+                      column_five + p == column_six + l) || row_six == row_one ||
+                      row_six == row_two
+                      || (column_six <= column_three &&
+                          column_six + word_six.length - 1 >= column_three &&
+                          row_six >= row_three &&
+                          row_six <= row_three + word_three.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+              if (column_six < 0 ||
+                  column_six > num_rows_and_columns - word_six.length ||
+                  k != 0) {
+                connection_five = false;
               } else {
-                connection_four = false;
+                word_six_reverse = true;
+                break;
               }
             } else {
               word_six_reverse = false;
-              word_four_reverse = true;
+              break;
+            }
+
+          } else {
+            column_six = column_four-j;
+            row_six = row_four+word_four.length-1 - i;
+            int k = 0;
+
+            for (int p = 0; p < word_ten.length; p++) {
+              for (int l = 0; l < word_six.length; l++) {
+                if (row_ten + p == row_six &&
+                    column_ten - p == column_six + l ){
+                  k++;
+                }
+              }
+            }
+
+            for (int p = 0; p < word_five.length; p++) {
+              for (int l = 0; l < word_six.length; l++) {
+                if ((row_five + p == row_six &&
+                    column_five + p == column_six + l) || row_six == row_one ||
+                    row_six == row_two
+                    || (column_six <= column_three &&
+                        column_six + word_six.length - 1 >= column_three &&
+                        row_six >= row_three &&
+                        row_six <= row_three + word_three.length - 1)) {
+                  k++;
+                }
+              }
+            }
+
+            if (column_six < 0 ||
+                column_six > num_rows_and_columns - word_six.length ||
+                k != 0) {
+              column_six = column_four-word_six.length+1 + j;
+              row_six = row_four + word_four.length - 1 - i;
+              int k = 0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_six.length; l++) {
+                  if (row_ten + p == row_six &&
+                      column_ten - p == column_six + l ){
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_six.length; l++) {
+                  if ((row_five + p == row_six &&
+                      column_five + p == column_six + l) || row_six == row_one ||
+                      row_six == row_two
+                      || (column_six <= column_three &&
+                          column_six + word_six.length - 1 >= column_three &&
+                          row_six >= row_three &&
+                          row_six <= row_three + word_three.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_six < 0 ||
+                  column_six > num_rows_and_columns - word_six.length ||
+                  k != 0) {
+                connection_five = false;
+              } else {
+                word_six_reverse = true;
+                break;
+              }
+            }
+            else {
+              word_six_reverse = false;
+              break;
             }
           }
         }
       }
+      if(connection_five){
+        break;
+      }
     }
 
 
-    if (!connection_four) {
+    if(!connection_five) {
       for (int f = 0; f < num_rows_and_columns; f++) {
         int k = 0;
         for (int l = 0; l < num_rows_and_columns - word_six.length + 1; l++) {
           row_six = f;
           column_six = l;
-
-          for (int p = 0; p < word_ten.length; p++) {
-            for (int l = 0; l < word_six.length; l++) {
-              if (!(row_ten + p == row_six &&
-                  column_ten - p == column_six + l)) {
-                k++;
-              }
-            }
-          }
-
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_six.length; j++) {
               if (!((row_five + i == row_six &&
@@ -2041,90 +2337,419 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               }
             }
           }
-          if (k == (word_five.length + word_ten.length) * word_six.length) {
+          for (int p = 0; p < word_ten.length; p++) {
+            for (int l = 0; l < word_six.length; l++) {
+              if (!(row_ten + p == row_six &&
+                  column_ten - p == column_six + l )){
+                k++;
+              }
+            }
+          }
+          if (k == (word_five.length+word_ten.length) * word_six.length) {
             break;
           }
         }
-        if (k == (word_five.length + word_ten.length) * word_six.length) {
+        if (k == (word_five.length+word_ten.length) * word_six.length) {
           break;
         }
       }
     }
 
+    for (int i = 0; i < word_three.length; i++) {
+      for (int j = 0; j < word_seven.length; j++) {
+        if (words[2][i] == words[6][j]) {
+          connection_six = true;
+          if (!word_three_reverse) {
+            row_seven = row_three + i;
+            column_seven = row_three - j;
+            int k = 0;
 
-    for (int f = num_rows_and_columns - 1; f > -1; f--) {
-      int k = 0;
-      for (int l = 0; l < num_rows_and_columns - word_seven.length + 1; l++) {
-        row_seven = f;
-        column_seven = l;
-        for (int i = 0; i < word_five.length; i++) {
-          for (int j = 0; j < word_seven.length; j++) {
-            if (!((row_five + i == row_seven &&
-                column_five + i == column_seven + j) ||
-                row_seven == row_six ||
-                row_seven == row_one ||
-                row_seven == row_two ||
-                (column_seven <= column_four &&
-                    column_seven + word_seven.length - 1 >= column_four &&
-                    row_seven >= row_four &&
-                    row_seven <= row_four + word_four.length - 1)
-                || (column_seven <= column_three &&
-                    column_seven + word_seven.length - 1 >= column_three &&
-                    row_seven >= row_three &&
-                    row_seven <= row_three + word_three.length - 1))) {
-              k++;
+            for (int p = 0; p < word_ten.length; p++) {
+              for (int l = 0; l < word_seven.length; l++) {
+                if (row_ten + p == row_seven &&
+                    column_ten - p == column_seven + l ){
+                  k++;
+                }
+              }
+            }
+
+            for (int i = 0; i < word_five.length; i++) {
+              for (int j = 0; j < word_seven.length; j++) {
+                if ((row_five + i == row_seven &&
+                    column_five + i == column_seven + j) ||
+                    row_seven == row_six ||
+                    row_seven == row_one ||
+                    row_seven == row_two ||
+                    (column_seven <= column_four &&
+                        column_seven + word_seven.length - 1 >= column_four &&
+                        row_seven >= row_four &&
+                        row_seven <= row_four + word_four.length - 1)
+                ) {
+                  k++;
+                }
+              }
+            }
+
+            if (column_seven < 0 ||
+                column_seven > num_rows_and_columns - word_seven.length ||
+                k != 0) {
+              row_seven = row_three + i;
+              column_seven = column_three-word_seven.length+1 + j;
+              int k = 0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_seven.length; l++) {
+                  if (row_ten + p == row_seven &&
+                      column_ten - p == column_seven + l ){
+                    k++;
+                  }
+                }
+              }
+
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_seven.length; j++) {
+                  if ((row_five + i == row_seven &&
+                      column_five + i == column_seven + j) ||
+                      row_seven == row_six ||
+                      row_seven == row_one ||
+                      row_seven == row_two ||
+                      (column_seven <= column_four &&
+                          column_seven + word_seven.length - 1 >= column_four &&
+                          row_seven >= row_four &&
+                          row_seven <= row_four + word_four.length - 1)
+                  ) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_seven < 0 ||
+                  column_seven > num_rows_and_columns - word_seven.length ||
+                  k != 0) {
+                connection_six = false;
+              }else{
+                word_seven_reverse = true;
+                break;
+              }
+            }
+            else {
+              word_seven_reverse = false;
+              break;
+            }
+          } else {
+            column_seven = column_three-j;
+            row_seven = row_three+word_three.length-1 - i;
+            int k = 0;
+            for (int i = 0; i < word_five.length; i++) {
+              for (int j = 0; j < word_seven.length; j++) {
+                if ((row_five + i == row_seven &&
+                    column_five + i == column_seven + j) ||
+                    row_seven == row_six ||
+                    row_seven == row_one ||
+                    row_seven == row_two ||
+                    (column_seven <= column_four &&
+                        column_seven + word_seven.length - 1 >= column_four &&
+                        row_seven >= row_four &&
+                        row_seven <= row_four + word_four.length - 1)
+                ) {
+                  k++;
+                }
+              }
+            }
+
+            for (int p = 0; p < word_ten.length; p++) {
+              for (int l = 0; l < word_seven.length; l++) {
+                if (row_ten + p == row_seven &&
+                    column_ten - p == column_seven + l ){
+                  k++;
+                }
+              }
+            }
+
+            if (column_seven < 0 ||
+                column_seven > num_rows_and_columns - word_seven.length ||
+                k != 0) {
+              column_seven = column_three +word_seven.length-1+j;
+              row_seven = row_three + word_three.length - 1 - i;
+              int k = 0;
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_seven.length; j++) {
+                  if ((row_five + i == row_seven &&
+                      column_five + i == column_seven + j) ||
+                      row_seven == row_six ||
+                      row_seven == row_one ||
+                      row_seven == row_two ||
+                      (column_seven <= column_four &&
+                          column_seven + word_seven.length - 1 >= column_four &&
+                          row_seven >= row_four &&
+                          row_seven <= row_four + word_four.length - 1)
+                  ) {
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_seven.length; l++) {
+                  if (row_ten + p == row_seven &&
+                      column_ten - p == column_seven + l ){
+                    k++;
+                  }
+                }
+              }
+
+              if (column_seven < 0 ||
+                  column_seven > num_rows_and_columns - word_seven.length ||
+                  k != 0) {
+                connection_six = false;
+              }else{
+                word_seven_reverse = true;
+                break;
+              }
+            }else {
+              word_seven_reverse = false;
+              break;
             }
           }
-        }
-        for (int p = 0; p < word_ten.length; p++) {
-          for (int l = 0; l < word_seven.length; l++) {
-            if (!(row_ten + p == row_seven &&
-                column_ten - p == column_seven + l)) {
-              k++;
-            }
-          }
-        }
-        if (k == (word_five.length + word_ten.length) * word_seven.length) {
-          break;
         }
       }
-      if (k == (word_five.length + word_ten.length) * word_seven.length) {
+      if(connection_six){
         break;
       }
     }
 
-    if (row_seven == 0 &&
-        column_seven == num_rows_and_columns - word_seven.length) {
-      fit_Words_Puzzle(
-          puzzle,
-          word_one,
-          word_two,
-          word_three,
-          word_four,
-          word_five,
-          word_six,
-          word_seven,
-          word_eight,
-          word_nine,
+
+    if(!connection_six) {
+      for (int i = 0; i < word_four.length; i++) {
+        for (int j = 0; j < word_seven.length; j++) {
+          if (words[3][i] == words[6][j]) {
+            connection_seven = true;
+            if (!word_four_reverse) {
+              row_seven = row_four + i;
+              column_seven = column_four - j;
+              int k = 0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_seven.length; l++) {
+                  if (row_ten + p == row_seven &&
+                      column_ten - p == column_seven + l ){
+                    k++;
+                  }
+                }
+              }
+
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_seven.length; j++) {
+                  if ((row_five + i == row_seven &&
+                      column_five + i == column_seven + j) ||
+                      row_seven == row_six ||
+                      row_seven == row_one ||
+                      row_seven == row_two ||
+                      (column_seven <= column_three &&
+                          column_seven + word_seven.length - 1 >=
+                              column_three &&
+                          row_seven >= row_three &&
+                          row_seven <= row_three + word_three.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_seven < 0 ||
+                  column_seven > num_rows_and_columns - word_seven.length ||
+                  k != 0) {
+                row_seven = row_four + i;
+                column_seven = column_four - word_seven.length + 1 + j;
+                int k = 0;
+
+                for (int p = 0; p < word_ten.length; p++) {
+                  for (int l = 0; l < word_seven.length; l++) {
+                    if (row_ten + p == row_seven &&
+                        column_ten - p == column_seven + l ){
+                      k++;
+                    }
+                  }
+                }
+
+                for (int i = 0; i < word_five.length; i++) {
+                  for (int j = 0; j < word_seven.length; j++) {
+                    if ((row_five + i == row_seven &&
+                        column_five + i == column_seven + j) ||
+                        row_seven == row_six ||
+                        row_seven == row_one ||
+                        row_seven == row_two ||
+                        (column_seven <= column_three &&
+                            column_seven + word_seven.length - 1 >=
+                                column_three &&
+                            row_seven >= row_three &&
+                            row_seven <= row_three + word_three.length - 1)) {
+                      k++;
+                    }
+                  }
+                }
+                if (column_seven < 0 ||
+                    column_seven > num_rows_and_columns - word_seven.length ||
+                    k != 0) {
+                  connection_seven = false;
+                } else {
+                  word_seven_reverse = true;
+                  break;
+                }
+              } else {
+                word_seven_reverse = false;
+                break;
+              }
+            } else {
+              column_seven = column_four - j;
+              row_seven = row_four + word_four.length - 1 - i;
+              int k = 0;
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_seven.length; j++) {
+                  if ((row_five + i == row_seven &&
+                      column_five + i == column_seven + j) ||
+                      row_seven == row_six ||
+                      row_seven == row_one ||
+                      row_seven == row_two ||
+                      (column_seven <= column_three &&
+                          column_seven + word_seven.length - 1 >=
+                              column_three &&
+                          row_seven >= row_three &&
+                          row_seven <= row_three + word_three.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_seven < 0 ||
+                  column_seven > num_rows_and_columns - word_seven.length ||
+                  k != 0) {
+                column_seven = column_four - word_seven.length + 1 + j;
+                row_seven = row_four + word_four.length - 1 - i;
+                int k = 0;
+
+                for (int p = 0; p < word_ten.length; p++) {
+                  for (int l = 0; l < word_seven.length; l++) {
+                    if (row_ten + p == row_seven &&
+                        column_ten - p == column_seven + l ){
+                      k++;
+                    }
+                  }
+                }
+
+                for (int i = 0; i < word_five.length; i++) {
+                  for (int j = 0; j < word_seven.length; j++) {
+                    if ((row_five + i == row_seven &&
+                        column_five + i == column_seven + j) ||
+                        row_seven == row_six ||
+                        row_seven == row_one ||
+                        row_seven == row_two ||
+                        (column_seven <= column_three &&
+                            column_seven + word_seven.length - 1 >=
+                                column_three &&
+                            row_seven >= row_three &&
+                            row_seven <= row_three + word_three.length - 1)) {
+                      k++;
+                    }
+                  }
+                }
+
+                if (column_seven < 0 ||
+                    column_seven > num_rows_and_columns - word_seven.length ||
+                    k != 0) {
+                  connection_seven = false;
+                } else {
+                  word_seven_reverse = true;
+                  break;
+                }
+              } else {
+                word_seven_reverse = false;
+                break;
+              }
+            }
+          }
+        }
+        if (connection_seven) {
+          break;
+        }
+      }
+    }
+    if(!connection_six && !connection_seven) {
+      for (int f = num_rows_and_columns - 1; f > -1; f--) {
+        int k = 0;
+        for (int l = 0; l < num_rows_and_columns - word_seven.length + 1; l++) {
+          row_seven = f;
+          column_seven = l;
+          k=0;
+          for (int p = 0; p < word_ten.length; p++) {
+            for (int l = 0; l < word_seven.length; l++) {
+              if (!(row_ten + p == row_seven &&
+                  column_ten - p == column_seven + l )){
+                k++;
+              }
+            }
+          }
+
+          for (int i = 0; i < word_five.length; i++) {
+            for (int j = 0; j < word_seven.length; j++) {
+              if (!((row_five + i == row_seven &&
+                  column_five + i == column_seven + j) ||
+                  row_seven == row_six ||
+                  row_seven == row_one ||
+                  row_seven == row_two ||
+                  (column_seven <= column_four &&
+                      column_seven + word_seven.length - 1 >= column_four &&
+                      row_seven >= row_four &&
+                      row_seven <= row_four + word_four.length - 1)
+                  || (column_seven <= column_three &&
+                      column_seven + word_seven.length - 1 >= column_three &&
+                      row_seven >= row_three &&
+                      row_seven <= row_three + word_three.length - 1))) {
+                k++;
+              }
+            }
+          }
+          if (k == (word_five.length+word_ten.length) * word_seven.length) {
+            break;
+          }
+        }
+        if (k == (word_five.length+word_ten.length) * word_seven.length) {
+          break;
+        }
+      }
+
+      if (row_seven == 0 &&
+          column_seven == num_rows_and_columns - word_seven.length) {
+        fit_Words_Puzzle(
+            puzzle,
+            word_one,
+            word_two,
+            word_three,
+            word_four,
+            word_five,
+            word_six,
+            word_seven,
+            word_eight,
+            word_nine,
           word_ten,
           word_eleven,
-          word_twelve);
+          word_twelve
+        );
+      }
     }
-
     for (int i = 0; i < word_six.length; i++) {
       for (int j = 0; j < word_eight.length; j++) {
         if (words[5][i] == words[7][j]) {
-          connection_five = true;
+          connection_eight = true;
           if (!word_six_reverse) {
-            row_eight = row_six - j;
+            row_eight = row_six -j;
             column_eight = column_six + i;
 
-            k = 0;
+            int k=0;
 
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_eight.length; l++) {
-                if (row_ten + p == row_eight + l &&
-                    column_ten - p == column_eight) {
+                if (row_ten + p == row_eight+l &&
+                    column_ten - p == column_eight ){
                   k++;
                 }
               }
@@ -2134,8 +2759,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               for (int l = 0; l < word_eight.length; l++) {
                 if ((row_five + p == row_eight + l &&
                     column_five + p == column_eight) ||
-                    column_eight == column_three ||
-                    column_eight == column_four ||
+                    column_eight == column_three || column_eight == column_four ||
                     (
                         row_eight <= row_one &&
                             row_eight + word_eight.length - 1 >= row_one &&
@@ -2149,49 +2773,98 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             column_eight <= column_two + word_two.length - 1
                     )
                     ||
-                    (
-                        row_eight <= row_six &&
-                            row_eight + word_eight.length - 1 >= row_six &&
-                            column_eight >= column_six &&
-                            column_eight <= column_six + word_six.length - 1
-                    ) ||
+
                     (
                         row_eight <= row_seven &&
                             row_eight + word_eight.length - 1 >= row_seven &&
                             column_eight >= column_seven &&
                             column_eight <= column_seven + word_seven.length - 1
                     )
-                ) {
+                ){
                   k++;
                 }
               }
             }
 
             if (row_eight < 0 ||
-                row_eight > num_rows_and_columns - word_eight.length ||
-                k != 0) {
-              connection_five = false;
-            } else {
+                row_eight > num_rows_and_columns - word_eight.length || k!=0) {
+              row_eight = row_six-word_eight.length+1 + j;
+              column_eight = column_six + i;
+
+              int k = 0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_eight.length; l++) {
+                  if (row_ten + p == row_eight+l &&
+                      column_ten - p == column_eight){
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_eight.length; l++) {
+                  if ((row_five + p == row_eight + l &&
+                      column_five + p == column_eight) ||
+                      column_eight == column_three || column_eight == column_four ||
+                      (
+                          row_eight <= row_one &&
+                              row_eight + word_eight.length - 1 >= row_one &&
+                              column_eight >= column_one &&
+                              column_eight <= column_one + word_one.length - 1
+                      ) ||
+                      (
+                          row_eight <= row_two &&
+                              row_eight + word_eight.length - 1 >= row_two &&
+                              column_eight >= column_two &&
+                              column_eight <= column_two + word_two.length - 1
+                      )
+                      ||
+
+                      (
+                          row_eight <= row_seven &&
+                              row_eight + word_eight.length - 1 >= row_seven &&
+                              column_eight >= column_seven &&
+                              column_eight <= column_seven + word_seven.length - 1
+                      )
+                  ){
+                    k++;
+                  }
+                }
+              }
+
+              if (row_eight < 0 ||
+                  row_eight > num_rows_and_columns - word_eight.length ||
+                  k != 0) {
+                connection_eight = false;
+              }else {
+                word_eight_reverse = true;
+                break;
+              }
+            }
+            else {
               word_eight_reverse = false;
+              break;
             }
           } else {
-            row_eight = row_six - j;
-            column_eight = column_six + word_six.length - 1 - i;
-            k = 0;
+            row_eight = row_six-j;
+            column_eight=column_six+word_seven.length-1-i;
+            int k=0;
+
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_eight.length; l++) {
-                if (row_ten + p == row_eight + l &&
-                    column_ten - p == column_eight) {
+                if (row_ten + p == row_eight &&
+                    column_ten - p == column_eight + l ){
                   k++;
                 }
               }
             }
+
             for (int p = 0; p < word_five.length; p++) {
               for (int l = 0; l < word_eight.length; l++) {
                 if ((row_five + p == row_eight + l &&
                     column_five + p == column_eight) ||
-                    column_eight == column_three ||
-                    column_eight == column_four ||
+                    column_eight == column_three || column_eight == column_four ||
                     (
                         row_eight <= row_one &&
                             row_eight + word_eight.length - 1 >= row_one &&
@@ -2205,41 +2878,99 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             column_eight <= column_two + word_two.length - 1
                     )
                     ||
-                    (
-                        row_eight <= row_six &&
-                            row_eight + word_eight.length - 1 >= row_six &&
-                            column_eight >= column_six &&
-                            column_eight <= column_six + word_six.length - 1
-                    ) ||
+
                     (
                         row_eight <= row_seven &&
                             row_eight + word_eight.length - 1 >= row_seven &&
                             column_eight >= column_seven &&
                             column_eight <= column_seven + word_seven.length - 1
                     )
-                ) {
+                ){
                   k++;
                 }
               }
             }
 
             if (row_eight < 0 ||
-                row_eight > num_rows_and_columns - word_eight.length ||
-                k != 0) {
-              connection_five = false;
-            } else {
+                row_eight > num_rows_and_columns - word_eight.length || k!=0) {
+              row_eight = row_six-word_eight.length+1+j;
+              column_eight=column_six+word_six.length-1-i;
+              int k=0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_eight.length; l++) {
+                  if (row_ten + p == row_eight &&
+                      column_ten - p == column_eight + l ){
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_eight.length; l++) {
+                  if ((row_five + p == row_eight + l &&
+                      column_five + p == column_eight) ||
+                      column_eight == column_three || column_eight == column_four ||
+                      (
+                          row_eight <= row_one &&
+                              row_eight + word_eight.length - 1 >= row_one &&
+                              column_eight >= column_one &&
+                              column_eight <= column_one + word_one.length - 1
+                      ) ||
+                      (
+                          row_eight <= row_two &&
+                              row_eight + word_eight.length - 1 >= row_two &&
+                              column_eight >= column_two &&
+                              column_eight <= column_two + word_two.length - 1
+                      )
+                      ||
+
+                      (
+                          row_eight <= row_seven &&
+                              row_eight + word_eight.length - 1 >= row_seven &&
+                              column_eight >= column_seven &&
+                              column_eight <= column_seven + word_seven.length - 1
+                      )
+                  ){
+                    k++;
+                  }
+                }
+              }
+
+              if (row_eight < 0 ||
+                  row_eight > num_rows_and_columns - word_eight.length || k!=0) {
+                connection_eight = false;
+              }else {
+                word_eight_reverse = true;
+                break;
+              }
+            }else {
               word_eight_reverse = false;
+              break;
             }
           }
         }
       }
+      if(connection_eight){
+        break;
+      }
     }
-    if (!connection_five) {
-      for (int f = 0; f < num_rows_and_columns-word_eight.length; f++) {
+    if(!connection_eight) {
+      for (int f = 0; f < num_rows_and_columns-word_eight.length+1; f++) {
         int k = 0;
         for (int l = 0; l < num_rows_and_columns; l++) {
           row_eight = f;
           column_eight = l;
+          k=0;
+          for (int p = 0; p < word_ten.length; p++) {
+            for (int l = 0; l < word_eight.length; l++) {
+              if (!(row_ten + p == row_eight &&
+                  column_ten - p == column_eight + l )){
+                k++;
+              }
+            }
+          }
+
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_eight.length; j++) {
               if (!((row_five + i == row_eight + j &&
@@ -2276,20 +3007,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
           }
 
-          for (int p = 0; p < word_ten.length; p++) {
-            for (int l = 0; l < word_eight.length; l++) {
-              if (!(row_ten + p == row_eight + l &&
-                  column_ten - p == column_eight)) {
-                k++;
-              }
-            }
-          }
-
-          if (k == (word_ten.length + word_five.length) * word_eight.length) {
+          if (k == (word_five.length+word_ten.length) * word_eight.length) {
             break;
           }
         }
-        if (k == (word_ten.length + word_five.length) * word_eight.length) {
+        if (k == (word_five.length+word_ten.length) * word_eight.length) {
           break;
         }
       }
@@ -2306,27 +3028,26 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             word_seven,
             word_eight,
             word_nine,
-            word_ten,
-            word_eleven,
-            word_twelve);
+          word_ten,
+          word_eleven,
+          word_twelve
+        );
       }
     }
-    for (int j = 0; j < (word_nine.length-1); j++) {
-
-      for (int i = 0; i<word_nine.length; i++) {
-
+    for (int i = 0; i < word_eight.length; i++) {
+      for (int j = 0; j < word_nine.length; j++) {
         if (words[7][i] == words[8][j]) {
-          connection_six = true;
+          connection_nine = true;
           if (!word_eight_reverse) {
-            row_nine = row_eight + i;
+            row_nine = row_eight +i;
             column_nine = column_eight - j;
 
-            k = 0;
+            int k=0;
 
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_nine.length; l++) {
                 if (row_ten + p == row_nine &&
-                    column_ten - p == column_nine + l) {
+                    column_ten - p == column_nine + l ){
                   k++;
                 }
               }
@@ -2346,39 +3067,74 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     || (column_nine <= column_three &&
                         column_nine + word_nine.length - 1 >= column_three &&
                         row_nine >= row_three &&
-                        row_nine <= row_three + word_three.length - 1) ||
-                    (column_nine <= column_eight &&
-                        column_nine + word_nine.length - 1 >= column_eight &&
-                        row_nine >= row_eight &&
-                        row_nine <= row_eight + word_eight.length - 1)) {
+                        row_nine <= row_three + word_three.length - 1)
+                ) {
                   k++;
                 }
               }
             }
 
             if (column_nine < 0 ||
-                column_nine > num_rows_and_columns - word_nine.length ||
-                k != 0) {
-              connection_six = false;
+                column_nine > num_rows_and_columns - word_nine.length || k!=0) {
+              row_nine = row_eight + i;
+              column_nine = column_eight-word_nine.length+1 + j;
 
-            } else {
+              int k = 0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if (row_ten + p == row_nine &&
+                      column_ten - p == column_nine + l ){
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if ((row_five + p == row_nine &&
+                      column_five + p == column_nine + l) ||
+                      row_nine == row_seven || row_nine == row_six ||
+                      row_nine == row_one ||
+                      row_nine == row_two ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)
+                      || (column_nine <= column_three &&
+                          column_nine + word_nine.length - 1 >= column_three &&
+                          row_nine >= row_three &&
+                          row_nine <= row_three + word_three.length - 1)
+                  ) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_nine < 0 ||
+                  column_nine > num_rows_and_columns - word_nine.length ||
+                  k != 0) {
+                connection_nine = false;
+              }else {
+                word_nine_reverse = true;
+                break;
+              }
+            }else {
               word_nine_reverse = false;
-
+              break;
             }
           } else {
-            row_nine = row_eight + word_eight.length - 1 - i;
-            column_nine = column_eight - j;
-            k = 0;
+            row_nine = row_eight+word_eight.length-1-i;
+            column_nine=column_eight-j;
 
+            int k=0;
             for (int p = 0; p < word_ten.length; p++) {
               for (int l = 0; l < word_nine.length; l++) {
                 if (row_ten + p == row_nine &&
-                    column_ten - p == column_nine + l) {
+                    column_ten - p == column_nine + l ){
                   k++;
                 }
               }
             }
-
 
             for (int p = 0; p < word_five.length; p++) {
               for (int l = 0; l < word_nine.length; l++) {
@@ -2394,35 +3150,247 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     || (column_nine <= column_three &&
                         column_nine + word_nine.length - 1 >= column_three &&
                         row_nine >= row_three &&
-                        row_nine <= row_three + word_three.length - 1) ||
-                    (column_nine <= column_eight &&
-                        column_nine + word_nine.length - 1 >= column_eight &&
-                        row_nine >= row_eight &&
-                        row_nine <= row_eight + word_eight.length - 1)) {
+                        row_nine <= row_three + word_three.length - 1)
+                ) {
                   k++;
                 }
               }
             }
 
             if (column_nine < 0 ||
-                column_nine > num_rows_and_columns - word_nine.length ||
-                k != 0) {
-              connection_six = false;
+                column_nine > num_rows_and_columns - word_nine.length || k!=0) {
+              row_nine = row_eight + word_eight.length - 1 - i;
+              column_nine = column_eight-word_nine.length+1 + j;
 
-            } else {
+              int k = 0;
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if (row_ten + p == row_nine &&
+                      column_ten - p == column_nine + l ){
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if ((row_five + p == row_nine &&
+                      column_five + p == column_nine + l) ||
+                      row_nine == row_seven || row_nine == row_six ||
+                      row_nine == row_one ||
+                      row_nine == row_two ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)
+                      || (column_nine <= column_three &&
+                          column_nine + word_nine.length - 1 >= column_three &&
+                          row_nine >= row_three &&
+                          row_nine <= row_three + word_three.length - 1)
+                  ) {
+                    k++;
+                  }
+                }
+              }
+              if (column_nine < 0 ||
+                  column_nine > num_rows_and_columns - word_nine.length ||
+                  k != 0) {
+                connection_nine = false;
+              }else {
+                word_nine_reverse = true;
+                break;
+              }
+            }else {
               word_nine_reverse = false;
-
+              break;
             }
           }
         }
       }
+      if(connection_nine){
+        break;
+      }
     }
-    if (!connection_six) {
+    if(!connection_nine) {
+      for (int i = 0; i < word_four.length; i++) {
+        for (int j = 0; j < word_nine.length; j++) {
+          if (words[3][i] == words[8][j]) {
+            connection_ten = true;
+            if (!word_four_reverse) {
+              row_nine = row_four + i;
+              column_nine = column_four - j;
+
+              int k = 0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if (row_ten + p == row_nine &&
+                      column_ten - p == column_nine + l ){
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if ((row_five + p == row_nine &&
+                      column_five + p == column_nine + l) ||
+                      row_nine == row_seven || row_nine == row_six ||
+                      row_nine == row_one ||
+                      row_nine == row_two ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)
+                      || (column_nine <= column_three &&
+                          column_nine + word_nine.length - 1 >= column_three &&
+                          row_nine >= row_three &&
+                          row_nine <= row_three + word_three.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_nine < 0 ||
+                  column_nine > num_rows_and_columns - word_nine.length ||
+                  k != 0) {
+                row_nine = row_four + i;
+                column_nine = column_four - word_nine.length + 1 + j;
+
+                int k = 0;
+                for (int p = 0; p < word_ten.length; p++) {
+                  for (int l = 0; l < word_nine.length; l++) {
+                    if (row_ten + p == row_nine &&
+                        column_ten - p == column_nine + l ){
+                      k++;
+                    }
+                  }
+                }
+                for (int p = 0; p < word_five.length; p++) {
+                  for (int l = 0; l < word_nine.length; l++) {
+                    if ((row_five + p == row_nine &&
+                        column_five + p == column_nine + l) ||
+                        row_nine == row_seven || row_nine == row_six ||
+                        row_nine == row_one ||
+                        row_nine == row_two ||
+                        (column_nine <= column_four &&
+                            column_nine + word_nine.length - 1 >= column_four &&
+                            row_nine >= row_four &&
+                            row_nine <= row_four + word_four.length - 1)
+                        || (column_nine <= column_three &&
+                            column_nine + word_nine.length - 1 >= column_three &&
+                            row_nine >= row_three &&
+                            row_nine <= row_three + word_three.length - 1)) {
+                      k++;
+                    }
+                  }
+                }
+
+                if (column_nine < 0 ||
+                    column_nine > num_rows_and_columns - word_nine.length ||
+                    k != 0) {
+                  connection_ten = false;
+                } else {
+                  word_nine_reverse = true;
+                  break;
+                }
+              } else {
+                word_nine_reverse = false;
+                break;
+              }
+            } else {
+              row_nine = row_four + word_four.length - 1 - i;
+              column_nine = column_four - j;
+
+              int k = 0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if (row_ten + p == row_nine &&
+                      column_ten - p == column_nine + l ){
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_five.length; p++) {
+                for (int l = 0; l < word_nine.length; l++) {
+                  if ((row_five + p == row_nine &&
+                      column_five + p == column_nine + l) ||
+                      row_nine == row_seven || row_nine == row_six ||
+                      row_nine == row_one ||
+                      row_nine == row_two ||
+                      (column_nine <= column_four &&
+                          column_nine + word_nine.length - 1 >= column_four &&
+                          row_nine >= row_four &&
+                          row_nine <= row_four + word_four.length - 1)
+                      || (column_nine <= column_three &&
+                          column_nine + word_nine.length - 1 >= column_three &&
+                          row_nine >= row_three &&
+                          row_nine <= row_three + word_three.length - 1)) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_nine < 0 ||
+                  column_nine > num_rows_and_columns - word_nine.length ||
+                  k != 0) {
+                row_nine = row_four + word_four.length - 1 - i;
+                column_nine = column_four - word_nine.length + 1 + j;
+
+                int k = 0;
+                for (int p = 0; p < word_ten.length; p++) {
+                  for (int l = 0; l < word_nine.length; l++) {
+                    if (row_ten + p == row_nine &&
+                        column_ten - p == column_nine + l ){
+                      k++;
+                    }
+                  }
+                }
+                for (int p = 0; p < word_five.length; p++) {
+                  for (int l = 0; l < word_nine.length; l++) {
+                    if ((row_five + p == row_nine &&
+                        column_five + p == column_nine + l) ||
+                        row_nine == row_seven || row_nine == row_six ||
+                        row_nine == row_one ||
+                        row_nine == row_two ||
+                        (column_nine <= column_four &&
+                            column_nine + word_nine.length - 1 >= column_four &&
+                            row_nine >= row_four &&
+                            row_nine <= row_four + word_four.length - 1)
+                        || (column_nine <= column_three &&
+                            column_nine + word_nine.length - 1 >= column_three &&
+                            row_nine >= row_three &&
+                            row_nine <= row_three + word_three.length - 1)) {
+                      k++;
+                    }
+                  }
+                }
+
+                if (column_nine < 0 ||
+                    column_nine > num_rows_and_columns - word_nine.length ||
+                    k != 0) {
+                  connection_ten = false;
+                } else {
+                  word_nine_reverse = true;
+                  break;
+                }
+              } else {
+                word_nine_reverse = false;
+                break;
+              }
+            }
+          }
+        }
+        if (connection_ten) {
+          break;
+        }
+      }
+    }
+    if(!connection_nine && !connection_ten) {
       for (int f = 0; f < num_rows_and_columns; f++) {
         int k = 0;
         for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
           row_nine = f;
           column_nine = l;
+          k=0;
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_nine.length; j++) {
               if (!((row_five + i == row_nine &&
@@ -2448,21 +3416,17 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           }
           for (int p = 0; p < word_ten.length; p++) {
             for (int l = 0; l < word_nine.length; l++) {
-              if (!((row_ten + p == row_nine &&
-                  column_ten - p == column_nine + l)
-                  ||
-                  row_nine == row_seven || row_nine == row_six ||
-                  row_nine == row_one ||
-                  row_nine == row_two)) {
+              if (!(row_ten + p == row_nine &&
+                  column_ten - p == column_nine + l )){
                 k++;
               }
             }
           }
-          if (k == (word_ten.length + word_five.length) * word_nine.length) {
+          if (k == word_five.length * word_nine.length) {
             break;
           }
         }
-        if (k == (word_ten.length + word_five.length) * word_nine.length) {
+        if (k == word_five.length * word_nine.length) {
           break;
         }
       }
@@ -2478,22 +3442,25 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             word_seven,
             word_eight,
             word_nine,
-            word_ten,
-            word_eleven,
-            word_twelve);
+          word_ten,
+          word_eleven,
+          word_twelve,
+        );
       }
     }
+
+
 
 
     for (int i = 0; i < word_seven.length; i++) {
       for (int j = 0; j<word_eleven.length; j++) {
         if (words[6][i] == words[10][j]) {
-          connection_seven = true;
-          if (random.nextInt(2)==0) {
+          connection_eleven = true;
+          if (!word_seven_reverse) {
             row_eleven = row_seven - j;
             column_eleven = column_seven + i;
 
-            k = 0;
+            int k = 0;
 
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_eleven.length; j++) {
@@ -2519,12 +3486,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             row_eleven + word_eleven.length - 1 >= row_six &&
                             column_eleven >= column_six &&
                             column_eleven <= column_six + word_six.length - 1
-                    ) ||
-                    (
-                        row_eleven <= row_seven &&
-                            row_eleven + word_eleven.length - 1 >= row_seven &&
-                            column_eleven >= column_seven &&
-                            column_eleven <= column_seven + word_seven.length - 1
                     )
                     ||
                     (
@@ -2551,22 +3512,79 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (row_eleven < 0 ||
                 row_eleven > num_rows_and_columns - word_eleven.length ||
                 k != 0) {
-              connection_seven = false;
+              row_eleven = row_seven-word_eleven.length+1 + j;
+              column_eleven = column_seven + i;
+              int k = 0;
+
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_eleven.length; j++) {
+                  if ((row_five + i == row_eleven + j &&
+                      column_eleven + i == column_eleven) ||
+                      column_eleven == column_three || column_eleven == column_four ||
+                      column_eleven==column_eight||
+                      (
+                          row_eleven <= row_one &&
+                              row_eleven + word_eleven.length - 1 >= row_one &&
+                              column_eleven >= column_one &&
+                              column_eleven <= column_one + word_one.length - 1
+                      ) ||
+                      (
+                          row_eleven <= row_two &&
+                              row_eleven + word_eight.length - 1 >= row_two &&
+                              column_eleven >= column_two &&
+                              column_eleven <= column_two + word_two.length - 1
+                      )
+                      ||
+                      (
+                          row_eleven <= row_six &&
+                              row_eleven + word_eleven.length - 1 >= row_six &&
+                              column_eleven >= column_six &&
+                              column_eleven <= column_six + word_six.length - 1
+                      )
+                      ||
+                      (
+                          row_eleven <= row_nine &&
+                              row_eleven + word_eleven.length - 1 >= row_nine &&
+                              column_eleven >= column_nine &&
+                              column_eleven <= column_nine + word_nine.length - 1
+                      )
+                  ) {
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_eleven.length; l++) {
+                  if (row_ten + p == row_eleven + l &&
+                      column_ten - p == column_eleven) {
+                    k++;
+                  }
+                }
+              }
+
+              if (row_eleven < 0 ||
+                  row_eleven > num_rows_and_columns - word_eleven.length ||
+                  k != 0) {
+              connection_eleven = false;
+            } else{
+                word_eleven_reverse=true;
+              }
             } else {
-              word_seven_reverse = false;
               word_eleven_reverse=false;
             }
           } else {
-            row_eleven = row_seven-j;
-            column_eleven = column_seven +word_seven.length-1-i;
-            k = 0;
+            row_eleven = row_seven - j;
+            column_eleven = column_seven + word_seven.length - 1 - i;
+            int k = 0;
 
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_eleven.length; j++) {
                 if ((row_five + i == row_eleven + j &&
                     column_eleven + i == column_eleven) ||
-                    column_eleven == column_three || column_eleven == column_four ||
-                    column_eleven==column_eight||
+                    column_eleven == column_three ||
+                    column_eleven == column_four ||
+                    column_eleven == column_eight ||
                     (
                         row_eleven <= row_one &&
                             row_eleven + word_eleven.length - 1 >= row_one &&
@@ -2585,12 +3603,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                             row_eleven + word_eleven.length - 1 >= row_six &&
                             column_eleven >= column_six &&
                             column_eleven <= column_six + word_six.length - 1
-                    ) ||
-                    (
-                        row_eleven <= row_seven &&
-                            row_eleven + word_eleven.length - 1 >= row_seven &&
-                            column_eleven >= column_seven &&
-                            column_eleven <= column_seven + word_seven.length - 1
                     )
                     ||
                     (
@@ -2618,9 +3630,66 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (row_eleven < 0 ||
                 row_eleven > num_rows_and_columns - word_eleven.length ||
                 k != 0) {
-              connection_seven = false;
-            } else {
-              word_seven_reverse = true;
+              row_eleven = row_seven - word_eleven.length + 1 + j;
+              column_eleven = column_seven + i;
+              int k = 0;
+
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_eleven.length; j++) {
+                  if ((row_five + i == row_eleven + j &&
+                      column_eleven + i == column_eleven) ||
+                      column_eleven == column_three ||
+                      column_eleven == column_four ||
+                      column_eleven == column_eight ||
+                      (
+                          row_eleven <= row_one &&
+                              row_eleven + word_eleven.length - 1 >= row_one &&
+                              column_eleven >= column_one &&
+                              column_eleven <= column_one + word_one.length - 1
+                      ) ||
+                      (
+                          row_eleven <= row_two &&
+                              row_eleven + word_eight.length - 1 >= row_two &&
+                              column_eleven >= column_two &&
+                              column_eleven <= column_two + word_two.length - 1
+                      )
+                      ||
+                      (
+                          row_eleven <= row_six &&
+                              row_eleven + word_eleven.length - 1 >= row_six &&
+                              column_eleven >= column_six &&
+                              column_eleven <= column_six + word_six.length - 1
+                      )
+                      ||
+                      (
+                          row_eleven <= row_nine &&
+                              row_eleven + word_eleven.length - 1 >= row_nine &&
+                              column_eleven >= column_nine &&
+                              column_eleven <= column_nine + word_nine.length - 1
+                      )
+                  ) {
+                    k++;
+                  }
+                }
+              }
+
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_eleven.length; l++) {
+                  if (row_ten + p == row_eleven + l &&
+                      column_ten - p == column_eleven) {
+                    k++;
+                  }
+                }
+              }
+              if (row_eleven < 0 ||
+                  row_eleven > num_rows_and_columns - word_eleven.length ||
+                  k != 0) {
+                connection_eleven = false;
+              } else {
+                word_eleven_reverse=true;
+              }
+
+          }else {
               word_eleven_reverse=false;
             }
           }
@@ -2628,7 +3697,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       }
     }
 
-    if(!connection_seven) {
+    if(!connection_eleven) {
       for (int f = 0; f < num_rows_and_columns - word_eleven.length + 1; f++) {
         int k = 0;
         for (int l = num_rows_and_columns - 1; l > -1; l--) {
@@ -2719,12 +3788,12 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     for (int i = 0; i < word_eleven.length; i++) {
       for (int j = 0; j<word_twelve.length; j++) {
         if (words[10][i] == words[11][j]) {
-          connection_eight = true;
+          connection_twelve = true;
           if (!word_eleven_reverse) {
             row_twelve = row_eleven + i;
             column_twelve = column_eleven - j;
 
-            k = 0;
+            int k = 0;
 
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_twelve.length; j++) {
@@ -2745,11 +3814,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     (column_twelve <= column_eight &&
                         column_twelve + word_twelve.length - 1 >= column_eight &&
                         row_twelve >= row_eight &&
-                        row_twelve <= row_eight + word_eight.length - 1) ||
-                    (column_twelve <= column_eleven &&
-                        column_twelve + word_twelve.length - 1 >= column_eleven &&
-                        row_twelve >= row_eleven &&
-                        row_twelve <= row_eleven + word_eleven.length - 1)) {
+                        row_twelve <= row_eight + word_eight.length - 1) ) {
                   k++;
                 }
               }
@@ -2766,14 +3831,58 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (column_twelve < 0 ||
                 column_twelve > num_rows_and_columns - word_twelve.length ||
                 k != 0) {
-              connection_eight = false;
-            } else {
+              row_twelve = row_eleven + i;
+              column_twelve = column_eleven-word_twelve.length+1 + j;
+
+              int k = 0;
+
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_twelve.length; j++) {
+                  if ((row_five + i == row_twelve &&
+                      column_five + i == column_twelve + j) ||
+                      row_twelve == row_seven || row_twelve == row_six ||
+                      row_twelve == row_one ||
+                      row_twelve == row_two ||
+                      row_twelve == row_nine ||
+                      (column_twelve <= column_four &&
+                          column_twelve + word_twelve.length - 1 >= column_four &&
+                          row_twelve >= row_four &&
+                          row_twelve <= row_four + word_four.length - 1)
+                      || (column_twelve <= column_three &&
+                          column_twelve + word_twelve.length - 1 >= column_three &&
+                          row_twelve >= row_three &&
+                          row_twelve <= row_three + word_three.length - 1) ||
+                      (column_twelve <= column_eight &&
+                          column_twelve + word_twelve.length - 1 >= column_eight &&
+                          row_twelve >= row_eight &&
+                          row_twelve <= row_eight + word_eight.length - 1) ) {
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_twelve.length; l++) {
+                  if (row_ten + p == row_twelve &&
+                      column_ten - p == column_twelve + l) {
+                    k++;
+                  }
+                }
+              }
+
+              if (column_twelve < 0 ||
+                  column_twelve > num_rows_and_columns - word_twelve.length ||
+                  k != 0) {
+              connection_twelve = false;
+            } else{
+                word_twelve_reverse=true;
+              }
+            }else {
               word_twelve_reverse=false;
             }
           } else {
             row_twelve = row_eleven + word_eleven.length - 1 - i;
             column_twelve = column_eleven - j;
-            k = 0;
+            int k = 0;
 
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_twelve.length; j++) {
@@ -2794,11 +3903,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     (column_twelve <= column_eight &&
                         column_twelve + word_twelve.length - 1 >= column_eight &&
                         row_twelve >= row_eight &&
-                        row_twelve <= row_eight + word_eight.length - 1) ||
-                    (column_twelve <= column_eleven &&
-                        column_twelve + word_twelve.length - 1 >= column_eleven &&
-                        row_twelve >= row_eleven &&
-                        row_twelve <= row_eleven + word_eleven.length - 1)) {
+                        row_twelve <= row_eight + word_eight.length - 1) ) {
                   k++;
                 }
               }
@@ -2814,8 +3919,50 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (column_twelve < 0 ||
                 column_twelve > num_rows_and_columns - word_twelve.length ||
                 k != 0) {
-              connection_eight = false;
-            } else {
+              row_twelve = row_eleven + word_eleven.length - 1 - i;
+              column_twelve = column_eleven-word_twelve.length+1 + j;
+              int k = 0;
+
+              for (int i = 0; i < word_five.length; i++) {
+                for (int j = 0; j < word_twelve.length; j++) {
+                  if ((row_five + i == row_twelve &&
+                      column_five + i == column_twelve + j) ||
+                      row_twelve == row_seven || row_twelve == row_six ||
+                      row_twelve == row_one ||
+                      row_twelve == row_two ||
+                      row_twelve == row_nine ||
+                      (column_twelve <= column_four &&
+                          column_twelve + word_twelve.length - 1 >= column_four &&
+                          row_twelve >= row_four &&
+                          row_twelve <= row_four + word_four.length - 1)
+                      || (column_twelve <= column_three &&
+                          column_twelve + word_twelve.length - 1 >= column_three &&
+                          row_twelve >= row_three &&
+                          row_twelve <= row_three + word_three.length - 1) ||
+                      (column_twelve <= column_eight &&
+                          column_twelve + word_twelve.length - 1 >= column_eight &&
+                          row_twelve >= row_eight &&
+                          row_twelve <= row_eight + word_eight.length - 1) ) {
+                    k++;
+                  }
+                }
+              }
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_twelve.length; l++) {
+                  if (row_ten + p == row_twelve &&
+                      column_ten - p == column_twelve + l) {
+                    k++;
+                  }
+                }
+              }
+              if (column_twelve < 0 ||
+                  column_twelve > num_rows_and_columns - word_twelve.length ||
+                  k != 0) {
+              connection_twelve = false;
+            } else{
+              word_twelve_reverse = true;
+            }
+          }else {
               word_twelve_reverse = false;
             }
           }
@@ -2824,7 +3971,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     }
 
 
-    if(!connection_eight) {
+    if(!connection_twelve) {
       for (int f = num_rows_and_columns - 1; f > -1; f--) {
         int k = 0;
         for (int l = num_rows_and_columns - word_twelve.length; l > -1; l--) {
