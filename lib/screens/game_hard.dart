@@ -704,7 +704,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
                       boxShadow: [
                         BoxShadow(
-                            color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
+                            color: GameColors.primary, spreadRadius: MediaQuery.of(context).size.height/100),
 
                       ],
                       borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,
@@ -1280,7 +1280,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
                       boxShadow: [
                         BoxShadow(
-                            color: GameColors.button_Background_Light, spreadRadius: MediaQuery.of(context).size.height/100),
+                            color: GameColors.primary, spreadRadius: MediaQuery.of(context).size.height/100),
 
                       ],
                       borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height/30) ,

@@ -31,133 +31,112 @@ class _HomeState extends State<Home> {
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/20),
 
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Level()),
-                );
-              } ,
-              color:Colors.black,
-              highlightColor: GameColors.button_Background_Light,
-              child:Ink(
-                decoration:  BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[GameColors.button_Background, Colors.black],),
-                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
-                ),
-                child: Container(
-                    constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                    alignment: Alignment.center,
-                    child: Text(AppLocalizations.of(context).translate("home_play"),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery. of(context). size. height/15),
-                      textAlign: TextAlign.center,
-                    )
-                ),
-              ),
-            ),
+            Icon(Icons.star,
+            color: GameColors.secondary,
+            size:MediaQuery.of(context).size.height/10),
 
-            SizedBox(width:MediaQuery. of(context). size. width/15,
-                height: MediaQuery. of(context). size. height/15),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Level()),
-                );
-              } ,
-              color:Colors.black,
-              highlightColor: GameColors.button_Background,
-              child:Ink(
-                decoration:  BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[GameColors.button_Background_Light, Colors.black],),
-                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
-                ),
-                child: Container(
-                    constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                    alignment: Alignment.center,
-                    child: Text(AppLocalizations.of(context).translate("home_share"),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery. of(context). size. height/15),
-                      textAlign: TextAlign.center,
-                    )
-                ),
-              ),
-            ),
+            SizedBox(width:MediaQuery. of(context). size. width/20,
+                height: MediaQuery. of(context). size. height/20),
 
-            SizedBox(width:MediaQuery. of(context). size. width/15,
-                height: MediaQuery. of(context). size. height/15),
 
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Stats()),
-                );
-              } ,
-              color:Colors.black,
-              highlightColor: GameColors.button_Background,
-              child:Ink(
-                decoration:  BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[GameColors.button_Background_Light, Colors.black],),
-                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
-                ),
-                child: Container(
-                    constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                    alignment: Alignment.center,
-                    child: Text(AppLocalizations.of(context).translate("home_stats"),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery. of(context). size. height/15),
-                      textAlign: TextAlign.center,
-                    )
-                ),
-              ),
-            ),
-            SizedBox(width:MediaQuery. of(context). size. width/15,
-                height: MediaQuery. of(context). size. height/15),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
 
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Settings()),
-                );
-              } ,
-              color:Colors.black,
-              highlightColor: GameColors.button_Background,
-              child:Ink(
-                decoration:  BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[GameColors.button_Background_Light, Colors.black],),
-                  borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15),
+                  child:Row(
+
+                children: [
+                  Container(
+                      child:
+                      IconButton(
+                        color:GameColors.secondary,
+                        icon: Icon(Icons.trending_up),
+                        iconSize: MediaQuery.of(context).size.height/7,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Stats()),
+                          );
+                        },
+                      ),
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(MediaQuery
+                            .of(context)
+                            .size
+                            .height / 10)
+                    ),
                   ),
-                ),
-                child: Container(
-                    constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                    alignment: Alignment.center,
-                    child: Text(AppLocalizations.of(context).translate("home_settings"),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery. of(context). size. height/15),
-                      textAlign: TextAlign.center,
-                    )
-                ),
-              ),
-            ),
+                  SizedBox(width:MediaQuery.of(context).size.width/20),
+                  Container(child:
+                  IconButton(
+                    color:GameColors.primary,
+                    icon: Icon(Icons.play_arrow),
+                    iconSize: MediaQuery.of(context).size.height/7,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Level()),
+                      );
+                    },
+                  ),
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(MediaQuery
+                            .of(context)
+                            .size
+                            .height / 10)
+                    ),
+                  ),
+                  SizedBox(width:MediaQuery.of(context).size.width/20),
+                  Container(child:
+                  IconButton(
+                    color:GameColors.secondary,
+                    icon: Icon(Icons.share),
+                    iconSize: MediaQuery.of(context).size.height/7,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Level()),
+                      );
+                    },
+                  ),
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(MediaQuery
+                            .of(context)
+                            .size
+                            .height / 10)
+                    ),
+                  ),
+                  SizedBox(width:MediaQuery.of(context).size.width/20),
+                  Container(child:
+                  IconButton(
+                    color:GameColors.secondary,
+                    icon: Icon(Icons.settings),
+                    iconSize: MediaQuery.of(context).size.height/7,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Settings()),
+                      );
+                    },
+                  ),
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(MediaQuery
+                            .of(context)
+                            .size
+                            .height / 10)
+                    ),
+                  ),
+
+
+
+
+                ],
+              )
+              )
+
           ],
         ),
       ),

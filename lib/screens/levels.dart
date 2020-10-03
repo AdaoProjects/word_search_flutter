@@ -55,12 +55,12 @@ class _LevelState extends State<Level> {
                           )));
                     },
                     color: Colors.black,
-                    highlightColor: GameColors.button_Background,
+                    highlightColor: GameColors.tertiary,
                     child: Ink(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: <Color>[
-                            GameColors.button_Background_Light,
+                            GameColors.primary,
                             Colors.black
                           ],),
                         borderRadius: BorderRadius.all(
@@ -110,12 +110,12 @@ class _LevelState extends State<Level> {
                       );
                     },
                     color: Colors.black,
-                    highlightColor: GameColors.button_Background,
+                    highlightColor: GameColors.tertiary,
                     child: Ink(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: <Color>[
-                            GameColors.button_Background_Light,
+                            GameColors.primary,
                             Colors.black
                           ],),
                         borderRadius: BorderRadius.all(
@@ -166,12 +166,12 @@ class _LevelState extends State<Level> {
                       );
                     },
                     color: Colors.black,
-                    highlightColor: GameColors.button_Background,
+                    highlightColor: GameColors.tertiary,
                     child: Ink(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: <Color>[
-                            GameColors.button_Background_Light,
+                            GameColors.primary,
                             Colors.black
                           ],),
                         borderRadius: BorderRadius.all(

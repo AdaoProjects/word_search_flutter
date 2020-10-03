@@ -537,7 +537,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
                            boxShadow: [
                              BoxShadow(
-                                 color: GameColors.button_Background_Light,
+                                 color: GameColors.primary,
                                  spreadRadius: MediaQuery
                                      .of(context)
                                      .size
@@ -862,7 +862,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
                          boxShadow: [
                            BoxShadow(
-                               color: GameColors.button_Background_Light,
+                               color: GameColors.primary,
                                spreadRadius: MediaQuery
                                    .of(context)
                                    .size

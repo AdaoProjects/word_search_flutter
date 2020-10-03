@@ -681,7 +681,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
                       boxShadow: [
                         BoxShadow(
-                            color: GameColors.button_Background_Light,
+                            color: GameColors.primary,
                             spreadRadius: MediaQuery
                                 .of(context)
                                 .size
@@ -1264,7 +1264,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
                       boxShadow: [
                         BoxShadow(
-                            color: GameColors.button_Background_Light,
+                            color: GameColors.primary,
                             spreadRadius: MediaQuery
                                 .of(context)
                                 .size

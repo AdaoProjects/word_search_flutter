@@ -5,13 +5,14 @@ class GameColors {
   GameColors._();
 
   /// Primary color.
-  static const primary = Color(0xFFD44500);
+  static const primary = Color(0xFF01befe);
 
-  /// The color used.
-  static const button_Background = Color(0xFFFE7C00);
+  static const secondary = Color(0xFFffdd00);
 
-  /// The color used to draw Play button background.
-  static const button_Background_Light = Color(0xFF00a8a8);
+  static const tertiary =Color(0xFFff7d00);
+
+  static const quaternary=Color(0xFFadf002);
+
 
 
 }

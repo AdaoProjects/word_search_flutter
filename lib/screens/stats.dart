@@ -65,7 +65,7 @@ class _StatsState extends State<Stats> {
       prefs.setString("best_time_hard", null);
       })
       }, icon: Icon(Icons.autorenew,
-        color: GameColors.button_Background,
+        color: GameColors.tertiary,
         size: MediaQuery
             .of(context)
             .size
@@ -77,7 +77,7 @@ class _StatsState extends State<Stats> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                          color: GameColors.button_Background,
+                          color: GameColors.tertiary,
                           spreadRadius: MediaQuery
                               .of(context)
                               .size
