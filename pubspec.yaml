@@ -52,7 +52,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
 
   assets:
-    - assets/images/artecriada.jpg
+    - assets/images/find_the_words_adan.png
     - assets/sounds/selectionsound.wav
     - assets/sounds/wrongsound.wav
     - assets/sounds/foundsound.wav

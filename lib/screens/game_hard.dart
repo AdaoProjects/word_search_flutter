@@ -1394,25 +1394,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     }
     return puzzle[i];
   }
+
   fit_Words_Puzzle(List<String> puzzle, String word_one, String word_two,
       String word_three, String word_four, String word_five, String word_six,
       String word_seven, String word_eight
       , String word_nine, String word_ten, String word_eleven,
       String word_twelve) {
 
-    // the row and column from the 'beginer of the words', rigth is positive and down is positive, later the word can be changed to reversed order so it makes more difficult the puzzle
-    //word one is always in horizontal and can be connected with the diagonal
-    //word two is always in horizontal and never is connected to three
-    //word three is always in vertical and cab be connected with word two
-    //word four is always in vertical and never is connected
-    //word five is diagnol in even cells can be connected to word one or two
-    //word six is horizontal connected to word four
-    // word seven is horizontal connected with eight
-    // word eight is vertical connected to word seven
-    //word nine is horizontal connected no conected
-    //word ten is diagnol in odds cells and can be connected to word eleven
-    // word eleven is vertical and can be connected to word ten and twelve
-    // word twelve is horizontal and can be connected to word eleven
     row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
     column_five = random.nextInt(
         ((num_rows_and_columns - word_five.length + 1) / 2).toInt()) * 2 +
@@ -1458,8 +1446,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     true;
 
 
-    for (int i = 0; i < word_five.length; i++) {
-      for (int j = 0; j < word_one.length; j++) {
+    for (int i = 0; i < words[4].length; i++) {
+      for (int j = 0; j < words[0].length; j++) {
         if (words[4][i] == words[0][j]) {
           connection_one = true;
           if (random.nextInt(2) == 0) {
@@ -1586,8 +1574,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       }
     }
 
-    for (int i = 0; i < word_five.length; i++) {
-      for (int j = 0; j < word_two.length; j++) {
+    for (int i = 0; i < words[4].length; i++) {
+      for (int j = 0; j < words[1].length; j++) {
         if (words[4][i] == words[1][j]) {
           connection_two = true;
           if (!word_five_reverse) {
@@ -1758,8 +1746,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     }
 
 
-    for (int i = 0; i < word_two.length; i++) {
-      for (int j = 0; j < word_three.length; j++) {
+    for (int i = 0; i < words[1].length; i++) {
+      for (int j = 0; j < words[2].length; j++) {
         if (words[1][i] == words[2][j]) {
           connection_three = true;
           if (!word_two_reverse) {
@@ -1994,9 +1982,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     }
 
 
-    for (int i=0;i<word_one.length;i++ ) {
-      for (int j = 0; j < word_four.length; j++) {
-        if (word_one[i] == words[3][j]) {
+    for (int i=0;i<words[0].length;i++ ) {
+      for (int j = 0; j < words[3].length; j++) {
+        if (words[0][i] == words[3][j]) {
           connection_four = true;
           if (!word_one_reverse) {
             row_four = row_one - j;
@@ -2179,8 +2167,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         }
       }
     }
-    for (int i = 0; i < word_four.length; i++) {
-      for (int j = 0; j < word_six.length; j++) {
+    for (int i = 0; i < words[3].length; i++) {
+      for (int j = 0; j < words[5].length; j++) {
         if (words[3][i] == words[5][j]) {
           connection_five = true;
           if (!word_four_reverse) {
@@ -2374,8 +2362,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       }
     }
 
-    for (int i = 0; i < word_three.length; i++) {
-      for (int j = 0; j < word_seven.length; j++) {
+    for (int i = 0; i < words[2].length; i++) {
+      for (int j = 0; j < words[6].length; j++) {
         if (words[2][i] == words[6][j]) {
           connection_six = true;
           if (!word_three_reverse) {
@@ -2539,8 +2527,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
 
     if(!connection_six) {
-      for (int i = 0; i < word_four.length; i++) {
-        for (int j = 0; j < word_seven.length; j++) {
+      for (int i = 0; i < words[4].length; i++) {
+        for (int j = 0; j < words[6].length; j++) {
           if (words[3][i] == words[6][j]) {
             connection_seven = true;
             if (!word_four_reverse) {
@@ -2755,8 +2743,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         );
       }
     }
-    for (int i = 0; i < word_six.length; i++) {
-      for (int j = 0; j < word_eight.length; j++) {
+    for (int i = 0; i < words[5].length; i++) {
+      for (int j = 0; j < words[7].length; j++) {
         if (words[5][i] == words[7][j]) {
           connection_eight = true;
           if (!word_six_reverse) {
@@ -3053,8 +3041,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         );
       }
     }
-    for (int i = 0; i < word_eight.length; i++) {
-      for (int j = 0; j < word_nine.length; j++) {
+
+    for (int i = 0; i < words[7].length; i++) {
+      for (int j = 0; j < words[8].length; j++) {
         if (words[7][i] == words[8][j]) {
           connection_nine = true;
           if (!word_eight_reverse) {
@@ -3063,10 +3052,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
             int k=0;
 
-            for (int p = 0; p < word_ten.length; p++) {
-              for (int l = 0; l < word_nine.length; l++) {
-                if (row_ten + p == row_nine &&
-                    column_ten - p == column_nine + l ){
+            for(int p=0; p<word_ten.length;p++){
+              for (int l=0; l<word_nine.length;l++){
+                if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                   k++;
                 }
               }
@@ -3099,15 +3087,15 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               column_nine = column_eight-word_nine.length+1 + j;
 
               int k = 0;
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+
+
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                     k++;
                   }
                 }
               }
-
               for (int p = 0; p < word_five.length; p++) {
                 for (int l = 0; l < word_nine.length; l++) {
                   if ((row_five + p == row_nine &&
@@ -3146,10 +3134,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             column_nine=column_eight-j;
 
             int k=0;
-            for (int p = 0; p < word_ten.length; p++) {
-              for (int l = 0; l < word_nine.length; l++) {
-                if (row_ten + p == row_nine &&
-                    column_ten - p == column_nine + l ){
+            for(int p=0; p<word_ten.length;p++){
+              for (int l=0; l<word_nine.length;l++){
+                if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                   k++;
                 }
               }
@@ -3182,15 +3169,14 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               column_nine = column_eight-word_nine.length+1 + j;
 
               int k = 0;
-
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                     k++;
                   }
                 }
               }
+
               for (int p = 0; p < word_five.length; p++) {
                 for (int l = 0; l < word_nine.length; l++) {
                   if ((row_five + p == row_nine &&
@@ -3230,20 +3216,25 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         break;
       }
     }
+
+
+
     if(!connection_nine) {
-      for (int i = 0; i < word_four.length; i++) {
-        for (int j = 0; j < word_nine.length; j++) {
+      for (int i = 0; i < words[3].length; i++) {
+        for (int j = 0; j < words[8].length; j++) {
           if (words[3][i] == words[8][j]) {
+
+
             connection_ten = true;
             if (!word_four_reverse) {
               row_nine = row_four + i;
               column_nine = column_four - j;
 
               int k = 0;
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                     k++;
                   }
                 }
@@ -3255,11 +3246,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       row_nine == row_seven || row_nine == row_six ||
                       row_nine == row_one ||
                       row_nine == row_two ||
-                      (column_nine <= column_four &&
-                          column_nine + word_nine.length - 1 >= column_four &&
-                          row_nine >= row_four &&
-                          row_nine <= row_four + word_four.length - 1)
-                      || (column_nine <= column_three &&
+                      (column_nine <= column_three &&
                           column_nine + word_nine.length - 1 >= column_three &&
                           row_nine >= row_three &&
                           row_nine <= row_three + word_three.length - 1)) {
@@ -3275,10 +3262,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                 column_nine = column_four - word_nine.length + 1 + j;
 
                 int k = 0;
-                for (int p = 0; p < word_ten.length; p++) {
-                  for (int l = 0; l < word_nine.length; l++) {
-                    if (row_ten + p == row_nine &&
-                        column_ten - p == column_nine + l ){
+                for(int p=0; p<word_ten.length;p++){
+                  for (int l=0; l<word_nine.length;l++){
+                    if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                       k++;
                     }
                   }
@@ -3290,11 +3276,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                        (column_nine <= column_four &&
-                            column_nine + word_nine.length - 1 >= column_four &&
-                            row_nine >= row_four &&
-                            row_nine <= row_four + word_four.length - 1)
-                        || (column_nine <= column_three &&
+                        (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -3320,10 +3302,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               column_nine = column_four - j;
 
               int k = 0;
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                     k++;
                   }
                 }
@@ -3335,11 +3316,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       row_nine == row_seven || row_nine == row_six ||
                       row_nine == row_one ||
                       row_nine == row_two ||
-                      (column_nine <= column_four &&
-                          column_nine + word_nine.length - 1 >= column_four &&
-                          row_nine >= row_four &&
-                          row_nine <= row_four + word_four.length - 1)
-                      || (column_nine <= column_three &&
+                      (column_nine <= column_three &&
                           column_nine + word_nine.length - 1 >= column_three &&
                           row_nine >= row_three &&
                           row_nine <= row_three + word_three.length - 1)) {
@@ -3355,10 +3332,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                 column_nine = column_four - word_nine.length + 1 + j;
 
                 int k = 0;
-                for (int p = 0; p < word_ten.length; p++) {
-                  for (int l = 0; l < word_nine.length; l++) {
-                    if (row_ten + p == row_nine &&
-                        column_ten - p == column_nine + l ){
+                for(int p=0; p<word_ten.length;p++){
+                  for (int l=0; l<word_nine.length;l++){
+                    if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                       k++;
                     }
                   }
@@ -3370,11 +3346,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                        (column_nine <= column_four &&
-                            column_nine + word_nine.length - 1 >= column_four &&
-                            row_nine >= row_four &&
-                            row_nine <= row_four + word_four.length - 1)
-                        || (column_nine <= column_three &&
+                        (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -3396,20 +3368,35 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                 break;
               }
             }
+
+
           }
+
+
         }
         if (connection_ten) {
           break;
         }
+
+
       }
     }
+
+
     if(!connection_nine && !connection_ten) {
       for (int f = 0; f < num_rows_and_columns; f++) {
         int k = 0;
         for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
           row_nine = f;
           column_nine = l;
-          k=0;
+          k = 0;
+          for(int p=0; p<word_ten.length;p++){
+            for (int l=0; l<word_nine.length;l++){
+              if(row_ten+p==row_nine && column_ten-p==column_nine-l){
+                k++;
+              }
+            }
+          }
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_nine.length; j++) {
               if (!((row_five + i == row_nine &&
@@ -3433,14 +3420,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               }
             }
           }
-          for (int p = 0; p < word_ten.length; p++) {
-            for (int l = 0; l < word_nine.length; l++) {
-              if (!(row_ten + p == row_nine &&
-                  column_ten - p == column_nine + l )){
-                k++;
-              }
-            }
-          }
           if (k == word_five.length * word_nine.length) {
             break;
           }
@@ -3449,30 +3428,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
           break;
         }
       }
-      if (row_nine == num_rows_and_columns - 1 && column_nine == 0) {
-        fit_Words_Puzzle(
-          puzzle,
-          word_one,
-          word_two,
-          word_three,
-          word_four,
-          word_five,
-          word_six,
-          word_seven,
-          word_eight,
-          word_nine,
-          word_ten,
-          word_eleven,
-          word_twelve,
-        );
-      }
     }
 
 
 
 
-    for (int i = 0; i < word_seven.length; i++) {
-      for (int j = 0; j<word_eleven.length; j++) {
+    for (int i = 0; i < words[6].length; i++) {
+      for (int j = 0; j<words[10].length; j++) {
         if (words[6][i] == words[10][j]) {
           connection_eleven = true;
           if (!word_seven_reverse) {
@@ -3804,8 +3766,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       }
     }
 
-    for (int i = 0; i < word_eleven.length; i++) {
-      for (int j = 0; j<word_twelve.length; j++) {
+    for (int i = 0; i < words[10].length; i++) {
+      for (int j = 0; j<words[11].length; j++) {
         if (words[10][i] == words[11][j]) {
           connection_twelve = true;
           if (!word_eleven_reverse) {

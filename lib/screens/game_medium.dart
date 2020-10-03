@@ -599,7 +599,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/images/artecriada.jpg',
+                  Image.asset('assets/images/find_the_words.png',
                       height: MediaQuery
                           .of(context)
                           .size
@@ -1439,8 +1439,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     true;
 
 
-    for (int i = 0; i < word_five.length; i++) {
-      for (int j = 0; j < word_one.length; j++) {
+    for (int i = 0; i < words[4].length; i++) {
+      for (int j = 0; j < words[0].length; j++) {
         if (words[4][i] == words[0][j]) {
           connection_one = true;
           if (random.nextInt(2) == 0) {
@@ -1567,8 +1567,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       }
     }
 
-    for (int i = 0; i < word_five.length; i++) {
-      for (int j = 0; j < word_two.length; j++) {
+    for (int i = 0; i < words[4].length; i++) {
+      for (int j = 0; j < words[1].length; j++) {
         if (words[4][i] == words[1][j]) {
           connection_two = true;
           if (!word_five_reverse) {
@@ -1739,8 +1739,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     }
 
 
-    for (int i = 0; i < word_two.length; i++) {
-      for (int j = 0; j < word_three.length; j++) {
+    for (int i = 0; i < words[1].length; i++) {
+      for (int j = 0; j < words[2].length; j++) {
         if (words[1][i] == words[2][j]) {
           connection_three = true;
           if (!word_two_reverse) {
@@ -1975,9 +1975,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     }
 
 
-    for (int i=0;i<word_one.length;i++ ) {
-      for (int j = 0; j < word_four.length; j++) {
-        if (word_one[i] == words[3][j]) {
+    for (int i=0;i<words[0].length;i++ ) {
+      for (int j = 0; j < words[3].length; j++) {
+        if (words[0][i] == words[3][j]) {
           connection_four = true;
           if (!word_one_reverse) {
             row_four = row_one - j;
@@ -2160,8 +2160,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         }
       }
     }
-    for (int i = 0; i < word_four.length; i++) {
-      for (int j = 0; j < word_six.length; j++) {
+    for (int i = 0; i < words[3].length; i++) {
+      for (int j = 0; j < words[5].length; j++) {
         if (words[3][i] == words[5][j]) {
           connection_five = true;
           if (!word_four_reverse) {
@@ -2355,8 +2355,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       }
     }
 
-    for (int i = 0; i < word_three.length; i++) {
-      for (int j = 0; j < word_seven.length; j++) {
+    for (int i = 0; i < words[2].length; i++) {
+      for (int j = 0; j < words[6].length; j++) {
         if (words[2][i] == words[6][j]) {
           connection_six = true;
           if (!word_three_reverse) {
@@ -2520,8 +2520,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
 
     if(!connection_six) {
-      for (int i = 0; i < word_four.length; i++) {
-        for (int j = 0; j < word_seven.length; j++) {
+      for (int i = 0; i < words[4].length; i++) {
+        for (int j = 0; j < words[6].length; j++) {
           if (words[3][i] == words[6][j]) {
             connection_seven = true;
             if (!word_four_reverse) {
@@ -2736,8 +2736,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         );
       }
     }
-    for (int i = 0; i < word_six.length; i++) {
-      for (int j = 0; j < word_eight.length; j++) {
+    for (int i = 0; i < words[5].length; i++) {
+      for (int j = 0; j < words[7].length; j++) {
         if (words[5][i] == words[7][j]) {
           connection_eight = true;
           if (!word_six_reverse) {
@@ -3034,8 +3034,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         );
       }
     }
-    for (int i = 0; i < word_eight.length; i++) {
-      for (int j = 0; j < word_nine.length; j++) {
+
+    for (int i = 0; i < words[7].length; i++) {
+      for (int j = 0; j < words[8].length; j++) {
         if (words[7][i] == words[8][j]) {
           connection_nine = true;
           if (!word_eight_reverse) {
@@ -3044,10 +3045,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
 
             int k=0;
 
-            for (int p = 0; p < word_ten.length; p++) {
-              for (int l = 0; l < word_nine.length; l++) {
-                if (row_ten + p == row_nine &&
-                    column_ten - p == column_nine + l ){
+            for(int p=0; p<word_ten.length;p++){
+              for (int l=0; l<word_nine.length;l++){
+                if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                   k++;
                 }
               }
@@ -3080,15 +3080,15 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               column_nine = column_eight-word_nine.length+1 + j;
 
               int k = 0;
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+
+
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                     k++;
                   }
                 }
               }
-
               for (int p = 0; p < word_five.length; p++) {
                 for (int l = 0; l < word_nine.length; l++) {
                   if ((row_five + p == row_nine &&
@@ -3127,10 +3127,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             column_nine=column_eight-j;
 
             int k=0;
-            for (int p = 0; p < word_ten.length; p++) {
-              for (int l = 0; l < word_nine.length; l++) {
-                if (row_ten + p == row_nine &&
-                    column_ten - p == column_nine + l ){
+            for(int p=0; p<word_ten.length;p++){
+              for (int l=0; l<word_nine.length;l++){
+                if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                   k++;
                 }
               }
@@ -3163,15 +3162,14 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               column_nine = column_eight-word_nine.length+1 + j;
 
               int k = 0;
-
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine-l){
                     k++;
                   }
                 }
               }
+
               for (int p = 0; p < word_five.length; p++) {
                 for (int l = 0; l < word_nine.length; l++) {
                   if ((row_five + p == row_nine &&
@@ -3211,20 +3209,25 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         break;
       }
     }
+
+
+
     if(!connection_nine) {
-      for (int i = 0; i < word_four.length; i++) {
-        for (int j = 0; j < word_nine.length; j++) {
+      for (int i = 0; i < words[3].length; i++) {
+        for (int j = 0; j < words[8].length; j++) {
           if (words[3][i] == words[8][j]) {
+
+
             connection_ten = true;
             if (!word_four_reverse) {
               row_nine = row_four + i;
               column_nine = column_four - j;
 
               int k = 0;
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                     k++;
                   }
                 }
@@ -3236,11 +3239,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       row_nine == row_seven || row_nine == row_six ||
                       row_nine == row_one ||
                       row_nine == row_two ||
-                      (column_nine <= column_four &&
-                          column_nine + word_nine.length - 1 >= column_four &&
-                          row_nine >= row_four &&
-                          row_nine <= row_four + word_four.length - 1)
-                      || (column_nine <= column_three &&
+                      (column_nine <= column_three &&
                           column_nine + word_nine.length - 1 >= column_three &&
                           row_nine >= row_three &&
                           row_nine <= row_three + word_three.length - 1)) {
@@ -3256,10 +3255,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 column_nine = column_four - word_nine.length + 1 + j;
 
                 int k = 0;
-                for (int p = 0; p < word_ten.length; p++) {
-                  for (int l = 0; l < word_nine.length; l++) {
-                    if (row_ten + p == row_nine &&
-                        column_ten - p == column_nine + l ){
+                for(int p=0; p<word_ten.length;p++){
+                  for (int l=0; l<word_nine.length;l++){
+                    if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                       k++;
                     }
                   }
@@ -3271,11 +3269,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                        (column_nine <= column_four &&
-                            column_nine + word_nine.length - 1 >= column_four &&
-                            row_nine >= row_four &&
-                            row_nine <= row_four + word_four.length - 1)
-                        || (column_nine <= column_three &&
+                         (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -3301,10 +3295,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               column_nine = column_four - j;
 
               int k = 0;
-              for (int p = 0; p < word_ten.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if (row_ten + p == row_nine &&
-                      column_ten - p == column_nine + l ){
+              for(int p=0; p<word_ten.length;p++){
+                for (int l=0; l<word_nine.length;l++){
+                  if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                     k++;
                   }
                 }
@@ -3316,11 +3309,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       row_nine == row_seven || row_nine == row_six ||
                       row_nine == row_one ||
                       row_nine == row_two ||
-                      (column_nine <= column_four &&
-                          column_nine + word_nine.length - 1 >= column_four &&
-                          row_nine >= row_four &&
-                          row_nine <= row_four + word_four.length - 1)
-                      || (column_nine <= column_three &&
+                      (column_nine <= column_three &&
                           column_nine + word_nine.length - 1 >= column_three &&
                           row_nine >= row_three &&
                           row_nine <= row_three + word_three.length - 1)) {
@@ -3336,10 +3325,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 column_nine = column_four - word_nine.length + 1 + j;
 
                 int k = 0;
-                for (int p = 0; p < word_ten.length; p++) {
-                  for (int l = 0; l < word_nine.length; l++) {
-                    if (row_ten + p == row_nine &&
-                        column_ten - p == column_nine + l ){
+                for(int p=0; p<word_ten.length;p++){
+                  for (int l=0; l<word_nine.length;l++){
+                    if(row_ten+p==row_nine && column_ten-p==column_nine+l){
                       k++;
                     }
                   }
@@ -3351,11 +3339,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                        (column_nine <= column_four &&
-                            column_nine + word_nine.length - 1 >= column_four &&
-                            row_nine >= row_four &&
-                            row_nine <= row_four + word_four.length - 1)
-                        || (column_nine <= column_three &&
+                         (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -3377,20 +3361,35 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 break;
               }
             }
+
+
           }
+
+
         }
         if (connection_ten) {
           break;
         }
+
+
       }
     }
+
+
     if(!connection_nine && !connection_ten) {
       for (int f = 0; f < num_rows_and_columns; f++) {
         int k = 0;
         for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
           row_nine = f;
           column_nine = l;
-          k=0;
+          k = 0;
+          for(int p=0; p<word_ten.length;p++){
+            for (int l=0; l<word_nine.length;l++){
+              if(row_ten+p==row_nine && column_ten-p==column_nine-l){
+                k++;
+              }
+            }
+          }
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_nine.length; j++) {
               if (!((row_five + i == row_nine &&
@@ -3414,14 +3413,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               }
             }
           }
-          for (int p = 0; p < word_ten.length; p++) {
-            for (int l = 0; l < word_nine.length; l++) {
-              if (!(row_ten + p == row_nine &&
-                  column_ten - p == column_nine + l )){
-                k++;
-              }
-            }
-          }
           if (k == word_five.length * word_nine.length) {
             break;
           }
@@ -3430,30 +3421,13 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           break;
         }
       }
-      if (row_nine == num_rows_and_columns - 1 && column_nine == 0) {
-        fit_Words_Puzzle(
-            puzzle,
-            word_one,
-            word_two,
-            word_three,
-            word_four,
-            word_five,
-            word_six,
-            word_seven,
-            word_eight,
-            word_nine,
-          word_ten,
-          word_eleven,
-          word_twelve,
-        );
-      }
     }
 
 
 
 
-    for (int i = 0; i < word_seven.length; i++) {
-      for (int j = 0; j<word_eleven.length; j++) {
+    for (int i = 0; i < words[6].length; i++) {
+      for (int j = 0; j<words[10].length; j++) {
         if (words[6][i] == words[10][j]) {
           connection_eleven = true;
           if (!word_seven_reverse) {
@@ -3785,8 +3759,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       }
     }
 
-    for (int i = 0; i < word_eleven.length; i++) {
-      for (int j = 0; j<word_twelve.length; j++) {
+    for (int i = 0; i < words[10].length; i++) {
+      for (int j = 0; j<words[11].length; j++) {
         if (words[10][i] == words[11][j]) {
           connection_twelve = true;
           if (!word_eleven_reverse) {

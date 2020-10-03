@@ -19,7 +19,7 @@ class _LevelState extends State<Level> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/images/artecriada.jpg',
+                  Image.asset('assets/images/find_the_words_adan.png',
                       height: MediaQuery
                           .of(context)
                           .size
