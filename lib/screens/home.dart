@@ -33,10 +33,10 @@ class _HomeState extends State<Home> {
 
             Icon(Icons.star,
             color: GameColors.secondary,
-            size:MediaQuery.of(context).size.height/10),
+            size:MediaQuery.of(context).size.height/12),
 
             SizedBox(width:MediaQuery. of(context). size. width/20,
-                height: MediaQuery. of(context). size. height/20),
+                height: MediaQuery. of(context). size. height/10),
 
 
             SingleChildScrollView(
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                         splashColor:Colors.yellowAccent,
                         color:GameColors.secondary,
                         icon: Icon(Icons.trending_up),
-                        iconSize: MediaQuery.of(context).size.height/7,
+                        iconSize: MediaQuery.of(context).size.height/10,
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
                     splashColor:Colors.yellowAccent,
                     color:GameColors.primary,
                     icon: Icon(Icons.play_arrow),
-                    iconSize: MediaQuery.of(context).size.height/7,
+                    iconSize: MediaQuery.of(context).size.height/10,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
                     splashColor:Colors.yellowAccent,
                     color:GameColors.secondary,
                     icon: Icon(Icons.share),
-                    iconSize: MediaQuery.of(context).size.height/7,
+                    iconSize: MediaQuery.of(context).size.height/10,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
                     splashColor:Colors.yellowAccent,
                     color:GameColors.secondary,
                     icon: Icon(Icons.settings),
-                    iconSize: MediaQuery.of(context).size.height/7,
+                    iconSize: MediaQuery.of(context).size.height/10,
                     onPressed: () {
                       Navigator.push(
                         context,

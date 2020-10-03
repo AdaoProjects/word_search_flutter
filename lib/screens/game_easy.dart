@@ -1495,7 +1495,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
     for (int i=0;i<word_one.length;i++ ) {
       for (int j = 0; j < word_four.length; j++) {
-        if (word_one[i] == words[3][j]) {
+        if (words[0][i] == words[3][j]) {
           connection_four = true;
           if (!word_one_reverse) {
             row_four = row_one - j;
