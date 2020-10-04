@@ -147,7 +147,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
          backgroundColor: Colors.black,
          body: Center(
            child: GestureDetector(
-             onPanUpdate: (details) {
+             onPanUpdate: (details) async{
                RenderBox box = context.findRenderObject();
                final Offset local = box.globalToLocal(
                    details.globalPosition);
