@@ -20,7 +20,7 @@
 
   "game_level_easy" : "NIVEAU: FACILE",
   "game_level_medium" : "NIVEAU: MOYEN",
-  "game_level_hard" : "NIVEAU: DIFFICILE",
+  "game_level_hard" : "DIFFICILE",
   "game_level_type_food": "Aliments",
   "game_level_type_animals": "Animaux",
   "game_level_type_diverse": "Divers",
