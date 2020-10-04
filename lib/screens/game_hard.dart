@@ -1465,7 +1465,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length||k!=0) {
               row_one = row_five + i;
-              column_one = column_five + i + word_one.length - 1 - j;
+              column_one = column_five + i - word_one.length + 1 + j;
               int k=0;
               for (int p = 0; p < word_ten.length; p++) {
                 for (int l = 0; l < word_one.length; l++) {
@@ -1523,7 +1523,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length ||k!=0) {
               row_one = row_five + word_five.length - i - 1;
-              column_one = column_five + word_five.length - i - 1+word_one.length-1 - j;
+              column_one = column_five + word_five.length - i - 1-word_one.length+1 + j;
               int k=0;
               for (int p = 0; p < word_ten.length; p++) {
                 for (int l = 0; l < word_one.length; l++) {
@@ -1594,7 +1594,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                 column_two > num_rows_and_columns - word_two.length ||
                 row_one == row_two ||k!=0) {
               row_two = row_five + i;
-              column_two = column_five + i +word_two.length-1 - j;
+              column_two = column_five + i -word_two.length+1 + j;
               int k=0;
               for (int p = 0; p < word_ten.length; p++) {
                 for (int l = 0; l < word_two.length; l++) {
@@ -1652,7 +1652,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                 column_two > num_rows_and_columns - word_two.length ||
                 row_one == row_two) {
               row_two = row_five + word_five.length - i - 1;
-              column_two = column_five + word_five.length - i - 1+word_two.length-1 - j;
+              column_two = column_five + word_five.length - i - 1-word_two.length+1 + j;
               if (column_two < 0 ||
                   column_two > num_rows_and_columns - word_two.length ||
                   row_one == row_two) {
