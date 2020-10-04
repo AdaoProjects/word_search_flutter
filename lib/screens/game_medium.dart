@@ -644,7 +644,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     width: MediaQuery
                         .of(context)
                         .size
-                        .width * 8 / 10 * 1.1,
+                        .width,
                     child: Table(
                         children: [
                           for (int i = 0; i <
@@ -1643,11 +1643,22 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             if (column_two < 0 ||
                 column_two > num_rows_and_columns - word_two.length ||
+                k!=0||
                 row_one == row_two) {
               row_two = row_five + word_five.length - i - 1;
               column_two = column_five + word_five.length - i - 1-word_two.length+1 + j;
+              int k=0;
+              for (int p = 0; p < word_ten.length; p++) {
+                for (int l = 0; l < word_two.length; l++) {
+                  if ((row_ten + p == row_two &&
+                      column_ten - p == column_two + l) ){
+                    k++;
+                  }
+                }
+              }
               if (column_two < 0 ||
                   column_two > num_rows_and_columns - word_two.length ||
+                  k!=0||
                   row_one == row_two) {
                 no_connection_two_count++;
                 if (no_connection_two_count < 15) {
