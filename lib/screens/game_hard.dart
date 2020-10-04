@@ -4513,172 +4513,171 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
   }
   set_language() {
     String language = AppLocalizations.of(context).translate("game_language");
-    if (widget.game_type.type == 'food') {
+    if(widget.game_type.type=='food') {
       if (language == 'en') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "butter".toUpperCase();
+        words[1] = "coffee".toUpperCase();
+        words[2] = "cream".toUpperCase();
+        words[3] = "juice".toUpperCase();
+        words[4] = "trout".toUpperCase();
+        words[5] = "milk".toUpperCase();
+        words[6] = "soda".toUpperCase();
+        words[7] = "beef".toUpperCase();
+        words[8] = "tea".toUpperCase();
+        words[9]= "cake".toUpperCase();
+        words[10]= "lamb".toUpperCase();
+        words[11]= "bean".toUpperCase();
       } else if (language == 'pt') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "frango".toUpperCase();
+        words[1] = "laranja".toUpperCase();
+        words[2] = "frutas".toUpperCase();
+        words[3] = "arroz".toUpperCase();
+        words[4] = "milho".toUpperCase();
+        words[5] = "carne".toUpperCase();
+        words[6] = "soda".toUpperCase();
+        words[7] = "limao".toUpperCase();
+        words[8] = "ovo".toUpperCase();
+        words[9]= "figo".toUpperCase();
+        words[10]= "suco".toUpperCase();
+        words[11]= "coco".toUpperCase();
       } else if (language == 'fr') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
+        words[0] = "goyave".toUpperCase();
+        words[1] = "cerise".toUpperCase();
+        words[2] = "citron".toUpperCase();
+        words[3] = "prune".toUpperCase();
         words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[5] = "mure".toUpperCase();
+        words[6] = "figue".toUpperCase();
+        words[7] = "poire".toUpperCase();
+        words[8] = "chou".toUpperCase();
+        words[9]= "mais".toUpperCase();
+        words[10]= "lait".toUpperCase();
+        words[11]= "vin".toUpperCase();
       } else if (language == 'es') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "patata".toUpperCase();
+        words[1] = "Pastel ".toUpperCase();
+        words[2] = "queso".toUpperCase();
+        words[3] = "salsa".toUpperCase();
+        words[4] = "fritas".toUpperCase();
+        words[5] = "miel".toUpperCase();
+        words[6] = "pan".toUpperCase();
+        words[7] = "maiz".toUpperCase();
+        words[8] = "ajo".toUpperCase();
+        words[9]= "atun".toUpperCase();
+        words[10]= "higo".toUpperCase();
+        words[11]= "yogur".toUpperCase();
       }
-    } else if (widget.game_type.type == 'animals') {
+    }else if (widget.game_type.type=='animals'){
       if (language == 'en') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "badger".toUpperCase();
+        words[1] = "collie".toUpperCase();
+        words[2] = "whale".toUpperCase();
+        words[3] = "deer".toUpperCase();
+        words[4] = "fossa".toUpperCase();
+        words[5] = "dhole".toUpperCase();
+        words[6] = "dingo".toUpperCase();
+        words[7] = "duck".toUpperCase();
+        words[8] = "dodo".toUpperCase();
+        words[9]= "fox".toUpperCase();
+        words[10]= "fish".toUpperCase();
+        words[11]= "seal".toUpperCase();
       } else if (language == 'pt') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "abelha".toUpperCase();
+        words[1] = "jiboia".toUpperCase();
+        words[2] = "leao".toUpperCase();
+        words[3] = "marta".toUpperCase();
+        words[4] = "melro".toUpperCase();
+        words[5] = "lula".toUpperCase();
+        words[6] = "cao".toUpperCase();
+        words[7] = "polvo".toUpperCase();
+        words[8] = "tigre".toUpperCase();
+        words[9]= "lobo".toUpperCase();
+        words[10]= "kudu".toUpperCase();
+        words[11]= "jacu".toUpperCase();
       } else if (language == 'fr') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "souris".toUpperCase();
+        words[1] = "mante".toUpperCase();
+        words[2] = "vache".toUpperCase();
+        words[3] = "mule".toUpperCase();
+        words[4] = "chien".toUpperCase();
+        words[5] = "cerf".toUpperCase();
+        words[6] = "loup".toUpperCase();
+        words[7] = "hibou".toUpperCase();
+        words[8] = "singe".toUpperCase();
+        words[9]= "ours".toUpperCase();
+        words[10]= "oie".toUpperCase();
+        words[11]= "ane".toUpperCase();
       } else if (language == 'es') {
-        words[0] = "pickle".toUpperCase();
-        words[1] = "bacon".toUpperCase();
-        words[2] = "honey".toUpperCase();
-        words[3] = "lemon".toUpperCase();
-        words[4] = "melon".toUpperCase();
-        words[5] = "patty".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
-        words[9] = "pop".toUpperCase();
-        words[10] = "pie".toUpperCase();
-        words[11] = "pizza".toUpperCase();
+        words[0] = "buitre".toUpperCase();
+        words[1] = "castor".toUpperCase();
+        words[2] = "cerdo".toUpperCase();
+        words[3] = "cebra".toUpperCase();
+        words[4] = "burro".toUpperCase();
+        words[5] = "buey".toUpperCase();
+        words[6] = "buho".toUpperCase();
+        words[7] = "erizo".toUpperCase();
+        words[8] = "emu".toUpperCase();
+        words[9]= "foca".toUpperCase();
+        words[10]= "gato".toUpperCase();
+        words[11]= "leon".toUpperCase();
       }
-      else if (widget.game_type.type == 'diverse') {
-        if (language == 'en') {
-          words[0] = "pickle".toUpperCase();
-          words[1] = "bacon".toUpperCase();
-          words[2] = "honey".toUpperCase();
-          words[3] = "lemon".toUpperCase();
-          words[4] = "melon".toUpperCase();
-          words[5] = "patty".toUpperCase();
-          words[6] = "Fig".toUpperCase();
-          words[7] = "bean".toUpperCase();
-          words[8] = "Pea".toUpperCase();
-          words[9] = "pop".toUpperCase();
-          words[10] = "pie".toUpperCase();
-          words[11] = "pizza".toUpperCase();
-        } else if (language == 'pt') {
-          words[0] = "pickle".toUpperCase();
-          words[1] = "bacon".toUpperCase();
-          words[2] = "honey".toUpperCase();
-          words[3] = "lemon".toUpperCase();
-          words[4] = "melon".toUpperCase();
-          words[5] = "patty".toUpperCase();
-          words[6] = "Fig".toUpperCase();
-          words[7] = "bean".toUpperCase();
-          words[8] = "Pea".toUpperCase();
-          words[9] = "pop".toUpperCase();
-          words[10] = "pie".toUpperCase();
-          words[11] = "pizza".toUpperCase();
-        } else if (language == 'fr') {
-          words[0] = "pickle".toUpperCase();
-          words[1] = "bacon".toUpperCase();
-          words[2] = "honey".toUpperCase();
-          words[3] = "lemon".toUpperCase();
-          words[4] = "melon".toUpperCase();
-          words[5] = "patty".toUpperCase();
-          words[6] = "Fig".toUpperCase();
-          words[7] = "bean".toUpperCase();
-          words[8] = "Pea".toUpperCase();
-          words[9] = "pop".toUpperCase();
-          words[10] = "pie".toUpperCase();
-          words[11] = "pizza".toUpperCase();
-        } else if (language == 'es') {
-          words[0] = "pickle".toUpperCase();
-          words[1] = "bacon".toUpperCase();
-          words[2] = "honey".toUpperCase();
-          words[3] = "lemon".toUpperCase();
-          words[4] = "melon".toUpperCase();
-          words[5] = "patty".toUpperCase();
-          words[6] = "Fig".toUpperCase();
-          words[7] = "bean".toUpperCase();
-          words[8] = "Pea".toUpperCase();
-          words[9] = "pop".toUpperCase();
-          words[10] = "pie".toUpperCase();
-          words[11] = "pizza".toUpperCase();
-        }
+    }
+    else if (widget.game_type.type=='diverse'){
+      if (language == 'en') {
+        words[0] = "porter".toUpperCase();
+        words[1] = "retire".toUpperCase();
+        words[2] = "tight".toUpperCase();
+        words[3] = "wheart".toUpperCase();
+        words[4] = "iron".toUpperCase();
+        words[5] = "glove".toUpperCase();
+        words[6] = "soda".toUpperCase();
+        words[7] = "pack".toUpperCase();
+        words[8] = "pure".toUpperCase();
+        words[9]= "trick".toUpperCase();
+        words[10]= "bin".toUpperCase();
+        words[11]= "mill".toUpperCase();
+      } else if (language == 'pt') {
+        words[0] = "mister".toUpperCase();
+        words[1] = "casual".toUpperCase();
+        words[2] = "sutil".toUpperCase();
+        words[3] = "mexer".toUpperCase();
+        words[4] = "inato".toUpperCase();
+        words[5] = "ideia".toUpperCase();
+        words[6] = "soda".toUpperCase();
+        words[7] = "torpe".toUpperCase();
+        words[8] = "amor".toUpperCase();
+        words[9]= "caos".toUpperCase();
+        words[10]= "caos".toUpperCase();
+        words[11]= "mito".toUpperCase();
+      } else if (language == 'fr') {
+        words[0] = "webcam".toUpperCase();
+        words[1] = "wattes".toUpperCase();
+        words[2] = "AVOYA".toUpperCase();
+        words[3] = "SYRTE".toUpperCase();
+        words[4] = "BAYES".toUpperCase();
+        words[5] = "FLUE".toUpperCase();
+        words[6] = "GARA".toUpperCase();
+        words[7] = "GAZE".toUpperCase();
+        words[8] = "EXPO".toUpperCase();
+        words[9]= "DICO".toUpperCase();
+        words[10]= "LICE".toUpperCase();
+        words[11]= "kip".toUpperCase();
+      } else if (language == 'es') {
+        words[0] = "viento".toUpperCase();
+        words[1] = "champu".toUpperCase();
+        words[2] = "nube".toUpperCase();
+        words[3] = "loro".toUpperCase();
+        words[4] = "mani".toUpperCase();
+        words[5] = "rosa".toUpperCase();
+        words[6] = "tenis".toUpperCase();
+        words[7] = "mesa".toUpperCase();
+        words[8] = "uva".toUpperCase();
+        words[9]= "azul".toUpperCase();
+        words[10]= "rugby".toUpperCase();
+        words[11]= "cama".toUpperCase();
       }
     }
   }
-
   show_Congrats() {
 
 
