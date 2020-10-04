@@ -3033,35 +3033,35 @@ set_language() {
       }
     }else if (widget.game_type.type=='animals'){
       if (language == 'en') {
-        words[0] = "Apple".toUpperCase();
-        words[1] = "Mango".toUpperCase();
-        words[2] = "Date".toUpperCase();
-        words[3] = "Lime".toUpperCase();
-        words[4] = "Pear".toUpperCase();
-        words[5] = "Abiu".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
+        words[0] = "zorro".toUpperCase();
+        words[1] = "skink".toUpperCase();
+        words[2] = "crow".toUpperCase();
+        words[3] = "wild".toUpperCase();
+        words[4] = "lion".toUpperCase();
+        words[5] = "fox".toUpperCase();
+        words[6] = "dog".toUpperCase();
+        words[7] = "rat".toUpperCase();
+        words[8] = "cat".toUpperCase();
       } else if (language == 'pt') {
-        words[0] = "Jambo".toUpperCase();
-        words[1] = "Manga".toUpperCase();
-        words[2] = "Baru".toUpperCase();
-        words[3] = "Akee".toUpperCase();
-        words[4] = "Lima".toUpperCase();
-        words[5] = "Abiu".toUpperCase();
-        words[6] = "Ata".toUpperCase();
-        words[7] = "Uva".toUpperCase();
-        words[8] = "Uxi".toUpperCase();
+        words[0] = "aguia".toUpperCase();
+        words[1] = "bode".toUpperCase();
+        words[2] = "asno".toUpperCase();
+        words[3] = "boto".toUpperCase();
+        words[4] = "alce".toUpperCase();
+          words[5] = "asno".toUpperCase();
+        words[6] = "boi".toUpperCase();
+        words[7] = "boa".toUpperCase();
+        words[8] = "kea".toUpperCase();
       } else if (language == 'fr') {
-        words[0] = "pomme".toUpperCase();
-        words[1] = "Coing".toUpperCase();
-        words[2] = "chou".toUpperCase();
-        words[3] = "noix".toUpperCase();
-        words[4] = "lime".toUpperCase();
-        words[5] = "coco".toUpperCase();
-        words[6] = "Taxo".toUpperCase();
-        words[7] = "Kaki".toUpperCase();
-        words[8] = "Kiwi".toUpperCase();
+        words[0] = "panda".toUpperCase();
+        words[1] = "grive".toUpperCase();
+        words[2] = "geai".toUpperCase();
+        words[3] = "porc".toUpperCase();
+        words[4] = "cane".toUpperCase();
+        words[5] = "milan".toUpperCase();
+        words[6] = "oie".toUpperCase();
+        words[7] = "ane".toUpperCase();
+        words[8] = "rat".toUpperCase();
       } else if (language == 'es') {
         words[0] = "limon".toUpperCase();
         words[1] = "mango".toUpperCase();
@@ -3076,45 +3076,45 @@ set_language() {
     }
     else if (widget.game_type.type=='diverse'){
       if (language == 'en') {
-        words[0] = "Apple".toUpperCase();
-        words[1] = "Mango".toUpperCase();
-        words[2] = "Date".toUpperCase();
-        words[3] = "Lime".toUpperCase();
-        words[4] = "Pear".toUpperCase();
-        words[5] = "Abiu".toUpperCase();
-        words[6] = "Fig".toUpperCase();
-        words[7] = "bean".toUpperCase();
-        words[8] = "Pea".toUpperCase();
+        words[0] = "uncle".toUpperCase();
+        words[1] = "blast".toUpperCase();
+        words[2] = "lazy".toUpperCase();
+        words[3] = "jump".toUpperCase();
+        words[4] = "cake".toUpperCase();
+        words[5] = "site".toUpperCase();
+        words[6] = "aba".toUpperCase();
+        words[7] = "act".toUpperCase();
+        words[8] = "air".toUpperCase();
       } else if (language == 'pt') {
-        words[0] = "Jambo".toUpperCase();
-        words[1] = "Manga".toUpperCase();
-        words[2] = "Baru".toUpperCase();
-        words[3] = "Akee".toUpperCase();
-        words[4] = "Lima".toUpperCase();
+        words[0] = "palta".toUpperCase();
+        words[1] = "texto".toUpperCase();
+        words[2] = "cano".toUpperCase();
+        words[3] = "cena".toUpperCase();
+        words[4] = "seta".toUpperCase();
         words[5] = "Abiu".toUpperCase();
         words[6] = "Ata".toUpperCase();
         words[7] = "Uva".toUpperCase();
         words[8] = "Uxi".toUpperCase();
       } else if (language == 'fr') {
-        words[0] = "pomme".toUpperCase();
-        words[1] = "Coing".toUpperCase();
-        words[2] = "chou".toUpperCase();
-        words[3] = "noix".toUpperCase();
-        words[4] = "lime".toUpperCase();
+        words[0] = "bodin".toUpperCase();
+        words[1] = "brant".toUpperCase();
+        words[2] = "roma".toUpperCase();
+        words[3] = "roku".toUpperCase();
+        words[4] = "tout".toUpperCase();
         words[5] = "coco".toUpperCase();
-        words[6] = "Taxo".toUpperCase();
-        words[7] = "Kaki".toUpperCase();
-        words[8] = "Kiwi".toUpperCase();
+        words[6] = "por".toUpperCase();
+        words[7] = "pom".toUpperCase();
+        words[8] = "rop".toUpperCase();
       } else if (language == 'es') {
-        words[0] = "limon".toUpperCase();
-        words[1] = "mango".toUpperCase();
-        words[2] = "coco".toUpperCase();
-        words[3] = "higo".toUpperCase();
-        words[4] = "lima".toUpperCase();
-        words[5] = "kiwi".toUpperCase();
-        words[6] = "mora".toUpperCase();
-        words[7] = "uva".toUpperCase();
-        words[8] = "yaca".toUpperCase();
+        words[0] = "roger".toUpperCase();
+        words[1] = "cuzco".toUpperCase();
+        words[2] = "lelo".toUpperCase();
+        words[3] = "loli".toUpperCase();
+        words[4] = "tous".toUpperCase();
+        words[5] = "soez".toUpperCase();
+        words[6] = "spa".toUpperCase();
+        words[7] = "spy".toUpperCase();
+        words[8] = "soy".toUpperCase();
       }
     }
 }

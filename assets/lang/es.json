@@ -1,9 +1,11 @@
 {
 
-  "levels_level": "NIVEL",
-  "levels_easy" :"FÁCIL",
-  "levels_medium" :"MEDIO",
-  "levels_hard" :"DIFÍCIL",
+  "levels_food" :"Comida",
+  "levels_animals" :"Animales",
+  "levels_diverse" :"Diverso",
+  "levels_easy" : "Fácil",
+  "levels_medium" : "Medio",
+  "levels_hard" : "Difícil",
 
   "settings_settings": "AJUSTES",
   "settings_language": "Idioma",

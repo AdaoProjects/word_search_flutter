@@ -28,7 +28,15 @@ class _LevelState extends State<Level> {
                           .of(context)
                           .size
                           .width),
-                  Text(AppLocalizations.of(context).translate("levels_level"),
+                  SizedBox(width: MediaQuery
+                      .of(context)
+                      .size
+                      .width / 10,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15),
+                  Text(AppLocalizations.of(context).translate("levels_food"),
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -38,6 +46,78 @@ class _LevelState extends State<Level> {
                               .size
                               .height / 15)
                   ),
+
+            SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+
+                child:Row(
+
+                    children: [
+                    Container(
+                    child:FlatButton(
+                      child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: MediaQuery
+                        .of(context)
+                        .size
+                        .height / 25)
+            ),
+                onPressed: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("food")
+            )));
+            },
+                )
+    ),
+                      Container(
+                          child:FlatButton(
+                            child: Text(AppLocalizations.of(context).translate("levels_medium"),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 25)
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("food")
+                                  )));
+                            },
+                          )
+                      ),
+                      Container(
+
+                          child:FlatButton(
+                            child: Text(AppLocalizations.of(context).translate("levels_hard"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("food")
+                                  )));
+                            },
+                          )
+                      ),
+                    ]
+                ),
+
+            ),
                   SizedBox(width: MediaQuery
                       .of(context)
                       .size
@@ -45,164 +125,176 @@ class _LevelState extends State<Level> {
                       height: MediaQuery
                           .of(context)
                           .size
-                          .height / 10),
-
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("food")
-                          )));
-                    },
-                    color: Colors.black,
-                    highlightColor: GameColors.tertiary,
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            GameColors.primary,
-                            Colors.black
-                          ],),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(MediaQuery
-                                .of(context)
-                                .size
-                                .height / 15)),
-                      ),
-                      child: Container(
-                          constraints: BoxConstraints(minWidth: MediaQuery
+                          .height / 15),
+                  Text(AppLocalizations.of(context).translate("levels_animals"),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: MediaQuery
                               .of(context)
                               .size
-                              .width * 4 / 5, minHeight: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 15), // min sizes for Material buttons
-                          alignment: Alignment.center,
-                          child: Text(AppLocalizations.of(context).translate(
-                              "levels_easy"),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                                fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 15),
-                            textAlign: TextAlign.center,
-                          )
-                      ),
-                    ),
+                              .height / 15)
                   ),
 
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+
+                    child:Row(
+
+                        children: [
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 25)
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("animals")
+                                      )));
+                                },
+                              )
+                          ),
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_medium"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("animals")
+                                      )));
+                                },
+                              )
+                          ),
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_hard"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("animals")
+                                      )));
+                                },
+                              )
+                          ),
+                        ]
+                    ),
+
+                  ),
                   SizedBox(width: MediaQuery
                       .of(context)
                       .size
-                      .width / 15,
+                      .width / 10,
                       height: MediaQuery
                           .of(context)
                           .size
                           .height / 15),
-                  RaisedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("food"))),
-                      );
-                    },
-                    color: Colors.black,
-                    highlightColor: GameColors.tertiary,
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            GameColors.primary,
-                            Colors.black
-                          ],),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(MediaQuery
-                                .of(context)
-                                .size
-                                .height / 15)),
-                      ),
-                      child: Container(
-                          constraints: BoxConstraints(minWidth: MediaQuery
+                  Text(AppLocalizations.of(context).translate("levels_diverse"),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: MediaQuery
                               .of(context)
                               .size
-                              .width * 4 / 5, minHeight: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 15), // min sizes for Material buttons
-                          alignment: Alignment.center,
-                          child: Text(AppLocalizations.of(context).translate(
-                              "levels_medium"),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                                fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 15),
-                            textAlign: TextAlign.center,
-                          )
-                      ),
-                    ),
+                              .height / 15)
                   ),
 
-                  SizedBox(width: MediaQuery
-                      .of(context)
-                      .size
-                      .width / 15,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height / 15),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
 
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("food"))),
-                      );
-                    },
-                    color: Colors.black,
-                    highlightColor: GameColors.tertiary,
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            GameColors.primary,
-                            Colors.black
-                          ],),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(MediaQuery
-                                .of(context)
-                                .size
-                                .height / 15)),
-                      ),
-                      child: Container(
-                          constraints: BoxConstraints(minWidth: MediaQuery
+                    child:Row(
+
+                        children: [
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                          fontSize: MediaQuery
                               .of(context)
                               .size
-                              .width * 4 / 5, minHeight: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 15), // min sizes for Material buttons
-                          alignment: Alignment.center,
-                          child: Text(AppLocalizations.of(context).translate(
-                              "levels_hard"),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                                fontSize: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height / 15),
-                            textAlign: TextAlign.center,
-                          )
-                      ),
+                              .height / 25)
+                  ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("diverse")
+                                      )));
+                                },
+                              )
+                          ),
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_medium"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("diverse")
+                                      )));
+                                },
+                              )
+                          ),
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_hard"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("diverse")
+                                      )));
+                                },
+                              )
+                          ),
+                        ]
                     ),
+
                   ),
                 ]
             )
