@@ -1617,11 +1617,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
         }
         for(int y=0;y<word_five.length;y++){
           for (int x=0;x<word_four.length;x++){
-            if((row_five+y==row_four+x && column_five+y==column_four)||
+            if(!((row_five+y==row_four+x && column_five+y==column_four)||
                 column_four==column_three || (column_four>=column_one && column_four<=column_one+word_one.length-1
                 && row_four<=row_one && row_four+word_four.length-1>=row_one) ||
                 (column_four>=column_two && column_four<=column_two+word_two.length-1
-                    && row_four<=row_two && row_four+word_four.length-1>=row_two)){
+                    && row_four<=row_two && row_four+word_four.length-1>=row_two))){
               k++;
             }
           }
