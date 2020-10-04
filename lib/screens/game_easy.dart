@@ -1098,7 +1098,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             if (column_one < 0 ||
                 column_one > num_rows_and_columns - word_one.length) {
               row_one = row_five + i;
-              column_one = column_five + i - word_one.length + 1 + j;
+              column_one = column_five + i - word_one.length + 1+ j;
 
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
@@ -1185,41 +1185,28 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   column_two > num_rows_and_columns - word_two.length ||
                   row_one == row_two) {
                 row_two = row_five + i;
-                column_two = column_five + i +word_two.length-1 - j;
+                column_two = column_five + i -word_two.length+1 + j;
                 if (column_two < 0 ||
                     column_two > num_rows_and_columns - word_two.length ||
                     row_one == row_two) {
-                  row_two = row_five + i;
-                  column_two = column_five + i - j;
-                  if (column_two < 0 ||
-                      column_two > num_rows_and_columns - word_two.length ||
-                      row_one == row_two) {
-                    row_two = row_five + i;
-                    column_two = column_five + i -word_two.length+1 + j;
-                    if (column_two < 0 ||
-                        column_two > num_rows_and_columns - word_two.length ||
-                        row_one == row_two) {
-                      no_connection_two_count++;
-                      if (no_connection_two_count < 15) {
-                        fit_Words_Puzzle(
-                            puzzle,
-                            word_one,
-                            word_two,
-                            word_three,
-                            word_four,
-                            word_five,
-                            word_six,
-                            word_seven,
-                            word_eight,
-                            word_nine
-                        );
-                      } else {
-                        connection_two = false;
-                      }
-                    }else{
-
-                    }
+                  no_connection_two_count++;
+                  if (no_connection_two_count < 15) {
+                    fit_Words_Puzzle(
+                        puzzle,
+                        word_one,
+                        word_two,
+                        word_three,
+                        word_four,
+                        word_five,
+                        word_six,
+                        word_seven,
+                        word_eight,
+                        word_nine
+                    );
                   } else {
+                    connection_two = false;
+                  }
+                } else {
                   word_two_reverse = true;
                   break;
                 }
