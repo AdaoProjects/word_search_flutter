@@ -3033,8 +3033,8 @@ set_language() {
       }
     }else if (widget.game_type.type=='animals'){
       if (language == 'en') {
-        words[0] = "zorro".toUpperCase();
-        words[1] = "skink".toUpperCase();
+        words[0] = "whale".toUpperCase();
+        words[1] = "gecko".toUpperCase();
         words[2] = "crow".toUpperCase();
         words[3] = "wild".toUpperCase();
         words[4] = "lion".toUpperCase();
