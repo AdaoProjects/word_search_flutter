@@ -2537,7 +2537,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
 
     if(!connection_six) {
-      for (int i = 0; i < words[4].length; i++) {
+      for (int i = 0; i < words[3].length; i++) {
         for (int j = 0; j < words[6].length; j++) {
           if (words[3][i] == words[6][j]) {
             connection_seven = true;
@@ -4581,11 +4581,11 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
       if (language == 'en') {
         words[0] = "badger".toUpperCase();
         words[1] = "collie".toUpperCase();
-        words[2] = "whale".toUpperCase();
-        words[3] = "deer".toUpperCase();
+        words[2] = "dingo".toUpperCase();
+        words[3] = "whale".toUpperCase();
         words[4] = "fossa".toUpperCase();
         words[5] = "dhole".toUpperCase();
-        words[6] = "dingo".toUpperCase();
+        words[6] = "deer".toUpperCase();
         words[7] = "duck".toUpperCase();
         words[8] = "dodo".toUpperCase();
         words[9]= "fox".toUpperCase();
