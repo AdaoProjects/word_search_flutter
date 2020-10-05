@@ -453,15 +453,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                child: Column(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: <Widget>[
-                     Image.asset('assets/images/find_the_words.png',
+                     SizedBox(
                          height: MediaQuery
                              .of(context)
                              .size
                              .height / 7,
-                         width: MediaQuery
-                             .of(context)
-                             .size
-                             .width),
+                     ),
                      Row(
                          children: [
                            SizedBox(width: MediaQuery
