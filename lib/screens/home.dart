@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
                     .size
                     .width),
             SizedBox(width:MediaQuery. of(context). size. width/20,
-                height: MediaQuery. of(context). size. height/20),
+                height: MediaQuery. of(context). size. height/15),
 
             Row(children:[
               SizedBox(width:MediaQuery.of(context).size.width/5),
@@ -57,14 +57,38 @@ class _HomeState extends State<Home> {
                   child:Row(
 
                 children: [
+                  SizedBox(width:MediaQuery.of(context).size.width/25),
+                  Container(child:
+                  IconButton(
+                    splashRadius: MediaQuery.of(context).size.width/7,
+                    splashColor:Colors.yellowAccent,
+                    color:GameColors.primary,
+                    icon: Icon(Icons.play_arrow),
+                    iconSize: MediaQuery.of(context).size.width/7,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Level()),
+                      );
+                    },
+                  ),
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(MediaQuery
+                            .of(context)
+                            .size
+                            .height / 10)
+                    ),
+                  ),
+                  SizedBox(width:MediaQuery.of(context).size.width/10),
                   Container(
                       child:
                       IconButton(
-                        splashRadius: MediaQuery.of(context).size.height/10,
+                        splashRadius: MediaQuery.of(context).size.width/7,
                         splashColor:Colors.yellowAccent,
                         color:GameColors.secondary,
                         icon: Icon(Icons.trending_up),
-                        iconSize: MediaQuery.of(context).size.height/10,
+                        iconSize: MediaQuery.of(context).size.width/7,
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -80,80 +104,62 @@ class _HomeState extends State<Home> {
                             .height / 10)
                     ),
                   ),
-                  SizedBox(width:MediaQuery.of(context).size.width/20),
-                  Container(child:
-                  IconButton(
-                    splashRadius: MediaQuery.of(context).size.height/10,
-                    splashColor:Colors.yellowAccent,
-                    color:GameColors.primary,
-                    icon: Icon(Icons.play_arrow),
-                    iconSize: MediaQuery.of(context).size.height/10,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Level()),
-                      );
-                    },
-                  ),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(MediaQuery
-                            .of(context)
-                            .size
-                            .height / 10)
-                    ),
-                  ),
-                  SizedBox(width:MediaQuery.of(context).size.width/20),
-                  Container(child:
-                  IconButton(
-                    splashRadius: MediaQuery.of(context).size.height/10,
-                    splashColor:Colors.yellowAccent,
-                    color:GameColors.secondary,
-                    icon: Icon(Icons.share),
-                    iconSize: MediaQuery.of(context).size.height/10,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Level()),
-                      );
-                    },
-                  ),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(MediaQuery
-                            .of(context)
-                            .size
-                            .height / 10)
-                    ),
-                  ),
-                  SizedBox(width:MediaQuery.of(context).size.width/20),
-                  Container(child:
-                  IconButton(
-                    splashRadius: MediaQuery.of(context).size.height/10,
-                    splashColor:Colors.yellowAccent,
-                    color:GameColors.secondary,
-                    icon: Icon(Icons.settings),
-                    iconSize: MediaQuery.of(context).size.height/10,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Settings()),
-                      );
-                    },
-                  ),
-                    decoration: BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(MediaQuery
-                            .of(context)
-                            .size
-                            .height / 10)
-                    ),
-                  ),
-
-
-
 
                 ],
+              ),
+            ),
+              SizedBox(height:MediaQuery.of(context).size.height/15),
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                child:
+              Row(children:[
+                SizedBox(width:MediaQuery.of(context).size.width/25),
+                Container(child:
+                IconButton(
+                  splashRadius: MediaQuery.of(context).size.width/7,
+                  splashColor:Colors.yellowAccent,
+                  color:GameColors.secondary,
+                  icon: Icon(Icons.share),
+                  iconSize: MediaQuery.of(context).size.width/7,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Level()),
+                    );
+                  },
+                ),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(MediaQuery
+                          .of(context)
+                          .size
+                          .height / 10)
+                  ),
+                ),
+                SizedBox(width:MediaQuery.of(context).size.width/10),
+                Container(child:
+                IconButton(
+                  splashRadius: MediaQuery.of(context).size.width/7,
+                  splashColor:Colors.yellowAccent,
+                  color:GameColors.secondary,
+                  icon: Icon(Icons.settings),
+                  iconSize: MediaQuery.of(context).size.width/7,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Settings()),
+                    );
+                  },
+                ),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(MediaQuery
+                          .of(context)
+                          .size
+                          .width/7)
+                  ),
+                ),
+              ]
               )
               )
 

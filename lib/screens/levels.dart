@@ -55,6 +55,7 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                 Text(AppLocalizations.of(context).translate("levels_easy"),
                                     style: TextStyle(
@@ -77,10 +78,13 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("food")
                                       )));
                                 },
-                              )
+                              ),
+                            
                           ),
+                          SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_medium"),
                                       style: TextStyle(
@@ -103,11 +107,14 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("food")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
+                          SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
 
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children: [
                                   Text(AppLocalizations.of(context).translate("levels_hard"),
                                       style: TextStyle(
@@ -129,7 +136,8 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("food")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
                         ]
                     ),
@@ -162,6 +170,7 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_easy"),
                                       style: TextStyle(
@@ -184,10 +193,13 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("animals")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
+                          SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_medium"),
                                       style: TextStyle(
@@ -209,10 +221,13 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("animals")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
+                          SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                 Text(AppLocalizations.of(context).translate("levels_hard"),
     style: TextStyle(
@@ -234,7 +249,8 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("animals")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
                         ]
                     ),
@@ -267,6 +283,7 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children: [
                                   Text(AppLocalizations.of(context).translate("levels_easy"),
                                       style: TextStyle(
@@ -289,10 +306,13 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("diverse")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
+                          SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_medium"),
                                       style: TextStyle(
@@ -314,10 +334,13 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("diverse")
                                       )));
                                 },
-                              )
+                              ),
+
                           ),
+                          SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
+                                color: Colors.blue[400],
                                 child: Column(children:[
                                 Text(AppLocalizations.of(context).translate("levels_hard"),
     style: TextStyle(
@@ -339,7 +362,8 @@ class _LevelState extends State<Level> {
                                       MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("diverse")
                                       )));
                                 },
-                              )
+                              ),
+                            
                           ),
                         ]
                     ),
