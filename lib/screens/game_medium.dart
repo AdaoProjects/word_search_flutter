@@ -2856,7 +2856,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
           } else {
             row_eight = row_six-j;
-            column_eight=column_six+word_seven.length-1-i;
+            column_eight=column_six+word_six.length-1-i;
             int k=0;
 
             for (int p = 0; p < word_ten.length; p++) {
