@@ -1866,7 +1866,7 @@ if(!connection_five) {
             if (column_seven < 0 ||
                 column_seven > num_rows_and_columns - word_seven.length ||
                 k != 0) {
-              column_seven = column_three +word_seven.length-1+j;
+              column_seven = column_three -word_seven.length+1+j;
               row_seven = row_three + word_three.length - 1 - i;
               int k = 0;
               for (int i = 0; i < word_five.length; i++) {
