@@ -288,17 +288,17 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 if (local.dx > MediaQuery
                     .of(context)
                     .size
-                    .width / 18.4
+                    .width / 18.415
                     + column * MediaQuery
                         .of(context)
                         .size
-                        .width / 11.28 && local.dx < MediaQuery
+                        .width / 11.21 && local.dx < MediaQuery
                     .of(context)
                     .size
-                    .width / 18.4 + (column + 1) * MediaQuery
+                    .width / 18.415 + (column + 1) * MediaQuery
                     .of(context)
                     .size
-                    .width / 11.28
+                    .width / 11.21
 
                     && local.dy > MediaQuery
                         .of(context)
@@ -316,10 +316,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   end_Of_Selection_dx = MediaQuery
                       .of(context)
                       .size
-                      .width / 18.4 + (column + 1 / 2) * MediaQuery
+                      .width / 18.415 + (column + 1 / 2) * MediaQuery
                       .of(context)
                       .size
-                      .width / 11.28;
+                      .width / 11.21;
                   end_Of_Selection_dy = MediaQuery
                       .of(context)
                       .size
@@ -375,17 +375,17 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   if (local.dx > MediaQuery
                       .of(context)
                       .size
-                      .width / 18.4
+                      .width / 18.415
                       + column * MediaQuery
                           .of(context)
                           .size
-                          .width / 11.28 && local.dx < MediaQuery
+                          .width / 11.21 && local.dx < MediaQuery
                       .of(context)
                       .size
-                      .width / 18.4 + (column + 1) * MediaQuery
+                      .width / 18.415 + (column + 1) * MediaQuery
                       .of(context)
                       .size
-                      .width / 11.28
+                      .width / 11.21
 
                       && local.dy > MediaQuery
                           .of(context)
@@ -410,11 +410,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       start_Of_Selection_dx = MediaQuery
                           .of(context)
                           .size
-                          .width / 18.4 +
+                          .width / 18.415 +
                           (column + 1 / 2) * MediaQuery
                               .of(context)
                               .size
-                              .width / 11.28;
+                              .width / 11.21;
                       start_Of_Selection_dy = MediaQuery
                           .of(context)
                           .size
@@ -3447,7 +3447,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_eleven.length; j++) {
                 if ((row_five + i == row_eleven + j &&
-                    column_eleven + i == column_eleven) ||
+                    column_five + i == column_eleven) ||
                     column_eleven == column_three || column_eleven == column_four ||
                     column_eleven==column_eight||
                     (
@@ -3501,7 +3501,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               for (int i = 0; i < word_five.length; i++) {
                 for (int j = 0; j < word_eleven.length; j++) {
                   if ((row_five + i == row_eleven + j &&
-                      column_eleven + i == column_eleven) ||
+                      column_five + i == column_eleven) ||
                       column_eleven == column_three || column_eleven == column_four ||
                       column_eleven==column_eight||
                       (
@@ -3563,7 +3563,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_eleven.length; j++) {
                 if ((row_five + i == row_eleven + j &&
-                    column_eleven + i == column_eleven) ||
+                    column_five + i == column_eleven) ||
                     column_eleven == column_three ||
                     column_eleven == column_four ||
                     column_eleven == column_eight ||
@@ -3619,7 +3619,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               for (int i = 0; i < word_five.length; i++) {
                 for (int j = 0; j < word_eleven.length; j++) {
                   if ((row_five + i == row_eleven + j &&
-                      column_eleven + i == column_eleven) ||
+                      column_five + i == column_eleven) ||
                       column_eleven == column_three ||
                       column_eleven == column_four ||
                       column_eleven == column_eight ||
@@ -3689,7 +3689,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_eleven.length; j++) {
               if (!((row_five + i == row_eleven + j &&
-                  column_eleven + i == column_eleven) ||
+                  column_five + i == column_eleven) ||
                   column_eleven == column_three ||
                   column_eleven == column_four ||
                   column_eleven==column_eight||

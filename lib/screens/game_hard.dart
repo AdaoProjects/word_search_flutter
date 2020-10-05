@@ -3456,7 +3456,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_eleven.length; j++) {
                 if ((row_five + i == row_eleven + j &&
-                    column_eleven + i == column_eleven) ||
+                    column_five + i == column_eleven) ||
                     column_eleven == column_three || column_eleven == column_four ||
                     column_eleven==column_eight||
                     (
@@ -3510,7 +3510,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               for (int i = 0; i < word_five.length; i++) {
                 for (int j = 0; j < word_eleven.length; j++) {
                   if ((row_five + i == row_eleven + j &&
-                      column_eleven + i == column_eleven) ||
+                      column_five + i == column_eleven) ||
                       column_eleven == column_three || column_eleven == column_four ||
                       column_eleven==column_eight||
                       (
@@ -3572,7 +3572,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             for (int i = 0; i < word_five.length; i++) {
               for (int j = 0; j < word_eleven.length; j++) {
                 if ((row_five + i == row_eleven + j &&
-                    column_eleven + i == column_eleven) ||
+                    column_five + i == column_eleven) ||
                     column_eleven == column_three ||
                     column_eleven == column_four ||
                     column_eleven == column_eight ||
@@ -3628,7 +3628,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               for (int i = 0; i < word_five.length; i++) {
                 for (int j = 0; j < word_eleven.length; j++) {
                   if ((row_five + i == row_eleven + j &&
-                      column_eleven + i == column_eleven) ||
+                      column_five + i == column_eleven) ||
                       column_eleven == column_three ||
                       column_eleven == column_four ||
                       column_eleven == column_eight ||
@@ -3698,7 +3698,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
           for (int i = 0; i < word_five.length; i++) {
             for (int j = 0; j < word_eleven.length; j++) {
               if (!((row_five + i == row_eleven + j &&
-                  column_eleven + i == column_eleven) ||
+                  column_five + i == column_eleven) ||
                   column_eleven == column_three ||
                   column_eleven == column_four ||
                   column_eleven==column_eight||
