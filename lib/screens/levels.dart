@@ -44,7 +44,7 @@ class _LevelState extends State<Level> {
                           fontSize: MediaQuery
                               .of(context)
                               .size
-                              .height / 15)
+                              .height / 20)
                   ),
 
                   SingleChildScrollView(
@@ -55,7 +55,8 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                                child: Column(children:[
+                                Text(AppLocalizations.of(context).translate("levels_easy"),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -64,6 +65,11 @@ class _LevelState extends State<Level> {
                                             .of(context)
                                             .size
                                             .height / 25)
+                                ),
+                                Icon(Icons.star,
+                                    color: GameColors.secondary,
+                                    size:MediaQuery.of(context).size.width/10),
+          ]
                                 ),
                                 onPressed: () {
                                   Navigator.push(
@@ -75,16 +81,22 @@ class _LevelState extends State<Level> {
                           ),
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_medium"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children:[
+                                  Text(AppLocalizations.of(context).translate("levels_medium"),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height / 25)
+                                  ),
+    Icon(Icons.star,
+    color: GameColors.secondary,
+    size:MediaQuery.of(context).size.width/10),
+
+                                ]),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -96,16 +108,21 @@ class _LevelState extends State<Level> {
                           Container(
 
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_hard"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children: [
+                                  Text(AppLocalizations.of(context).translate("levels_hard"),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height / 25)
+                                  ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -134,7 +151,7 @@ class _LevelState extends State<Level> {
                           fontSize: MediaQuery
                               .of(context)
                               .size
-                              .height / 15)
+                              .height / 20)
                   ),
 
                   SingleChildScrollView(
@@ -145,16 +162,22 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_easy"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children:[
+                                  Text(AppLocalizations.of(context).translate("levels_easy"),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height / 25)
+                                  ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
+
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -165,16 +188,21 @@ class _LevelState extends State<Level> {
                           ),
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_medium"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children:[
+                                  Text(AppLocalizations.of(context).translate("levels_medium"),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height / 25)
+                                  ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -185,16 +213,21 @@ class _LevelState extends State<Level> {
                           ),
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_hard"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children:[
+                                Text(AppLocalizations.of(context).translate("levels_hard"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -223,7 +256,7 @@ class _LevelState extends State<Level> {
                           fontSize: MediaQuery
                               .of(context)
                               .size
-                              .height / 15)
+                              .height / 20)
                   ),
 
                   SingleChildScrollView(
@@ -234,16 +267,22 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_easy"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children: [
+                                  Text(AppLocalizations.of(context).translate("levels_easy"),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height / 25)
+                                  ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
+
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -254,16 +293,21 @@ class _LevelState extends State<Level> {
                           ),
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_medium"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children:[
+                                  Text(AppLocalizations.of(context).translate("levels_medium"),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height / 25)
+                                  ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -274,16 +318,21 @@ class _LevelState extends State<Level> {
                           ),
                           Container(
                               child:FlatButton(
-                                child: Text(AppLocalizations.of(context).translate("levels_hard"),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 25)
-                                ),
+                                child: Column(children:[
+                                Text(AppLocalizations.of(context).translate("levels_hard"),
+    style: TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: MediaQuery
+        .of(context)
+        .size
+        .height / 25)
+    ),
+                                  Icon(Icons.star,
+                                      color: GameColors.secondary,
+                                      size:MediaQuery.of(context).size.width/10),
+                                ]),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
