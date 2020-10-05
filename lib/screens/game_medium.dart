@@ -2125,7 +2125,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     if(!connection_four) {
       num_of_tentatives = 0;
       int k = 0;
-      while (k < word_five.length * word_four.length) {
+      while (k < (word_five.length * word_ten.length)*word_four.length) {
         k = 0;
         row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
         column_four = random.nextInt(num_rows_and_columns);
