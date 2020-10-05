@@ -739,9 +739,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -783,9 +780,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -827,9 +821,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
+
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -878,9 +870,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
+
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -922,9 +912,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
+
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -966,9 +954,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
+
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1017,9 +1003,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1061,9 +1044,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1105,9 +1085,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1155,9 +1132,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1199,9 +1173,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1243,9 +1214,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
+
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&

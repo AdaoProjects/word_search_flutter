@@ -721,9 +721,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -765,9 +762,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -809,148 +803,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
-                                  (word_three_scratch &&
-                                      sorted_Num_Words == 1) ||
-                                  (word_four_scratch &&
-                                      sorted_Num_Words == 2) ||
-                                  (word_five_scratch && sorted_Num_Words == 3)
-                                  ? Center(
-                                  child: Text(return_Sorted_Words() + ', ',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ))
-                                  : Center(
-                                child: Text(return_Sorted_Words() + ',',
-                                  style: TextStyle(fontSize: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 30, fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),),
-                            ]
-                            ),
-                          ]),
-
-
-                          TableRow(children: [
-                            Row(children: [
-                              SizedBox(width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 30),
-                              (word_twelve_scratch && sorted_Num_Words == 10) ||
-                                  (word_eleven_scratch &&
-                                      sorted_Num_Words == 9) ||
-                                  (word_ten_scratch && sorted_Num_Words == 8) ||
-                                  (word_nine_scratch &&
-                                      sorted_Num_Words == 7) ||
-                                  (word_eight_scratch &&
-                                      sorted_Num_Words == 6) ||
-                                  (word_seven_scratch &&
-                                      sorted_Num_Words == 5) ||
-                                  (word_six_scratch && sorted_Num_Words == 4) ||
-                                  (word_one_scratch &&
-                                      sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
-                                  (word_three_scratch &&
-                                      sorted_Num_Words == 1) ||
-                                  (word_four_scratch &&
-                                      sorted_Num_Words == 2) ||
-                                  (word_five_scratch && sorted_Num_Words == 3)
-                                  ? Center(
-                                  child: Text(return_Sorted_Words() + ', ',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ))
-                                  : Center(
-                                child: Text(return_Sorted_Words() + ',',
-                                  style: TextStyle(fontSize: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 30, fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),),
-                              SizedBox(width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 30),
-                              (word_twelve_scratch && sorted_Num_Words == 10) ||
-                                  (word_eleven_scratch &&
-                                      sorted_Num_Words == 9) ||
-                                  (word_ten_scratch && sorted_Num_Words == 8) ||
-                                  (word_nine_scratch &&
-                                      sorted_Num_Words == 7) ||
-                                  (word_eight_scratch &&
-                                      sorted_Num_Words == 6) ||
-                                  (word_seven_scratch &&
-                                      sorted_Num_Words == 5) ||
-                                  (word_six_scratch && sorted_Num_Words == 4) ||
-                                  (word_one_scratch &&
-                                      sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
-                                  (word_three_scratch &&
-                                      sorted_Num_Words == 1) ||
-                                  (word_four_scratch &&
-                                      sorted_Num_Words == 2) ||
-                                  (word_five_scratch && sorted_Num_Words == 3)
-                                  ? Center(
-                                  child: Text(return_Sorted_Words() + ', ',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .height / 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ))
-                                  : Center(
-                                child: Text(return_Sorted_Words() + ',',
-                                  style: TextStyle(fontSize: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 30, fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),),
-                              SizedBox(width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 30),
-                              (word_twelve_scratch && sorted_Num_Words == 10) ||
-                                  (word_eleven_scratch &&
-                                      sorted_Num_Words == 9) ||
-                                  (word_ten_scratch && sorted_Num_Words == 8) ||
-                                  (word_nine_scratch &&
-                                      sorted_Num_Words == 7) ||
-                                  (word_eight_scratch &&
-                                      sorted_Num_Words == 6) ||
-                                  (word_seven_scratch &&
-                                      sorted_Num_Words == 5) ||
-                                  (word_six_scratch && sorted_Num_Words == 4) ||
-                                  (word_one_scratch &&
-                                      sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -999,9 +851,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1043,9 +892,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1087,9 +933,136 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
+                                  (word_three_scratch &&
+                                      sorted_Num_Words == 1) ||
+                                  (word_four_scratch &&
+                                      sorted_Num_Words == 2) ||
+                                  (word_five_scratch && sorted_Num_Words == 3)
+                                  ? Center(
+                                  child: Text(return_Sorted_Words() + ', ',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ))
+                                  : Center(
+                                child: Text(return_Sorted_Words() + ',',
+                                  style: TextStyle(fontSize: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 30, fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),),
+                            ]
+                            ),
+                          ]),
+
+
+                          TableRow(children: [
+                            Row(children: [
+                              SizedBox(width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 30),
+                              (word_twelve_scratch && sorted_Num_Words == 10) ||
+                                  (word_eleven_scratch &&
+                                      sorted_Num_Words == 9) ||
+                                  (word_ten_scratch && sorted_Num_Words == 8) ||
+                                  (word_nine_scratch &&
+                                      sorted_Num_Words == 7) ||
+                                  (word_eight_scratch &&
+                                      sorted_Num_Words == 6) ||
+                                  (word_seven_scratch &&
+                                      sorted_Num_Words == 5) ||
+                                  (word_six_scratch && sorted_Num_Words == 4) ||
+                                  (word_one_scratch &&
+                                      sorted_Num_Words == 11) ||
+                                  (word_three_scratch &&
+                                      sorted_Num_Words == 1) ||
+                                  (word_four_scratch &&
+                                      sorted_Num_Words == 2) ||
+                                  (word_five_scratch && sorted_Num_Words == 3)
+                                  ? Center(
+                                  child: Text(return_Sorted_Words() + ', ',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ))
+                                  : Center(
+                                child: Text(return_Sorted_Words() + ',',
+                                  style: TextStyle(fontSize: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 30, fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),),
+                              SizedBox(width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 30),
+                              (word_twelve_scratch && sorted_Num_Words == 10) ||
+                                  (word_eleven_scratch &&
+                                      sorted_Num_Words == 9) ||
+                                  (word_ten_scratch && sorted_Num_Words == 8) ||
+                                  (word_nine_scratch &&
+                                      sorted_Num_Words == 7) ||
+                                  (word_eight_scratch &&
+                                      sorted_Num_Words == 6) ||
+                                  (word_seven_scratch &&
+                                      sorted_Num_Words == 5) ||
+                                  (word_six_scratch && sorted_Num_Words == 4) ||
+                                  (word_one_scratch &&
+                                      sorted_Num_Words == 11) ||
+                                  (word_three_scratch &&
+                                      sorted_Num_Words == 1) ||
+                                  (word_four_scratch &&
+                                      sorted_Num_Words == 2) ||
+                                  (word_five_scratch && sorted_Num_Words == 3)
+                                  ? Center(
+                                  child: Text(return_Sorted_Words() + ', ',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ))
+                                  : Center(
+                                child: Text(return_Sorted_Words() + ',',
+                                  style: TextStyle(fontSize: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 30, fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),),
+                              SizedBox(width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 30),
+                              (word_twelve_scratch && sorted_Num_Words == 10) ||
+                                  (word_eleven_scratch &&
+                                      sorted_Num_Words == 9) ||
+                                  (word_ten_scratch && sorted_Num_Words == 8) ||
+                                  (word_nine_scratch &&
+                                      sorted_Num_Words == 7) ||
+                                  (word_eight_scratch &&
+                                      sorted_Num_Words == 6) ||
+                                  (word_seven_scratch &&
+                                      sorted_Num_Words == 5) ||
+                                  (word_six_scratch && sorted_Num_Words == 4) ||
+                                  (word_one_scratch &&
+                                      sorted_Num_Words == 11) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1137,9 +1110,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1181,9 +1151,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
@@ -1225,9 +1192,6 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   (word_six_scratch && sorted_Num_Words == 4) ||
                                   (word_one_scratch &&
                                       sorted_Num_Words == 11) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_one_scratch && sorted_Num_Words == 7) ||
-                                  (word_two_scratch && sorted_Num_Words == 0) ||
                                   (word_three_scratch &&
                                       sorted_Num_Words == 1) ||
                                   (word_four_scratch &&
