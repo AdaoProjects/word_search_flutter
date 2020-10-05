@@ -600,11 +600,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height / 7,
-                      ),
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height / 7,
+                  ),
                   Row(
                       children: [
                         SizedBox(width: MediaQuery
@@ -1480,9 +1480,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       word_seven,
                       word_eight,
                       word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve
+                      word_ten,
+                      word_eleven,
+                      word_twelve
                   );
                 }else {
                   connection_one = false;
@@ -1540,8 +1540,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       word_eight,
                       word_nine,
                       word_ten,
-                    word_eleven,
-                    word_twelve
+                      word_eleven,
+                      word_twelve
                   );
                 }else {
                   connection_one = false;
@@ -1610,9 +1610,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       word_seven,
                       word_eight,
                       word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve
+                      word_ten,
+                      word_eleven,
+                      word_twelve
                   );
                 } else {
                   connection_two = false;
@@ -1670,9 +1670,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       word_seven,
                       word_eight,
                       word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve
+                      word_ten,
+                      word_eleven,
+                      word_twelve
                   );
                 } else {
                   connection_two = false;
@@ -1819,9 +1819,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       word_seven,
                       word_eight,
                       word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve
+                      word_ten,
+                      word_eleven,
+                      word_twelve
                   );
                 } else {
                   connection_three = false;
@@ -1904,9 +1904,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       word_seven,
                       word_eight,
                       word_nine,
-                    word_ten,
-                    word_eleven,
-                    word_twelve
+                      word_ten,
+                      word_eleven,
+                      word_twelve
                   );
                 } else {
                   connection_three = false;
@@ -1951,9 +1951,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               word_seven,
               word_eight,
               word_nine,
-            word_ten,
-            word_eleven,
-            word_twelve
+              word_ten,
+              word_eleven,
+              word_twelve
           );
         }
         for (int i = 0; i < word_five.length; i++) {
@@ -2125,7 +2125,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     if(!connection_four) {
       num_of_tentatives = 0;
       int k = 0;
-      while (k < (word_five.length * word_ten.length)*word_four.length) {
+      while (k < (word_five.length+word_ten.length) * word_four.length) {
         k = 0;
         row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
         column_four = random.nextInt(num_rows_and_columns);
@@ -2142,9 +2142,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               word_seven,
               word_eight,
               word_nine,
-            word_ten,
-            word_eleven,
-            word_twelve
+              word_ten,
+              word_eleven,
+              word_twelve
           );
         }
         for(int y=0;y<word_five.length;y++){
@@ -2738,9 +2738,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             word_seven,
             word_eight,
             word_nine,
-          word_ten,
-          word_eleven,
-          word_twelve
+            word_ten,
+            word_eleven,
+            word_twelve
         );
       }
     }
@@ -3036,9 +3036,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             word_seven,
             word_eight,
             word_nine,
-          word_ten,
-          word_eleven,
-          word_twelve
+            word_ten,
+            word_eleven,
+            word_twelve
         );
       }
     }
@@ -3277,7 +3277,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                         (column_nine <= column_three &&
+                        (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -3347,7 +3347,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                         (column_nine <= column_three &&
+                        (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -3548,8 +3548,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               if (row_eleven < 0 ||
                   row_eleven > num_rows_and_columns - word_eleven.length ||
                   k != 0) {
-              connection_eleven = false;
-            } else{
+                connection_eleven = false;
+              } else{
                 word_eleven_reverse=true;
               }
             } else {
@@ -3671,7 +3671,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 word_eleven_reverse=true;
               }
 
-          }else {
+            }else {
               word_eleven_reverse=false;
             }
           }
@@ -3854,8 +3854,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               if (column_twelve < 0 ||
                   column_twelve > num_rows_and_columns - word_twelve.length ||
                   k != 0) {
-              connection_twelve = false;
-            } else{
+                connection_twelve = false;
+              } else{
                 word_twelve_reverse=true;
               }
             }else {
@@ -3940,11 +3940,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               if (column_twelve < 0 ||
                   column_twelve > num_rows_and_columns - word_twelve.length ||
                   k != 0) {
-              connection_twelve = false;
-            } else{
-              word_twelve_reverse = true;
-            }
-          }else {
+                connection_twelve = false;
+              } else{
+                word_twelve_reverse = true;
+              }
+            }else {
               word_twelve_reverse = false;
             }
           }
@@ -4129,7 +4129,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         puzzle[(row_ten + i) * num_rows_and_columns + column_ten - i] =
         word_ten[i];
       }
-      }else{
+    }else{
       for (int i = 0; i < word_ten.length; i++) {
         puzzle[(row_ten + i) * num_rows_and_columns + column_ten - i] =
         word_ten[word_ten.length-1-i];
@@ -4469,8 +4469,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   void _getTime() {
     if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
         !word_five_scratch || !word_six_scratch || !word_seven_scratch||
-    !word_eight_scratch||!word_nine_scratch||!word_ten_scratch||
-    !word_eleven_scratch||!word_twelve_scratch) {
+        !word_eight_scratch||!word_nine_scratch||!word_ten_scratch||
+        !word_eleven_scratch||!word_twelve_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;

@@ -47,77 +47,77 @@ class _LevelState extends State<Level> {
                               .height / 15)
                   ),
 
-            SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
 
-                child:Row(
+                    child:Row(
 
-                    children: [
-                    Container(
-                    child:FlatButton(
-                      child: Text(AppLocalizations.of(context).translate("levels_easy"),
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                    fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 25)
-            ),
-                onPressed: () {
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("food")
-            )));
-            },
-                )
-    ),
-                      Container(
-                          child:FlatButton(
-                            child: Text(AppLocalizations.of(context).translate("levels_medium"),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.italic,
-                                    fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height / 25)
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("food")
-                                  )));
-                            },
-                          )
-                      ),
-                      Container(
+                        children: [
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Easy(game_type: new Game_Type("food")
+                                      )));
+                                },
+                              )
+                          ),
+                          Container(
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_medium"),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Medium(game_type: new Game_Type("food")
+                                      )));
+                                },
+                              )
+                          ),
+                          Container(
 
-                          child:FlatButton(
-                            child: Text(AppLocalizations.of(context).translate("levels_hard"),
-    style: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    fontSize: MediaQuery
-        .of(context)
-        .size
-        .height / 25)
-    ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("food")
-                                  )));
-                            },
-                          )
-                      ),
-                    ]
-                ),
+                              child:FlatButton(
+                                child: Text(AppLocalizations.of(context).translate("levels_hard"),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Game_Hard(game_type: new Game_Type("food")
+                                      )));
+                                },
+                              )
+                          ),
+                        ]
+                    ),
 
-            ),
+                  ),
                   SizedBox(width: MediaQuery
                       .of(context)
                       .size
@@ -146,14 +146,14 @@ class _LevelState extends State<Level> {
                           Container(
                               child:FlatButton(
                                 child: Text(AppLocalizations.of(context).translate("levels_easy"),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 25)
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
                                 ),
                                 onPressed: () {
                                   Navigator.push(
@@ -166,15 +166,15 @@ class _LevelState extends State<Level> {
                           Container(
                               child:FlatButton(
                                 child: Text(AppLocalizations.of(context).translate("levels_medium"),
-    style: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    fontSize: MediaQuery
-        .of(context)
-        .size
-        .height / 25)
-    ),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -186,15 +186,15 @@ class _LevelState extends State<Level> {
                           Container(
                               child:FlatButton(
                                 child: Text(AppLocalizations.of(context).translate("levels_hard"),
-    style: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    fontSize: MediaQuery
-        .of(context)
-        .size
-        .height / 25)
-    ),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -235,15 +235,15 @@ class _LevelState extends State<Level> {
                           Container(
                               child:FlatButton(
                                 child: Text(AppLocalizations.of(context).translate("levels_easy"),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 25)
-                  ),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -255,15 +255,15 @@ class _LevelState extends State<Level> {
                           Container(
                               child:FlatButton(
                                 child: Text(AppLocalizations.of(context).translate("levels_medium"),
-    style: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    fontSize: MediaQuery
-        .of(context)
-        .size
-        .height / 25)
-    ),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                       context,
@@ -275,15 +275,15 @@ class _LevelState extends State<Level> {
                           Container(
                               child:FlatButton(
                                 child: Text(AppLocalizations.of(context).translate("levels_hard"),
-    style: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    fontSize: MediaQuery
-        .of(context)
-        .size
-        .height / 25)
-    ),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 25)
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                       context,

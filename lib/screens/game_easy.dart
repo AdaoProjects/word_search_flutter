@@ -141,745 +141,745 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-       debugShowCheckedModeBanner: false,
-       home:Scaffold(
-         backgroundColor: Colors.black,
-         body: Center(
-           child: GestureDetector(
-             onPanUpdate: (details) async{
-               RenderBox box = context.findRenderObject();
-               final Offset local = box.globalToLocal(
-                   details.globalPosition);
-               for (int row = 0; row < num_rows_and_columns; row++) {
-                 for (int column = 0; column < num_rows_and_columns; column++) {
-                   if (local.dx > MediaQuery
-                       .of(context)
-                       .size
-                       .width / 18.4
-                       + column * MediaQuery
-                           .of(context)
-                           .size
-                           .width / 9 && local.dx < MediaQuery
-                       .of(context)
-                       .size
-                       .width / 18.4 + (column + 1) * MediaQuery
-                       .of(context)
-                       .size
-                       .width / 9
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:Scaffold(
+          backgroundColor: Colors.black,
+          body: Center(
+            child: GestureDetector(
+              onPanUpdate: (details) async{
+                RenderBox box = context.findRenderObject();
+                final Offset local = box.globalToLocal(
+                    details.globalPosition);
+                for (int row = 0; row < num_rows_and_columns; row++) {
+                  for (int column = 0; column < num_rows_and_columns; column++) {
+                    if (local.dx > MediaQuery
+                        .of(context)
+                        .size
+                        .width / 18.4
+                        + column * MediaQuery
+                            .of(context)
+                            .size
+                            .width / 9 && local.dx < MediaQuery
+                        .of(context)
+                        .size
+                        .width / 18.4 + (column + 1) * MediaQuery
+                        .of(context)
+                        .size
+                        .width / 9
 
-                       && local.dy > MediaQuery
-                           .of(context)
-                           .size
-                           .height / 3.732 + row * MediaQuery
-                           .of(context)
-                           .size
-                           .height / 15 && local.dy < MediaQuery
-                       .of(context)
-                       .size
-                       .height / 3.732 + (row + 1) * MediaQuery
-                       .of(context)
-                       .size
-                       .height / 15) {
-                     end_Of_Selection_dx = MediaQuery
-                         .of(context)
-                         .size
-                         .width / 18.4 + (column + 1 / 2) * MediaQuery
-                         .of(context)
-                         .size
-                         .width / 9;
-                     end_Of_Selection_dy = MediaQuery
-                         .of(context)
-                         .size
-                         .height / 3.732 + (row + 1 / 2) * MediaQuery
-                         .of(context)
-                         .size
-                         .height / 15;
-                     if(row_end!=row || column_end!=column){
-                       play_Selection_Sound();
-                     }
-                     row_end=row;
-                     column_end=column;
-                     if(!first_Point_Drawed) {
-                       points.removeAt(2*number_Of_Words_Selected + 1);
-                     }
-                     first_Point_Drawed=false;
-                     setState(() {
-                       points.add(DrawingPoints(
-                         radius: MediaQuery
-                             .of(context)
-                             .size
-                             .height / 15,
-                         first:false,
-                         points: Offset(
-                           end_Of_Selection_dx,
-                           end_Of_Selection_dy,),
-                         paint: Paint()
-                           ..strokeCap = strokeCap
-                           ..isAntiAlias = true
-                           ..color = selected_color.withOpacity(
-                               opacity)
-                           ..strokeWidth = MediaQuery
-                               .of(context)
-                               .size
-                               .height / 15,
-                       ));
-                     });
-                   }
-                 }
-               }
+                        && local.dy > MediaQuery
+                            .of(context)
+                            .size
+                            .height / 3.732 + row * MediaQuery
+                            .of(context)
+                            .size
+                            .height / 15 && local.dy < MediaQuery
+                        .of(context)
+                        .size
+                        .height / 3.732 + (row + 1) * MediaQuery
+                        .of(context)
+                        .size
+                        .height / 15) {
+                      end_Of_Selection_dx = MediaQuery
+                          .of(context)
+                          .size
+                          .width / 18.4 + (column + 1 / 2) * MediaQuery
+                          .of(context)
+                          .size
+                          .width / 9;
+                      end_Of_Selection_dy = MediaQuery
+                          .of(context)
+                          .size
+                          .height / 3.732 + (row + 1 / 2) * MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15;
+                      if(row_end!=row || column_end!=column){
+                        play_Selection_Sound();
+                      }
+                      row_end=row;
+                      column_end=column;
+                      if(!first_Point_Drawed) {
+                        points.removeAt(2*number_Of_Words_Selected + 1);
+                      }
+                      first_Point_Drawed=false;
+                      setState(() {
+                        points.add(DrawingPoints(
+                          radius: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15,
+                          first:false,
+                          points: Offset(
+                            end_Of_Selection_dx,
+                            end_Of_Selection_dy,),
+                          paint: Paint()
+                            ..strokeCap = strokeCap
+                            ..isAntiAlias = true
+                            ..color = selected_color.withOpacity(
+                                opacity)
+                            ..strokeWidth = MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15,
+                        ));
+                      });
+                    }
+                  }
+                }
 
-             },
-             onPanStart: (details)  async{
-               RenderBox box = context.findRenderObject();
-               if(!first_Point_Drawed) {
-                 final Offset local = box.globalToLocal(
-                     details.globalPosition);
-                 for (int row = 0; row < num_rows_and_columns; row++) {
-                   for (int column = 0; column < num_rows_and_columns; column++) {
-                     if (local.dx > MediaQuery
-                         .of(context)
-                         .size
-                         .width / 18.4
-                         + column * MediaQuery
-                             .of(context)
-                             .size
-                             .width / 9 && local.dx < MediaQuery
-                         .of(context)
-                         .size
-                         .width / 18.4 + (column + 1) * MediaQuery
-                         .of(context)
-                         .size
-                         .width / 9
+              },
+              onPanStart: (details)  async{
+                RenderBox box = context.findRenderObject();
+                if(!first_Point_Drawed) {
+                  final Offset local = box.globalToLocal(
+                      details.globalPosition);
+                  for (int row = 0; row < num_rows_and_columns; row++) {
+                    for (int column = 0; column < num_rows_and_columns; column++) {
+                      if (local.dx > MediaQuery
+                          .of(context)
+                          .size
+                          .width / 18.4
+                          + column * MediaQuery
+                              .of(context)
+                              .size
+                              .width / 9 && local.dx < MediaQuery
+                          .of(context)
+                          .size
+                          .width / 18.4 + (column + 1) * MediaQuery
+                          .of(context)
+                          .size
+                          .width / 9
 
-                         && local.dy > MediaQuery
-                             .of(context)
-                             .size
-                             .height / 3.732 + row * MediaQuery
-                             .of(context)
-                             .size
-                             .height / 15 && local.dy < MediaQuery
-                         .of(context)
-                         .size
-                         .height / 3.732 + (row + 1) * MediaQuery
-                         .of(context)
-                         .size
-                         .height / 15) {
+                          && local.dy > MediaQuery
+                              .of(context)
+                              .size
+                              .height / 3.732 + row * MediaQuery
+                              .of(context)
+                              .size
+                              .height / 15 && local.dy < MediaQuery
+                          .of(context)
+                          .size
+                          .height / 3.732 + (row + 1) * MediaQuery
+                          .of(context)
+                          .size
+                          .height / 15) {
 
-                       play_Selection_Sound();
+                        play_Selection_Sound();
 
-                       setState(() {
-                         start_Of_Selection_dx=MediaQuery
-                             .of(context)
-                             .size
-                             .width / 18.4 +
-                             (column + 1 / 2) * MediaQuery
-                                 .of(context)
-                                 .size
-                                 .width / 9;
-                         start_Of_Selection_dy=MediaQuery
-                             .of(context)
-                             .size
-                             .height / 3.732 +
-                             (row + 1 / 2) * MediaQuery
-                                 .of(context)
-                                 .size
-                                 .height / 15;
+                        setState(() {
+                          start_Of_Selection_dx=MediaQuery
+                              .of(context)
+                              .size
+                              .width / 18.4 +
+                              (column + 1 / 2) * MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 9;
+                          start_Of_Selection_dy=MediaQuery
+                              .of(context)
+                              .size
+                              .height / 3.732 +
+                              (row + 1 / 2) * MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15;
 
-                         row_start=row;
-                         column_start=column;
-                         points.add(DrawingPoints(
-                           radius: MediaQuery
-                               .of(context)
-                               .size
-                               .height / 15,
-                           first:true,
-                           points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
-                           paint: Paint()
-                             ..strokeCap = strokeCap
-                             ..isAntiAlias = true
-                             ..color = serie_Color().withOpacity(
-                                 opacity)
-                             ..strokeWidth = MediaQuery
-                                 .of(context)
-                                 .size
-                                 .height / 15,
-
-
-                         ));
-                       });
-                     }
-                   }
-                 }
-               }
-               first_Point_Drawed=true;
-             },
-
-             onPanEnd: (details) {
-               bool found_word = false;
-               for (int i = 0; i < words.length; i++) {
-                 if (
-                 (
-                     row_start == solution_positions[4 * i] &&
-                         column_start == solution_positions[4 * i + 1] &&
-                         row_end == solution_positions[4 * i + 2] &&
-                         column_end == solution_positions[4 * i + 3])
-                     ||
-                     (row_start == solution_positions[4 * i + 2] &&
-                         column_start == solution_positions[4 * i + 3] &&
-                         row_end == solution_positions[4 * i] &&
-                         column_end == solution_positions[4 * i + 1])) {
-                   found_word = true;
-                   play_Found_Sound();
-                   number_Of_Words_Selected++;
-                   if (i==0) {
-                     if(word_one_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_one_scratch = true;
-                     });
-
-                   } else if (i==1) {
-                     if(word_two_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_two_scratch = true;
-                     });
-                   } else if (i==2) {
-                     if(word_three_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-                     }
-                     setState(() {
-                       word_three_scratch = true;
-                     });
-                   }
-                   else if (i==3) {
-                     if(word_four_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_four_scratch = true;
-                     });
-                   } else if (i==5) {
-                     if(word_six_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_six_scratch = true;
-                     });
-                   }   else if (i==6) {
-                     if(word_seven_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_seven_scratch = true;
-                     });
-                   } else if (i==7) {
-                     if(word_eight_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_eight_scratch = true;
-                     });
-                   }  else if (i==8) {
-                     if(word_nine_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_nine_scratch = true;
-                     });
-                   } else {
-                     if(word_five_scratch==true){
-                       number_Of_Words_Selected--;
-                       points.removeAt(2 * number_Of_Words_Selected + 1);
-                       points.removeAt(2 * number_Of_Words_Selected);
-
-                     }
-                     setState(() {
-                       word_five_scratch = true;
-                     });
-                   }
-                 }
-               }
-               if (!found_word) {
-                 points.removeAt(2 * number_Of_Words_Selected + 1);
-                 points.removeAt(2 * number_Of_Words_Selected);
-                 play_Wrong_Sound();
-               }
-               if (word_one_scratch == true && word_two_scratch == true &&
-                   word_three_scratch == true && word_four_scratch == true &&
-                   word_five_scratch == true && word_six_scratch == true
-               &&word_seven_scratch==true && word_eight_scratch==true&&
-               word_nine_scratch==true) {
-                 set_Best_Time();
-                 setState(() {
-                   showAlertDialog(context);
-                 });
-
-               }
-             },
+                          row_start=row;
+                          column_start=column;
+                          points.add(DrawingPoints(
+                            radius: MediaQuery
+                                .of(context)
+                                .size
+                                .height / 15,
+                            first:true,
+                            points: Offset(start_Of_Selection_dx, start_Of_Selection_dy),
+                            paint: Paint()
+                              ..strokeCap = strokeCap
+                              ..isAntiAlias = true
+                              ..color = serie_Color().withOpacity(
+                                  opacity)
+                              ..strokeWidth = MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 15,
 
 
-             child: CustomPaint(
-               size: Size.infinite,
-               foregroundPainter: DrawingPainter(
-                 pointsList: points,
-               ),
-               child: Column(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: <Widget>[
-                     SizedBox(
-                         height: MediaQuery
-                             .of(context)
-                             .size
-                             .height / 7,
-                     ),
-                     Row(
-                         children: [
-                           SizedBox(width: MediaQuery
-                               .of(context)
-                               .size
-                               .width / 10),
-                           Text(AppLocalizations.of(context).translate("game_level_easy"),
-                             style: TextStyle(fontSize: MediaQuery
-                                 .of(context)
-                                 .size
-                                 .height / 25,
-                               color: Colors.white,),
-                           ),
-                           SizedBox(width: MediaQuery
-                               .of(context)
-                               .size
-                               .width / 10),
-                           //Timer
-                           Icon(Icons.timer,
-                             color: Colors.white,
-                             size: MediaQuery
-                                 .of(context)
-                                 .size
-                                 .height / 25,),
-                           return_Timer(),
+                          ));
+                        });
+                      }
+                    }
+                  }
+                }
+                first_Point_Drawed=true;
+              },
+
+              onPanEnd: (details) {
+                bool found_word = false;
+                for (int i = 0; i < words.length; i++) {
+                  if (
+                  (
+                      row_start == solution_positions[4 * i] &&
+                          column_start == solution_positions[4 * i + 1] &&
+                          row_end == solution_positions[4 * i + 2] &&
+                          column_end == solution_positions[4 * i + 3])
+                      ||
+                      (row_start == solution_positions[4 * i + 2] &&
+                          column_start == solution_positions[4 * i + 3] &&
+                          row_end == solution_positions[4 * i] &&
+                          column_end == solution_positions[4 * i + 1])) {
+                    found_word = true;
+                    play_Found_Sound();
+                    number_Of_Words_Selected++;
+                    if (i==0) {
+                      if(word_one_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_one_scratch = true;
+                      });
+
+                    } else if (i==1) {
+                      if(word_two_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_two_scratch = true;
+                      });
+                    } else if (i==2) {
+                      if(word_three_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+                      }
+                      setState(() {
+                        word_three_scratch = true;
+                      });
+                    }
+                    else if (i==3) {
+                      if(word_four_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_four_scratch = true;
+                      });
+                    } else if (i==5) {
+                      if(word_six_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_six_scratch = true;
+                      });
+                    }   else if (i==6) {
+                      if(word_seven_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_seven_scratch = true;
+                      });
+                    } else if (i==7) {
+                      if(word_eight_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_eight_scratch = true;
+                      });
+                    }  else if (i==8) {
+                      if(word_nine_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_nine_scratch = true;
+                      });
+                    } else {
+                      if(word_five_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+
+                      }
+                      setState(() {
+                        word_five_scratch = true;
+                      });
+                    }
+                  }
+                }
+                if (!found_word) {
+                  points.removeAt(2 * number_Of_Words_Selected + 1);
+                  points.removeAt(2 * number_Of_Words_Selected);
+                  play_Wrong_Sound();
+                }
+                if (word_one_scratch == true && word_two_scratch == true &&
+                    word_three_scratch == true && word_four_scratch == true &&
+                    word_five_scratch == true && word_six_scratch == true
+                    &&word_seven_scratch==true && word_eight_scratch==true&&
+                    word_nine_scratch==true) {
+                  set_Best_Time();
+                  setState(() {
+                    showAlertDialog(context);
+                  });
+
+                }
+              },
 
 
-                         ]
-                     ),
-                     SizedBox(height: MediaQuery
-                         .of(context)
-                         .size
-                         .height / 25),
-                     Container(
-                       width: MediaQuery
-                           .of(context)
-                           .size
-                           .width * 8 / 10 * 1.1,
-                       child: Table(
-                         children: [
-                           for (int i=0; i< num_rows_and_columns;i++) TableRow(
-                             children: [
-                               for (int j=0; j< num_rows_and_columns;j++ )
-                                 Container(
-                                   width: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .width / 10 * 1.1,
-                                   height: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 15,
-                                   alignment: Alignment.center,
-                                   child:
-                                   Text(write_Puzzle_Letter(i*num_rows_and_columns+j),
-                                     style: TextStyle(fontSize: MediaQuery
-                                         .of(context)
-                                         .size
-                                         .height / 35,fontWeight: FontWeight.bold),),
-                                   decoration: BoxDecoration(
-                                     borderRadius: BorderRadius.circular(MediaQuery
-                                         .of(context)
-                                         .size
-                                         .height / 30),
-                                   ),
-                                 ),
-                             ],
-                           ),
-                         ],
-                       ),
-                       decoration: BoxDecoration(
-                           color: Colors.white,
-
-                           boxShadow: [
-                             BoxShadow(
-                                 color: GameColors.primary,
-                                 spreadRadius: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .height / 100),
-                           ],
-                           borderRadius: BorderRadius.circular(MediaQuery
-                               .of(context)
-                               .size
-                               .height / 30)
-                       ),
-                     ),
-                     SizedBox(height: MediaQuery
-                         .of(context)
-                         .size
-                         .height / 25),
-                     Container(
-                       width: MediaQuery
-                           .of(context)
-                           .size
-                           .width * 5 / 6,
-                       child: Table(
-                           children: [
-                             TableRow(children: [
-                               Row(children: [
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 13),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(
-                                     child: Text(return_Sorted_Words() + ', ',
-                                       style: TextStyle(
-                                           decoration: TextDecoration.lineThrough,
-                                           fontSize: MediaQuery
-                                               .of(context)
-                                               .size
-                                               .height / 30,fontWeight: FontWeight.bold,
-                                           color: Colors.black),
-                                     ))
-                                     : Center(
-                                   child: Text(return_Sorted_Words() + ',',
-                                     style: TextStyle(fontSize: MediaQuery
-                                         .of(context)
-                                         .size
-                                         .height / 30,fontWeight: FontWeight.bold,
-                                         color: Colors.black),
-                                   ),),
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 30),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(child: Text(return_Sorted_Words()+',',
-                                   style: TextStyle(
-                                       decoration: TextDecoration.lineThrough,
-                                       fontSize: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),)
-                                     : Center(child: Text(return_Sorted_Words()+',',
-                                   style: TextStyle(fontSize: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),
-                                 ),
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 30),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(child: Text(return_Sorted_Words(),
-                                   style: TextStyle(
-                                       decoration: TextDecoration.lineThrough,
-                                       fontSize: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),)
-                                     : Center(child: Text(return_Sorted_Words(),
-                                   style: TextStyle(fontSize: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),
-                                 ),
-                               ]
-                               ),
-                             ]
-                             ),
+              child: CustomPaint(
+                size: Size.infinite,
+                foregroundPainter: DrawingPainter(
+                  pointsList: points,
+                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height / 7,
+                      ),
+                      Row(
+                          children: [
+                            SizedBox(width: MediaQuery
+                                .of(context)
+                                .size
+                                .width / 10),
+                            Text(AppLocalizations.of(context).translate("game_level_easy"),
+                              style: TextStyle(fontSize: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 25,
+                                color: Colors.white,),
+                            ),
+                            SizedBox(width: MediaQuery
+                                .of(context)
+                                .size
+                                .width / 10),
+                            //Timer
+                            Icon(Icons.timer,
+                              color: Colors.white,
+                              size: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 25,),
+                            return_Timer(),
 
 
-                             TableRow(children: [
-                               Row(children: [
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 13),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(
-                                     child: Text(return_Sorted_Words() + ', ',
-                                       style: TextStyle(
-                                           decoration: TextDecoration.lineThrough,
-                                           fontSize: MediaQuery
-                                               .of(context)
-                                               .size
-                                               .height / 30,fontWeight: FontWeight.bold,
-                                           color: Colors.black),
-                                     ))
-                                     : Center(
-                                   child: Text(return_Sorted_Words() + ',',
-                                     style: TextStyle(fontSize: MediaQuery
-                                         .of(context)
-                                         .size
-                                         .height / 30,fontWeight: FontWeight.bold,
-                                         color: Colors.black),
-                                   ),),
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 30),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(child: Text(return_Sorted_Words()+',',
-                                   style: TextStyle(
-                                       decoration: TextDecoration.lineThrough,
-                                       fontSize: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),)
-                                     : Center(child: Text(return_Sorted_Words()+',',
-                                   style: TextStyle(fontSize: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),
-                                 ),
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 30),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(child: Text(return_Sorted_Words(),
-                                   style: TextStyle(
-                                       decoration: TextDecoration.lineThrough,
-                                       fontSize: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),)
-                                     : Center(child: Text(return_Sorted_Words(),
-                                   style: TextStyle(fontSize: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),
-                                 ),
-                               ]
-                               ),
-                             ]
-                             ),
+                          ]
+                      ),
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 25),
+                      Container(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 8 / 10 * 1.1,
+                        child: Table(
+                          children: [
+                            for (int i=0; i< num_rows_and_columns;i++) TableRow(
+                              children: [
+                                for (int j=0; j< num_rows_and_columns;j++ )
+                                  Container(
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width / 10 * 1.1,
+                                    height: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 15,
+                                    alignment: Alignment.center,
+                                    child:
+                                    Text(write_Puzzle_Letter(i*num_rows_and_columns+j),
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 35,fontWeight: FontWeight.bold),),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
 
-                             TableRow(children: [
-                               Row(children: [
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 13),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(
-                                     child: Text(return_Sorted_Words() + ', ',
-                                       style: TextStyle(
-                                           decoration: TextDecoration.lineThrough,
-                                           fontSize: MediaQuery
-                                               .of(context)
-                                               .size
-                                               .height / 30,fontWeight: FontWeight.bold,
-                                           color: Colors.black),
-                                     ))
-                                     : Center(
-                                   child: Text(return_Sorted_Words() + ',',
-                                     style: TextStyle(fontSize: MediaQuery
-                                         .of(context)
-                                         .size
-                                         .height / 30,fontWeight: FontWeight.bold,
-                                         color: Colors.black),
-                                   ),),
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 30),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(child: Text(return_Sorted_Words()+',',
-                                   style: TextStyle(
-                                       decoration: TextDecoration.lineThrough,
-                                       fontSize: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),)
-                                     : Center(child: Text(return_Sorted_Words()+',',
-                                   style: TextStyle(fontSize: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),
-                                 ),
-                                 SizedBox(width: MediaQuery
-                                     .of(context)
-                                     .size
-                                     .width / 30),
-                                 (word_nine_scratch && sorted_Num_Words == 7) ||
-                                     (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                     (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
-                                     (word_two_scratch && sorted_Num_Words == 0) ||
-                                     (word_three_scratch &&
-                                         sorted_Num_Words == 1) ||
-                                     (word_four_scratch &&
-                                         sorted_Num_Words == 2) ||
-                                     (word_five_scratch && sorted_Num_Words == 3)
-                                     ? Center(child: Text(return_Sorted_Words(),
-                                   style: TextStyle(
-                                       decoration: TextDecoration.lineThrough,
-                                       fontSize: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),)
-                                     : Center(child: Text(return_Sorted_Words(),
-                                   style: TextStyle(fontSize: MediaQuery
-                                       .of(context)
-                                       .size
-                                       .height / 30,fontWeight: FontWeight.bold,
-                                       color: Colors.black),
-                                 ),
-                                 ),
-                               ]
-                               ),
-                             ]
-                             ),
-                           ]
-                       ),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: GameColors.primary,
+                                  spreadRadius: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height / 100),
+                            ],
+                            borderRadius: BorderRadius.circular(MediaQuery
+                                .of(context)
+                                .size
+                                .height / 30)
+                        ),
+                      ),
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 25),
+                      Container(
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 5 / 6,
+                        child: Table(
+                            children: [
+                              TableRow(children: [
+                                Row(children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 13),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(
+                                      child: Text(return_Sorted_Words() + ', ',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height / 30,fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ))
+                                      : Center(
+                                    child: Text(return_Sorted_Words() + ',',
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30,fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(child: Text(return_Sorted_Words()+',',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),)
+                                      : Center(child: Text(return_Sorted_Words()+',',
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  ),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(child: Text(return_Sorted_Words(),
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),)
+                                      : Center(child: Text(return_Sorted_Words(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  ),
+                                ]
+                                ),
+                              ]
+                              ),
 
-                       decoration: BoxDecoration(
-                         color: Colors.white,
 
-                         boxShadow: [
-                           BoxShadow(
-                               color: GameColors.primary,
-                               spreadRadius: MediaQuery
-                                   .of(context)
-                                   .size
-                                   .height / 100),
+                              TableRow(children: [
+                                Row(children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 13),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(
+                                      child: Text(return_Sorted_Words() + ', ',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height / 30,fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ))
+                                      : Center(
+                                    child: Text(return_Sorted_Words() + ',',
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30,fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(child: Text(return_Sorted_Words()+',',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),)
+                                      : Center(child: Text(return_Sorted_Words()+',',
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  ),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(child: Text(return_Sorted_Words(),
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),)
+                                      : Center(child: Text(return_Sorted_Words(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  ),
+                                ]
+                                ),
+                              ]
+                              ),
 
-                         ],
-                         borderRadius: BorderRadius.circular(MediaQuery
-                             .of(context)
-                             .size
-                             .height / 30),
-                       ),
-                     ),
-                   ]
-               ),
-             ),
-           ),
-         ),
+                              TableRow(children: [
+                                Row(children: [
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 13),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(
+                                      child: Text(return_Sorted_Words() + ', ',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height / 30,fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ))
+                                      : Center(
+                                    child: Text(return_Sorted_Words() + ',',
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30,fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(child: Text(return_Sorted_Words()+',',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),)
+                                      : Center(child: Text(return_Sorted_Words()+',',
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  ),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(child: Text(return_Sorted_Words(),
+                                    style: TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),)
+                                      : Center(child: Text(return_Sorted_Words(),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 30,fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  ),
+                                ]
+                                ),
+                              ]
+                              ),
+                            ]
+                        ),
 
-       )
-   );
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+
+                          boxShadow: [
+                            BoxShadow(
+                                color: GameColors.primary,
+                                spreadRadius: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 100),
+
+                          ],
+                          borderRadius: BorderRadius.circular(MediaQuery
+                              .of(context)
+                              .size
+                              .height / 30),
+                        ),
+                      ),
+                    ]
+                ),
+              ),
+            ),
+          ),
+
+        )
+    );
   }
 
   String write_Random_Letter() {
@@ -932,9 +932,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           words[3],
           words[4],
           words[5],
-      words[6],
-      words[7],
-      words[8]);
+          words[6],
+          words[7],
+          words[8]);
       write_Words_Puzzle(
           puzzle,
           words[0],
@@ -955,8 +955,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
           words[4],
           words[5],
           words[6],
-    words[7],
-    words[8]);
+          words[7],
+          words[8]);
       sorted_Num_Words = random.nextInt(9) - 1;
       next_Color = random.nextInt(5);
     }
@@ -1038,7 +1038,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     int old_best_time_seconds=(prefs.getInt('best_time_easy_seconds') ?? null);
     int old_time;
     if(old_best_time_minutes==null ||old_best_time_seconds==null){
-    old_time=0;
+      old_time=0;
     }else {
       old_time = old_best_time_minutes * 60 + old_best_time_seconds;
     }
@@ -1100,7 +1100,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
                 no_connection_one_count++;
-              if (no_connection_one_count < 20) {
+                if (no_connection_one_count < 20) {
                   fit_Words_Puzzle(
                       puzzle,
                       word_one,
@@ -1116,11 +1116,11 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 }else {
                   connection_one = false;
                 }
-            }else{
+              }else{
                 word_one_reverse = true;
                 word_five_reverse = false;
                 break;
-            }
+              }
             } else {
               word_one_reverse = false;
               word_five_reverse = false;
@@ -1136,23 +1136,23 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               column_one = column_five + word_five.length - i - 1-word_one.length+1 + j;
               if (column_one < 0 ||
                   column_one > num_rows_and_columns - word_one.length) {
-              no_connection_one_count++;
-              if (no_connection_one_count < 20) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine
-                );
-              }else {
-                connection_one = false;
-              }
+                no_connection_one_count++;
+                if (no_connection_one_count < 20) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine
+                  );
+                }else {
+                  connection_one = false;
+                }
               } else {
                 word_one_reverse = true;
                 word_five_reverse = true;
@@ -1175,81 +1175,81 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       for (int j = 0; j < words[1].length; j++) {
         if (words[4][i] == words[1][j]) {
           connection_two = true;
-            if (!word_five_reverse) {
+          if (!word_five_reverse) {
+            row_two = row_five + i;
+            column_two = column_five + i - j;
+            if (column_two < 0 ||
+                column_two > num_rows_and_columns - word_two.length ||
+                row_one == row_two) {
               row_two = row_five + i;
-              column_two = column_five + i - j;
+              column_two = column_five + i -word_two.length+1 + j;
               if (column_two < 0 ||
                   column_two > num_rows_and_columns - word_two.length ||
                   row_one == row_two) {
-                row_two = row_five + i;
-                column_two = column_five + i -word_two.length+1 + j;
-                if (column_two < 0 ||
-                    column_two > num_rows_and_columns - word_two.length ||
-                    row_one == row_two) {
-                  no_connection_two_count++;
-                  if (no_connection_two_count < 15) {
-                    fit_Words_Puzzle(
-                        puzzle,
-                        word_one,
-                        word_two,
-                        word_three,
-                        word_four,
-                        word_five,
-                        word_six,
-                        word_seven,
-                        word_eight,
-                        word_nine
-                    );
-                  } else {
-                    connection_two = false;
-                  }
+                no_connection_two_count++;
+                if (no_connection_two_count < 15) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine
+                  );
                 } else {
-                  word_two_reverse = true;
-                  break;
+                  connection_two = false;
                 }
               } else {
-                word_two_reverse = false;
+                word_two_reverse = true;
                 break;
               }
             } else {
+              word_two_reverse = false;
+              break;
+            }
+          } else {
+            row_two = row_five + word_five.length - i - 1;
+            column_two =
+                column_five + word_five.length - i - 1 - j;
+            if (column_two < 0 ||
+                column_two > num_rows_and_columns - word_two.length ||
+                row_one == row_two) {
               row_two = row_five + word_five.length - i - 1;
-              column_two =
-                  column_five + word_five.length - i - 1 - j;
+              column_two = column_five + word_five.length - i - 1-word_two.length+1 + j;
               if (column_two < 0 ||
                   column_two > num_rows_and_columns - word_two.length ||
                   row_one == row_two) {
-                  row_two = row_five + word_five.length - i - 1;
-                  column_two = column_five + word_five.length - i - 1-word_two.length+1 + j;
-                  if (column_two < 0 ||
-                      column_two > num_rows_and_columns - word_two.length ||
-                      row_one == row_two) {
-                    no_connection_two_count++;
-                    if (no_connection_two_count < 15) {
-                      fit_Words_Puzzle(
-                          puzzle,
-                          word_one,
-                          word_two,
-                          word_three,
-                          word_four,
-                          word_five,
-                          word_six,
-                          word_seven,
-                          word_eight,
-                          word_nine
-                      );
-                    } else {
-                      connection_two = false;
-                    }
-                  } else {
-                    word_two_reverse = true;
-                    break;
-                  }
+                no_connection_two_count++;
+                if (no_connection_two_count < 15) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine
+                  );
+                } else {
+                  connection_two = false;
+                }
               } else {
-                word_two_reverse = false;
+                word_two_reverse = true;
                 break;
               }
+            } else {
+              word_two_reverse = false;
+              break;
             }
           }
+        }
       }
       if(connection_two){
         break;
@@ -1337,24 +1337,24 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (row_three < 0 ||
                   row_three > num_rows_and_columns - word_three.length ||
                   k != 0) {
-              no_connection_three_count++;
-              if (no_connection_three_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine
-                );
-              } else {
-                connection_three = false;
-              }
-            }  else {
+                no_connection_three_count++;
+                if (no_connection_three_count < 5) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine
+                  );
+                } else {
+                  connection_three = false;
+                }
+              }  else {
                 word_three_reverse = true;
                 word_two_reverse = false;
                 break;
@@ -1403,28 +1403,28 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (row_three < 0 ||
                   row_three > num_rows_and_columns - word_three.length ||
                   k != 0) {
-              no_connection_three_count++;
-              if (no_connection_three_count < 5) {
-                fit_Words_Puzzle(
-                    puzzle,
-                    word_one,
-                    word_two,
-                    word_three,
-                    word_four,
-                    word_five,
-                    word_six,
-                    word_seven,
-                    word_eight,
-                    word_nine
-                );
-              } else {
-                connection_three = false;
-              }
-            }else{
+                no_connection_three_count++;
+                if (no_connection_three_count < 5) {
+                  fit_Words_Puzzle(
+                      puzzle,
+                      word_one,
+                      word_two,
+                      word_three,
+                      word_four,
+                      word_five,
+                      word_six,
+                      word_seven,
+                      word_eight,
+                      word_nine
+                  );
+                } else {
+                  connection_three = false;
+                }
+              }else{
                 word_three_reverse = true;
                 word_two_reverse = true;
                 break;
-            }
+              }
             } else {
               word_three_reverse = false;
               word_two_reverse = true;
@@ -1492,7 +1492,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
             for(int y=0;y<word_five.length;y++){
               for (int x=0;x<word_four.length;x++){
                 if((row_five+y==row_four+x && column_five+y==column_four)||
-                column_four==column_three  ||
+                    column_four==column_three  ||
                     (column_four>=column_two && column_four<=column_two+word_two.length-1
                         && row_four<=row_two && row_four+word_four.length-1>=row_two)){
                   k++;
@@ -1518,9 +1518,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (row_four < 0 ||
                   row_four > num_rows_and_columns - word_four.length ||
                   k != 0) {
-                  connection_four = false;
-                }
-                else {
+                connection_four = false;
+              }
+              else {
                 word_four_reverse = true;
                 word_one_reverse = false;
                 break;
@@ -1569,8 +1569,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               if (row_four < 0 ||
                   row_four > num_rows_and_columns - word_four.length ||
                   k != 0) {
-                  connection_four = false;
-                } else{
+                connection_four = false;
+              } else{
                 word_four_reverse = true;
                 word_one_reverse = true;
                 break;
@@ -1730,7 +1730,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 break;
               }
             }
-              else {
+            else {
               word_six_reverse = false;
               break;
             }
@@ -1743,38 +1743,38 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     }
 
 
-if(!connection_five) {
-  for (int f = 0; f < num_rows_and_columns; f++) {
-    int k = 0;
-    for (int l = 0; l < num_rows_and_columns - word_six.length + 1; l++) {
-      row_six = f;
-      column_six = l;
-      for (int i = 0; i < word_five.length; i++) {
-        for (int j = 0; j < word_six.length; j++) {
-          if (!((row_five + i == row_six &&
-              column_five + i == column_six + j) || row_six == row_one ||
-              row_six == row_two ||
-              (column_six <= column_four &&
-                  column_six + word_six.length - 1 >= column_four &&
-                  row_six >= row_four &&
-                  row_six <= row_four + word_four.length - 1)
-              || (column_six <= column_three &&
-                  column_six + word_six.length - 1 >= column_three &&
-                  row_six >= row_three &&
-                  row_six <= row_three + word_three.length - 1))) {
-            k++;
+    if(!connection_five) {
+      for (int f = 0; f < num_rows_and_columns; f++) {
+        int k = 0;
+        for (int l = 0; l < num_rows_and_columns - word_six.length + 1; l++) {
+          row_six = f;
+          column_six = l;
+          for (int i = 0; i < word_five.length; i++) {
+            for (int j = 0; j < word_six.length; j++) {
+              if (!((row_five + i == row_six &&
+                  column_five + i == column_six + j) || row_six == row_one ||
+                  row_six == row_two ||
+                  (column_six <= column_four &&
+                      column_six + word_six.length - 1 >= column_four &&
+                      row_six >= row_four &&
+                      row_six <= row_four + word_four.length - 1)
+                  || (column_six <= column_three &&
+                      column_six + word_six.length - 1 >= column_three &&
+                      row_six >= row_three &&
+                      row_six <= row_three + word_three.length - 1))) {
+                k++;
+              }
+            }
+          }
+          if (k == word_five.length * word_six.length) {
+            break;
           }
         }
-      }
-      if (k == word_five.length * word_six.length) {
-        break;
+        if (k == word_five.length * word_six.length) {
+          break;
+        }
       }
     }
-    if (k == word_five.length * word_six.length) {
-      break;
-    }
-  }
-}
 
     for (int i = 0; i < words[2].length; i++) {
       for (int j = 0; j < words[6].length; j++) {
@@ -1796,7 +1796,7 @@ if(!connection_five) {
                         column_seven + word_seven.length - 1 >= column_four &&
                         row_seven >= row_four &&
                         row_seven <= row_four + word_four.length - 1)
-                    ) {
+                ) {
                   k++;
                 }
               }
@@ -1829,13 +1829,13 @@ if(!connection_five) {
               if (column_seven < 0 ||
                   column_seven > num_rows_and_columns - word_seven.length ||
                   k != 0) {
-              connection_six = false;
-            }else{
+                connection_six = false;
+              }else{
                 word_seven_reverse = true;
                 break;
               }
             }
-              else {
+            else {
               word_seven_reverse = false;
               break;
             }
@@ -1921,7 +1921,7 @@ if(!connection_five) {
                       row_seven == row_six ||
                       row_seven == row_one ||
                       row_seven == row_two ||
-                       (column_seven <= column_three &&
+                      (column_seven <= column_three &&
                           column_seven + word_seven.length - 1 >=
                               column_three &&
                           row_seven >= row_three &&
@@ -2249,8 +2249,8 @@ if(!connection_five) {
 
               if (row_eight < 0 ||
                   row_eight > num_rows_and_columns - word_eight.length || k!=0) {
-              connection_eight = false;
-            }else {
+                connection_eight = false;
+              }else {
                 word_eight_reverse = true;
                 break;
               }
@@ -2356,7 +2356,7 @@ if(!connection_five) {
                         column_nine + word_nine.length - 1 >= column_three &&
                         row_nine >= row_three &&
                         row_nine <= row_three + word_three.length - 1)
-                    ) {
+                ) {
                   k++;
                 }
               }
@@ -2554,7 +2554,7 @@ if(!connection_five) {
                       row_nine == row_seven || row_nine == row_six ||
                       row_nine == row_one ||
                       row_nine == row_two ||
-                       (column_nine <= column_three &&
+                      (column_nine <= column_three &&
                           column_nine + word_nine.length - 1 >= column_three &&
                           row_nine >= row_three &&
                           row_nine <= row_three + word_three.length - 1)) {
@@ -2578,7 +2578,7 @@ if(!connection_five) {
                         row_nine == row_seven || row_nine == row_six ||
                         row_nine == row_one ||
                         row_nine == row_two ||
-                         (column_nine <= column_three &&
+                        (column_nine <= column_three &&
                             column_nine + word_nine.length - 1 >= column_three &&
                             row_nine >= row_three &&
                             row_nine <= row_three + word_three.length - 1)) {
@@ -2607,58 +2607,58 @@ if(!connection_five) {
         }
       }
     }
-  if(!connection_nine && !connection_ten) {
-    for (int f = 0; f < num_rows_and_columns; f++) {
-      int k = 0;
-      for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
-        row_nine = f;
-        column_nine = l;
-        k=0;
-        for (int i = 0; i < word_five.length; i++) {
-          for (int j = 0; j < word_nine.length; j++) {
-            if (!((row_five + i == row_nine &&
-                column_five + i == column_nine + j) ||
-                row_nine == row_seven || row_nine == row_six ||
-                row_nine == row_one ||
-                row_nine == row_two ||
-                (column_nine <= column_four &&
-                    column_nine + word_nine.length - 1 >= column_four &&
-                    row_nine >= row_four &&
-                    row_nine <= row_four + word_four.length - 1)
-                || (column_nine <= column_three &&
-                    column_nine + word_nine.length - 1 >= column_three &&
-                    row_nine >= row_three &&
-                    row_nine <= row_three + word_three.length - 1) ||
-                (column_nine <= column_eight &&
-                    column_nine + word_nine.length - 1 >= column_eight &&
-                    row_nine >= row_eight &&
-                    row_nine <= row_eight + word_eight.length - 1))) {
-              k++;
+    if(!connection_nine && !connection_ten) {
+      for (int f = 0; f < num_rows_and_columns; f++) {
+        int k = 0;
+        for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
+          row_nine = f;
+          column_nine = l;
+          k=0;
+          for (int i = 0; i < word_five.length; i++) {
+            for (int j = 0; j < word_nine.length; j++) {
+              if (!((row_five + i == row_nine &&
+                  column_five + i == column_nine + j) ||
+                  row_nine == row_seven || row_nine == row_six ||
+                  row_nine == row_one ||
+                  row_nine == row_two ||
+                  (column_nine <= column_four &&
+                      column_nine + word_nine.length - 1 >= column_four &&
+                      row_nine >= row_four &&
+                      row_nine <= row_four + word_four.length - 1)
+                  || (column_nine <= column_three &&
+                      column_nine + word_nine.length - 1 >= column_three &&
+                      row_nine >= row_three &&
+                      row_nine <= row_three + word_three.length - 1) ||
+                  (column_nine <= column_eight &&
+                      column_nine + word_nine.length - 1 >= column_eight &&
+                      row_nine >= row_eight &&
+                      row_nine <= row_eight + word_eight.length - 1))) {
+                k++;
+              }
             }
+          }
+          if (k == word_five.length * word_nine.length) {
+            break;
           }
         }
         if (k == word_five.length * word_nine.length) {
           break;
         }
       }
-      if (k == word_five.length * word_nine.length) {
-        break;
+      if (row_nine == num_rows_and_columns - 1 && column_nine == 0) {
+        fit_Words_Puzzle(
+            puzzle,
+            word_one,
+            word_two,
+            word_three,
+            word_four,
+            word_five,
+            word_six,
+            word_seven,
+            word_eight,
+            word_nine);
       }
     }
-    if (row_nine == num_rows_and_columns - 1 && column_nine == 0) {
-      fit_Words_Puzzle(
-          puzzle,
-          word_one,
-          word_two,
-          word_three,
-          word_four,
-          word_five,
-          word_six,
-          word_seven,
-          word_eight,
-          word_nine);
-    }
-  }
 
 
   }
@@ -2879,7 +2879,7 @@ if(!connection_five) {
       }
     }
 
-    }
+  }
   write_Words_Puzzle(List<String> puzzle, String word_one,String word_two,String word_three,String word_four,String word_five,String word_six
       ,String word_seven, String word_eight,String word_nine) {
 
@@ -2984,7 +2984,7 @@ if(!connection_five) {
 
   }
 
-set_language() {
+  set_language() {
     String language=AppLocalizations.of(context).translate("game_language");
     if(widget.game_type.type=='food') {
       if (language == 'en') {
@@ -3045,7 +3045,7 @@ set_language() {
         words[2] = "asno".toUpperCase();
         words[3] = "boto".toUpperCase();
         words[4] = "alce".toUpperCase();
-          words[5] = "asno".toUpperCase();
+        words[5] = "asno".toUpperCase();
         words[6] = "boi".toUpperCase();
         words[7] = "boa".toUpperCase();
         words[8] = "kea".toUpperCase();
@@ -3114,25 +3114,25 @@ set_language() {
         words[8] = "soy".toUpperCase();
       }
     }
-}
-play_Found_Sound () async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  if (prefs.getBool("has_Sounds") == true) {
-    audioPlayer.play('sounds/foundsound.wav');
   }
-}
-play_Wrong_Sound() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  if (prefs.getBool("has_Sounds") == true) {
-    audioPlayer.play('sounds/wrongsound.wav');
+  play_Found_Sound () async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool("has_Sounds") == true) {
+      audioPlayer.play('sounds/foundsound.wav');
+    }
   }
-}
-play_Selection_Sound() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  if(prefs.getBool("has_Sounds")==true) {
-    audioPlayer.play('sounds/selectionsound.wav');
+  play_Wrong_Sound() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool("has_Sounds") == true) {
+      audioPlayer.play('sounds/wrongsound.wav');
+    }
   }
-}
+  play_Selection_Sound() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getBool("has_Sounds")==true) {
+      audioPlayer.play('sounds/selectionsound.wav');
+    }
+  }
 
   showAlertDialog(BuildContext context) {
 

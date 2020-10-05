@@ -632,7 +632,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                 
+
                   Row(
                       children: [
                         SizedBox(width: MediaQuery
@@ -670,30 +670,30 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                         .size
                         .width* 19/ 20,
                     child:Table(
-                      children: [
-                        for (int i=0; i< num_rows_and_columns;i++) TableRow(
-                          children: [
-                            for (int j=0; j< num_rows_and_columns;j++ )
-                              Container(
-                                width:  MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width/12*1.1,
-                                height:  MediaQuery
-                                    .of(context)
-                                    .size
-                                    .height /20,
-                                alignment: Alignment.center,
-                                child:
-                                Text(write_Puzzle_Letter(num_rows_and_columns*i+j),
-                                  style: TextStyle(fontSize: MediaQuery
+                        children: [
+                          for (int i=0; i< num_rows_and_columns;i++) TableRow(
+                            children: [
+                              for (int j=0; j< num_rows_and_columns;j++ )
+                                Container(
+                                  width:  MediaQuery
                                       .of(context)
                                       .size
-                                      .height / 35,fontWeight: FontWeight.bold),) ,
+                                      .width/12*1.1,
+                                  height:  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height /20,
+                                  alignment: Alignment.center,
+                                  child:
+                                  Text(write_Puzzle_Letter(num_rows_and_columns*i+j),
+                                    style: TextStyle(fontSize: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height / 35,fontWeight: FontWeight.bold),) ,
 
-                              ),
-                          ],
-                        ),
+                                ),
+                            ],
+                          ),
 
                         ]
                     ),
@@ -4497,7 +4497,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
         !word_five_scratch || !word_six_scratch || !word_seven_scratch ||
         !word_eight_scratch || !word_nine_scratch || !word_ten_scratch ||
-          !word_eleven_scratch || !word_twelve_scratch) {
+        !word_eleven_scratch || !word_twelve_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;
