@@ -55,7 +55,7 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                 Text(AppLocalizations.of(context).translate("levels_easy"),
                                     style: TextStyle(
@@ -84,7 +84,7 @@ class _LevelState extends State<Level> {
                           SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_medium"),
                                       style: TextStyle(
@@ -114,7 +114,7 @@ class _LevelState extends State<Level> {
                           Container(
 
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children: [
                                   Text(AppLocalizations.of(context).translate("levels_hard"),
                                       style: TextStyle(
@@ -170,7 +170,7 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_easy"),
                                       style: TextStyle(
@@ -199,7 +199,7 @@ class _LevelState extends State<Level> {
                           SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_medium"),
                                       style: TextStyle(
@@ -227,7 +227,7 @@ class _LevelState extends State<Level> {
                           SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                 Text(AppLocalizations.of(context).translate("levels_hard"),
     style: TextStyle(
@@ -283,7 +283,7 @@ class _LevelState extends State<Level> {
                         children: [
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children: [
                                   Text(AppLocalizations.of(context).translate("levels_easy"),
                                       style: TextStyle(
@@ -312,7 +312,7 @@ class _LevelState extends State<Level> {
                           SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                   Text(AppLocalizations.of(context).translate("levels_medium"),
                                       style: TextStyle(
@@ -340,7 +340,7 @@ class _LevelState extends State<Level> {
                           SizedBox(width:MediaQuery.of(context).size.width/15),
                           Container(
                               child:FlatButton(
-                                color: Colors.blue[400],
+                                color: GameColors.primary,
                                 child: Column(children:[
                                 Text(AppLocalizations.of(context).translate("levels_hard"),
     style: TextStyle(
