@@ -2159,7 +2159,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         for (int p = 0; p < word_ten.length; p++) {
           for (int l = 0; l < word_four.length; l++) {
             if (!(row_ten + p == row_four+l &&
-                column_ten - p == column_four )){
+                column_ten - p == column_four)){
               k++;
             }
           }
@@ -2475,7 +2475,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
             if (column_seven < 0 ||
                 column_seven > num_rows_and_columns - word_seven.length ||
                 k != 0) {
-              column_seven = column_three +word_seven.length-1+j;
+              column_seven = column_three -word_seven.length+1+j;
               row_seven = row_three + word_three.length - 1 - i;
               int k = 0;
               for (int i = 0; i < word_five.length; i++) {
@@ -3391,7 +3391,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
           k = 0;
           for(int p=0; p<word_ten.length;p++){
             for (int l=0; l<word_nine.length;l++){
-              if(row_ten+p==row_nine && column_ten-p==column_nine-l){
+              if(!(row_ten+p==row_nine && column_ten-p==column_nine-l)){
                 k++;
               }
             }
@@ -4158,7 +4158,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six, String word_seven,String word_eight
       ,String word_nine,String word_ten,String word_eleven,String word_twelve){
-    int num_rotates=random.nextInt(4);
+    int num_rotates=2;
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
@@ -4438,6 +4438,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
         solution_positions[47] =num_rows_and_columns-1-row_twelve;
       }
     }
+
   }
 
 

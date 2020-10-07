@@ -3381,7 +3381,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           k = 0;
           for(int p=0; p<word_ten.length;p++){
             for (int l=0; l<word_nine.length;l++){
-              if(row_ten+p==row_nine && column_ten-p==column_nine-l){
+              if(!(row_ten+p==row_nine && column_ten-p==column_nine-l)){
                 k++;
               }
             }
