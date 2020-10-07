@@ -2970,8 +2970,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
           k=0;
           for (int p = 0; p < word_ten.length; p++) {
             for (int l = 0; l < word_eight.length; l++) {
-              if (!(row_ten + p == row_eight &&
-                  column_ten - p == column_eight + l )){
+              if (!(row_ten + p == row_eight+l &&
+                  column_ten - p == column_eight )){
                 k++;
               }
             }
