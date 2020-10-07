@@ -279,7 +279,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       backgroundColor: Colors.black,
       body: Center(
         child: GestureDetector(
-          onPanUpdate: (details) async {
+          onPanUpdate: (details) {
             RenderBox box = context.findRenderObject();
             final Offset local = box.globalToLocal(
                 details.globalPosition);
@@ -328,11 +328,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       .size
                       .height / 18.75;
                   if (row_end != row || column_end != column) {
-                    SharedPreferences prefs = await SharedPreferences
-                        .getInstance();
-                    if (prefs.getBool("has_Sounds") == true) {
-                      audioPlayer.play('sounds/selectionsound.wav');
-                    }
+                    play_Selection_Sound();
                   }
                   row_end = row;
                   column_end = column;
@@ -365,7 +361,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
               }
             }
           },
-          onPanStart: (details) async {
+          onPanStart: (details) {
             RenderBox box = context.findRenderObject();
             if (!first_Point_Drawed) {
               final Offset local = box.globalToLocal(
@@ -400,11 +396,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       .of(context)
                       .size
                       .height / 18.75) {
-                    SharedPreferences prefs = await SharedPreferences
-                        .getInstance();
-                    if (prefs.getBool("has_Sounds") == true) {
-                      audioPlayer.play('sounds/selectionsound.wav');
-                    }
+                    play_Selection_Sound();
 
                     setState(() {
                       start_Of_Selection_dx = MediaQuery
@@ -453,7 +445,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             }
             first_Point_Drawed = true;
           },
-          onPanEnd: (details) async {
+          onPanEnd: (details)  {
             bool found_word = false;
             for (int i = 0; i < words.length; i++) {
               if (
@@ -467,10 +459,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       row_end == solution_positions[4 * i] &&
                       column_end == solution_positions[4 * i + 1]) {
                 found_word = true;
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                if (prefs.getBool("has_Sounds") == true) {
-                  audioPlayer.play('sounds/foundsound.wav');
-                }
+                play_Found_Sound();
                 number_Of_Words_Selected++;
                 if (i == 0) {
                   if (word_one_scratch == true) {
@@ -575,10 +564,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
             if (!found_word) {
               points.removeAt(2 * number_Of_Words_Selected + 1);
               points.removeAt(2 * number_Of_Words_Selected);
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              if (prefs.getBool("has_Sounds") == true) {
-                audioPlayer.play('sounds/wrongsound.wav');
-              }
+              play_Wrong_Sound();
             }
             if (word_one_scratch == true && word_two_scratch == true &&
                 word_three_scratch == true && word_four_scratch == true &&
@@ -4693,5 +4679,23 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
         return alert;
       },
     );
+  }
+  play_Found_Sound () async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool("has_Sounds") == true) {
+      audioPlayer.play('sounds/foundsound.wav');
+    }
+  }
+  play_Wrong_Sound() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool("has_Sounds") == true) {
+      audioPlayer.play('sounds/wrongsound.wav');
+    }
+  }
+  play_Selection_Sound() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getBool("has_Sounds")==true) {
+      audioPlayer.play('sounds/selectionsound.wav');
+    }
   }
 }
