@@ -4158,7 +4158,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
   }
   rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six, String word_seven,String word_eight
       ,String word_nine,String word_ten,String word_eleven,String word_twelve){
-    int num_rotates=2;
+    int num_rotates=random.nextInt(4);
     solution_positions[0] = row_one;
     solution_positions[1] = column_one;
     solution_positions[2] = row_one;
