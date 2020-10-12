@@ -22,7 +22,8 @@ class Game_Easy extends StatefulWidget {
 
 class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   //Puzzle
-  static List<List<String>> all_puzzles=[
+
+ static final List<List<String>> all_puzzles=[
     ["PgQwkdMEAYoyooaXfbndVrobGedargtcdlitejfhZoShenobRwPGcXlPNRjumpkW"],
     ["AdeefHKcbtDevawouPeboneoytwicetkViDgufAMVmbYiqRXSialTpDIHldpmujH"],
     ["TbOJsuitXedargGIplNrZWwCioAleiWpgwignsSmWfTeiysutshoefujNlimittb"],
@@ -1024,7 +1025,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     ["ObfbGZOdmoRerawaryVlisXoapEothGrwilwfocbcgiLieYNXafKgAEZRPtcookU"],
     ["yUcwWQbwIuahONaoSrbXibdlmgradeNbtfigglfTVFAshoeBlimitwdVZVshopQQ"],
   ];
-  static List<List<int>> all_solutions=[
+ static final List<List<int>> all_solutions=[
     [2,0,6,4,3,1,3,5,0,3,4,7,2,1,6,1,4,6,7,6,7,2,7,5,1,3,4,0,0,4,3,7,5,4,5,7,0,5,2,7,4,3,4,5,0,1,2,3,],
     [1,1,5,5,3,1,3,5,3,1,7,1,0,1,0,4,3,6,6,3,7,3,7,6,1,3,1,6,0,7,3,7,2,3,2,6,5,2,7,2,1,0,3,0,4,3,6,5,],
     [1,2,5,6,1,1,1,5,7,1,7,5,0,1,4,1,3,3,6,0,3,7,6,7,4,3,7,6,0,4,0,7,6,1,6,4,2,6,5,3,5,5,7,7,2,0,4,0,],
@@ -2026,7 +2027,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     [0,2,4,6,1,3,1,7,0,7,4,7,0,3,4,3,4,2,7,2,1,0,4,0,3,4,6,4,7,3,7,6,2,5,5,5,0,1,2,1,5,0,7,2,3,1,5,1,],
     [0,2,4,6,3,1,3,5,6,0,6,4,2,5,6,5,7,2,7,5,0,3,3,0,4,0,4,3,0,7,3,7,5,3,5,6,0,6,2,6,0,0,2,2,4,4,6,6,],
   ];
-  static List<List<String>> all_words=[
+ static final List<List<String>> all_words=[
     ["chief","grade","worth","below","folk","jump","deny","cook","bone","bad","jet","dog",],
     ["quiet","twice","limit","feed","lift","jump","wave","cook","bone","bad","buy","pig",],
     ["dress","grade","limit","below","lift","jump","gift","suit","shoe","wine","buy","pig",],
@@ -4066,6 +4067,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     if(!created_puzzle) {
       created_puzzle=true;
       int i =random.nextInt(1000);
+      
       puzzle=all_puzzles[i];
       solution_positions=all_solutions[i];
       words=all_words[i];
