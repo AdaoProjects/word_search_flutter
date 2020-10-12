@@ -31,7 +31,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   int no_connection_three_count=0;
   int no_connection_four_count=0;
   Random random = new Random();
-  List<String> words = ['', '', '', '', '','','','',''];
+  List<String> words = ['', '', '', '', '','','','','','','',''];
   int num_rows_and_columns = 8;
   bool word_one_scratch = false;
   bool word_two_scratch = false;
@@ -42,33 +42,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   bool word_seven_scratch=false;
   bool word_eight_scratch=false;
   bool word_nine_scratch=false;
-  bool word_one_reverse ;
-  bool word_two_reverse ;
-  bool word_three_reverse ;
-  bool word_four_reverse ;
-  bool word_five_reverse ;
-  bool word_six_reverse ;
-  bool word_seven_reverse;
-  bool word_eight_reverse;
-  bool word_nine_reverse;
-  int row_one;
-  int column_one;
-  int row_two;
-  int column_two;
-  int row_three;
-  int column_three;
-  int row_four;
-  int column_four;
-  int row_five;
-  int column_five;
-  int row_six;
-  int column_six;
-  int row_seven;
-  int column_seven;
-  int row_eight;
-  int column_eight;
-  int row_nine;
-  int column_nine;
+  bool word_ten_scratch=false;
+  bool word_eleven_scratch=false;
+  bool word_twelve_scratch=false;
   int sorted_Num_Words;
 
 //Paint
@@ -76,6 +52,18 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   bool init_Pan_Update;
   int number_Of_Words_Selected = 0;
   List<int> solution_positions = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,
@@ -413,6 +401,33 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       setState(() {
                         word_nine_scratch = true;
                       });
+                    }else if(i==9){
+                      if(word_ten_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+                      }
+                      setState(() {
+                        word_ten_scratch=true;
+                      });
+                    } else if(i==10){
+                      if(word_eleven_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+                      }
+                      setState(() {
+                        word_eleven_scratch=true;
+                      });
+                    } else if(i==11){
+                      if(word_twelve_scratch==true){
+                        number_Of_Words_Selected--;
+                        points.removeAt(2 * number_Of_Words_Selected + 1);
+                        points.removeAt(2 * number_Of_Words_Selected);
+                      }
+                      setState(() {
+                        word_twelve_scratch=true;
+                      });
                     } else {
                       if(word_five_scratch==true){
                         number_Of_Words_Selected--;
@@ -435,7 +450,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     word_three_scratch == true && word_four_scratch == true &&
                     word_five_scratch == true && word_six_scratch == true
                     &&word_seven_scratch==true && word_eight_scratch==true&&
-                    word_nine_scratch==true) {
+                    word_nine_scratch==true && word_ten_scratch &&
+                    word_eleven_scratch==true && word_twelve_scratch==true) {
                   set_Best_Time();
                   setState(() {
                     showAlertDialog(context);
@@ -453,11 +469,26 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                        height: MediaQuery
+                      Row(
+                        children:[
+                          SizedBox(width:MediaQuery.of(context).size.width/5),
+                          Icon(Icons.star,
+                              color: GameColors.secondary,
+                              size:MediaQuery.of(context).size.width/10),
+                          SizedBox(width:MediaQuery.of(context).size.width/10),
+                          Icon(
+                        Icons.star,
+                        color: GameColors.secondary,
+                        size: MediaQuery
                             .of(context)
                             .size
                             .height / 7,
+                      ),
+                          SizedBox(width:MediaQuery.of(context).size.width/10),
+                          Icon(Icons.star,
+                              color: GameColors.secondary,
+                              size:MediaQuery.of(context).size.width/10),
+                ]
                       ),
                       Row(
                           children: [
@@ -563,9 +594,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 13),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                  ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -594,9 +626,43 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 30),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(
+                                      child: Text(return_Sorted_Words() + ', ',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height / 30,fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ))
+                                      : Center(
+                                    child: Text(return_Sorted_Words() + ',',
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30,fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -624,9 +690,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 30),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -656,15 +723,17 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                               ),
 
 
+
                               TableRow(children: [
                                 Row(children: [
                                   SizedBox(width: MediaQuery
                                       .of(context)
                                       .size
                                       .width / 13),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -693,9 +762,43 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 30),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(
+                                      child: Text(return_Sorted_Words() + ', ',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height / 30,fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ))
+                                      : Center(
+                                    child: Text(return_Sorted_Words() + ',',
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30,fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -723,9 +826,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 30),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -760,9 +864,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 13),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -791,9 +896,43 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 30),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
+                                      (word_two_scratch && sorted_Num_Words == 0) ||
+                                      (word_three_scratch &&
+                                          sorted_Num_Words == 1) ||
+                                      (word_four_scratch &&
+                                          sorted_Num_Words == 2) ||
+                                      (word_five_scratch && sorted_Num_Words == 3)
+                                      ? Center(
+                                      child: Text(return_Sorted_Words() + ', ',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.lineThrough,
+                                            fontSize: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height / 30,fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ))
+                                      : Center(
+                                    child: Text(return_Sorted_Words() + ',',
+                                      style: TextStyle(fontSize: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .height / 30,fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),),
+                                  SizedBox(width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width / 30),
+
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
+                                      (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -821,9 +960,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                                       .of(context)
                                       .size
                                       .width / 30),
-                                  (word_nine_scratch && sorted_Num_Words == 7) ||
+                                  (word_twelve_scratch && sorted_Num_Words == 10)||(word_eleven_scratch && sorted_Num_Words == 9)
+                                      ||(word_ten_scratch && sorted_Num_Words == 8)||(word_nine_scratch && sorted_Num_Words == 7) ||
                                       (word_eight_scratch && sorted_Num_Words == 6) ||(word_seven_scratch && sorted_Num_Words == 5) ||
-                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 8) ||
+                                      (word_six_scratch && sorted_Num_Words == 4) ||(word_one_scratch && sorted_Num_Words == 11) ||
                                       (word_two_scratch && sorted_Num_Words == 0) ||
                                       (word_three_scratch &&
                                           sorted_Num_Words == 1) ||
@@ -920,43 +1060,3017 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   create_Puzzle_Random() {
     if(!created_puzzle) {
       created_puzzle=true;
-      set_language();
-      for (int i = 0; i < num_rows_and_columns * num_rows_and_columns; i++) {
-        puzzle[i] = write_Random_Letter();
-      }
-      fit_Words_Puzzle(
-          puzzle,
-          words[0],
-          words[1],
-          words[2],
-          words[3],
-          words[4],
-          words[5],
-          words[6],
-          words[7],
-          words[8]);
-      write_Words_Puzzle(
-          puzzle,
-          words[0],
-          words[1],
-          words[2],
-          words[3],
-          words[4],
-          words[5],
-          words[6],
-          words[7],
-          words[8]);
-      rotate_puzzle(
-          puzzle,
-          words[0],
-          words[1],
-          words[2],
-          words[3],
-          words[4],
-          words[5],
-          words[6],
-          words[7],
-          words[8]);
+      int i =random.nextInt(1000);
+
+      List<List<String>> all_puzzles=[
+        ["tfilHbMEAYLNrFDXfItoVpCXdeaedargodiyjtwtgVShohaiburncbruNRgiftms"],
+        ["lYDCbjetiPlblHPKfQieoRmdtNmlwroeNeioagJndvtwiceoXaZUZuSbKwbSVOqB"],
+        ["espohsLtvAssQKQiaZhwYUBuwoCobjpsedaredmgYPUtlMuoSGEhoRjdVdabwOAM"],
+        ["dwolblnyVePsiOrobLnfwGubdutyoebCoByDlWrXgradeLXdOBTlbmitNFGmrawL"],
+        ["dPgXtJSwaYZiViaVosSUfruMrZsfmtOsboneciwtuVgerbNSyQidMdoBCWpfolky"],
+        ["denyWHekjumpsnOlPTQQouAoFbEblOifYeegiQMtHlKimtMbYoMpiaZaewiwtcWd"],
+        ["enrubcjYRnEICoeDIbiHlotyOeewikknVlQimYleVoIpigodewiwtcfFDtfosOPS"],
+        ["BworthwQMpigpoCPeohslmTSEptbdiuKHawarefjWtQOiAntQhtejuDyObadHGqM"],
+        ["bdQTwarmrnwolbVCoadenySJawarebOTdoeXetaHWlnNasBdDeocIFsFRbbQshop"],
+        ["waveFbhEsoftootQZAPnKyrFtOefNTobHeoeraweYliEbgolkBHuiWloYAypqAbw"],
+        ["NjumpYhbWVtfigtatfilLHrdtEMAKMobeeXerawejoisuitlDehugipoIPtsqIXw"],
+        ["lwolbEQbiHUgiftumfolkXOriSLtTWbntsgradeypPoLRiluiIAfHQobgdabtRwq"],
+        ["warmDgipbroadAAftbVbloweyeoedareGnindTZdbAeueaQGuMNdqQbIyTMOklof"],
+        ["MAyubFAXfGSpfolkCeDarawaIOitSIobkpshZdrooiobcetnogfaQnhecHtdDyVQ"],
+        ["YQdabTInpMdfolkrawarmLWutwicehHbhdbZtsVuWnlrZfsyOaoFSYiYRwwIZTEg"],
+        ["MbadAKPJsOklofXXoHdUIQewfNauGfvotnoniealdgradewbBubRFdtRbYyubUTS"],
+        ["pcXsuitYEihVpohscSgifQMtawareRNftoOOefViPrIBdyYgFtfosUoDWhshoeGb"],
+        ["tIFWgipXebworthDjeXLjumptlQblowVJoFdtfiltwicenobbaduTnGLOWFFqTyJ"],
+        ["NWDAGjtXEgodepiFliftAmmbswolbupoesDWEjanvbeciwteaVorJXhDwDNydGGH"],
+        ["jJOsIyQFuMFtsQoPmtwiweDbpCCmoDrtbldilgeduielejoVrfnBbLIdntykoocW"],
+        ["pLDYbYGlmXReeVRiusoklofmjhscoMHisYoewiwtBoEZrVVckgipCdFawaveboyt"],
+        ["pfmrawPtawareJDitoJiWyQuhrZShBosVtTdecfbFhPnooaKEToKlgTtHbUkyned"],
+        ["RNfZedogbsgoXoZFlbsilShQoaJwfkpswdZoetmyedareduWWQHtdbjQHFGhMWJG"],
+        ["GPYdVfLZDawareUashoeGenPVWrNUdsMsytSCSNshohjumpSobVRevawpwolbtRI"],
+        ["HGlTcatPtHiGeohsVemGfcdQtwiceonHsftueoafToiIdkoUWZfgZlZDyobtkWYX"],
+        ["JJboneXFCtgodFKlDCeyobQiXtwicemmlGoUurWiijlIaqDtfUewevawtXbtcook"],
+        ["VshopZLVecApmujJvbaOldabaeetiCDowlCimKbnNoGCiBleewiwtcoCHTandLwW"],
+        ["yobdmXCbThEWrrSuVtwiweayprILoPswooNBlDBshwynedBDsandbFQNwolbburn"],
+        ["ZZbKLltAPdenyiPMYolsufZGGgosstEwttwiceoFfbonerrWojettRTdsPOhboyI"],
+        ["SdELtNtXbRofXfUQrOogikUeosdlfoXnawareoVodHtTecDbUeOUdsEojEgiftsy"],
+        ["gipwolbOVTGIYYsKbroadopeswScfoHvhifthXNaonesLiMweeeradeYHDdtejPf"],
+        ["wdhboyVsEantLJuWOMvariJypfFetouZawarebwEtPPifolkhKGOhYhUmrawHcUs"],
+        ["UqZSsjFMAbutSheHYewiceottlcmeUUpfooiKtepiwoldompgEkahuiRPBbsjgGD"],
+        ["QJHFMIkAKtfigoNpwgipoTmDpSsccuFbaBBsjaoetwiceytnhVPXVrOoBVtfildb"],
+        ["StEdabQGLhftfigbUtsoCyloJrVssuinHopBebfeawarertJSQtdogdNJPhsuitU"],
+        ["AYEllOyBdMpZiEoPNraEmfbVsAtciwtbhthstZlyofgYsouIeiHiwbRWCgTGpmuj"],
+        ["MmrawbHBEgntpBuQwirTioKyopuPYuhTrhbZfOsstwiceYSNhMGeevawLUYRdbad"],
+        ["SwolbZVJdMJyLdabowXnbonegpUeliftOaudWLMcPtwiceaUZhPQetIYQpmujtNM"],
+        ["gZUsyRXtiDPtsoZeptwiwebjkTXmoOrGloXilesdoQolenoRfAWcbofOgiftGbtI"],
+        ["DLcQfolkVXLhtdnablowifLXCawareiSshoepefgBFrMmdCbjetXuToHVFhVjyEV"],
+        ["BtMDHNeYQbetVPngWewiceiUPlTmupwjpoLibqeZmwHlCtEKupohshoejwtfigGF"],
+        ["MDkoocwddRtfigoOOrREVgfbVOeciweupGfshoeyMmUosNdTDAuAlRRKboyjBkJN"],
+        ["IjDgodLPVeQshopKkttfigQOodNwnboyoahYarFScotiSruHgradeJmbGbpRIfXL"],
+        ["QqyDDCMIVCukoocYbAbifVbXawarerpBdDHeetmdGdnadMueDodGFIjnbgKlifty"],
+        ["SLOlMQdFIqwYiToseBuoIfghSvpirbtogradetaeJTtwJthdOKhRwarmblowScat"],
+        ["dCdFsUNtaROaghZabtLUfiocawarerpptOAieAbkfVHBdOVoieohsqJogmrawEEc"],
+        ["jkoocKTOuSwUshoemPopAQNXpgradetdyLttiPaeoOhhChcnbLfolkcyKdogUHMI"],
+        ["kIpmujLylHcookoSobfSHbStfewaretesloBifYjhorYihFYowtgGScDeNhAgodH"],
+        ["edargjdVjarKpaeMuoMebigtmrRbsigspbopfsSuHnotJUZiehHJNIDtsKDCfeed"],
+        ["suitandNbbroadJLoOSpohstnCtTLfWfeawareYobPCjieYsoBJFedFAydenytqY"],
+        ["NbKMNNUDesliftlToMsoJBiChfwewPmwserawaiaPeIdrdtvKdQIomeeAQyobgjK"],
+        ["ewiwtmAwtohoDraialVrCannceRtewdeNbfhpfROCiOkoocAgQTZCAhVTEshoeDs"],
+        ["bPlUlKMRuXiSQitSyTmXfbfMtwiceRottttTegsyiGfodiiQuKhiTBepssJDgDEf"],
+        ["nrubliftsQRrtMBSRsEokfAGWIeabooBgradedosRARClbncevawooIajetMwyBL"],
+        ["bfGHjyuberadeuaWlbKiadmGorknhNQpwodlgckROaQiooQLDdfAofOZHtScburn"],
+        ["OSedBHCSTptvnKhMqymfaatwwuouiwroNoibjloltJleraweaVLbtQWbcPIHshoe"],
+        ["EyobkAEgEMRICliITbCOZpoAtedadgjfflMraSueioblowmngwFUrspoCtacbPsb"],
+        ["WfolkgipOShtrowZfsoftecOAeLTfvattwiceatiOMDhewbuPHNQdaZsenobdXUS"],
+        ["HCHgsNbZcNsHoMrZIhuHfdoDtfigtpaXGktedadgblaSftEUoocZAhMIyfYCbone"],
+        ["lVJynedjiZshopuspFEBOmZuahKApRwitwiceiethNBentoUABFefehELLgipjsE"],
+        ["ebadbuygKojumpoElwhSZdtJioSsGQiyfrENsfunttwiceseKhLCXerdAUUPJdTd"],
+        ["LbgIsoftbewolbDHrlTtdQFMoodQfCBcawareiabdyobetloLZSAKsWnQXtfigse"],
+        ["RTfJdenyIawareKLdkoliOKeooltihHngoeVfmciQcbGRiiwIDeohsltjumpCjet"],
+        ["burneLVefHYnBhUveciwttDaewhLJrkwdDAiBolMkoocewodOVjetffnCTjumpJa"],
+        ["andpAFbwHsmSbaSoIusodBJfjDneciweLetQrGIeVWHfOdvdtacJiaJMUblowlSJ"],
+        ["jZIbHgweuYUeSSoAmfqlLhldpoFosSbwRltwiceoJkJbGeJrtfigoKttQyubCyYh"],
+        ["XqTLMpNtJhuPOaAiUtwictwunrYPehasroOnjtvTuwiuegeZbwmjshopDpCILJAd"],
+        ["TEsnApTORWruiBwDsutgiDombsCfTtfryeeciweaVnnrylewUVeidudSLYEdwZbW"],
+        ["JQWtkTbBQbBfltacjrWioFdauofgffRnmawarePdpdUZieMTDkoocdCDADbonecU"],
+        ["ZYQcblowWRXChtfUMlIYVieKtigradejfmtsbBdfiifohaGagtifGodnCCltMQed"],
+        ["FMOEaldPldSLniaciErbdmbafsBeciwttQhlstIeLDRoBsAvbloweWEaAXRtfosw"],
+        ["UPpimitZgradeyubwMtHrXLjyohpXeuYTnlXimsCSFebpgJsdabdshoeHGMGtfil"],
+        ["WaburnsHtnesCKhmidnGsUoruaiNfepasowNedrwgradeeJdNbLPdnDWjetAByLL"],
+        ["hgipdPWwtwiceCRorISJenTlowXtfiobwayftLebRroiJaAfBmblZIcPSEevawIR"],
+        ["tpohsgipXeECMBMTLbjbelowEobkoocjtnrsRbuOfeoFemaUiHaRprHdgedargdF"],
+        ["daorbUbMPEwineuQqmrawVyQTuQCtfilPtiuspBNbonedargZpigttSXevawVhQL"],
+        ["RpmujCCwdogsJAfaLNnbsoFvDwRrleVeKopkuorVgradebwdMttboyNBNhhTjetX"],
+        ["PshopRJRaDwFbAsdnJaweYoadNvolHfbbHeroEtBWlntwiceDEohaHeJMRbwRcLt"],
+        ["evawFUgKdUBbroadRrfWdSWMbteciwtyoieslEAunudisbXbesfXsoftFtEQTyRZ"],
+        ["RwJBTPtsNoevawihgradeNuoKtweIWspGhaehUUydIrfbcQunZmXWaXbaMeohsdW"],
+        ["RMLsTboyRfRtstPGsewiceeUheQmNprjodligmUdeeiliuJXTnfDpjJNEytYsuit"],
+        ["PtHPBbtkEfDUoiodPiYnmoaMcgewcbuyWhlojumptfilVandFRCedargRKFbfZBN"],
+        ["AbXmjMOfDoVrXeoEenEadltcnebwknyoiLrsfnaowToHeeWkLKadAreIIedargdd"],
+        ["kRRlshoeoPYtiZRgojsefmNocubsviidemuhealtnpytKrwAiedargdEwWDpHBKT"],
+        ["PFLPshoeSpmujCtWgbuykYiciYclRbmofJohodiotfKyielkSawareZQAWandffR"],
+        ["KNwKdenyXRopNTLPbgradekGoTttioVtnkhhouOfeClcdjqoMTboyQesETgIfBQt"],
+        ["SElDGsZNsZiFfhIXMumZeopeeciweeovBJttdjhaAgyiubswCoimeIuJbWppPfLy"],
+        ["geohsLVDoAsuitQtdworthafttfoscLeHefedareKbioynedIWoulGWDZSMyqkKO"],
+        ["LQtAZSUfscJfNDoHTuaZolJKbqitksedNautdpoaPRdieihoawaregsrXCgiftWb"],
+        ["MWQbljSFXXWrYieCAaPofFftCfnaecstgradeooePVJidofntfighktiMbonecDw"],
+        ["MPblowJZfQPRRjdDTeQHfeaXtwicetoRtwsheyrtgfahdobfiRivobMopIMleeNs"],
+        ["boneBkELshopostIMJKooelgcHcfjiiAVhtfmfKICGietgodPUtedargbaddfJMV"],
+        ["kooctgQLlPCIwfiwQiSyYaiptfmdnnrlXaeieeWmLecitodEfQBIhVhUeciwtcOs"],
+        ["VINshopMOWTbnbgIdLOrHliITruofopbRbeaewoygradeynyQEKCdeuBmrawdbIJ"],
+        ["wPdenyMApshoeOUsaePdogobtwicefuKhVHutykYIyAMqMlWLoAMkoocWbMMXFfI"],
+        ["OpmujpNHRUOUVaiRpeciwtHgoYPhZhFQhbadioFZsBbuywYAdenyNVfGenobwolb"],
+        ["wUYbonetacdrLTtfrGhoTMiimApagDuggradeTstAWtbXffUPMhXuiTBwinelyXA"],
+        ["KXtpWdtPbHeOmfnbrKjwiuoaoFqlanjEafSuevWsdeVLiIeuHeradeQiZdEyobtt"],
+        ["UynedJQNwDlimitGaFYwWfZIrcoeohsDmlhldcLgbYkieaBiawaretVpeniwffZE"],
+        ["QVbYeohsdTrZdabPenotpjLDnfawaretyodItiftQlQQhouAKkMYsRCqHQXcookB"],
+        ["AMtUgodlRGLeyubiRwtwicemWafobuXisvoluoqtheserQySoSYbnZTHpILOblow"],
+        ["AgodwFXMftfosaJftotboyveXeledadeFnikjsadMrCuuYoFYuUiqVrLZbtIBCbL"],
+        ["pmujDPAJdogcpohsPReohsFBbroapiUDbcawareTlOaOtZdfoRWthGaVwJwavebD"],
+        ["IbbSynedFoeuyobCjnlCyrWDueodoWAkmawareJlpGdUaeIoXUCFLnsfsuitVXds"],
+        ["edargsMXlerEAuCMJeWeIiIDdfmBstKFbeeidsttoSnntfGayDayoIGcpohsWbME"],
+        ["bfLQlDjQBaeOiWuIpDdimHmCaNMFiPpVtciwtckgheohslaitejooRnfBSEfkYdt"],
+        ["GwineEawBddenynoPKrbWLdrWsPeciwtswhlsAGhhaWoQstQorXweOaLpmkooccV"],
+        ["bFMlILCVltfilACgoRFpshoewHYaedXOtDRtwicefGbhXcuEiFoZaTXqgZytfosI"],
+        ["RVeniwZJPTMwJNfMgcookReQJigradeOjlptbidTuUihOohAmHtfigncptactLHe"],
+        ["pohsjaSXdjettunOabWWgimdbcrsRiupKJhohGfsJAMitoQtawaradeRNWFUpfBE"],
+        ["EdITTdyRberaweoKXlHeoebBXQoNrftJwVpwtsfgatWohGoiveeohsspejBSUsVV"],
+        ["KAcookKAjetboywNtKUPFpoROepedargPtiobttmgUfuhhhrVoriqsWaHndZgGFw"],
+        ["CetwdnabIoeoBQlVChjruoHfNsHtwicewljhADeeCaiuESYdUPvfmboyPRYetpLQ"],
+        ["tfigebDOMfHYnPulQIoLoGiyDdYsbfPGfahRtaMteoNinyiEeradeuoZdbMVsfNb"],
+        ["VwboneWKwFoUtacTpHslefUDaFGsbviItwicemalhSdHrrMwFnPaIPdKaQwwineT"],
+        ["HAbuydepVZeKaooINtlbhhbCJQossLrgptwiceoidmiXuIafnZuuSqdtaTEjsCIA"],
+        ["ZHPesbadNCvOfhwYfaQocWobweledareYkiwBGtlJRohSahoRlBAcnVwbtfosdQJ"],
+        ["IedargRcyDarUWobopoFeoPubmrfksFrKubgoXsnLjZjilNdEdeeffkoLPCtMStg"],
+        ["XHwftbGSNjnoofoEbcerlliyrLhtubkgoMPifbZtawareQBfdCnQefCoPTdWdHIs"],
+        ["buyBbadTUdaorbPVsZklofRVosfVeohsfYeciwtdtWerIgeMAMdSdnoCcookyRUd"],
+        ["pmujgbOWBqykoocyZounlYdnbEeibolegradeifdHARZltLXcatioJJYRTtNwKDQ"],
+        ["OTsjumpOGLBhttTPtFfpofeOfgradeijiXRtaNSlgiphohRNblowrXcVeniwbAZP"],
+        ["CRXyliftPGRBnBPdsoftfenbtwiceadrteBceZAoeoRodiNajhSoaIedFsJkbBOf"],
+        ["LRTRbXReeniwrPRodBFfolkhewawalAsBoepdabJBlSsmjnBVeQQsuedDbevawjt"],
+        ["WlbMJjKtpigoVuZiQfVcymwubtEwhposuJLoSilTrWarareSnjetKHbfWRMhevaw"],
+        ["suitBysMfolkHoheGSbfJbovCZewareabrladimwQZoNbrhDJIwuaGJcPBywandM"],
+        ["VQSbfboyANqyloBXDZwuyolFKpobinwkbarareeBottCFAtdnhhjumpSedogEYDN"],
+        ["CwarmpigVNUevawwLworthbocenobZelfhUbadlbVoiJRGoGQBlerawatejkfLOK"],
+        ["BXQdJTKyXfpDaSuLgdadebKDdatisCglnohUhciiarDUocffBbQoeFttOOkwarmU"],
+        ["NhtbaOBFXtsfunSOPrFsirdpfoZWelnmewarerXueVQyobdjdkooctacZgiftTAU"],
+        ["gqtiusDliRutejFipdZibEsmgradeGoiZpgbltftCoiJoQtWThfNwKTZLstenobH"],
+        ["IsWwIVWyXhekaEYuboqnovJbopwuooeSypoXibcsBarareIoQttEABtfWhhJandt"],
+        ["ZpigfTZFHtACejLOgdadeIepwanidKmtaorluuFbvruijqldebbfXoaKVNDtwbLH"],
+        ["FEliftJAtdRtNjUTiaawareBubjoAittsdulPiuOGomemCDqKgpbynedPLlburnX"],
+        ["pfSOblowawaregiptoYiLCtnhrYRhpfrXtRNmciuNhWubylbXMjTMuoNITRdenyb"],
+        ["tiussoftdUtfigXUaRyubonebbJsliftPrBhsdogCoEtMeMJCawarerVXdSpLPJd"],
+        ["IWdlsCSbTnIeioSuawXbnffyWouKbyttgradeJSJntZilboyKhFBoQEVtiuswqSG"],
+        ["qwolbIPLburnbadZOSibsoftkcyerawalanltKoRoteoBWrEfOdwOEtJgodGOXhJ"],
+        ["pigAPlVCyobHiDDUVbcfgiftmrtheVXKroFpinYcaawareoEwdRtXofbbuyhkLLM"],
+        ["ejppohsQvsuitDwlanFmgMiiwprfpMnmZSaueNeitactbiXtLXAWhDhStwiceAQc"],
+        ["fVHfNandUeLerawaNTiedGKoACodceDrChbwcanbsaoZTKtydlOshopFbPMHpmuj"],
+        ["yobwolbUmtfilHUCrcWYwSeFaYhDoDobwtKilXhrgradeNsoDnAcbfFadCEgiftd"],
+        ["bZBjetMSIlefdvXVklofeoaQTZhwpigwYXsBfmhYtwiceCucSyobeBVjSZGbdoad"],
+        ["OUBlJytTBqNiUofVZWumdbiJwtwicelCoHoteentljlCntfybReoHoDSKTbtsdog"],
+        ["BBeohsHlAboyAUiUeEJLwfdUvCtatbatagradeoawmaQilrcZnMUDobPdblowwqJ"],
+        ["tbgiftWKirUFboneuoUdabtasaDcCeensdUEhljdhTXPYoOIoHawaweDpLmrawIf"],
+        ["eOaewarmnAnoPgOPibdhliZwweesifIoBljimtGlJoEeiADbewiwtcIXXSfolkIL"],
+        ["sDliftRejssuithveHeciwtatIBrborwwTpudloPiArmPewdnnRWubBoeCWNHjCg"],
+        ["fOPEhIwTeciwtZaBeAhQrEvYdogioReBmrawwolbbXRMLfMyuYnrubToytfilSYb"],
+        ["LsoftECNgiftpohsbwsYkFYbrBisdouZoBpneyoeawarerocdMtPThdWAVhRsFHZ"],
+        ["JFRfGtacBbawareWYJrogiftBWslbFhFStheaumcyiobMdrSoupMGSanbsandRwT"],
+        ["FCedshopCOvsnZbYsFahbalJCsworsoCpLeeoowwarawafVitRGCdtAnhDjetUIe"],
+        ["syBAbjJaMsoNretnpWebotfdarawaOoNtbykdKslhAonoPDiHWUneoBfRFVYedct"],
+        ["NIsBblowMUXstaOJTHwHffdpawareriHVovPegdltreLdPFJetwarmZBjhLeohsD"],
+        ["JKqYgipRISwubonepFoJibDwogradeMahStbkltvschoooTeOYayowYNsoftcHMG"],
+        ["pohsZwYtLYbkooceRaMVXrwjdewiwtabBVohjhvoSdlJiuenRoeZVemeRgbJJMfp"],
+        ["OgodkTRffVMlERHeseoedareufidsTCdiWOhahXLtfoscooBaTdenyreceniwOLb"],
+        ["EGHMburnXYpsuitNZVmNwyZZcsuwaorbghjovbuOooileySQdpVedargKFUbfLUZ"],
+        ["ewiwtcatHohoyBXGLlbrOnVTIeotewetwbnhaffdoFerdiQKlEmUlaDHbRSpigbF"],
+        ["JdXklofAyDegodXeuPcnswDnbKwhyoNiQQonilfwAgradeStEutPUbfRbJhblowC"],
+        ["SCDtbonehDJWfWTLtwiweoBerWBohGsvowwltiDawoieafewQlnbcOifKbeIgodl"],
+        ["wavewarmeGAlsuitpohsiBAUNchBwmPgEZhsoXidHWHilpatawarebKaVDZHbfQc"],
+        ["FtgiftUZJbeBfFYgpasjbeAomdhfDleduHopeZodjWeFoiWwhtrowhhNtwiceWsc"],
+        ["yworthPXnEKfYHWReVawaretdmFoQiZanrtlOIhcrafeniwcuwibdogQbClVtius"],
+        ["SMbVpleJTaNiNioUdjglDfhSecuqitsInadmumLByteVpiiCCBewaretPMfsuitt"],
+        ["ZyhyubjeKotXguLnObrFmiMoRNopBpfbBawaraStpXLAitFPitiushZUgshopJqD"],
+        ["sQVLVandfsFFtWPLboeciwtZyllrmojCnbokiluAeaBwlemTddAMQbpQUbonebuy"],
+        ["tVsLgodKasGhbonecuEqoTwPNiDwupoWYtaRXilUFvgradeVedaorbbtEmrawboy"],
+        ["LBdchboyVnAthDfFakrTLieGHogradeHwoUpeydfMconAVuCUhopmujbsbCTwave"],
+        ["GMwAtacIQOoppmujegradeHenQttiVJnoMhhdhkibkooclcwZAgIoFTBCYEfdeny"],
+        ["BMOcDPLbfptVoSAoewiceoPnejmghwkedeiywiEUYtlanneROSrRSeMfDmliftdD"],
+        ["UgwineFKWwipmujkAoVpbKLogradeoMoHtTwltncHhaYoeaeYvWUwCsceGliftGs"],
+        ["tHsbOwtgAiosaTaiYnurwfcfeTmsoeDtQedaredNshoptdpGARDThHiJMdabLQgL"],
+        ["DbgiftFZbasWONKFrdOswarmoRcSfPZpawarerSodNtWeodhtiusdWhsUdnaBOQs"],
+        ["dfolkbCHwnWYoVSLpCanBwCZaeeEWaXktwicerGohUOujmKobadGqeScBKynedtF"],
+        ["MVltejEBpOiDSpsNaemYDmhMtwiceuodhAthRjeeeniwcMXnJJEtiusyklofgipO"],
+        ["buysuitWXyobliftedargPFDberGIlNeoeKeiUvQnfTmsaGgeGiGwsRiMtwarmLp"],
+        ["gipjcookDMUukyubJPMmOlTyUcbpAVoseMhrYbhfKvtiooTFgradeaUZFWpwAfdS"],
+        ["folkpXDbGwKbSmaFNAofpduKUngradejeTKttiPHtfighhhOFuOJIAAcsgipEtej"],
+        ["tApohsXMiKdTQgHOutfosiMQsbZsgfbbCrGhstooLottVeynRawarerecdLpTOMd"],
+        ["qPAtfigbyunrubHruoibXSKobLberawaVPSltRZddnaoGUURTZFwwolbpmujpohs"],
+        ["ZbbGPwYVUasoMabYZdRsnvlYtwiceeoUUocatrwFplklofdMieNlimitgbwarmCH"],
+        ["DZtgjMpLURietbadGftwictYtbOkmuhmEoEliVqrHnAolgXaKeKfCoYwsuitIdHS"],
+        ["hMDOhOYytwictPuUrLNOabQdoandpiUawtenobebRfHshopfUoOYwolbCsIynedK"],
+        ["BIggburntHLiXGbGIeLfpklIbcjtlKoprBhodMwmoXfiebMuawareEojdQHOffMy"],
+        ["BMsMfyNtHBBoAuwiNUlbfbaudkdrbtvsfrWoTueLeBeagHrAeradeDUndKWRsyob"],
+        ["dwBbwXFbjoKduoNuurgYrrlymtwicenbphoCpbsyJDlOaonsMUedEehMOAbMdUHs"],
+        ["VgiftsLNLekoocwXHoffbXoCNhteeIrAEsdBlItWRotOohhdgeciwtcajSklofUb"],
+        ["seciwtcbKoOhwXaawGfXiotdfoJtkelQeQryNlfbeLJtnYogdUAFheofburnDddL"],
+        ["tiusbtRPJYhXrfECdoEBoiDTewawagjZwoeRduZlilgsmMibneopsfuAebdKtyXN"],
+        ["QtfkeniwteoKooCFfjlPpohBibkplmcsgeeOiZuEYlLimgIjMoMLiLITewiwtcYH"],
+        ["HBlsJTKmHYiOhBZrCppKBoHaJoauPGewphtwiceaishZDeSvgyubENtecookbadF"],
+        ["sAwolbJGobwsbpaVfrQasoidtoJZvfngMawarereKdMZTeEdPcatYdWPBYMGfolk"],
+        ["bdtfigmDoUaIdCrfnsEboAaoeCsrgbwlfKZoGUukeCNarHRyedadgdJAdCblowOD"],
+        ["UqynedltDXuPUaifOWpiKbmogradebisbStTutteLlhyCQBnIVopohsoandwVUBb"],
+        ["YqbCnrubBFuagiftbcCidStwewareDfoloJtftolorVLoMsbwtHLlgodEhTKkMQJ"],
+        ["bIpftdONuOPoefaHyVXthiobwolbfshstwicemZceohsediURTBUdWolHTIdenyg"],
+        ["twOJlgVXfipJiiHGonaumpCOsetwicekeohstePoNWhCjetoFoNNLAHcpZBAgift"],
+        ["SZtFMbKMhgradeGdtdabilDorsuitoWgoepSlwqywomMitDnIhuNfaGeDsjPtcNd"],
+        ["DMtfosOWwaveQsHJwpHJwhABoauABoSRrtwicelCthQTeyBbhTtactoEshopigBb"],
+        ["eNKFaYUwlvYfjnfiiCaueodnmZmwliDeipTkfshLtwicehQcXtaceoBSblowdeDE"],
+        ["eciwtMpMgIhAcoptibPihaafpprseZtikbmoJfhgXoauaQMXUKodjdLNKCPcenob"],
+        ["eciwtCDVbAhenobZaVtiFAtRdpfNeiWdIoigmfceMhgiFWoeLslpQQofjetfoskU"],
+        ["tFReohswePvqJHXojaAwuCWlwjpoRiPbMuarareFLmttPURtEphhRbadklofEand"],
+        ["BtfosCceURtAbohncNVfoutiBhLkiUrwdyifClononberawageuefDQLJdydFUBN"],
+        ["LtpohstHgradeHeVdstiJnjInDhkuwiKaVoooqdwXoNreWeCcHtEWNnNOhjumpyY"],
+        ["CcBtyCNmYwhLfuKrUoIibibagradeulwitXTlfrdfhHAoIontTMYwgTATblowyob"],
+        ["plimitstaeDTNbhatwicetochZMufJpyPdHiqDPwZogeohsoAgQCHZNlHwarmXBb"],
+        ["XJKMboyNVJdfSKpnXyawarartnoXZituierfgfhbudbjooXcsXDseldTLMPQNtkF"],
+        ["tDburnKpwederawadaigifttboruHtkhYtgmqioMZtfHBmoXGOeiAicSFKSjllRG"],
+        ["IACKDZLpGdbjcXHoJoroeCZhtgofdtfsfkawareSiHdYbieSgmrawVdUenobZDLc"],
+        ["XfFVfolkawarebcsKoTirYohKlTohJooweaEsckeibSodogGnQfjetGMetQWevaw"],
+        ["XVsburntWJJsboyitwiceYKmtoHHJrDiflevawdloegipSEMsbSBshopMcookbuy"],
+        ["htfiggodtbUZMTLAroQPbuyBonfpsoftweoaetMXbAltwiceXokhNuuUHGyAYsIq"],
+        ["gUCVIbQknisCblslrVfsroooudYtowffbInpartNbedadgdcoCUtUNaDyZMhOtQD"],
+        ["dUfolkSBEaRswavecHoPupJdQhtrminAReiubatpjGjerawanrubfHCtXWLwineh"],
+        ["NAptEFCXOVawareSLstobiVGwuhruyuTiiJtrngqntGhneiMepmujdpZMjetfolk"],
+        ["VbPwmrawbrCTapiguotBKvEWyawareeRldoJiNPYiJlnrubFfLebadqHtVbblowS"],
+        ["tCfwarmdAfSeMwpaQRiTioibGQWlHfgNweciwectoXCWSeQelnrubdMjbXevawVX"],
+        ["btXCtfosedadeOBFlaDibDWBooMuutKNwrylfqJZybZishoedogfblowKPbtQVLY"],
+        ["SDXOlKTLEJFMwiNUpmujobfTeedarestbnYrtludoIothoieyBRbawtnFIdogcsy"],
+        ["GfJZwarmOerawaAaFeneDWnKHdJosdSlwstbbsiBahioWmHyvouyiUuAepstQbHU"],
+        ["suitenobwSIqNtejaaHwuAfMrnAoSieZmdgradeOgiftECdtboyhCIEKRQZklofE"],
+        ["wGBpohsTsoyubVOFEslBroFnpJeboJyrarawaIDutdaUdGEbhvoUpmujeKKgTJUD"],
+        ["CRbtdabKLbedadeXgllaEiFWiooocauXfwwrasnqtVSbtoYdPEUliftOBbonetLY"],
+        ["RIsXpXHDhGZsaEbttwictXofrMBchryioybpogdlwnutmoiANerFeukpZdnVNjjU"],
+        ["sdVdDpjHuawaraeeioGRZttotrltfhshJbpifPPsAFgifoARCQDEgtsWBYLyobDP"],
+        ["SEPevawNVhtrfwGbNfBQeNuSgradeyobeMMidWswogodhhKahQkoocCrsSOpYZGm"],
+        ["ORcqEdogKaCpudabtGotwiceKhfkoeeAsooBlvotsoVMeahUcNXGbwsITHbroadR"],
+        ["JPqXIZXmDNEubadrkbHciuXaoewarerwolotfytncorYonDpAwtGleIiYNhNkdJg"],
+        ["bMbfEIJsugedadeurilaWiVinfooDHhtstwrNjdcJhTbuagbRSombiuEUVpppyJP"],
+        ["koocStejXtbCgipWFoeevawbytwicerCDLokuoEVRAlVaqVHGoedenobfUbmrawG"],
+        ["GOliftKETNwesoftIynovJCcUorsraaXfbuustwHdebiYehGLnetOSrMgradeUWd"],
+        ["lVeohslJiOjetNiWmRjumpftieEMfJtitwicegBuyHJheidsoJGGdfnAbIGFOtaZ"],
+        ["CtfGandyEZaobonewSQcleseoOdUdkunrSKrfQiitwiceFtwhXCIesVJsoftdGsF"],
+        ["boneDWRXcMpohsFgPhElimitGwiREpTptwaerawaEiavfyItCIureJuhPXKsmdab"],
+        ["PburnDpPpwolbiRPmpfFgiftuawareZHjtoQiOItFhryJhfdZDtIuicaYThHlbEb"],
+        ["RZwarmNeHZyubInBNpfdaorbwSoebEMkadJhioYoveApshyoeeciwtccVfIgNSKB"],
+        ["VSwqYMPfQEohuDTeCeltwiceCvbrtIedNauoMfCtPwywIEiNyobwarmlCandburn"],
+        ["MZboyBmtFtQPfFreawareYajLwgieVwCRoosdybcdDhrnqoYQoPetonDpVdEkheX"],
+        ["dPBKtfilawCenobUbpvOMIdYOaeQSVntwtwiceaiGhBMuZMujumpAqXsFbuyDUTI"],
+        ["RYVtPRtCLYpCftiEgdadeounPatjrCsrgohyteVuirWnfOsbpbOeiHZsLAFdldab"],
+        ["JhUVtURWBtIakfHDJrcRZloUPodEpwosawaraJbfnVYvtYoFdZeohsyAJblowZsU"],
+        ["IEywSXEpIoowarmoblbcZGwhbQrQhVosIeohsilDevawareCPKdyubbfRYEGdnaT"],
+        ["CIZymeVbTeKurvgoHcobaaoyGwhhwwdFKopisGpsgradeVouEttKAfhiEhhMUNst"],
+        ["TKpdenytEibsAcfhgaoAaiCtdfptlOUrtsauYGZoVhtwicewOohJDeRUYeblowtI"],
+        ["fdenyQPdKetedareldiaeXBeiOohcoffmeVgcohIinORlLUstiBktiusGwtfosUB"],
+        ["hBdspMTQtZbnsoNLrpBuaehRoawarerswtZSenodRhMnUfjHsuittCeMOwDgiftD"],
+        ["FQYCMwdPXtfigfoWRkoocegTMeciweTbDTChFdoetfosinXntfileeAicatPRFfw"],
+        ["ghCOUHOSiVtacRkypcsrSloNMooqobEtOoffuwdfEktVJieiGXawaregeohsXHft"],
+        ["dabsoftEandTKOnWsWleTUrZquOinWubZuihfybrJBitZtCoUYQarawayubptZTd"],
+        ["TfZHfNRbawareTueMUJieynMklofdogOcKBBbcoNobroaddJoevawbadkECmrawB"],
+        ["SXyubdabNcSsburnVwhBoandLopiLfeVgradentLGttVyfIZShhblowTRTAfolkT"],
+        ["wenobjetpRtKfUFbaufEEolWtwiceolBhMgewQKktfostgAXOONQICoACQNIbadd"],
+        ["JGXLfgKFdYdNeHicawareEaposwgdtNlreoiWsPiboGfnNsfShBtteGtXsBLtius"],
+        ["burnLdabwsbcpohsaurHhMQLvioOpiGLetawareKRadLttOfGnWZhUaOPdGpmujc"],
+        ["UVUJliftSXtbANYpsaXrwcticsFooofgnWealoiLgradekgMGMuDbLIZAyobtfos"],
+        ["QCOlWTtcyPIiASfouFVmsfiobtwicegkNnJtUerHyrRVOdRdoufolkAobbjumpZg"],
+        ["tpohsVTZeepburnZjvmibEDwwabrgloEiwrsaloJnNoNewSweEabPrBLAedargdA"],
+        ["QMLsJfYKVhAKseIaetwicenHnrsEcdrgoochSoidbwKaofoOOdabtpQkGWmrawYR"],
+        ["CdenybadRFQdcIdkpmujaolZqFGwgooReuBofLrknWilcZIboXHedargbMEbtCtZ"],
+        ["XfpFFStjgdadefesSatiothQMohshoLeTrwdecwnXbDanHoishopvalwPCOGMebR"],
+        ["YYNOGYbSXpRklofmjaeNyQEretwiceKathTbuHBwgiftuqRCpightrowQcookXnX"],
+        ["eciwtPLRjFhoghYwLeSltiaFsfteevpRhLobefjYowAlMUuXeboykRmVJKkoocpR"],
+        ["broadREwMstfiloMIYsXFlLHGKdebptIPerawaeWsoftbtjgOnrubhiIIdenypDZ"],
+        ["DOYUNUbsOtpNBArugradegoicatiiYatgDhpuAdRishopqPUfIVPtfostdabburn"],
+        ["MDWshoetYeIsIUcfwdnVsBaooaoitetsloSgwfrWeradeHidbbcookDlLPynedDB"],
+        ["XdwolbMJenwpmujXnaoCdtVboblseepobrejsonyCobCheAyDaEsVBrFgdadeGLd"],
+        ["McookSPJjlXfbadbuiawareummKoQiVrpiYlDIhnCtdevawcHoZbbuyRgshopREM"],
+        ["bBSWjumplcpSMwlQoNhiGaibwOpigvfrgradeetoKFtoDfJaDWhAbuydLsQIboyI"],
+        ["cmLbbXOYorJordogoaYnofMHkwfeaeGbpgradeaMoHIUidJbhGDCMhRusLtfigcy"],
+        ["twicecGXAEbbhFaRlFproiUtihmDoyebftugcaoftajoWndTHpodeAMYDktfigIH"],
+        ["fHYCdAMwerawaBeoedeMoSvldnCsrLabjaQtbBwWeWfCWRaGtiSyobrFlAnrubmB"],
+        ["GEbLNQCWRLoFwolbgfnpohsrpiemtbDodifireaaeMgthajdeciwtcwGfQULEXCI"],
+        ["abuywBZNXnScJoQUmFdMhBlOrktipilbalgradebwoQRtSofEfZBhyYKwaveshoe"],
+        ["gLynedIViOWsmrawpIhqWQwKyobwuDoLpeEoDilCEogradeAEhOtejbtTsBhwolb"],
+        ["wPtQtiusiwbetCQOnaewicepevlImuYmkeoBiPqulgwZlLYjooPAshoefdIAbuyK"],
+        ["jNLAkPkQuQeLlotTmcoLodfJpwhcfoiTMosifggSararetPbYtBLefVoIhJjdCWy"],
+        ["gynedRBZoJfbroaddawaretesJoliaGooylichGhfoefTDcstbbtNSTDtiusDBHM"],
+        ["bCynedDBrTZtiuspofpSDgAmawareoeudNtibdnjBUhohXicCLnDOcwaDeshopUt"],
+        ["IfpFtfosgradeRpROYtiIoyPLQhshoeUyCosbcdDnFrXkooceWbIgIIPdRtejBHV"],
+        ["fboyAIKfbetyubmoewicearllDmhGnakoAiNcdwKwXlZdenyLLsuitMFURHQshoe"],
+        ["BttburnQRffetJDWHiewiceDlgeGmuUsXidcipquQBfalmWibadtKuTtgodKOjJL"],
+        ["tfigJnFbMKbuyrbaRhVbLuldGtsesboVRrClphwKXoMoemoKawawerupOFHRgodj"],
+        ["YboneFMwtiuswdogfUSaBrAeNorqtPyvAmlhuodaWCLkbiewCTawareDcatVGCft"],
+        ["dogtwolbbadCfcFGedargoaQlarHHLstooDeshopwrRhsSVECboOXsWNLeevawRM"],
+        ["aUbEwarmnweMburndoldcookNroFrTRtEtwiceaQJhPLycsUNpohsoAstfigORbJ"],
+        ["sHZdNAlMPueUmiMcdniZfrFaywCtfwatFoeSeibwgradenoTotKVdenEdhHMDNeI"],
+        ["evawpUMMgipnpmEGptBVrouGawareuhjtokiBObshryouUXyCtoGoqJuWhbVEcOb"],
+        ["shopbadKVIdPjumpOEHrandWtwicebPbPoIIrsDoNlCoCtsnWeawaveeBbkoocGj"],
+        ["DEkboylOVDoePniEdOolNemOgrcoIdiDBoewiwtkGTdstFTlnrubseOoJTmrawjf"],
+        ["kOXKLXObleciwtsaoWwhoNudfPaMlEintMvJeetraOeSbdfuctimilnbHtfosKPa"],
+        ["RMCEtfilFshoevawfdaorpPJdemedargkoirNtecoEghahnaoLBQcwitcKNFUDwF"],
+        ["dfWDdboyawaretejoQAieTnBrIRwfHoIbQdnacbWAshopvDYmrawQDeMEHTRwolb"],
+        ["klofRLhQmrawgFtUbtacoCrCfoOfdYoCYenerawaGZieWoaCDUVdlYvCdabbcHeF"],
+        ["giftBCAMpiNCkIHNodpptoJQherawaoDsjbtoUccLuuhrHbDImrEtsoSCpnHhSyB"],
+        ["ebYDTjftnrJLeHofoottRflibawarekgbdCwieKdCaoVSdnVRldTIaqPbYsoftIM"],
+        ["FwsevawWAoEhUjKPAreQoXecptwiceotmhoduoGluDlokqibjWegWfaMAMbUtdXI"],
+        ["XGAbbXEfbPbeWooMFlrlFlnGaWookTCecnawareyaAdFUioNtfosYbhCPFHgiftc"],
+        ["eciwtUZFJChoKdogTwAlfolkloFeeZRbilLbQfeumbpmujvritejALantJboyWwC"],
+        ["pQCpbJkRtiSmofoHEfgunooKpWijelctaeSgHkiWtwicemtdhPBhiUaSINZlcbcZ"],
+        ["XUNtEIlRTSfstfigXocChwfysHwhXotoRPoTilebygradeXauTtNVbfnbKhwolbd"],
+        ["MSyobQGVsuittejLfDInrubfweperaweatioABoevpfhhVrdeiEocstGDgBRsShP"],
+        ["swaveVXylupfQTobiWimebLopAQtuiQnabuykjhetwicelXchHSXDAoLAandKJLf"],
+        ["FQXAkoocgiftCJQLsbfXshopheradeMColsHabAdeooYohnjXwfyraceZGtLbSDt"],
+        ["IbtdcMZjSupieaNuMrLomntmqnEwhiypTuKoRslBHKilFLWLdnaedargwolbtbad"],
+        ["suitDRwWfdnaIKoBbeEedadgbuiUlNeZgoyhjieTiPnucNfBfYmeyobttpJWTCET"],
+        ["bAwQNGpZlBoMGFoZogradehRwQtLeFsmyLhbeuVrSooJfWqaZnbIjetwevawKdog"],
+        ["HXenobNblbgipwJlieINOaXomlboyrNwioWHMmyftwiceLnoAPAuFFelUcatqZdk"],
+        ["YQbKePlYHaCvdWiLdSahnpfFswntamttdsLrCutaeMeoujicerawabuIfPQYdZsV"],
+        ["yubTABfPIJIIYoeKtfoslvnlbqFkaXrilPuwFfumotwicebiwgodeeOteniwKdRG"],
+        ["ynedHHdSYdSEIpaENerawaoVbjpeWtrsoseishbonyhtgsSfeoXosuitEbLCpRKM"],
+        ["bfYCcatpewareViblLGiMgoLoZElhnVwwNiwecaOFfoyFrFPtlMomUVGbVRbgift"],
+        ["WQULShZnweciwtXrkaPhorZuoIryloOboQnmewuaceDEbyfddECpohsJLgipNRVP"],
+        ["wsuitdYFaMEZeaARrbcnjwnBmryhUoXdboAWilZNSawareSXAddMSbfMburntfil"],
+        ["EbOMleNZceeKintcalWimofotoLXibioewiwtcgkRpmujgYATOJyobiNNHYtfilp"],
+        ["fsIUGpigEehedargVjioStlWRuPhphiXymAFcFmenptyobineEaXXVtodPckoocb"],
+        ["YceohsppDwhjBTmiIopieOuggradetjCJttVQfJByhhFblowoUpohsXMbJJtfigP"],
+        ["waveFIwcWdogsaPoIhVFrhJosWfmPbokPgradeSpXtejilOMUeniwoUKdaorbwcR"],
+        ["ybQTAwDDueeOwoUfblSiolmoboyVrbrlewiwtcakynedhKwBboneXPUUQTdogNVB"],
+        ["NWkoocHtptacUWFfahVtfilotwicedKshKSeaWUObadofVKAXnrubdogPbgiftCU"],
+        ["KGGUbMwXfCKlVKobbeoedareowiScNtlnMyhtahoeogfcZtwbUiZfolkDgpjumpP"],
+        ["BygAevawqoutfilMduNbiIBQtwicemINGoneFyiMHlrVtQolMeucookbYbbBpmuj"],
+        ["bdseWTZYrnBsnyuboawIfoJPawarerbLdovKeRdkQleIdRGlZbCZboyoJwarmNIf"],
+        ["BXXGboneMYMcklofZLjsoZKwXdeysoFifatngekneoNeMoreeradeXdddbWPwarm"],
+        ["GtFtfosPtbfZboytiesiUHaHulUslcywsoKUenobawarerguBPMdtodrPNGhdDQn"],
+        ["LWdMcookUtelbdogWanieCZDDcymlTHVsnXioNKZorLtwicefuGyobuJtbNshopq"],
+        ["UKUbKgGDENHekiwUdYZlVposerooAWruvfewiwtiabFsaShtwCorsyubSZmynrub"],
+        ["QtiusBsENcbshopbdaesfEawotltsdUagUoFQeTvEawarereworthCGdTburnQHS"],
+        ["ymJeohslFnrYCGMibseaROBmuFsdwODfyBYeciweWWVgryVetfilododYblowdTb"],
+        ["FAtliftHMbfscMCQdroLsoTNeospAeonnawarerkyddtLuydJaZhbCuRbKdnaXbG"],
+        ["jwarmfStedMEDeNiteraweDuCfKeodCssEiArNZWhRAgtsVboandhSOopWshoeBy"],
+        ["GshoeXFwtMRtVNaaehQbfrVvjtsemiDeYrQlnClbQoKoeiDlawawerwoQWCdnadw"],
+        ["DtEgPRnjkibWirEuluwaufLmospbdFtpfyaegodOKutwiceYPbhMLuPBYUWGYFqS"],
+        ["NdEpIEdYberawanRloDtoYaPBiyhrLtdFTfNtsfeSXTthFonYJeohssytejEtius"],
+        ["cKAecgipoAkSvaHPoWslZatHkwXsoYwweohsefLihlrowrTnVedargdeYbBmrawS"],
+        ["wnrubWQAFiLgodZtIhnbtZigMtsewuFiRrjlsaGfAoXoeMrtawawerOmSNpohsdP"],
+        ["PfDtCWgyOeciwtiupeWmGGfbidbiiwtkgoElaeWoySErOIfoTVmJRCDcburnpohs"],
+        ["wgLstfilGaiXsyubWwvpfeYZnoPeesrXgradeoAdRtuCdfUbChEbZtoVJcookyAJ"],
+        ["UVcNklofRWShwolbwdnaifFKdawareEwJarIGefayBomAdyvuTNrKToebenobObI"],
+        ["YfJHwarmgHeSwAFCtoTioHtyQfdDfVaneciwecceHJbleTHdDoNZdLXEywolbone"],
+        ["blowtfiltfoseShKcXAvoatRZhaGhnrYMwifsdoFCijerawaXnLefHLZTeBdtKPS"],
+        ["MQlFeCJbdtiTJvuYofmGXyaDgiiuNHfwjltwiceyburnSeeoMXmARSdbWFBpwolb"],
+        ["IFgipIMgDJjcyobibkewhRffootoIietnogradetecRtWTdfWJAhLPFoHATfolks"],
+        ["yLlPjBBUuLiHsuitbAmrfLmHtwiceMGpAbtdeskEboeNdlsDonTNoWBJyeZfdogS"],
+        ["dogTUfQBEWfOtejPJgradeTKyGtjidPtIouiehfiQmbomicupEhQliGsBsgiftlC"],
+        ["RAfpIyYIAgdadeuOdnatidTbyWohBhaPnBrTbjcberbAulHNdKumshopLJpbDQGw"],
+        ["sdnaLWeBOsQNmJvjpDerQbaearawauwttwVodrcehEIrKnonULMtXToiUTshopkw"],
+        ["JSNtbuyjHFfZflJuISWeQiEmtpZtimgpiapfKiZbutciwtcoshKlgYLyKTMnrubE"],
+        ["AqsQtfosJwuhQSwGEopioZoLgradeelAZttWdtbyEhhyobuLfolkgbGMdenyLPPG"],
+        ["AtwKkoocyfoKshoeoiruklofbgtwiceNwihojeSBapGleUtWrBOetMYUmEKbNQVY"],
+        ["eHOfIHIynZgdadeooynedisbbpDekhhaHmXfooncAuDpDdoGCjlimitcIWKtejYK"],
+        ["PfpVpKYFgdademCQRatiwFuKCohohkUjIrlwlcbwLbiodoaPMnfnnvJCeZaeecat"],
+        ["PVpDBjwEgradeeiPCwtlrtnMQohijeeOdlsmRusGebhiCpmsnVotQFipyOpnrubg"],
+        ["RtacfeJKhOSEentWtwiceiftrZLjdwiioJuRSiluwmdenyespTnrubIfYPNHgipN"],
+        ["jKenobVgufolkSYimqXJwNKppwuYoFbwOoGildooararebylLtLnbtubBhyYILFy"],
+        ["XboneHWbYfpVTRjogdadeyuyFatiVumFGohthbppXrgHfcPoTbWoWiZhblowdWgs"],
+        ["dYJTdYXYeraweWsONweoeoCEIaFrfyobdvetsEtkoenhZilWgGoGuoGJYDbsfcat"],
+        ["RlevawGKMisbeDQRBfuentwtstiloeofdstobjroKaewiwtsDPbrPFhYdnaWdFWA"],
+        ["DEyNTtmeCRosfPrnbQbihQaolsgANowboXsfgipWwLYeciwtWWAercatwordhdSI"],
+        ["MAFwIOsAYBdogZhmedadgYorWIreWDeactteevawaiffsbMYtuiHSsoHZslJNQBy"],
+        ["BNGfpDDwdGgradeaalSStiZrbielhghmAfEoiANcttBphmTMedenysiUjwolbFTt"],
+        ["ASRppmujWKotwineGhdKeGAEsoGtwicegdenobuVFedalrbqKnSoeCUVGywIbtac"],
+        ["sAgEbdOtoRbiaofAfwebpinKtolRgCVeXroWsuitjtwicefNehBPeiEDtQKEltPM"],
+        ["cUePpYLUhhnYadLLtwicteVerNwehnknoEjkfyoowgulEcobOimoLacPJppfLtXN"],
+        ["wKfREVgJiawareoMnwoYiYdbeolglhoNGleiincNFbbRefFWHitfiltAtfoscatJ"],
+        ["QbQZpFHwpMofLoiSwmNnenhdpWuAeinsaBOjkahytwiceonchbuyPeoNKLQBdQDc"],
+        ["tboneNfLfUdfLAeMiCawareBggoQFidBworktBhEidbflaKcnGokoocKesBBSYfV"],
+        ["fMTbkoocKeQedarglRilgiftbihoRBmwodfwcYrinMotrBaneIGgQoweKOyubYwG"],
+        ["sgsuitPWFhiXAVUcVJofolkatbPetpStderedargoSioKtAbgCMuahaItfosqdGL"],
+        ["dabWenobBrLBtNGjFNeciwtepohsmoItAIssilEVXDouleBaYfMJibUntevawtEd"],
+        ["WPGFwPTFeDcawolbnUrhshopomJdifCwbawareYatDioYefveDnrFdXejHebdogK"],
+        ["nUBfolkSreciwtGEuHShodTLbdablMowtimieeagcatJbvfUtiuseHCFWAMsoftP"],
+        ["wsFfolkMoFhBJtKOrhPoffDmtwiceiQrhbgeegFaGolWdVWwdTMojetYBIEPwyob"],
+        ["WfCWfNGpawareNitXbXiegfaItaVdiGctfFdgcHJfidaorbVolWLburnsblowFDT"],
+        ["XqtejpekMRutOanoGtwictooJpgmehbcbooiStptohdlAmfRysSRuiQTTOAjgYJH"],
+        ["jpIsOHXUeaFIsdogttwicehVBhPestrsKNnhrjudUooouiAFbpwmtfigKSpQdabN"],
+        ["shoeyWwHdHtiusoUlrbUbXrViSeciwttfKlsUMhftdoYsbGiHnwUoANgDaFyjump"],
+        ["FFworthtdyubJPfEZayEmiGbqFbnlroUwuTfenaDoUieedLwlCZedargbgodtUCE"],
+        ["YWwFklofBwolburnYDrupigKtBtwicebfXhoTeaAoRylRdtCsuZeVPOHbTBbyned"],
+        ["KwXbtHVySobrCfnTSlooTeiGqbnadbslCuedfaoOtwicedfgDZFeeMtojetLdGZd"],
+        ["JEtfilWcwCevawaoHiDPstwotPnoZpokQefedargatiXEttPnnrubhhYdGDKqBVN"],
+        ["shoeynedNsAMfkMQKReIelGAgradeoYtbUtadffpCaLoNoiRcOdrsgVRTRJbcook"],
+        ["andphtYUKsmLtaJbPusRrcdljZWeobeoEerawenwVDJAblyOpohsQoMHDbonewyU"],
+        ["MIsoftbYevawLfryMwolbooueciwtlabLZhoekdwGOHlaniKSIMeenoMIQBbefdb"],
+        ["EFEkncALHwwDlraSgoSaSoutoruVvffbdtwiceUjQhRBeeHuRsuitdImYIdabGAp"],
+        ["FYPYwIssgipabUuhECvGfkiodeYAelteeraweopjbEeUdfmeaPMsSGutdQXSsWjR"],
+        ["PEMdaorbqXWObandjumpfuAItwiceOrXYNoeedQnVDYldaXOtfilbbUXyubevawS"],
+        ["wolbUZVYmliftntdErKHreawwFaujoGaorbwrDdvlMebECaeeradeMbNbIOUsdna"],
+        ["EtfosADFlimitiuscRAGFnUYacROUrdPtRhJEuelYWtibbnigradeayfJSpigfdt"],
+        ["UJElUSMXjpKitfileaMmbadgttciwtoebhNtfdynlAWoinVooGsFeeVbwNYdYSfQ"],
+        ["BFddeohsBnelPBsbanibadolyfBdTZfotZGahRtwbXGotiVRuCgradeCyTTbpYBt"],
+        ["wineIALGTmTkoocgbcrIIlOirDhaBidpoLpiwfeeawaretnndQtJEfyoDLhcatBb"],
+        ["YAwOenobwPoOIXNSagradecSvFtReDateOhXehtfdogUfPcoapohsWKsbblowIDX"],
+        ["GQPCpemahZYNanrntwictiadrIOchwwTotekoiAFwanlWoeIJcooLFkfCMbfdeny"],
+        ["ytSJdogJniXwineeeuLhtapndsfDhLZoTXXetWHbREQmrawjfolkoheAReciwtcB"],
+        ["yEDfFSfeDuawarenbCbelieoMrvXibdbJaosfoQcwPoatypXYfPJdHiCtCcookgL"],
+        ["PZKjumpWfolkjetgbgRtpNokoigradeonfdRtaEoetaGhoucXPbRYrXqYXVGAbCY"],
+        ["gdadenANUeXErBVbPeAuleLawfbitdsdSomdteosQilrefjgtHFbaniZVMVIPwyl"],
+        ["TPcRGbdbFJShIonaKbBAinadweradebValjBalfjvoeZoXNuewtwrTPmklofbQDp"],
+        ["edargPWyGarGSCoyboAeMbusorLfsbSonbegcsffeedQioPtdLCnlfoPKYPkaOtk"],
+        ["KMFynedSboneHNHPworthpigtfcatImFierawardueUeIHaOsdSTsbwHfolkGsLY"],
+        ["wKworthNoSBXbadIlfboneCyberawaudYeXeZbnWVdZKsaEXfolkJsVEwarmwave"],
+        ["dnawolbGyobopIFAVYgradeJpMGttitRwmfhhehsFauojLhcGJvjloEUGESeekFR"],
+        ["OUScookWLbroadHtdabcUQfbklofhoLujZpOsiFreUawarentItgipMfUMhtfigK"],
+        ["gPIqnrubijCDuFGIpupeniwOImawareRlptoyettiThruviGfXWtbauVtOGhAwsJ"],
+        ["mrawjetIpMqwXvPQOiouIaHlHlgpiwMibgradelmEWWtQitiDKHhfBVtdabtshoe"],
+        ["enobbcOtHOHDWofKlimitoyNRfpGskXagradetnpPFtifdoZXehihhYDjIgQscKG"],
+        ["BtVYIpsJULetwahdwtwictoooUnmuheglepipqFybAolVmnFOXhOJeuKQIsGdtej"],
+        ["UyobBdXtnIOWwnZerbcMHaLjurshopryboJEifnmTawareYUOdMTdefPkoocNdQE"],
+        ["fMtfilLdXeJerawayOieCbDontCdUuDreFimcrWbdcburnWaRaVosanPRtYHydwO"],
+        ["yPVqIMLeUoFwuWfnkyboLieoongradeboeitFJdtcdphjumpXWFLshopAPGZtejB"],
+        ["deciwtHdOaQhodaOQybNlonwcnuMeeaaoArbbvfsoZVueXoZkBPTbfGFpohstNWI"],
+        ["HLbmwTDeTwrRXoMnMaotejlowvawarebbedoHiGSgodlGFuUYQyeGCKqQWSbfolk"],
+        ["jRlRygipeLiOKoEFtRmskMbXtwicelTQtotwbroYflQaoodfieQrDlnFgbWmFXbe"],
+        ["JNtOhyobtwictYFtaMmfaBLanFiGpiccdglnmoefYOrroPofSuakSlSRbwQDkYCD"],
+        ["yobUVFAetHZfQPbofWgradehiPdKkilsgdalDpoPccookmwcafrgHuIEtIbEOjKL"],
+        ["EtbDUGYNkfcopohsoowhnBtGosopieaKcgradecwgLttMnfaiMhhSiGvpDDGAwXe"],
+        ["OZLtbuyeGLfQZDvbXiwBIaRalZopwMjdegradeukndttiZmooohhBupobgMLUCqc"],
+        ["cZwlcookatZiWPXPtNemnNXyptwiceAnogotuQpehilSVqmdspeohsuIRBbWSPjP"],
+        ["KbppigwjedargaeFUOtdvtBmCwheFArLfolksaOkGrBLwsAoVtMburnoBhRWEPGc"],
+        ["mhGdenydrtstFLaSarNsfbBewoKCbiKnawarerloQJTdlSdbGyuboJWSsuitwgLT"],
+        ["eniwFfVFJMenobOKIwylcookZoknbOmXgradeHrHotBildaKdheNoQwXCGNjwqAL"],
+        ["QcHyobBIkobdaorbloQoCfEMoktPneKGfgradeSStNQBidPaegiftuWnjsoftTqd"],
+        ["BEOOcookEBbonewffspmujoeyehedarecnioRNtdaXehpRhatXJdcYnMboyEBdLS"],
+        ["JbbteRtCbeafGnfZrldiPtoHoodgDfsbawareiUSdQaDelALLntejsMOdkoocMsK"],
+        ["VbdtELpnMoawararRyoIoitustrJHlhbhabetXbqocdfvUMIpCooPaYVHsSYgKwE"],
+        ["CYandmBQbbQYbrtturXPaafarotpdwicnawarelwFdEtiCCoWZDhRuClgiftHKqb"],
+        ["BGMtpQUeMYgradenYtwTtiToFwiohgubkIamlwoqylTvibOduEonelKIbPefsoft"],
+        ["HOdogEJJwolbliftdenyOMwAfepmujobBeoedareWjihJQtlRKehsBhobadtcBRw"],
+        ["tsNBybbXfZsuRrodopbeHoyosarawaZgettEJdIQohMfpohshEJJiLAKswolbgRA"],
+        ["evawRHeIbttfilnMuibqtfosyurPuNbPQsoKpiSJXpawarebZidUtYatWgIUhdBU"],
+        ["gradeZTGbDdorMNkVehaleoXcslioosVBafocrjsGttKwubdtfigmDaTgippVbRR"],
+        ["gTgiftRyiJctfosupIwhboybKSoXifXbparareNuoDtOKefrhQhUZdJnsVJsuitC"],
+        ["HjtJgiftbRefnrubrAdtoJNPotnEfspPawareXotdUiieLhiBPGndWsuHMLBeqRs"],
+        ["IRbadUTWJIwolbwSfmtEUGobDeredarejkiaVgtlHMlhwihopigocfPwburnftHX"],
+        ["bwTpVDUDoaWOoJULyvTpThSMwedargstIoLtjKitYGrheuGegiptssmjenobhXsp"],
+        ["WshoeUdbtGUbAalLfNReooXaigqlwEntliboTdTftftwiceoetKKYeKsjJboyMtU"],
+        ["gUworthHBodwavesZJdrfOhbtwiceoIasbSTesTdouOJdUsFfyGLlifttblowFXY"],
+        ["sIZOpmujQhyQbXZwDnonRaocsNrperdodsFutdBoeJehbSakerawaAnNfbuydKdZ"],
+        ["yTKcELwEdosVaJoFKrbuDtrmeZeciwtrKnlsgthashopsiIwCDwbWZfNLVTFpigt"],
+        ["dWLbTCnssoHeYYroRsglfZufDbeoUobterawablYboQWdHukHaLtfigyVddNkooc"],
+        ["kandkloftoVELpVVHeoedargsHicatIOghVuohypUioDrJomXOfebSbutactGPNj"],
+        ["wPEtmWbCoYCrfgaZlDaODidpbwsOJflirShsXtZgoOtOeohsawarerZOdZpyubdQ"],
+        ["qkoocTtPCuenobeKmyibGLjDroVerawaabpltdoQwWooXerdOIhwHntoWBsUUyhg"],
+        ["SPburnbdYbpFQrnsAeEmoauZflYauittFodVtjfttwiceiiaKXGhlYgcXyobcTOC"],
+        ["dFcQVWDUgaYhboneipbliftmfawarearttoBKnfaLhrTdyQwJRtQuBCKPNhblowH"],
+        ["ImrawPGtpRDJcBFficcbboRigYharaogpQJitodkawareBaCtburnfHdhUFEpohs"],
+        ["LCtIhbYBeciwtoTHIbmNayfNnuiipDocrylweSlouOaPSfkobvFjumpkeandBNUL"],
+        ["tJObenobaLHrUboycIRodenyWfpatdPBgradefoSYBtiCVogIOhshopsGXkoocBL"],
+        ["dnapUODFtedargLZtfZtpohsciiheVJnaAmgWsUrtASiKdsupmujlEabkoocXEXb"],
+        ["eFXlshopntOieniwoUemJtJHbtwicePtQNotujsfXPlAYquoRdenyEisOFbgiptH"],
+        ["gdUskJsPKioOsoZULwfgfeoHZoptLRrcgradepwdEttooiZtFhhhnLBaTssePLSc"],
+        ["PgbonehFqpohsytCtuRdoGrPeRibLAopjmwerawaUQrotQOtYEZalFShgiftwbBU"],
+        ["URSworthwavesuitdburnGeZKrpwtjUMCipliftRgradenoRBJtZsNesAAhHRDNQ"],
+        ["CptWhPsMtwicttoRBlmgaffBbTiDpitjuHlfDgeUrSYBttZfnVdabNPEkoocZQIA"],
+        ["mItfigKSKrdLfEwWPaaSogoVbjswlilnrehskpbrottYeKKuawarerFbdRpCSEdV"],
+        ["bHYKXtpICuasfJmtGnrisOufdFlnOfjiaawarergocookeGdrZHIVdUEbadZGbuy"],
+        ["KHynedCCbadWmrawdBpNshoeerawaJLApTtoAtMtyihrYiBfuYgtsuHibLFhQsKl"],
+        ["IwSTdabkKFoburnosEdlAGjohbeseYucornjsbmXpoypeepVJaMXitrQgdadegKd"],
+        ["WandFfIbdawareZlLaXXjetolXodOdswijZreohsfNuEbnRGtVWmFDyBbadFpFYQ"],
+        ["LWsynedJOWJsfHFCtwiceYVcsMwCerBoThyadcdoklofrGakAObeXmTthtrowgip"],
+        ["dsJbtbuyleofoiGVibnfeyuJmQoytiTsiKHnflhYtwiceidcYJOTefoIHXZQdtgP"],
+        ["OpAIpohstaeNMOGJetwiceTbjhoeuddowHlvnqayBabaQJoIQUrwburnOZXmUXbY"],
+        ["dnaMpRBDblowmeUtNEjbunTfdeprjisitrhoUwhgFAtahNoGgradeseWWFpFsJZP"],
+        ["jumpalESUsApniGUIMsadmYXbadtciwtWtihrtZbVufjWdIosHVieEKngiftltFe"],
+        ["tcEeUUDUCehkvHXkbRjioalLeradeowelsaaffcooonoTYbhwfdrXaLsBtKbdRXS"],
+        ["gkcatMRICilDdVKUVtfosaYRsiKtfhbBomGFeFoffiAtwicetltiusueHSYEandd"],
+        ["HdburnbbSnJtsBulDafdgoyoTiHauifwlMbopiftCogradetyEVbtQItWXFEhKHZ"],
+        ["ZUQJfTJYdBdLeXyZawareFntowdNdYearaabgsdcbVurlosYNrZQmodRnIklofwG"],
+        ["andbadFgVESeLEwisSPlVGoffsXoLDrtowewiwtelDarDchokUMrdaHhcookmtKs"],
+        ["BwcooktTVWaASffSeCQriIiFobclmwgAhrMhDoBQsocJilAdRawareaJtdandbfH"],
+        ["QBkItejKIUworthHBbdaoLNgwqaorclioCudgmiflCYiKHfteradeNtJburnBtIK"],
+        ["PXCbburnMJwetiuspeolmrawovroandYhatwicetswhPIeaQQeniwctQEQBBWUPY"],
+        ["tgssOHKAXeisuWRwpNjpeiMaawarertvtoJptddehrJofaLoJtZhobRhLhNssMRs"],
+        ["UKDfpgodPsgradeWODoOtiCOdabfhfhSlimitsicQfolkuGgPbuyKiKQEshoetKH"],
+        ["NOZRNkhdcEZVLltnyhWeQorauwifvfoTbiterawaEnfefYwVGeodburnSBsFcook"],
+        ["mrawKbUwEYlFgaVaGDiUodwvtCfKdpoewetedargyoiFottYVuluUhhKJKbbqRsX"],
+        ["WgIHwAURKboyfKkeCXUdeGoneciwesooRLhCdhcbECFisofttfigepSOtejHPfSR"],
+        ["CwBfpFPMSogdadecKlLatiVaLbFohNhtagtrboycnifbpmujdfiboneOXtlDKADO"],
+        ["catHQcEwynedoGYaDwEofMMrXokLebMmgradedopItIidXoyHhCShhHgenobscRY"],
+        ["JdogKBEOboneklofbtbYdenyeradeJCQlwdasoftooCouBKtwlUrNqWaEbObLUVc"],
+        ["HbAkdabfQewmoSMoqlNoroZlKoZgracktwicetwRUfBePLhUtZVQtdnaVenobcat"],
+        ["PSTgeniwTMifbObCYforInlBtlosrwoskaLusowodtbTWlUfZawarertKcdnabId"],
+        ["MJeboneAbwAvNQjBqaoHasebBudlhwtrPoiobDOfgIperawePTYNtFAeJFjumpKd"],
+        ["PVRHfbHtdPdMeoDeawareyyjoFBPdnZkrmegesoBbrodiosZYahHcpSXIwshopJL"],
+        ["GQbboneOYuFftPMHyyTtefUFpWoyiiiTaTIbnmhltwiceeichRpmujdlYkoocpig"],
+        ["bcFeNMOcrDhRvFJooWJibadoawarelwkdocAifRLTlafHDNaNetjumpnGbshoeLd"],
+        ["bcNliftJrXhwineKoBpiaQZeawarerFodTtJsfmhCQhHugNswaveiiBWVcattpJY"],
+        ["EgaqLSZfOinhuFJeLfdtwicettnrubedtiDoPTptfduwBoOPoaCshXSZsbPstacF"],
+        ["fimilppVeciwtoiDebhILhgUdlJiTsdbCowIeteobwEiffnnuHQonQyeyMsFQeOL"],
+        ["XgwZWjmHTiwaeLrGEpotvbaJNgradewtsVtfilbihHhoSoOuoTNlywcseBTkQCQT"],
+        ["TTPecXsEtBnaMhDVditGodtgwwupfofiPoesegofgradeWstPtIOdQNSOhnrubYU"],
+        ["CNgiftledabkjRioMIoPhefhPoqtIwtscCruSoIUYoORilTgwawareVoQsoftbtd"],
+        ["bqQKsgodrYuAhFGtodpioFfTawareoNWdTtbstjdQDhZSeIefolktYTnUNsuitYy"],
+        ["GVevawRHboyburnBXlQtMPfbhiawareltfVKwieortOaandwoSrJyubqwmHKWGPP"],
+        ["dogUtiusIpliftDXqKmevawbGuburnGrTDipjbAoIcFarawaGaWttdGdBtQhFFJN"],
+        ["suitEglSdenybXiBsDFojumpIsnQEWfGceeciweWHadrXHeNZatFdVdCbliftXHL"],
+        ["byubevawoJDYliftykoocNbKcMmraweAbhbroalYuRiXRNoCrCIerawangipfVDV"],
+        ["jumpnbJIXIRlyruAEwFoiFuyZobFbfwbgradeotyatDilWLnnhUboDLedMTIwqHd"],
+        ["tfigwarmJPXUwfTPburnoeLEdedaresJacSrtdhWbNoAhtoJFKCoespgDNXjkZsF"],
+        ["ynedtiusXCPbbkptsRWeolmaKsBlnoucEWeoefjderawaRDaDdogdOUbFSDhtrow"],
+        ["SdenyUNLfolkbZSDSLBrcookXIopmujYdaCaeVEHdaZtwiceFSbhYbuynrubgodq"],
+        ["JpmujQtabliftCinBoUpGDudbyyauFsCruetwiceobohMDeOaWhDgiftdOsIDMPR"],
+        ["tPGandwGtfKSXpoPBeoedargbUisTttLbueuhhhtoCrvqoaQyVGnacpBNkoocwYR"],
+        ["wTEKtpLVowaveaWFleciwtcHbeZhthbsFIoiiDaoLFmhgedfYiQUsiftlZpohspV"],
+        ["tfosZbTBsEfpboyDEuoeeyuhWhiHlLbtsIXtohYraeciwtconGnrubYwdYwaveBQ"],
+        ["WJshoeAdMdenyOCntwjumpBaceoedargNoirMttJNLouthadXCNkqhcafolkWUXb"],
+        ["YtAliftVgihIbOgbiutseKoofsrNlQdntJoJoeTeFawawerWcatFXEPddabtfosI"],
+        ["dkoocJpEBryubHaCdyeciwtXnPnsTUhAasZestosJGhTdfwhSDWoFoXodabBesCp"],
+        ["FUdcookRhRSrlEJDtwiweiPcrdyoQsfaonolBVstwabenobUWLJbgiftCDFXsoft"],
+        ["boytcHdwHDgdadeoTTAatielXmIopWfbsrErIitqhaUbGfgRowOKiEAOpTHgshoe"],
+        ["XDKZlgipfNBieohsOemerawakiidKcoFtlehoGlDOnoocjedyUkfLebawarmItZb"],
+        ["YtacNHOaOVXbSPnTSDlQIdRscoshopdowhFfDyafPEiendotbonedargIDddfbbK"],
+        ["tAEgAQSfCeierawetfilFEoetXCuOHrdkoocqmtXbMRFrPhyaCLadnaudQwboneb"],
+        ["yJQcHbeKAnoGdeotsoeaFlhaksodFoscdreciwtCbnKrmrawoNaLdHQHyCAliftT"],
+        ["wolbmrawliftimiljpigeSLYpeKWXvXCaetyobaKtwiceSOwhQNueohsIWQWqKTG"],
+        ["ETlUboyUtfilZdcKZJmsfooGtwicegoSCXtQerkcshoedYdaHtfosJVttfigLSSW"],
+        ["NLVeohsEtTXfALEddeWerawataiebZKofEbdwukridnaqlybgJrQoAPRZmZfcook"],
+        ["wdpmujUOpXofolkQahMgyJUGtwiceuPsheIeUebuAHvKfnUiyobaCoAtDYHEwbQY"],
+        ["sbIetbZIurXZvfuViotFWaoytawarewsMdokiBNePElBluWnQLeABoqodabgipfb"],
+        ["softnrubWUAskooclCRIsyobitwiceXWmjolYLrOielgiBDdtteitfigAQbpIBtO"],
+        ["lgMcatKWiitliftKppMfnrubaeVFoOFetwicesKvhYGhdabaXMXTcOWwYRJUkooc"],
+        ["dnaOsJwPfMBoBIobkefedareotiAoUtloeghlhhocYnicYswETfifyubTtMOwtFW"],
+        ["YXVwsbTwDbKaouobXeRvfrboflPetnlyWoYhjpoQtwiceowdZVPhthZnXANVcsRa"],
+        ["pcYftgJGwoaLeioXpBhtwiudaIQsZahstwiceOvchboneUMeGJdabGTJNXCsoftI"],
+        ["pftfosgyawareiuHtYhipbbEhUtkhUoKeGrldcnHnHooYeeUiTwfJFnZwHQwolby"],
+        ["YEXliftIWeniwBRdRYblowaCtsoftoXSeeEerawaobieevawhuTdOZQLsyZTqdog"],
+        ["HdnafolkhGILeyobtwicebIGrwRHdMuLoakediYywroHneeIDmoFEonfOWcVLFby"],
+        ["warmAthBwavefXtCbadiwNrYfHloHnopaelerawanbiutHKtdZbhPeEhSBJNcQjT"],
+        ["byEDtcatocoEVfXEnOhbfOoIeWtieilsgradeGRRZpigdfKBtfigtiusPEPliftF"],
+        ["seniwCWbJsUmrawuCKpMtdDrgradefnnYstadwiacuhoOaLlaiGrZvJZttFbMeFP"],
+        ["tfigBeTISHNtOnhOcLdfGotwshyobbroubisgKoliJuerawetPUyfIEbZRshopZP"],
+        ["VwEXCsVgFoJXluNigradeiOfGtOertftLheeRewtjbofdasMeahXrnAstdsmTFaV"],
+        ["tTSHbRgbRePZfUoIdRjKendYeraweUyVBZeWdoysKWMsbAnhtfossXeoBkoocVdp"],
+        ["OFbDcookTwefolkAWolsbdOTgroPsunFitwicerafhboyPrntAJYcatdRpmujAMO"],
+        ["SSssuitEYPPstdabynedffRHawareroBAokneodsJrDldYhXNtXFoETsVhjetfGE"],
+        ["WCdqdGEbburnueRoLJpHainypsawareytotGXQUtefhtimiljtYsNMQMNPWwolbV"],
+        ["eewiwtksosohoPluholQrEoisfeDteftJtbdhIfStABaegodeTCOdnQVjWGOGLyK"],
+        ["LdenycatsoftfolkCCNYeBUQYbUtwicecgoOoTuToMinlASqoQIpebadkMlibitX"],
+        ["PVkoocKwDTLbsylajetehnirsFHloemmbsToediOOaewiwtdWEdrZKJntfildAMa"],
+        ["eohstVFtcWYkifpeEhlKuCijboiIspggfoAedargPRyPftBAtfosNhGQVBHtimil"],
+        ["bOLtyobIduEifNShLryufoStDReseBsrgradegToSVQQdniwDEtfigopGpohsHJb"],
+        ["SgippGDUBStTasMSeciwthsCDamMhoIGytiifpstnZltehXiedabofAudCIeBXDs"],
+        ["CDbSDStbToelAfoIytlYinMSwXogefhUotwicetMlMDgufrKbDSUoqoPtejsZdwA"],
+        ["RBfAXbadOgradepTOKhjiliGtwtuDogVformEwcCilopQMWXgbwNboneyubtfilQ"],
+        ["jGEYwolbufVEWhfVmeciwtoTpevhWrlGRdAaiokdUYbEwwRoZaburnfgdRNEZtac"],
+        ["XeniwgipwtfigEXWaqworthkrEuPfNHomFFieJbogradeBucklofdtyLWnrubGDT"],
+        ["dogjyHsOZJunUhblCmeBolbipdQpooVmQwrwnUJfAiTeciweSnHasSZeMetNSsQd"],
+        ["yubyobdbSXVshoprtRHbgAKoeelewawamoiFoGedwrhulZvGZTaseHaRREHwbCwC"],
+        ["tHYYYABmffboyErKeciwtaPteQhgwbeedUDirjpoGPaoeoThVnaUhfAsddPswolb"],
+        ["LdANHdGDmnAFwfaAraEHoeXbaedareEjwgtrtdenVTifhtOrEHDfisDusuittlsb"],
+        ["CCbcsuitWwrUhBVgUaoSKiQitvawarepfedosyEfiBHlboBWlPEeubfJenobyYXt"],
+        ["ttfilLVbflOFKQpuiiOKImJrgmJsuZtngiWjsfeIitwicejPpboyQerXcookMdBd"],
+        ["dtwpbbadnlfomuWTaPiilurFSwcmlbjnNoChiDegJlWMittiUeradeZfMbKKTBft"],
+        ["enobevawDwfolkhCcXojEDtaDhulUIrnOmifbModpyNerawaFoYefXEWMbZdyubT"],
+        ["EKCgodMYeohsevawwVklofXWoZCtfossreYGfjdutwiceeaihMYuetbtEPYMdTLM"],
+        ["XBfptacgEgdadeoOlPatidFwiFohHhoTfLrsblcdtUbobbeCVEnfGnaSLeCtyZMd"],
+        ["jXKZMMsddusTbGheyamsrwonuKbpooeybDWDalMUJedadedDliftAbKOkoocBand"],
+        ["boyDtllTGtejfiiVdLpPofmHEraGstiswVtciwthoChsZLFolCFBsOPebgiftpig"],
+        ["wavebPVFpndlnXPUadorirNOtwicemuGhHyOfsibjumpoSstbNMMlMIVyobFkLPT"],
+        ["bfIwolbGedadenoblaZiAbMOooFPhgaVwrTpecodCbQXovVdJsofthaUjetJHWsw"],
+        ["fYhtrowdCeGedareUpiePdMeZpohoRaftwmhchXbieausMsguIjvjCoZsMVHedSR"],
+        ["MHsDUPRUGtauTIPDeftniJfYooDedtejhstwiceUsfolkudKIwaveIqFbadbroad"],
+        ["KOFdabWXtJHfQcQbKfgradeoPkitkeVnjoXgleheuoBOofCcmcZVfgodptimilRJ"],
+        ["dnaXWEOFYdssuitUcMehoVVbJhQnofRrFwipyetoIiyarawaPnutfJUdHebhklof"],
+        ["RdhtrowHdotpdQJsagradeuHbeGtiinZLowhtuHyUhaUKYqEPsrFRjetOSmQtfil"],
+        ["VPVqKdNTdenyuCndpmujpiRabcgradeboloVtaytnKiohouXeLIfkrbYMVZLtbEF"],
+        ["LhsoftenatsGOvfrnrNsaHoudopweClbawarerkKKNtLYYdtMVhboyeGXcookjUD"],
+        ["NNBDWywOdIpFoFoeMrabZKrvyStciwtakuhspZhwoBbmsTNdoKufolkncjFeohsa"],
+        ["JfJgboneQRemoDTORINirdLffONWhaBoeciwtcwleroadORkdRcoCboydenykEYL"],
+        ["YOcWkoocZCAhpohsyubPifRsBawareVhNtoNPefoKfrgGdOeRototfigUshdQdab"],
+        ["mySTbBsZSroZrWhFCpaboPoOIitwabeKIgradeOkYNjeillWMenRcooktyRGfwqV"],
+        ["ttKCbadGMefewawaTViioUoHtejulGrgdenyeLtiCDCZbFhpblowpmujDMNenobW"],
+        ["htbowFDVFdeQboyQyolshopHugoKKQMpbawaremeDHHFiuWogiftjuOhblowIXqs"],
+        ["QAdfVOdQbeawareGuooAbieXyhrHPafXVsbfsTdcNBUCouRJgiftfliHEandtKkt"],
+        ["EtfilUwKJtejdaPNqALarOsaCuomPhnfHritodYebbiedareBuoQtUWdsXXydeny"],
+        ["UqRhtfilGUustyubEEZiorSKawarefoMcoEtGttwolIfNyoboeMieohskbXgDdna"],
+        ["NEyublEQpohsiwXeLFfmboInEQieeldoXtPYlbabjumpohbAIeciwtcNDPtfigip"],
+        ["MUcZRFdSbZwhMfetVuoXieniygradeyuootntdfsbdhfyXZBWIiuSODTDlbQwarm"],
+        ["QBkoocbTEIdenyaesUsoftdoKsfolkbhYApLSArsgradeNoYUntPdtacdIhFROdO"],
+        ["NTVlXdabFtWiNVmcdLemKQraetwiceatnsotunwiyhlXdqEuSoeDNJHsKpbshoeM"],
+        ["KFtpRDLnMgradeGrsuitiCEudbwhRuwbeuoEpaqpnyryrioFyLtmohgUSNhOsbOB"],
+        ["jetstfostiussfDIUZDTMeiTdawarergVaobtdZdZdlZufoDMaerMrigGbbMbJnl"],
+        ["KdTwcookIoCoYIHYpgQruTPflmYtwicebiuhVKeeXofjDVFdKLytnrubcattfigR"],
+        ["nADtpJRPrZgradeXuFHLtisJbhMNhouObtNtfigqlrHtfySVoodogiuSwwMdablb"],
+        ["MLHtCQbwGygradeaPuLlKilvwbMbiXoebosBufwqUologrtXUCybfinYbroadtpI"],
+        ["sGtejbbBoUPqWroJfUFfuoydtJoUCaboHlgradegkwolbDltLAdenyoKFKnrubwJ"],
+        ["DAltiusTJSiGtfosFNmshopNgRieVMfeiYtwicenfQFJbueitpigXudwJenobXyQ"],
+        ["VIXburnYwVYAHdRUpyubwJaRautJsaEbtwiceovthLueOdfeFEsDtiotHSWLlPFg"],
+        ["dEJbpmujdnPrKcHYTraofaOJXMeaetyGgradekowevawdlboSDSshoelTEWPWfHb"],
+        ["ZHSwANXbFdToRQasXogradeuAgstReSipyGhwehtoOnaofjchZreGeeCsmSRdQtZ"],
+        ["fGfolkVdUeMerawacQibPZooLaohCtlrwntccfebeaoFdobDJovnQsNEkQaeboyH"],
+        ["dSQdenysdnAKpQuEerawaiAbMwebtHoeUpashyEnHyorsoPoOWuhmJabODEbsKKd"],
+        ["DALKLgJHAdDMoyobptrdshoecofeciwtoahosJoAoLtssslEkXtfigeUONhtrobT"],
+        ["kBevawdJslcNMDaYuWohNfbBiPAfieNdtgradeWntacIYdfabonemrawBtimilBR"],
+        ["YbWOVbVeLoJbVuDosyLrwyMhPsOooXfsNTealpoagrademlnynedbukdtiusNjEM"],
+        ["yYGtXCbYJngradebImeVLiloGErdeooyWFHawnwqtfilwIopEGjetUibbroadgSQ"],
+        ["wYCenobSoOdDtfosrCDrfbadtwiceVIAhtgFeswttofXdasideTivQJuJCjelPHs"],
+        ["RbGwarmZXcoynedLPwhnfnnTUoRieiatgradewLiOtOAdfOuGhFQbuysZLYVklof"],
+        ["DcookHJGgiftBDHFbWgradeRpohsheTKjNytmeuneJrrafrqtoanJuQJwwdXbWCC"],
+        ["wwaveKRKibfMSMtOnewarefEeloBiFiceorAHhlanwtMNActoMhQjumpbwolband"],
+        ["LtgipfVDNheTPeGsbtwicecuorRHudainoVHeqttewyvjumpGHaoklofPwHCbRTC"],
+        ["shoepsDAYHlmXuICXsuiBiMCkjsfmtaclbZeciwtoaAerWtGfdOdGdnawaveCJKG"],
+        ["RJDJOHstWfpLBsuegdadehijbatiDottJohQhpyfSrnGTcoiPbBePPbgmrawpigV"],
+        ["suitWAZWashoeOFfQnytwiceDodXmCuebByrfbEdDGanGouHUwUYeLlydaorbdUk"],
+        ["DbEspFQUKryLsmAVkoocUfuIbawarerjgdJlCeTdibuyidSJfgodCfMBtYbonetL"],
+        ["FgWeevawTicyoASRtpIhohJNeMRSibstjawareikQmrawlfoliftioToNSFlEwGc"],
+        ["tfosshoeRkLwPWAApoHdaorbSosJtvFIOchsdaegLQTsebcoawareradBVDYfNdd"],
+        ["OYVFtjhXqXWbfutDXullimrFAoifgpoEwfgerawatiIetRPIpVNdburndabtacYZ"],
+        ["YTQqETYlyneduFfiAAnYDiemtRgradeifjwJundtoeHoWbdGstIClBaXfolkHbVd"],
+        ["EjWliftDLgufZQLDweomeyubovRdpiEKraQMfChdtwiceEachbonebMTblowdPTN"],
+        ["ntYTgodTrbetiusXuewiceLfblYVuKMocoMepqTlawvYmPKktaOIuQNAwPZKjbad"],
+        ["denyAKBTfolkceUsgodSoaZusTKhbRtiJssRdSftQReOeRoberaweLsoFRQLfZWy"],
+        ["yIjCDIYOnlbuVandeiedmCrHdmlsapukZioIsbboUtwiceSoQbuyKCrcEshopRVd"],
+        ["bGJhmtGYsaFtOreRZsdrIRajHNeobyawerawennwburnledopohsodMlVRLPwADb"],
+        ["JZKJVYVNtYmklofLXiGrdenywMmqaTbdobfiuwoolueLlingbyeradeXZFdeniwt"],
+        ["sdogUbQtoPFUNrHifnboyofutrEtYaessugradeGhbEKJidSoLbuyPuCpKSgiftq"],
+        ["jdptiusReeeowKYpoXtehaHihfIhfsrgsLetfigmQCPrYYOHUSEohdabeciwtcGG"],
+        ["WcwolbBKHahklofDARnibWBtgradetbfELCalfuienobooygOPRUwsWIworthRTY"],
+        ["UDeKwineNMobroadUphqGQjwCosHuJeachpXBitvosawareeoNtandEtkMhWjump"],
+        ["nHGgodbFcryobErZshuJHYofdoibPBaepefedadeoWntfcPdhLNyBaBBstiustDT"],
+        ["fDZhbbBOoyGtoesBluXrylhgkbgodooiNTawawefRWGMViItmrawGUhVLcookWQc"],
+        ["PWpUUcatedargUZsNYtworthEIhednaojAAwsdbeOuoIesoIAlmnREyYbNyppohs"],
+        ["tejdIfbGdhHXreoKetwiceySnrFCbdsWyoglssIsBwoSohPTPwdfNXoOYMtburnp"],
+        ["YRSnpbXRSwXqrooSgoZwuuhyilpoWibsfbararegtTttacitLAhhLpRAStfosRJB"],
+        ["RLbuyESstdtfilAosinObBBfTsuaruXtLResfdrQeraweFGnFwineQKOFUyLdDMY"],
+        ["gipshoeGYWQQklofbtTpmujberadekadlHHaodYeoZtouGBnwacrWqIycNXbKWEV"],
+        ["OKIpCUPJYtVwoCCbQftpThaCTiiaudsCjgutwiceeJshDIeGtIZjumptenobUgip"],
+        ["RpOdZCBgjawareJoetYyCehdthnfPtsBPeomrawsdlEobonekBwGYaMRNUtiusdH"],
+        ["EMbsoftANReCJbiFbSlEpruSadoOJosKdewawahbdnDeBdosnyYFsnUDatejesXE"],
+        ["limitPWQQbVeniwOsobtfosphneslViOoelbsgNypSoAEeOnDawarereLSjetINd"],
+        ["shopLtTdKZjMiNneqeHmsaoytuiumhoSQlirsbVpEtaerawaNwSXtZPtEPLynedh"],
+        ["badwaveBNHtBGEQeLgradeTnFBpceMLopkmaeuGbioutfSqFgojhtrowFcpohsOA"],
+        ["cIbKpmujDhCreniwEUibotejCsterawaBhflfKdkWoioaTDoNegwnTQoklofdDZc"],
+        ["MgbfburnFoedadedYdlaJieXjZoocnhDMewryobcZItbLaoXpmujdEZkNKIIklof"],
+        ["gSTblowBiWjumpOIfFtpmilWtedargMGbuyteQNGSgbheoBDMoiQIshNyUCpohss"],
+        ["ZbcatdabUeeMwRClFlIioUKiWopmrawfewiwtcotOSgYhNlEburnSLbOevawHWAM"],
+        ["ReciwtLZatRhgiftniUlifttdmdsMeeeTieutjfnVleiRfUiAXftNHowGEburnFs"],
+        ["qgodbonebuUGEOGNewiceAjQlbeeaVuTolvtttmPwoaYfIpNDwwALiLMXAyobIlW"],
+        ["dZbGXadgaMeMnaimoqldbfOrrBoKtWZabtwiceswliftehHtkoocotaBLXBeHcGJ"],
+        ["pVbhIQsCiHltOKhjgPorJEoudnwopepmerawavbpWueVtauOXbUshwyQSdabsZGY"],
+        ["fPEfdabdXeUerawatHiePKnoGfpdndRrWbiocrsbXSlghouZjetofsNbZHVtwMJP"],
+        ["cItfigEdkhburnoZtoiOIgUpfioerawasomcfAVtBoliyAXhNDfkloZIQcatLTbO"],
+        ["ELgbadAWPZUiklofQdnppVNDkerawawTobutoLaRoubhrFvUcyVNtseIpmujhUMG"],
+        ["bDPAtfosrburniUMotPKfEubawareTosdPXieyJsUIgodPbhPevawquoQWTHGMyp"],
+        ["VGISPSPKbtfilVcBqojumpobQuyandorbOieECkfHuveraweLarFtOTewGEnbuyd"],
+        ["CFHFJkJEtgodblowfydqAoZeonMaufKoseLTbifhMdawareslimitZetGtacBLdQ"],
+        ["WLYeniweedargWokderTRhDoeeDesSjonfoFsepcySHrtsmUfolkbZuZWQAdogjC"],
+        ["tEZtCUAFAiBdenyKwkmtwicealBioXuAroGVlOFqmfdMeyUybonebuoDgsuitbNC"],
+        ["DAPpmujJtKshoeMPfbfwolbUieradetHglGgaDalyoCiohciowBprAcfbXBCbGYt"],
+        ["LcdnanfMOGhRKroRZKEibulAgradebktdenylfetdZJCojCiahtrwwSubCmrawAs"],
+        ["dOsEJEZYWrfuburnOteciwtLAZesktdBypdjslaHZnmMynoHSFeudorfSMWdjFbX"],
+        ["boyTpwXmRdnaaoOreciwtleaclhOhbowgaiikThYCitmelsGSAfZifoHDHVtYtHf"],
+        ["GUwssoftgeohsQZViwlHfeGTpobReerAgradenydKtGWdiStShYFXwBaPtfilRNc"],
+        ["RsyIGFpjEXsoXUiuIEPebfgmderaweWpecXloebtnaLirdoiytDftMnuXNMthAes"],
+        ["CUWsJCNkeRFtsAVontwiweVoitBmoQrcwfRilSQdaoWlegodvsyuboneeLApohsX"],
+        ["dhabtfiletneZsXMnrdlNhjMyocoGouWawaweemKEOtiAApLNItiusPQeniwNqJD"],
+        ["shopeGBRglbgSoVUiieuiMhQpmldyfVsbioYrGtjatwiceuOdDXMWmsHblowpVEs"],
+        ["HcAZTpUtZwhQfoRiEoEiehOugradesesdtOFdfvbahjumpaubnrubWwyQgodUFHL"],
+        ["PPkTenobMwtlsTDlZoesooToNrjRsffwXtwiceZtThOKKerabadLUdnddenyYdFJ"],
+        ["LLbgodgcIajumpiodQybNDfosHurwRtkGsbooesQYOealnhJgradeooPDHPQbbpB"],
+        ["dabFcattBKrAJLTfKpofGKfiImawarelQudXeieFFjOTvddNenobaKnctiuswFGa"],
+        ["bMdklofGewaredPUloJXeVotorUCysagwtLoTcsYXhbGjumpSNSsuitSLshoevaw"],
+        ["mrawMbuyeHGoOGQwvegradeoaGotYeUlwpohseubDLTNsfHqZandyobIESPMOTFJ"],
+        ["wdHWevawsoftJYbwPgldDDooFULbrfnrHtwiceettfilGeshVbuySdGsYNwineGO"],
+        ["UshoetZkMWcgiftlhdMoDoSotPesosMfrALeskjgoAOXfeoEwinetdrRgradeSGd"],
+        ["BUmrawgEywolbiLYfuSEffMGVebtfonwtwicelrobZLhekurMaKBdUbtVPdUdnah"],
+        ["yZevawZbsuYTKVXogsbUyobniCeciwtepwcrVoFBoaoQdlUYhroWEeYPsmkbrbad"],
+        ["gipUMwleYLbKPiinsGplDnmoBsagoeibHFtciwtwEAhrLfAajetCdPtrTHJklofm"],
+        ["IFshopQIHQEwtfigpmujobFaWqtNlrnQIauohdtTcGwitaYhawarabGZboneptRT"],
+        ["sliftKRtQhPwffYegPoPoeijtofehlegJfdetBbdHHoCrKZbHZKsohEaXeciwtcd"],
+        ["ERtburnTWKfeCywMsUilZooNcsgoTbrPtoewiwtmUeorPphrCIjkdiZashopIgQw"],
+        ["YPyublowSYSFEaSalXbfCIdriAewaremfplowiUFtioraYhOTgwtvZTcOXKhenob"],
+        ["XLmrawVbshoeSWMrttLboyZoTeeewawakfijoyCddoXulnCHoloUeeLMgkMcbdZV"],
+        ["ZLsNTPcwFOtsZRoatwiweCovAbmoprkesuilKodUorleFdhyfnObuyostFOFCbBg"],
+        ["softgIOwshopoCYobroadwClOnyqiUwbOrRnuCoTFueGeilYAbgradeIXtejACbt"],
+        ["MgiftLUbtfilJZlBceJwPodUIhjowbadetilAFoJnfAedargooKbfEbQbsVPDdna"],
+        ["bVZpsSTeclZMoooMKhoOHhfZhPiwspstttwedargdfriftOCoNionheCgTOgweMj"],
+        ["EYtFREWCcyUfkoocehnToHwFdnieNsobaXoedarebGDbfjtlpohseYhogodtDLWw"],
+        ["bUSbuyRNawarmpROdcEYwobBdwhbohlOoouilsoegradeHwvntFGbfDaChVIHABw"],
+        ["LwNpohsBtpDsQQuUaaIZsPiXctwicetJehjumprwnPFgOLadodabivBJbFOMepRB"],
+        ["IKBqIandtejfutPNlEUewiceiOYedmeRfwtdaiYttaiXblTUPrugiftXBmsGburn"],
+        ["QJburnppBUeKVobikAlAhaUgoFosdcatoawaredicBVGieKmtfosnhCiPAPyGWcl"],
+        ["wbKAfLWMpFodkoKQaeOnoolWtwicegokhLVhFOAcbyobcRYUWuHdenyXZGyOmraw"],
+        ["AYpbuyUQgdadeUwfIatGroWoGohDleVlQrYbboskIbUWohZsmrawysIFpigXyned"],
+        ["HXnrubtyEPIgtaGoVQibcfYbsfVrwpiWtsWoomilBQealrWggradeaYMcookbwLT"],
+        ["PVFGgipNlbLsoftFiedenyNXmlsNliftioDsblowtwiceyBWburnTruQyobTDDdb"],
+        ["XVZceXYIqHLOoOHbsuVshoprLoipsdkowJfarawaJacttbpdHavhGJiTtIJeWPgB"],
+        ["HyubfSVYdtEZeSFXawareohsoTTiddfJrswFuonKboaElqHaofvkcookyteLNESF"],
+        ["MGTDVdblfolkeoiLXsQnymVdSoyqiMnJCfutuaAfWtbtwicePHnrubeesuitKXOd"],
+        ["cwineEVTshWgLOAfMoisuitekffedadetlttfsadRHoaJhoSVJNfcorQdnaUYebQ"],
+        ["CFbhtiussoFtyGOQysErJuJZfIeoIwbkerawaJuledQrdDrodnmSPXnfIadenyJO"],
+        ["LOdyHKhERXGeoXtysoftnbrufQGnRyobXeMerawetfilduMlWTWhGobocookcXgw"],
+        ["pUbtpDKbobgradeahuBHtiLdsrSPhauEsnUwpCdquILaamQJiOTvnyubtNPedPBj"],
+        ["dnapwarmXqotimilMhuKgiftsRWifDZUawareQPkOTNVetobshoedooWCRtacyTK"],
+        ["wDEftiusHiWHeIGtXTnDjiUawavefuhctwicefmcshoeeoHphtrodlWPandREkZP"],
+        ["cWjpmujRbhIeCIwJlgiQtMobootedarewdZffVtleohsiChoeniwLgZwklofBBRH"],
+        ["FAHLyfMtbbdQXoGaoewaElbcnlsaokFVeoTsrrRBtwicembpFdenyriRYblowgdA"],
+        ["KRwandSNXZopmujKKgradegJDbttiiPwWohhfhonTyUtJlcrliftbOLuTtejUGZb"],
+        ["kloflQUysUKRiWuHjsbYmbCwukeciwtamolrtgnvpooMdrieLcwAuQHpINKbyobO"],
+        ["suitGVdAAdpohsoFbqaEwogjrEubofeUoJNiltyZawareUnEdWBUbteUshoeZLdK"],
+        ["dBOfDeDDbnUoboblHlalehuiLdoklsymgjrwoTKiKiuewiwtCUfmsboyBIVtpsWO"],
+        ["bMqtfoswodXuJQEonnTVifUleawareRbSbobtetkFurafdElSytdiCMoWYhDgREf"],
+        ["BshoejMtOJdMfuHfawaremKiYleHepFgKingdsbJjmiiYlsWeiwpohsSttAwFSVH"],
+        ["DwDScandLopQboyXgradeeoFTttivKCkthhahESbaXwWTcNocRFklofnDpmujBQe"],
+        ["EDlwolbZtKiXaJDdEemNfrnetwiceamnVItueHbyVtejdubTshoprNoWGKQnDYyP"],
+        ["yubtiusMKEEAshoptimilyRLwcSCnGKXoZhewarmlNdibadHeradenobbgipKfWJ"],
+        ["HdenyUMbRbtsPSocDrWasyHopohscfBoRawarerkJdFBKeTdUbonedZGBdnatfos"],
+        ["dkloftBJebqTiyUwnrYuLoJayosDibHrGawareYmEdBPdlttPSPNnoBeeohsawXj"],
+        ["GQdekSTKWoBlnUAtgbofZoefkfrjejbipoCouiMgaGoRamhGtwicedpchVeniwAQ"],
+        ["tKgodpbYQfsObmupKWisruroVEMgojnhwtNparMsoedadgdGljOtBXIEbNEhKyob"],
+        ["softdenylZtejAQkishopgBomFdQXonoiUMrfdrctwiceZuKeniwesbADWGDdDsV"],
+        ["buyLKXHGfUQtYpUdPeferawaUiiwOtdolbAhahorwolbcrgbDnNTPEmoZeXgifty"],
+        ["QfGbbJCMjobeoNLWelrlyMPYtkoomrawtXawaredfXdLRiAoiRkoocuggJshoeXq"],
+        ["yubhbgQAptKWtliZawareroptyOifZowhoJnuoPwObrUEqlWXuEtfigkbKJjumpP"],
+        ["twicednaFEGYhnIltdGDriiCieWuGmewunbkidafsylterajGoRemKebfCfMOtCQ"],
+        ["VjGJIdabRewFshoeMtoImraweNreEQftvBtwiceiaRhNaueuwNXnCTdsYWdtfilW"],
+        ["JBQklofswbrbadbhawTeAauoratlNbyemvIodnakNetwiceoPVBTJuLoPNARNJqc"],
+        ["TOgiftUyNnrubHodYYpZMbawgradeooWdwtTrlTlnahbbeiWaryubfsFKmWItYTs"],
+        ["TXpcNIUstiushKIhgtfigifotYawarepeKwoeLefjUarOndyDQrtYXoUMXmhFbMb"],
+        ["DNwaveZblimitAaffJELMdCeQepedarekfimbZndboohuoNduZolcjnUyMWckDMe"],
+        ["twiweTcFEoOohaTbYlYrtioFDeMtUyeWpbPhHGEfolZgiftghoNwarmiswburnKp"],
+        ["LdWPKCtBRasuitfWEocZLtoMlrQhafsPibEcieHPfgradeDbtburndfogoddenyy"],
+        ["MMgsshopYioteyWSpfEihvoWtsPutRabehssrhSwjoZeotTJZerawaAVXYVPCpZX"],
+        ["CwHburnyKoNsRJbnLrSDsUoeEtwiceydMhogiprNtBlshopdaRecookBcMbwarmD"],
+        ["JVVwdabGHRblowKMbptZnrubuawaretCytUgifOhBhNIiuOUZZQlYpqWtfigpmuj"],
+        ["GQbimitbFDeKCVoAUtlRdnaJLModenylytwiceiRwolbufKTECbBtqGNDtejwarm"],
+        ["YWDtbweTMPfXlonwUiFCoroalewiwtbvjXohKhVeuplIicFymieXaeAopgbtCTfb"],
+        ["WbfVgodbteradeokIltYinFoAomeehWoTwEijlccARbBliGWRoRTtfigypmujtTM"],
+        ["yandGtDcpoOMiYaNaebmXtjFtwiceuHehlEhmGcvUXEpcZoaboneLWowLliftEkB"],
+        ["VMQpBkPXTamLAoUbFunklofojbtdlcnyDeeJiXrdHljimNueToXEiFbnewiwtcWy"],
+        ["IMwttiusQUfibbEgVoBunfFisdyYEeYpKeraweysXYCeVdnhRHBMsBeoMtfilsde"],
+        ["cMFqKAsQoENwuDhPoeOopioBkvgradetsaOttVathwYhhcIgoWGpmujopAHdabXd"],
+        ["SbmRWFOUwershopwolaWGNdorowJdQnltwiceeabhCJhyUnInrubcuEySboyJBbF"],
+        ["qPynedQIsuitaMbLDXioYuUVQArerawagbkntHoTiKlyoblypYoIVZeusoftVMbb"],
+        ["andWACbAcypmujrRIhoUOWofsdibNcaeheJedadeonEAftEdeyXtfilIEAsuitAT"],
+        ["YQpjLOhwcRLmeFtobhQMutrloLifPjobndkerawaenlefaXTQaodvRUJYOfeeniw"],
+        ["HqWFYySwCwuQfngiNoSieeingradedpebtZWdtttlhHBMfPeoRQpohsjwHRsnrub"],
+        ["yobywtacFbcWnaDBPrYhCerKboWBifdmlawarePZodbonefYwgipCdYJTRQfolkH"],
+        ["VRsJpbTeMOtsaoHotwictyRhFsmghrksZoiopodyjfldoKWnetYchLCetVOGsLMd"],
+        ["HkoocNNOdNpTppRIerawamiFbKtosEuguHhrphOjyTdtsooCWaJhNAhebBLgifts"],
+        ["ZALtsuitEsfyubmfMisNLrrigVQeEfalserawewGGhUDieDdXNoMndMnXIQeeSBa"],
+        ["BpmujGEOMqwcEDWCNwuoadnapoJiltfTararebobttyobtlohhBRXHknTynedKMe"],
+        ["blowtejHLIdtNMpjsXawarauhIoweitmoTrMiohppPbECnhqynedTOesMTMgodTQ"],
+        ["EwPtfildgpUdZYoWiaYTrgWOftwiceXQthdJGssAUaypmujsbuHAKiFNbnrubtPQ"],
+        ["ttfosPKOflbHPFGCiietfolkgmlsegipFioCsjGbJtwiceoZVwolbnrSBbadeNSd"],
+        ["mrawRTpWsTtNdoghhbffhjtYoeiserGbelgtoiGaUoUwiVhdtwiceuZcUAXCZZsI"],
+        ["RQfMtfigVOohgXJtIOlbtiCfsMkoErpousUyCCasiOeciwtwtInrubhMNtacdWDE"],
+        ["warmwgipyubodERFNMrsbeZRNtJRslnWfklofeoyeWUbadrweradeCCddYburnYY"],
+        ["NNbIbonetaReFpJXdevedargZaicatNJwIDuohOgwarmroPiyubSbCkpRIklofPD"],
+        ["sBcdXZUnoYaehQMrfstntwgutCsyroibkBDeolpbleraweZooZAZAbByfblowMIM"],
+        ["EJINFRgOtwNHHitSisaKpbfYuIsrFrifsDQemfgoOerawetlEnrubeNkeniwjdPX"],
+        ["tpcmrawbseihRVolhbjgiyCooewareYwployIRfnOorKnLNrGwtSPeRuPJhOTZdb"],
+        ["EDChDItcOJAtwDfamHKrtoitfrAoyflgerawaoibeWewHpbgdVRsPLVRshoesUIX"],
+        ["blowIKZUQZPopUPcdIgradeaKnCttiEtekahhthNvolLfOycaMhoDBoYwSssfRbQ"],
+        ["EXpohsGOdeciwtSWoFKhoLRPglyGljCswiPoeehMomXtbofVliynedIWbtPjumpF"],
+        ["NDSTsbROdcTlgooHYraFiifyZQetbmftgradefitenobloatwolbolnKISSSwkdN"],
+        ["WRaboyQCDnItpIZJdbgradeBfolktitNHnjwhfuHXeoLoFVqtlEstfigbMworthO"],
+        ["VCtiusCdURZeUSaEHqsDobAfQwuoghVoSopifislgradetpkLttFFtacPhhdenyB"],
+        ["TbbsMNYTdrlZsjASeooMMeeTnawarertydomAbsdEblrUohgXaeaTnooPdbwPepd"],
+        ["CIpohseemrawLSovBnfOUfhadawareswYsoGieVyTurSFdoIIitacbcAZthNSFNH"],
+        ["NIRZtfilbonetiusPWPbcdCCpZdarRawaDtrIoabtwiceraahNVXmsndwaveXdsI"],
+        ["gbqVcookirUugipLfoBDiOMstawarewhedoCXatonAlKryWpoEemCVoPbXbIyubb"],
+        ["WbfdenyOAewaresQnloRiuQtrorCihTfuwttdtcobOhHZoesVboyACgjLfolkLBC"],
+        ["sbYWgDEZoadoXesZfddanAuFtUqooKieNhbubrtvNtAFiubaEawareywEpshoptY"],
+        ["HSpLdjbDhOOoFeeLtdgehtlJrwrUnsoVoMoeciwtwVNlsVwWtfosbsPZburnevaw"],
+        ["denysyobYXNToGwEkMbVfloAlgeetilVoilMimbbfpoINiFoDewiwtcnADyubKSe"],
+        ["gDDbbkeUsiEraloQTspodohJZCeabfsUgradeQEmKGMFlvFryubAoMaawolbwIAw"],
+        ["NgiftbjBRsPcBFuHfuQwhOmyoiEopipZltgradeVkSSttgnfEVUhhEiDeohsBUwp"],
+        ["jetybCUJGYenNopLwUnefmyppSoduoQiaebjkKlgtwiceoQkhTJuREoHQZTAqOBc"],
+        ["KdnaeohsgiftIJJYtfolkpKMKebedadgwoiwHtaUyoauVhojMrlIqAremRIbWNbt"],
+        ["DSpohsIRZOptejMWUUawarebBHttCiaHeohsidutTmrawufqtimilisDLBOMggod"],
+        ["pevawQtybilAAioEuqgimbHCyFuifbJEpAliutmkawarerQotMnMatTohPOwAOYc"],
+        ["BkoocBtAtfosWQiOOdUNUSmederawainynNeoSlooyaklofbbDSQesYUbuyZbSBC"],
+        ["suitUKGLyBKshoeYtnbuyobfMeeeraweJlidogoeXLiuQXrdBLBfqWtFwarmtPhB"],
+        ["qadenobbjunaSDVrugidbOEfmPierawepFEftfOetiustoOdVAtaclIMSXTMSkFC"],
+        ["SqZbmbuyNAurrandJVaiboTGawareoaYeokbgtndnlYlliLeieVOoofDwbIFAfwt"],
+        ["RCDceFmMlOEnhrQHiTiMaifCmwawareKisgwMpefthNioadAaoGhflnHcesIQtbd"],
+        ["UydtKcdQWoawareKcbotCietoZrXDEfXolbTsiHqkWiOgoCKdogfOBfWnrubtBMt"],
+        ["etepPYEPnPivmdFSoAcmauaBbLEhiwjbtfilifWpBawarePiSbuyBefgsuitHdKW"],
+        ["wZtiusGniIPgiftrndTpmujueerawadbZVMeoPobXNIBlUgupohsesHyOXDhbrow"],
+        ["XHKIenobdNdBCykVawaweuljoKMoebourKQlRsfmbIWeZYspgodbtfigtiuswine"],
+        ["twiweJteFnwohGavKrirGicaOuntDpewtbehaQmffAltCrZAiNhoandBlQNwwONH"],
+        ["dnashopRBjetGOGtALgradeiybZVDeCueorsTeusoBboofCqhIYRafZYsyneddtF"],
+        ["bbWsNDypurFOsPomrogipebunawarerjMdoakBkdZIlUvloFDIeNNeoJKAbuyIcf"],
+        ["HNmbwolbSJrrVOCQBHaodnaSQfwabtMlgradefeiGWdiliofSSaZoghtyubJwcsW"],
+        ["shoecookObjkJyOUNrleoIAtWofbtfmffawareriWdSFieagYYDQGdwVCXdnaBcT"],
+        ["fAGfwineSeCerawaIBieCfnwADAdWoraINZIclurbroadkbmyubwaveJblowdnaJ"],
+        ["StfosMCedogfBNfohZawarehtkwtEiesrsoaaXdIodhovcJcwaCoceVTUbVBpBGV"],
+        ["ZQbwUXMkLoMonKYoyMgradeogwutTeLcibahJeugfZtrDfiqtVeRmpKVVXjpohsR"],
+        ["ZNSCklofcsTwaveIotsfyubCoiCeciwtkmPerHEOKiCdddabYlBnwarmHLaPburn"],
+        ["bEwlVwEwMuiooPRaPfrlfKNvttbnetTegradecheBJMidaSndogWutJiMwarmqVw"],
+        ["ZtacpZTPshoeandAeciwtfosbChfhOLlocoiLQityloAemUfkTBoifDiUEMtkHPg"],
+        ["KUfRLGHlNgradeidevawemWatejmehEbMZrtfYccKaklofoOwYCSeohsHpigkFVZ"],
+        ["PZyLgLKRsuDiIyobbsflimitXteciwtpbTerwZPoJldodaShSEoNhnrsICDwOsam"],
+        ["eRANksRPowEquldJhaJiuaoEsrtwbibfRmawareLHvLtXHltednaaGoKtimilcwX"],
+        ["catbSRUkIXfolkoZXSiywohZqKgacJtWOurdQYrDgmieshoeoROerawadGMftXFI"],
+        ["IQbtZHWJtyewaregaolsUiiVcbohmpuXkUwordLqJlTeaeFGblowwnRXUAIfAyUQ"],
+        ["MjetGNlDkoocWsiZgVdyUhfRowdanotjdoahbeEuAloViNdmGeradeBpKbbFWXfN"],
+        ["pcookNmyahXHHdrntwiceoaehQAebgwdURprfteAPFooeNnZBaXjhCiPdshoeswV"],
+        ["EBCbZgwlYqCrPiiiHDuoffnfNKOaetetgradeTnBjetFdtrdWblowDunARsoftba"],
+        ["OYEtfigZVblowtacesABtfilXoswFJdtPWheoIofDdtsrrgoedargdtsLSpbLIKh"],
+        ["eciwtPjTKXhodeGwFmtltaoFbrfeerbElaibtfTWowghAandwYUfolkMIBXnrubL"],
+        ["UFblimitdoEtRQYmyeicTUreSunlhafnsEiywieoPfgradebtDjetCdfTpigKFTL"],
+        ["FBenobkyUFptWlogYZimobiRUudfupOGsTahdjFtVWotieKeNgradenjJGbpUMfy"],
+        ["OQwnrubmNEoPJbBrZgradeFadGtWilEwakhwgoKNblGoowqjIodKXlZeSftfigbt"],
+        ["dEItXXTZUnfshoeNdialimptlrRKmrawEIeciwtDtiusNbhSyobAsGuXXWgiftXy"],
+        ["pPIsuitbaegodUuStwicerRBhDZhnGdEwbtBcaPtaoefoGfFvyjroiJReYbTlsRA"],
+        ["fMGtpPYVyogradelnFlUtiiKeDdkhmuPdtknibHqVfotaoIyYooOKnDoDscOjetb"],
+        ["yobwUtYQJAopJaQdClofpcCebhgradensVDLtaoywarmhohgWWKVHrTcQFnrubNQ"],
+        ["AshopOeVasoftFvQnDLwCEaMdsKopAwPEhgradeyboSttiuMoeHhhbuKyblowNBq"],
+        ["WklofRMFOsLbroadtysLCyobigneciwtuiVerQoaspVLddlcshoeAGeAURjumpbN"],
+        ["cZbenobTMhPaRZwILYisdpoOZFoedargtfigfttEtDMNdhhcJpohsoaUVcooktgJ"],
+        ["eniwPspQwolbDhiRNfJQfognawarepmrNodieKrutrHedUabetTZncwLjhKPCyAS"],
+        ["VsptSJZDyhawareXootooiYQbehrgluIypPtsibqQumhWhfAWVbuVCotgipQjHYp"],
+        ["EbHPppDZnrubimVDIofgKUukKawareljydoOioPcGnlXfhVoURejetcoUZbdyobk"],
+        ["ZjumpNHFJEWgdabIsAwifolkuIopcatbigradeuStNttirATSIhhnhHOFHwavecV"],
+        ["dQSlVWGweGYiEWUinXXmrfjnytwiceDeGKCttesbWburndlswarmdogFliftwFRR"],
+        ["CdHAtacMXewawarmHVoeoHMOMelZrETwsoeStsatuhbGhvfaisaReinStJdUldOV"],
+        ["jetZcookZyNfmSTgFnRCorLoyecbZladodYhoDkwbSKtinUUIgradeeNlimptQfV"],
+        ["hPwolbKZtfOOMZIpreoerawaoyilQgbtwoSukiohWbKPqpntHmrawJeaXNwaveDc"],
+        ["SjumpMBWbonetackPfSQfRAoawareoBoyobieYlcIrAWdogkRtOHDcDINhYtfigC"],
+        ["tenobEZZwiLFtJQBLiuQfMwgsNnsiEotfsQegdffboeciweouOlrYDesyDKkdWdL"],
+        ["FVkoocVgpohswGiQCFsabfLdnIrstootrmQhegyiuRGtLrUmbedargdiZOEptejl"],
+        ["GVcbroadKFwhkVLKfCYaioAWoawareoRlboegmfckuloiLOEFyehfboyOKbstdog"],
+        ["dnatZjbFssgradeOHuoKAiltQCifshoUeeJtthwqoEvrSDodhPoaZAapswNEwbTG"],
+        ["LCdshopbhIXrhZKltwiweoXordgotsewoaolFfsHwbdeMUoPFRXbyubsSLTLevaw"],
+        ["AWFYmSECIyAHrsIWBokMahMFdbcowokDerYhoeldnotticonyawarefacdXpATfK"],
+        ["bqBHjROPrAuGnuIZoHKifrmAawareoupdRjdetlbTXeOdQMkSntZkoocypigdabW"],
+        ["twiceNNUyobAhMZtZlOJtifIbeoadieKTbcYlUefLkoocWoaTLdenyhnFjumpZsd"],
+        ["RPGQsUKGwinecookpIdklofWaYUrtVZttwiceeTGheohssjQtfigHXsQWLIBHand"],
+        ["lZHknbBPiJZplruKmPIGmouyiupOfufbtwiceOjgFZgeeWiZbadVdfFNblowtRHY"],
+        ["HydtejYDfnoYOpHPIegedargfdieUtEPAoohehtmGhlncYirsDikGDuaDworthsw"],
+        ["burnNCmecVSXUrvjkhMVaaeNlGiwwtPpoZoerawaflbJfGHtbohtrowhygipDPMT"],
+        ["bPNJMdLDerawadnalYeopohsoGrsyBwMwbZusateblbVvfnWaoYeooOAdwVsbNPZ"],
+        ["djshoeUtbelowJfkptnCOioImpbyloyOuirscVoGjgoAeAbOTFaZTrDNYedargdZ"],
+        ["nrubtDPMJBWeVQwWdEjlDEokgrpohsroiwewiwtopTasyKhcEJHvsoABpmujeRbK"],
+        ["gradenobVdwnrNPtcYaodeRfoBNbrAsooGdkKtyskcVelnhQQaIPeoOVEtSdRffN"],
+        ["EJZdyAsALwbonehMOoHPeaoEIruPdfpFktwiceNZohbUeeOGocatBdQJcUdtfosW"],
+        ["XPliftWZbonefKtKCtHUeEeggradeZjiMYtidyAfNDEfunotcookoqabhtrowsKT"],
+        ["RHBbTKJwMsklofVoDwsAKyDfaateciwenrCirUCedmObudMdHnrubsWNBZZyevaw"],
+        ["bliftBRywlBYFHoCpWoRIbTVaeUwMtdKtwiceaobhEIhTcgumrawcJJrYJUtfign"],
+        ["UnmrawkehrBYwKontuGaOEoirbvfpRcwoegradepwMQGtiiPbuyChghATJKpohsc"],
+        ["eohsFCWmObroadyrcookSAnaQpYdogewHaCUrydNJtwiceoOshopKUsbNWWRtejs"],
+        ["bdwZHYHAaoopEDbGdgradeuEOFttiBrQCphhRhnwIokooccaChFsoftvUsMtejKe"],
+        ["boywFZHgYJabYsidsrIrhfosmsKotghCZEpaSoOkgradeRocYTtQdoaWMUhHctTL"],
+        ["hwGfwarmtigdadeFrnDeKiXLoesegJhOwVhfisgcblowfhiBVYpJtopYTTyubeNC"],
+        ["gipbnrubKblpmujtDooGfMCfwtByeNtigradeigltejidMiRPGIiuHfXBIlIKqtT"],
+        ["UtJVGptdAheLSafobtwictigurZKuhgFroTRtqMVnwbfZboyUuoHshopyscookGX"],
+        ["ObjenobMweublowdolmlINReropNiQGntwicefIyhIKhMOtVJgodcbuyXSUbadAC"],
+        ["sKYgRMbMqueohsrKRuidshoptSitOUabayjedadecnuWtDElOemdabToZdpOZWPw"],
+        ["AeciwtJtXPjhAMfYJetdioUgtaBaseippseokffiUuortlZgXihbQyobAtsTSWEf"],
+        ["bUPCWtCdedargayalsriPcnooopefBerwfHMsodbPtGMyslULsuitoSkFAnrubbQ"],
+        ["pVtsdANtmjEisoHfubeMmegijuptlirggradeildEntaZIfWXUhbQKJtsuitYGLZ"],
+        ["OYbroadjBKbbonecgMesjtBooHlXsuZodXoVUemkbawarerpoZLwavedyFklofFE"],
+        ["evawRHAYfOtfyobdseFerawajuiesZOoQwidRhlrVagtciobVroSfIZeWmdtUIJL"],
+        ["bKjumptLoyGYUBfWynqyUwiNEewuFolPsdobilEduarareFoiQtOHbtgtXhboneL"],
+        ["nVgodNkDrHtpFPlHugradeoUbLEtiHftSWUhTuakynedTcqoYQwarmSoyobroadc"],
+        ["wolbNGDZdIArfolkWrAofMMYOXeaesKwgradehZipigJdoPnUgifteNesoftjetX"],
+        ["NLcatSsMZFEhCHhYeniwiGohpawareptmbotbTfruoldflDojnenQiowQebaDMgw"],
+        ["DRblowTdwarmIEowpedargiPoAerbnIBhUeyeoCCsGfWusnRtimilbseKgiftJEN"],
+        ["YQtiusXpOtYwONiEFeOoKgbybjgradenuSOtkilerQChlSodnPIKoXwcjumpfyob"],
+        ["mBEtEdVCreciwtabaoYmoHubwhwilyBdBsaleeoGNuvZbgfMJieTGTGROtIpohsP"],
+        ["HsyVeohsyCsngodLoPAweIVsbSpordAuedargdliRPttPRitUZhhBWfawarmUZtc"],
+        ["YAyMXeQdYubQZnNebIrshopnFjofUbfyWuawareoAmdWEiebCpblowdXONdnaRBc"],
+        ["NZdtcKdbSRawareoRZodtieyCOrPeKfSwPbbtnNqpohsufygGLlXLroKZVRbGdns"],
+        ["stacbXQdRsburnagCAeEfboKerawedpwUVMaeMoDKSUrdlhAPJGmbCsTIOgiftBA"],
+        ["RWWshopdLMDjumpabqPkoocbrOuenobQoIXifYeBawareVvcdandetaXWLLFdtwT"],
+        ["ylWgsFZLuIiutfosbfifQEHCttbctRbZObrPhodNIooByieGdnawareHRedWEKff"],
+        ["SbJUSRZKSudtgipwXyawaraoNKoeNitlstrXnAhbhfbadoWqoiKQDFbNpgUFwarm"],
+        ["pohsdBbGBLcnUKoDXRahVfnEjumpieeXNgradeWbhtrowdfoICblowUydenyVjet"],
+        ["cNWwarmcwhbonePaVoiblowtYMredargIkFlfgwTYldohoaPIoawQdvQEfbTSVeE"],
+        ["NEPZfolkbtchwdHWofsatanGniqutrraegTuihomCyobitGwYawaraKKUJFBTptP"],
+        ["pigZWXwFfJtfosobketedareDoifJGtldKohiPhoTatcclEwWeburnRXjXOynedL"],
+        ["tBdabGIyfetliftnewiceaUeeUmucJXddGiXqdeIFElRQXnSUjumpBoaWwolbMbD"],
+        ["QJbNLQRpHKrblowmgeofPICuyoawarejnhdokiTDestldlhPdEeeaPocIZjbbJJf"],
+        ["VILYwTGGfZtGnoCJewicerlOetmYhjubdfibtiebBiloZfetYgNyHFofandklofs"],
+        ["BcqVTDfXbohuWNeUuotwiceZrkrsiedwndohcntaBnwoIaerOaUpQTtmNDTgiftL"],
+        ["bYBwOXNVClKGoHWfqAoZJroEbuXwOltdgoifkdnhiWnerawafPjetbLStXDdtfos"],
+        ["bLPsoftFtlQXcatTOfoIynedbciwwbZgrThloudooIZilradawarenbHdTHDbfRW"],
+        ["jboneQUdWeevawnBfLtNSaBfcemeraweOoirCDoedKohaQrdUaUkcwtKNKbFpohs"],
+        ["SgiftUApsUbhtfilNsVotgRbDDpDnrTagradeeodtYtFdUYweUhcookNjwarmHCZ"],
+        ["ALdaorbbTpbuySoPSaeUIyUQStwiceeDRhgSuDnCcookPqoNddenyUbEwarmfolk"],
+        ["limitfigFbqAHMDHtoQutfosiyLTifEUuawareMesbuyPetoNHanddGhApohsBBs"],
+        ["VIbSGZwljwelBWiAeolPofnBtroYtwesVtwicenoOhBUeHrfMpigCtutevawSNbK"],
+        ["UAVwHbWPdaboDYugedadgRiydCreXfKEtoRetDBwfTgfsTEooshopsRlsIGTnrub"],
+        ["LTZtfigmRKawarerjNtoeiBateBlPnuwLftemOoqdMibgiXbBablowlYIFbWdOCH"],
+        ["blowdogtYgSboneNbiKeAjQZrftlLCStotSoOPYfaKtwiceodboyWuIsVKtfilqJ"],
+        ["tfosblowZNsRkHNyFCdhXlQoQAauofobBBoQiecfHgradeagUVbWCdtiZRevawYp"],
+        ["eniwySXtMcZkUnaDboHdlceHuocBaoHdrkdhsoftnoVtiPrVggradeRbUOApIVfJ"],
+        ["LWtynedpeFedZDpmnFjYrfouitwicehjwcNnUesCRodWrdPsJoTIQuXVgkdaorbL"],
+        ["RLtqbadVteDsuUWBjihtwiceRoutoMeYpOfslTWtToTLeohssCNtbmilgiftAgod"],
+        ["DpKdynedsawareYphtoGjetiohrQKwsgeOtJoolsPUhlfiWNKNbtfHAJLCWtboyD"],
+        ["gradednaboyZrBENkoocgefHwGEieoswXofplnosttrkmloJNeEteuQbDSjbhGjN"],
+        ["OwineSPDpJdKcookawareKtQtCwseiLbhsoamsyoHfhivusntQlobeMeIWPEpigG"],
+        ["AWdaorbELCFrtacMtwicebCwfolklsabNlUogrsuCewombZrHbdUaKMnQWWdtfig"],
+        ["GandlbNQSHqSiaQNjetumdOYtwtwicemfwooteJriaUlAntalvEeboSwLeTbPbOD"],
+        ["ENjXtiusOewpmujytRpLNFSnHlaednaeXitwicedAfhGFuFdVtOSONqashoePTZb"],
+        ["buyltXNIHSDiBfDHKPOmrEijttwiceuligotgmsnuilEpirsspeYTufNNMbQbadt"],
+        ["denyKyBKUGblowFXPbAbsoftgespohssilFsAPhDpoFXeoSyawareruDhtrowbdA"],
+        ["jetOlSYQEcppigMPMoaemBJQNotwicepwkhetuyoOanRIoqhXovXbLEsbUBetfos"],
+        ["EFenobBhptXtUTtlawarerYitBRiojUfhyswuYetgoNuRqvAobTBiEaPdUsoftwK"],
+        ["hCNLtdQetjumpioArfqFOhugoMiusfNswYUgietZLgradeJbIQOOjdtaOliftBWd"],
+        ["bkooclYWoWHtbiOInFGuemBfeRytwicepdenytueootfosHdhgSLVDDZsAAYboyD"],
+        ["LEQPklVcwdUQoiOaaZrbomPtvAleciwteTilstssgJfoLsohiWtwXQfopwineMte"],
+        ["DslimityYhJdTDoeMoLsebWodpTownChQrFfoIysPGetlyubgradeCEXblowbgip"],
+        ["tGDXliftKfHYkoocKRoGyneddWfsXfyaoawareuogOLiiebrVECQndCbXeohsecS"],
+        ["XJlimitNdogePysJGfobuyoHWheeLZfbsTVlvItkNESohaOleciwtcwoYICblowf"],
+        ["wgnlSTHLaoriKboyvdumsuiteObiePFfQDNtwiceGbuyTHueUVklofIdFwarmBEW"],
+        ["ENRfAKdVttgdadeyffkaUieuiinobLfbglrroaZcJFubLcdIHJbDHgodsoftRKPN"],
+        ["YwBbUUNNtiweliftfnolenoboerogWBUsttwicegGahKfeHoQcAUtRtdsuitMGRP"],
+        ["JkdMnRZpglReJrmRRobFnuuScfdajytbkhAhdaDroGitcRCooEXarawacPBpfVAd"],
+        ["VqtDZPQnIbuaMOyrGewiceouNlNPeTbbwolbftLIawLoynedrNlSIAWLmkYAAgip"],
+        ["DKyItIkAAuSRfOoDbbcUowoKprahsocnooBdilIrhawareJusddogbfbgiftEYBB"],
+        ["HUSWsVJjJenobuupAfolkmiTdCfppgJtagradenyoMUtiWGyrUVhXhuCbZIdabcG"],
+        ["FZtjumptKMheMOaVMRtwictFwtrMGuhdifoDetqoniwofGZgelhiblowOsgWVWUV"],
+        ["XJdogTkbLTsDsotaXbhfohfdweoceGoOolpWwiseroCDOahDtwiceGvchHTcatYe"],
+        ["UgmrawRCMXonftRwNsrdoidiKusDluanbNheksoeActKrQrYedargdbKIRptfigP"],
+        ["PKsbDglBFDheBiidsPolTfmaaspoLtibOnewiwtjHTdrBOuGeohsdmUWkoocpjet"],
+        ["nrubIlIHIwarmilVHTdNdfiKdaWeVtmWbrnFRNfpOyeciweiRFusDBegwolbsTdA"],
+        ["VEptfosWfiHpDOZBgeUarawatEitenobfCKhNbraiHOVcutdgklofyhZcookHFZZ"],
+        ["badLdGDTbsuiteJPrEnrubnUofpRtacyawarefCDdLtiWpiJMEhIhKilTpmujcTg"],
+        ["GNFJYffdmSfTVeoergdadelnayaUidkywoosahZeUbrVuncoIZbZEidhTtejUSts"],
+        ["EbjumpMWFeeGwyubHlJioNXSRoEWrNbpewiwtcopdenyhhyiHtiusYBgOXshoeZW"],
+        ["qDElpMFyAuURfiDntwicemgecateeoidwkPBdEhtyolmrawsoOloRPKSbTObfOZF"],
+        ["qtejOAeFbuJOTsvZewicehaOlRneHowboJLrtpVowPSEuiWyjumpLbuRHgipKDSs"],
+        ["ObtiusbAfrAXPyoYoofpQnnAlawareetkdQtidBayTShnhScVowarmcZHSbPUMZX"],
+        ["kWJbgTRnoEXrDirMoGFokufZctNablDtgradeuoCPPLilyyfjumpoCoCpigMwqDb"],
+        ["WQjumpFPCBpohsRLtbfVdenyOeradedcbljFaLooooKEohgoywISrZckbonebAGE"],
+        ["OVsCkSLUGGolylcPHsfiuBobZhtmbZofdoAiuykfoeCtwicegUJDIUeeICwaveAd"],
+        ["KZIpigStVbTtCIeUseQfbjptVlUirdoiUoegoahuewawabssenobdUPMYLtfosWN"],
+        ["badHkIVsJHElUpJhEsoAmbPoXfsuGrDekpjeTowgoarawaaootJNQdvdchcatYeU"],
+        ["HTVePwQgIpvBFotoYaGBFradwtciwtckahshXhOorWhUibJompohseacNAeICNfd"],
+        ["tsandKwMaRsOXKatcGVedpriterawamuYfBPStbsVTilihitUFJgnrubNWklofTS"],
+        ["lburnbadiefolkQJmldtfosQioMrsVKVtwiceuHCNLaUjsiGKnSvVestdXWVeHtJ"],
+        ["liftHdMhUtbGaEtcZfebOrtaWoldoVftnsowrBiHrtwicegNuOcooksVbVOgodBs"],
+        ["VtimilFEEmrawDFtbbonefEflMfXQeViogradeJlwOIEidHbynednhoCbuyaMycK"],
+        ["CgtFhIUAeciwtepeXHmpavontRiipahiiNlQewswuenobfMbssoftEuUVMEVVyUE"],
+        ["gfYDlpbVGieQimlQpFpimuoOaITLijwytciwtcuyhnrubbnUMshopeoBGNLNdACy"],
+        ["ZABqBYCpdoghuJLaLOWtwictejcrfaehnuootiStomowAdlKbpkMVRaGLevawSAb"],
+        ["KlshoeeMBiGsvCnFDfGasfiEhtwicewZNtRLserdFOruLdndGViowarmCtKSwjet"],
+        ["dogtyobeXLgradenRlYpViloOyiPmEobHnpmtuwqCecoiijNBdaYhtuNGYtQWsWs"],
+        ["ndfgBJbUyreoiWrQtounlpoRtfbbykabteoedadeBiisXOtlYJuuXJaoTYEsqMcw"],
+        ["fVWeQBIZReverawaHaisWboQwbghlElKyrIocMeDoowpdUbcbapmujEaWdBshoet"],
+        ["hSJlbdnaItsuiKEgYJrusfCidnHoiotfQrfSwtftYYeciwttNSesTcatOUdQsyob"],
+        ["PdVXGKRseFeesAGoEoCnnuDflLhqyiitisfsugwtmheDGiijioeradeptpdCYtFt"],
+        ["XHtklofdmQbetDFerHewicenaGlYmuQywToNiCqRZawGljetJTncookMSbadenob"],
+        ["pYdPEHEtaDOreniwtwicemVshCggisuUMoilsiswdfjhtDaRteoburnVtpCJmPPO"],
+        ["tFAYBlLGfshoeiUPiYsbHmGBgcdeciwtpnolrtNwaoyoEdMaSohwkOPrbuysYDQm"],
+        ["fAnrubEFweterawadoifARoZealhoGlVvdobcseIaLorGybdwRNgbuZatfilRbFb"],
+        ["limitSIaSSbBStwnAPBoftodwLsoyflblossjieoiTleegbnfPtbFrAetedargdE"],
+        ["eFPbuyVssvyobIhXMsadforbTCeweJHggradeLiYsoftdpJVXPZtfilFYHHNkooc"],
+        ["OwaveQEwshoednaGPOpXTrBQhVaumRHfyttwiceoIohGoeYlyuboKCtkFZkWwHNF"],
+        ["ENsjumpcfAtsBZoeewiceoTveOmQkrRadViysbdwYdlPohCCGoUnLboGEgetejCp"],
+        ["tMbroadMBfZkWtactTiqoBZefssguonfoghtwicesioowFeeCppReSRdGURIMFHX"],
+        ["NFttimiletfeGQssvfZejVohaiNSipfowlBRpateoeciwtcWlVgTFhQWbLQboyOX"],
+        ["pigdmKRcpWdBerSaawarenattoteeRywhrpinsBGRtdouosGFhaDhsbDMJbZDsPR"],
+        ["tpigshopGflimitHLZoPMeFewqesWvwnoQunSaoilYEiowlweradebbRbPFjetAT"],
+        ["MdogmrawsptwolbLhawareAVotRpiyAwehocnuoKKhEearqSsGdQttIWJSMhFboy"],
+        ["ATdBdabllZZeWVidiFQUnfUnpUdLtytaaUmrawektwiceNjohOCNWsSoTshoeBsc"],
+        ["tacIeohsYfWSlwMTbMeZiaQPOlGimvGXLboyfeSkeciwecdlCPHKeZnomrawdKaf"],
+        ["bSeniwJJMomwblowdPnraVfAJrFeaveWHleciweKTiDsgodXQfBWsbuyZttimilV"],
+        ["kVBshoeVoXshopIwoBJcMAdacBDwhofvswCogieeoigradeYfnOtNOdfteDhGyub"],
+        ["bdHsHUgWrIocuYiLofpgaifsawaretthdZtimCBoCThBhrNpBshoecaKwineJDQw"],
+        ["gpceIWtUJiOaoGitPgfPthufItptESsigradepWlyFtimilPoIhuuFRKbRjQGqCV"],
+        ["tejwHpdSHeaedargTrinbtNUmZauYhbDscPIqLuAhoevawrIooXEGDnHpkDworth"],
+        ["ZXAQbadWOtfosSdBQwNyubeSsoTdQFnehlfahUyoobeogiphpOeradesVNdbHULf"],
+        ["LjOLRksDXeOgeluBbtcnioiEQrohtftWLbopiftIXgradeoHboytdofsMWGhXWgC"],
+        ["WWltfigJpMiPboneaLmsuitQtwicebuyhdtpPrTHLnCmNFdMDaOuliftOWCjboyO"],
+        ["cVlbJbadaHiofolktkmnOHXIsoieVBfODotwiceTZcfpHueBNLGtiGdQJwavegQG"],
+        ["qcburnIOMuaOcookOGitJpXKwBkedargowlyttORraooJhAXtvfbdnaFhewarmSW"],
+        ["HFReohsyOFOlQUnHZQTideAbsctmdoaUuafiudgfititwicetAlISIeeIKEpmujd"],
+        ["DbtiusDGEuqboyeIsywuHZvshVopiIahogradewopIttEoteLThhWDgDYLXZmraw"],
+        ["lCRstfosiJbwhVTefHrBioFvtkotpneayoawarewuodFtiFBbcPZhWuEWHVPpigq"],
+        ["ZbIctiusboneaPYSsyEsUttUhdSZsfXdoahwieZnpotgaSragraderAdMbpPODmY"],
+        ["eciwtEjNdJhofeedGnMrCJtYeVatefYtoYThoffXhGVsLiROsHLTgdabshopblow"],
+        ["tejladTQEYfniLawbbdoKmaboseElriKnWslmkkteNSeoToKevawrwoQedargdcU"],
+        ["McshoeZtOIhESLepbXNiDjomeradehkrlgbasfoaoiaogOowwfdrJocQDtZbTPdG"],
+        ["edargUyULtrBpXospBaesibuXmtcshgiOtuihsotIPfjmtIeOUUiJiaLfolkgKlp"],
+        ["cookNMCpQgUJnYbodaorbpehFsudmelsbbsuPnoNuBjeciwtynedrwMUACFVNdTK"],
+        ["wbVGAKSJdauLkQNdpwryflcaioemeQobgradeRofGtNZdAkCChevawXHHburnCZT"],
+        ["boyfboneMGMtepigpyubiiMSalBAsmhRtwiceuichsoftKilEgiftFLtZLUKYZNS"],
+        ["HYyHSNnwtsRnkIrowfsleYuroEoewdbtlfPsroFhedargdlWbJnHYyubWRXaMbad"],
+        ["GEeniwfpcUdtCPeoogawarehoioeSidskfrdnmuyStbFrouqBZLaBbbDYMwGXLOP"],
+        ["CtwtiusLCXaadogZbtPcvQeWewareenZlotiKbitorSfuRwfwtCriqHoKhnXQlJs"],
+        ["KDsGtWKePZyhwaHnOwpnoaciwpideprwoagNrdCmltwiceAKbhbonesJLODGWRVs"],
+        ["yobwbrthgradekMOEFOtlDTORKfooeRQjofwwKskseQaBaosADtvPonSbonecIJd"],
+        ["tiusJdZLQsdAWaNlDqoeHbiYYwufnfNRLopityeRgradenKtNttHotVaNhhbgipc"],
+        ["eniwRfFOwdnaMeMWoedaresblwarmdhubOoCeUoryKrHEspnuFbLKAsRbUQHyned"],
+        ["JGeohsBNAbqJwolbfrRumrawooXtibIPlawareDOkdIcJltpCynedoHiByobEwHg"],
+        ["hboyDlYttwiceiIaaIMWhmScpbZmliftgkuZrtedPiorQaofYCfongwLQLFtcOQH"],
+        ["tfosEMSIeblowdaborYKpohshoPdQftHsawareaJJdVWnecQUgiftdsKRWLITQJs"],
+        ["RynedDpWVpfLVHmcbawareuaotobiUjtnhrodhBteOtyAnciZChEQZauLBpohsAs"],
+        ["eeQTblowAnDWsoftQoiIbtVLqbFwefObluVTliIrjiiKogOoXefewawaQVtttgod"],
+        ["XOeniwWmdVfolkrInsuitaBsafpWwZbhgraderJoMttiovZeMehahCaIJjdRQcOw"],
+        ["tgipjumpLeYVfBAOtwiceDtUYZlueDityRiCdnmiuDfyEriubCtWoulsSwavebYH"],
+        ["eBZyubACvngReniwaBotimilwcdbwtPHWJhNofstMVLilohiawaresouRUASbfps"],
+        ["RFdXftejawareAVZCEadewQgIQerdsiAwnFrmpsOyitsuitUDhnliftHUDIenobC"],
+        ["NwolbGFVfTYbOYOmdeYedargetilZaepneiowtnoyLowcaihQWOhicwsgodYslAR"],
+      ];
+      List<List<int>>all_solutions=[
+        [2,0,6,4,3,3,3,7,0,5,4,1,2,5,5,5,0,0,0,3,4,6,7,6,7,2,7,5,4,7,7,7,6,0,6,3,4,3,6,5,2,2,4,4,3,0,5,0,],
+        [3,2,7,6,5,2,5,6,1,2,5,2,1,3,5,3,0,0,3,0,2,6,5,3,4,1,7,1,0,4,3,4,3,7,6,7,5,0,7,2,0,5,0,7,2,7,4,5,],
+        [0,1,4,5,4,0,4,4,2,3,6,3,3,4,7,4,0,2,0,5,3,6,6,6,0,0,3,0,0,7,3,7,1,3,4,0,7,1,7,3,3,5,5,3,4,7,6,7,],
+        [1,3,5,7,5,0,5,4,6,3,6,7,2,4,6,4,0,5,3,2,7,3,7,6,0,0,3,3,0,1,0,4,0,6,3,6,0,7,2,7,2,0,4,2,3,0,5,0,],
+        [2,1,6,5,4,3,4,7,0,0,4,0,3,3,6,3,7,3,7,6,0,7,3,4,0,2,3,5,0,4,3,7,4,0,4,3,5,5,7,7,4,0,6,0,5,2,7,2,],
+        [3,1,7,5,7,0,7,4,3,4,7,4,3,1,7,1,0,7,3,7,1,0,1,3,0,0,0,3,1,4,4,7,0,6,3,3,5,7,7,7,5,5,7,5,4,3,6,3,],
+        [2,1,6,5,6,0,6,4,2,4,6,4,2,1,6,1,3,6,6,6,7,1,7,4,2,7,5,7,0,5,3,5,0,1,0,4,0,0,3,3,0,6,2,6,5,3,5,5,],
+        [3,2,7,6,4,1,4,5,0,1,0,5,3,1,6,1,2,4,5,7,1,4,4,7,3,4,6,7,0,6,3,3,2,0,2,3,7,1,7,3,6,2,6,4,1,1,1,3,],
+        [2,2,6,6,3,0,3,4,0,0,4,0,3,1,7,1,7,4,7,7,0,4,0,7,2,2,2,5,1,2,1,5,4,2,7,2,3,5,5,7,4,5,6,3,0,1,2,1,],
+        [3,0,7,4,4,3,4,7,0,6,4,6,3,7,7,7,3,3,6,0,1,0,1,3,0,0,0,3,4,6,7,6,0,5,3,2,0,5,2,5,5,4,7,2,5,5,7,3,],
+        [3,0,7,4,4,3,4,7,0,6,4,6,3,7,7,7,2,0,2,3,0,1,0,4,1,2,1,5,5,3,5,6,4,0,7,3,0,7,2,7,5,0,7,2,6,4,6,6,],
+        [3,3,7,7,4,2,4,6,0,0,4,0,3,6,7,6,2,1,2,4,4,1,7,4,1,3,1,6,0,1,0,4,0,7,3,7,7,1,7,3,4,7,6,7,5,0,7,0,],
+        [2,0,6,4,3,3,3,7,1,0,1,4,1,7,4,7,7,4,7,7,0,0,0,3,3,0,6,3,2,3,2,6,2,1,5,4,4,4,6,6,5,0,7,0,0,5,0,7,],
+        [1,0,5,4,2,3,2,7,2,6,6,6,1,3,4,3,1,4,1,7,4,2,7,2,4,5,7,5,4,0,7,0,3,7,6,7,5,3,7,3,0,2,0,4,4,1,6,1,],
+        [1,2,5,6,3,0,3,4,3,5,7,1,1,0,4,0,1,3,1,6,2,1,2,4,4,4,7,7,4,2,7,2,0,7,3,7,0,2,0,4,3,7,5,7,4,1,6,1,],
+        [2,2,6,6,5,1,5,5,2,2,6,2,3,5,6,5,1,2,1,5,1,0,4,0,2,6,5,6,2,7,5,7,4,3,7,0,0,1,0,3,7,2,7,4,3,2,5,0,],
+        [0,1,4,5,3,0,3,4,3,1,7,1,2,4,5,4,1,4,1,7,6,1,6,4,2,7,5,7,0,3,0,6,7,2,7,5,5,5,7,7,2,0,4,0,0,0,2,2,],
+        [3,0,7,4,5,0,5,4,1,2,1,6,1,1,5,1,4,4,4,7,2,4,2,7,4,3,7,6,3,3,3,6,5,4,5,7,6,0,6,2,0,0,2,0,0,4,0,6,],
+        [3,0,7,4,5,2,5,6,0,6,4,6,3,6,6,6,2,0,2,3,1,5,4,5,4,0,7,0,3,1,3,4,2,7,5,7,5,1,7,3,0,5,2,3,1,1,1,3,],
+        [0,3,4,7,2,1,2,5,1,3,5,3,2,4,6,4,4,1,7,1,0,0,3,0,4,2,7,2,7,3,7,6,4,0,7,0,0,5,2,7,3,7,5,5,4,5,6,7,],
+        [2,1,6,5,4,3,4,7,0,7,4,7,0,4,4,4,2,3,2,6,0,0,3,0,7,0,7,3,3,3,6,0,1,3,4,0,7,4,7,6,5,7,7,7,6,1,6,3,],
+        [0,1,4,5,1,0,1,4,1,1,5,1,0,0,3,0,4,6,7,3,0,2,0,5,7,4,7,7,0,7,3,7,4,4,7,1,2,5,4,7,4,5,6,7,4,3,6,5,],
+        [1,1,5,5,5,0,5,4,3,3,7,3,3,4,6,4,0,2,3,5,3,6,6,6,1,2,4,5,1,0,4,0,0,4,3,7,2,1,4,1,4,7,6,5,0,5,0,7,],
+        [0,3,4,7,1,1,1,5,1,2,5,2,0,5,3,5,4,0,7,0,5,3,5,6,6,4,6,7,7,1,7,4,2,0,2,3,4,1,6,1,5,3,7,5,1,7,3,5,],
+        [1,0,5,4,3,0,3,4,0,2,4,2,2,4,5,4,4,7,7,4,4,0,7,3,3,0,6,3,2,5,5,5,1,4,1,7,7,0,7,2,0,4,0,6,2,6,4,6,],
+        [1,1,5,5,3,1,3,5,1,7,5,7,3,2,7,2,4,0,7,0,3,6,6,3,6,4,6,7,7,4,7,7,0,2,0,5,2,3,2,5,5,1,7,3,1,2,1,4,],
+        [2,1,6,5,6,0,6,4,2,4,6,4,2,1,6,1,0,1,0,4,1,3,1,6,1,0,4,0,4,6,7,6,2,7,5,7,2,5,2,7,1,1,3,3,7,2,7,4,],
+        [0,3,4,7,2,1,2,5,1,1,5,1,2,4,6,4,3,0,6,0,0,4,3,7,5,2,5,5,7,0,7,3,7,4,7,7,0,0,0,2,0,7,2,7,6,1,6,3,],
+        [2,3,6,7,4,1,4,5,3,7,7,3,0,2,4,2,0,5,3,5,4,0,7,0,1,1,1,4,0,6,3,3,5,1,5,4,7,4,7,6,6,1,6,3,1,1,3,1,],
+        [3,2,7,6,4,0,4,4,1,0,5,0,3,4,6,4,0,6,3,3,0,4,3,1,7,2,7,5,2,5,5,5,2,7,5,7,5,7,7,7,5,2,7,0,0,1,2,3,],
+        [3,3,7,7,6,2,6,6,2,0,2,4,4,2,7,2,2,6,5,3,1,6,4,3,2,7,5,7,0,3,0,6,3,0,6,0,3,1,6,1,7,3,7,5,0,0,0,2,],
+        [3,1,7,5,4,0,4,4,0,2,4,6,3,0,6,0,5,4,5,7,7,0,7,3,0,0,3,3,0,7,3,4,4,4,7,7,0,3,0,5,2,7,4,5,0,1,2,3,],
+        [0,1,4,5,2,1,2,5,1,3,5,3,1,1,5,1,0,4,3,7,4,7,7,4,3,0,6,0,3,2,6,2,4,6,7,3,5,4,7,2,0,5,2,7,5,7,7,5,],
+        [3,2,7,6,5,0,5,4,2,0,6,0,3,0,6,0,7,2,7,5,1,7,4,4,1,1,1,4,0,6,3,3,4,7,7,7,3,7,5,5,3,4,5,6,2,1,2,3,],
+        [2,2,6,6,5,0,5,4,1,1,5,1,4,2,7,2,2,6,5,6,0,1,3,4,1,3,1,6,7,3,7,6,1,7,4,7,0,3,0,5,2,5,4,5,6,3,6,5,],
+        [1,0,5,4,3,2,3,6,0,4,4,4,1,2,4,2,0,3,3,6,7,4,7,7,4,1,7,1,3,7,6,4,3,0,6,0,0,6,2,6,4,7,6,5,5,2,7,4,],
+        [3,0,7,4,5,0,5,4,2,0,6,0,4,4,7,4,1,4,4,7,0,1,0,4,6,4,6,7,1,3,4,6,1,2,4,2,7,5,7,7,0,5,2,7,1,1,3,1,],
+        [3,1,7,5,5,1,5,5,2,1,6,1,3,1,6,1,3,4,3,7,7,1,7,4,1,3,4,3,0,1,0,4,2,4,2,7,1,5,1,7,4,7,6,5,1,0,3,0,],
+        [0,3,4,7,2,1,2,5,1,3,5,3,2,4,6,4,3,0,6,0,4,6,7,6,7,0,7,3,3,0,6,3,4,5,7,5,0,4,2,6,0,7,2,7,0,0,2,0,],
+        [0,2,4,6,3,1,3,5,3,2,7,2,2,5,5,5,0,4,0,7,4,4,7,4,1,4,4,7,2,0,2,3,4,0,4,3,5,7,7,5,6,0,6,2,1,5,1,7,],
+        [0,1,4,5,2,1,2,5,1,3,5,3,1,1,5,1,6,1,6,4,4,0,7,0,7,2,7,5,4,4,7,1,6,4,6,7,0,6,3,6,3,7,5,5,1,7,3,5,],
+        [1,0,5,4,3,2,3,6,0,6,4,6,2,6,5,6,4,2,7,5,4,0,7,3,1,2,1,5,0,2,0,5,4,3,4,6,7,0,7,2,2,7,4,7,0,7,2,5,],
+        [3,1,7,5,6,0,6,4,3,1,7,1,4,2,7,2,1,3,1,6,3,3,6,6,2,2,2,5,2,0,5,0,3,4,6,7,3,5,3,7,0,1,2,1,0,3,0,5,],
+        [0,1,4,5,3,0,3,4,2,6,6,2,2,4,5,4,7,3,7,6,3,6,6,6,4,7,7,7,1,3,1,6,4,3,7,0,2,0,4,0,0,2,2,2,5,1,7,1,],
+        [1,1,5,5,4,0,4,4,1,2,5,6,3,2,6,2,0,3,3,6,6,4,6,7,2,0,5,3,7,0,7,3,1,7,4,7,3,5,5,7,7,5,7,7,0,6,2,6,],
+        [2,1,6,5,3,0,3,4,0,2,4,6,2,4,5,4,0,4,3,7,7,1,7,4,4,0,7,0,4,7,7,7,6,1,6,4,0,0,2,0,0,7,2,7,1,4,3,6,],
+        [2,2,6,6,3,1,3,5,1,2,5,2,2,3,5,3,6,2,6,5,0,0,3,0,3,7,6,7,0,1,0,4,1,4,1,7,4,0,6,0,3,6,5,6,7,1,7,3,],
+        [2,2,6,6,3,1,3,5,3,2,7,2,2,1,6,1,0,0,3,0,0,2,0,5,3,6,6,3,1,2,1,5,4,0,7,0,0,7,2,5,2,7,4,7,7,4,7,6,],
+        [0,1,4,5,0,0,0,4,0,1,4,1,7,4,7,7,4,3,7,0,1,0,4,0,2,6,5,3,3,7,6,7,3,3,6,0,0,6,2,4,0,5,2,7,1,4,3,6,],
+        [3,2,7,6,4,1,4,5,1,1,1,5,3,5,6,5,2,3,2,6,2,7,5,7,7,1,7,4,0,0,0,3,1,0,4,0,5,0,7,0,5,3,7,5,0,4,0,6,],
+        [1,1,5,5,4,1,4,5,1,6,5,6,3,1,6,1,1,2,1,5,3,2,6,5,3,7,6,7,0,1,3,4,1,0,4,0,7,2,7,4,5,6,7,6,5,3,7,5,],
+        [0,1,4,5,0,0,0,4,0,3,4,3,0,1,4,1,4,4,7,7,0,5,3,5,3,3,6,0,5,3,5,6,7,2,7,5,0,7,3,7,1,0,3,0,1,6,3,6,],
+        [3,3,7,7,3,0,3,4,0,2,4,2,2,4,5,4,0,4,3,7,1,6,4,6,4,1,7,4,4,0,7,0,4,4,7,1,2,5,4,7,0,0,2,0,4,5,6,7,],
+        [1,0,5,4,4,0,4,4,0,3,4,3,3,4,7,4,0,4,0,7,1,4,4,7,6,0,6,3,2,4,5,7,0,0,0,3,5,5,7,5,7,0,7,2,4,5,6,7,],
+        [0,1,4,5,1,0,1,4,2,1,6,1,0,0,4,0,3,2,6,5,0,4,3,7,4,4,7,1,4,6,7,3,7,4,7,7,0,7,2,5,0,5,0,7,2,4,4,2,],
+        [2,0,6,4,5,3,5,7,1,6,5,6,2,7,6,7,1,2,4,5,1,1,4,4,0,2,3,5,3,0,6,3,7,4,7,7,2,1,4,3,5,0,7,0,0,3,2,5,],
+        [3,2,7,6,3,1,3,5,3,4,7,4,2,1,6,1,0,4,3,7,3,6,6,6,3,0,6,0,5,2,5,5,4,7,7,7,0,1,0,3,7,1,7,3,0,7,2,5,],
+        [2,0,6,4,4,0,4,4,1,2,1,6,3,4,6,4,0,1,0,4,2,1,2,4,2,5,5,5,3,7,6,7,7,0,7,3,5,6,7,4,2,6,4,6,0,5,0,7,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,3,5,6,5,4,1,7,1,0,4,3,4,3,0,3,3,1,2,4,2,7,4,7,7,5,0,7,0,4,2,6,2,0,3,2,5,],
+        [2,0,6,4,4,0,4,4,0,0,4,0,2,0,5,0,1,2,1,5,0,7,3,4,0,3,0,6,1,7,4,7,4,6,7,6,3,6,6,3,5,5,7,5,7,2,7,4,],
+        [3,3,7,7,5,1,5,5,2,1,6,1,4,5,7,5,2,0,5,0,1,2,1,5,3,7,6,7,2,6,5,6,0,0,3,3,0,1,0,3,0,4,0,6,0,7,2,5,],
+        [3,2,7,6,4,0,4,4,1,0,5,0,0,1,4,1,2,3,5,6,0,4,0,7,7,2,7,5,1,2,1,5,4,7,7,7,5,1,5,3,3,7,5,5,0,2,2,4,],
+        [0,2,4,6,1,1,1,5,2,3,6,7,1,2,5,2,3,3,6,6,7,0,7,3,0,4,0,7,2,1,5,1,6,2,6,5,2,7,5,7,7,5,7,7,2,0,4,0,],
+        [2,1,6,5,2,0,2,4,1,5,5,5,1,0,4,0,3,6,6,6,7,2,7,5,0,7,3,7,5,0,5,3,0,0,0,3,0,4,3,1,6,2,6,4,5,7,7,7,],
+        [1,1,5,5,3,3,3,7,0,7,4,7,2,7,5,7,4,2,7,5,0,3,3,0,4,7,7,4,7,1,7,4,1,4,4,1,0,6,2,4,6,0,6,2,0,0,0,2,],
+        [2,2,6,6,4,2,4,6,3,7,7,7,0,3,4,3,2,1,5,1,0,0,3,0,6,0,6,3,0,6,3,6,0,7,3,4,5,3,7,5,7,1,7,3,0,5,2,7,],
+        [0,1,4,5,2,1,2,5,1,1,5,1,0,5,3,5,6,4,6,7,4,4,7,1,2,6,5,6,0,7,3,7,3,0,6,0,3,4,6,1,4,5,6,3,5,5,7,7,],
+        [2,0,6,4,4,2,4,6,1,6,5,6,3,6,6,6,2,2,5,5,2,7,5,7,4,0,7,3,0,2,3,5,0,3,3,0,4,1,7,4,5,4,7,6,0,5,2,3,],
+        [3,2,7,6,4,1,4,5,1,1,5,1,3,5,6,5,0,4,3,4,2,0,5,0,0,3,3,3,6,1,6,4,7,2,7,5,0,6,2,6,1,5,1,7,2,7,4,7,],
+        [0,3,4,7,3,2,3,6,2,1,6,1,1,6,4,6,4,2,7,2,4,3,7,3,3,0,6,0,0,4,0,7,4,3,7,6,4,4,6,6,1,5,3,7,5,7,7,7,],
+        [1,1,5,5,3,3,3,7,0,5,4,5,2,3,6,3,1,0,4,0,7,3,7,6,4,7,7,7,6,0,6,3,3,1,6,4,0,6,2,6,1,7,3,7,0,4,2,4,],
+        [1,3,5,7,1,0,1,4,0,2,0,6,0,2,3,2,7,4,7,7,2,7,5,4,3,0,6,3,2,0,5,3,6,4,6,7,6,0,6,2,1,5,1,7,3,3,5,5,],
+        [1,3,5,7,5,0,5,4,2,1,6,1,3,4,6,4,0,6,3,6,1,7,4,7,4,5,7,5,1,0,4,0,0,2,0,5,1,2,4,2,7,0,7,2,0,1,2,1,],
+        [1,3,5,7,1,0,1,4,0,0,4,0,0,4,3,4,3,3,6,3,3,1,6,1,7,2,7,5,0,7,3,7,1,4,4,7,4,2,6,2,4,4,6,6,0,1,0,3,],
+        [3,2,7,6,7,1,7,5,3,2,7,2,2,3,2,7,0,1,0,4,3,7,6,4,4,0,7,0,3,3,3,6,2,1,5,1,4,5,6,7,0,0,2,2,0,5,0,7,],
+        [2,0,6,4,5,3,5,7,0,0,0,4,4,5,7,5,3,4,3,7,2,1,2,4,7,0,7,3,4,1,4,4,5,0,5,3,1,2,1,5,0,6,2,6,6,1,6,3,],
+        [1,3,5,7,5,0,5,4,3,1,7,1,4,2,7,2,1,6,4,3,0,1,0,4,0,7,3,7,2,3,5,6,2,2,5,5,6,3,6,5,7,4,7,6,1,0,1,2,],
+        [3,3,7,7,5,3,5,7,2,3,6,3,1,4,5,4,0,1,0,4,1,6,4,6,1,2,4,2,4,0,7,3,4,2,7,2,1,7,3,7,5,3,7,5,1,0,3,0,],
+        [1,0,5,4,3,2,3,6,1,3,1,7,2,2,5,2,4,4,7,1,6,4,6,7,0,0,0,3,3,1,6,1,3,0,6,0,5,5,7,5,3,7,5,7,0,6,2,4,],
+        [1,1,5,5,2,0,2,4,0,1,4,1,2,3,5,3,0,7,3,7,3,2,6,2,1,2,1,5,0,6,3,6,7,2,7,5,5,4,7,6,4,7,6,7,5,0,7,0,],
+        [0,3,4,7,2,1,2,5,1,3,5,3,1,1,4,1,4,2,7,2,3,5,6,5,4,1,7,1,7,4,7,7,2,0,5,0,0,5,0,7,1,5,3,7,4,4,6,4,],
+        [3,0,7,4,6,3,6,7,0,6,4,2,3,3,7,3,5,0,5,3,4,4,4,7,0,1,3,1,0,7,3,4,0,5,3,2,1,7,3,5,3,5,3,7,5,5,5,7,],
+        [3,2,7,6,7,1,7,5,3,2,7,2,4,4,7,7,0,7,3,4,0,3,3,3,3,6,6,3,2,7,5,7,0,1,3,1,2,0,5,0,0,4,2,6,2,4,4,6,],
+        [2,2,6,6,6,1,6,5,0,3,4,7,4,3,7,3,1,3,4,6,2,1,5,1,2,3,5,6,0,0,3,0,0,4,0,7,4,0,7,0,3,2,5,2,1,7,3,7,],
+        [3,2,7,6,6,1,6,5,1,6,5,6,4,5,7,5,2,4,5,1,1,1,1,4,2,0,5,0,2,7,5,7,0,4,0,7,3,5,5,3,2,1,2,3,7,2,7,4,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,1,3,4,3,4,1,7,4,3,7,6,7,0,4,0,7,2,6,5,3,2,0,5,0,6,2,6,4,5,5,7,7,5,4,7,2,],
+        [3,1,7,5,3,0,3,4,0,2,4,2,1,4,4,4,2,6,5,6,4,5,7,2,2,7,5,7,1,0,4,3,0,5,3,5,5,2,7,0,5,5,7,7,5,1,7,3,],
+        [3,0,7,4,4,3,4,7,2,1,2,5,2,7,5,7,4,2,7,5,3,1,3,4,5,4,5,7,1,2,1,5,0,1,0,4,5,1,7,3,1,7,3,5,0,0,2,0,],
+        [3,1,7,5,6,0,6,4,3,7,7,7,4,4,7,4,0,7,3,4,0,2,3,5,7,2,7,5,1,0,4,3,3,6,6,6,3,0,5,2,1,1,3,3,4,5,6,5,],
+        [3,1,7,5,4,0,4,4,0,3,4,3,2,4,5,4,0,4,3,7,3,6,6,6,6,0,6,3,3,5,6,5,7,1,7,4,4,7,7,7,0,5,2,7,2,1,4,3,],
+        [1,0,5,4,3,0,3,4,1,6,5,6,2,4,5,4,4,0,7,3,4,7,7,7,4,1,7,4,0,2,0,5,4,2,7,5,4,5,6,5,1,5,3,5,5,0,7,0,],
+        [3,0,7,4,6,3,6,7,2,6,6,2,4,3,7,3,1,0,1,3,1,5,4,2,2,7,5,4,0,5,3,2,0,0,0,3,7,0,7,2,1,6,3,4,5,5,5,7,],
+        [3,1,7,5,7,0,7,4,1,0,5,4,3,3,6,0,0,4,3,7,1,4,4,7,2,3,5,6,0,0,0,3,4,4,7,7,1,7,4,4,3,0,5,2,0,5,2,7,],
+        [2,0,6,4,5,0,5,4,1,3,5,3,3,4,6,4,0,3,0,6,7,0,7,3,4,7,7,4,1,5,4,5,1,4,4,1,3,7,5,5,5,7,7,5,1,6,3,6,],
+        [1,0,5,4,3,0,3,4,0,0,4,0,1,0,4,0,4,6,7,6,1,7,4,4,0,2,0,5,6,4,6,7,1,1,1,4,5,1,7,1,2,7,4,5,2,3,2,5,],
+        [2,2,6,6,2,1,2,5,1,5,5,5,0,5,3,5,2,0,5,0,0,1,0,4,6,0,6,3,7,4,7,7,7,0,7,3,4,1,4,3,5,2,5,4,0,5,2,7,],
+        [1,1,5,5,4,0,4,4,0,3,4,3,3,2,6,2,4,7,7,4,0,0,3,0,0,7,3,7,1,6,4,6,0,3,0,6,7,0,7,3,5,3,7,5,1,2,3,4,],
+        [3,2,7,6,6,1,6,5,1,0,5,0,4,1,7,1,0,6,3,3,0,3,3,6,2,3,5,6,4,7,7,7,1,7,4,4,7,3,7,5,0,2,2,2,0,5,2,7,],
+        [3,1,7,5,6,0,6,4,1,2,1,6,4,4,7,4,2,5,5,2,1,0,4,0,0,1,0,4,2,3,5,0,3,3,3,6,7,0,7,3,4,5,6,5,4,7,6,7,],
+        [2,3,6,7,3,2,3,6,0,2,4,2,2,4,5,4,3,1,6,1,3,7,6,4,1,0,4,0,7,3,7,6,0,4,0,7,1,4,1,6,2,5,4,7,1,0,3,2,],
+        [0,2,4,6,2,2,2,6,0,7,4,7,2,3,6,3,4,0,7,0,2,2,5,2,2,1,5,1,7,4,7,7,3,4,6,4,3,4,5,6,1,4,1,6,0,4,0,6,],
+        [2,0,6,4,3,3,3,7,3,6,7,6,1,7,4,7,1,0,4,3,1,1,1,4,0,4,3,7,4,5,7,2,4,1,7,1,2,3,2,5,2,2,4,4,0,1,0,3,],
+        [1,3,5,7,4,2,4,6,3,0,3,4,3,4,6,4,1,4,1,7,0,0,0,3,7,2,7,5,4,0,7,0,2,2,2,5,5,6,7,6,4,1,6,3,1,0,1,2,],
+        [3,3,7,7,4,1,4,5,1,6,5,2,0,2,4,2,3,7,6,7,2,0,5,0,0,4,0,7,7,0,7,3,0,1,3,1,1,4,1,6,0,2,2,4,5,4,7,6,],
+        [0,1,4,5,0,0,0,4,1,0,5,4,0,1,3,1,7,0,7,3,4,6,7,3,3,0,6,3,0,5,3,5,4,2,7,5,4,0,6,0,4,7,6,7,4,4,6,2,],
+        [0,1,4,5,4,0,4,4,0,4,4,4,2,0,5,0,4,6,7,3,0,6,3,6,4,7,7,7,4,1,7,4,5,1,5,4,0,0,2,2,6,0,6,2,5,6,7,6,],
+        [1,1,5,5,3,3,3,7,0,7,4,7,2,3,6,3,4,0,7,0,4,1,7,1,1,2,1,5,7,2,7,5,3,1,6,4,0,1,0,4,5,6,7,6,0,6,2,6,],
+        [2,3,6,7,4,3,4,7,0,3,4,3,2,3,5,3,1,1,1,4,7,3,7,6,4,0,7,0,0,0,3,0,2,4,2,7,5,2,7,2,5,5,7,3,1,7,3,5,],
+        [2,3,6,7,3,2,3,6,1,3,5,3,1,6,4,6,4,1,7,4,4,0,7,0,6,2,6,5,2,1,2,4,4,4,7,7,0,2,0,5,7,1,7,3,2,0,4,2,],
+        [3,1,7,5,6,0,6,4,2,1,6,5,4,4,7,4,0,0,0,3,0,4,3,7,2,4,5,7,1,4,4,7,3,3,6,6,1,0,3,0,1,1,1,3,0,5,2,7,],
+        [0,1,4,5,1,1,1,5,1,4,5,4,0,5,3,5,4,2,7,5,3,6,6,6,4,0,7,0,1,0,4,3,6,2,6,5,0,6,2,6,5,1,7,1,4,7,6,7,],
+        [2,0,6,4,3,3,3,7,1,6,5,6,2,5,5,5,3,2,6,5,4,7,7,7,4,1,7,4,0,2,0,5,4,4,7,1,1,3,1,5,1,0,1,2,5,0,7,2,],
+        [1,3,5,7,3,3,3,7,0,3,4,3,2,7,5,7,4,1,7,4,4,2,7,5,4,0,7,3,0,7,3,4,0,1,3,1,6,5,6,7,0,2,2,2,0,4,0,6,],
+        [3,1,7,5,6,0,6,4,3,1,7,1,4,0,7,0,1,7,4,4,0,0,3,3,0,0,0,3,4,7,7,4,0,4,3,4,5,5,7,7,0,5,2,7,4,5,6,3,],
+        [2,2,6,6,4,0,4,4,1,0,5,0,2,0,5,0,1,4,4,7,4,5,7,2,2,4,5,7,0,1,3,4,0,2,0,5,7,3,7,6,1,4,1,6,5,2,7,0,],
+        [2,1,6,5,4,1,4,5,2,6,6,6,0,2,4,2,0,7,3,4,4,0,7,3,3,7,6,7,4,1,7,4,0,6,3,3,0,5,2,3,0,2,0,4,5,0,7,0,],
+        [2,0,6,4,3,3,3,7,1,6,5,6,2,7,6,7,1,4,4,1,7,1,7,4,0,3,3,0,4,3,7,0,0,4,3,7,0,5,0,7,2,4,4,6,5,5,7,5,],
+        [0,2,4,6,0,1,0,5,0,2,4,2,6,1,6,4,3,3,6,6,2,1,5,1,4,3,7,6,0,7,3,4,1,7,4,7,1,0,3,0,5,3,7,3,5,7,7,7,],
+        [2,1,6,5,5,0,5,4,2,0,6,0,4,4,7,4,0,3,3,6,4,7,7,7,0,4,3,7,0,2,3,5,1,2,4,5,0,5,2,7,1,1,3,3,5,2,7,2,],
+        [2,0,6,4,4,2,4,6,1,1,1,5,3,2,6,2,2,2,2,5,2,0,5,0,4,7,7,4,7,0,7,3,3,4,3,7,0,4,0,6,0,0,0,2,5,5,7,7,],
+        [1,1,5,5,4,0,4,4,3,6,7,2,3,4,7,4,1,3,4,6,0,0,0,3,1,7,4,7,1,3,1,6,0,5,3,2,1,2,3,0,6,0,6,2,0,4,2,6,],
+        [2,2,6,6,3,1,3,5,3,4,7,4,2,3,5,3,1,4,4,7,0,3,0,6,2,0,5,0,6,0,6,3,0,2,3,5,7,0,7,3,1,5,3,7,5,0,5,2,],
+        [3,3,7,7,3,0,3,4,2,7,6,7,2,4,5,4,0,4,0,7,2,0,2,3,0,3,3,6,4,3,7,3,4,1,7,1,5,4,7,4,4,0,6,0,1,7,3,5,],
+        [2,0,6,4,3,0,3,4,0,4,4,4,3,1,7,1,2,3,2,6,4,3,7,6,7,2,7,5,1,3,4,6,0,7,3,7,1,0,1,3,5,5,7,7,4,5,6,7,],
+        [2,3,6,7,5,2,5,6,3,3,7,3,2,6,6,6,0,1,3,1,0,5,3,5,7,4,7,7,0,7,3,7,3,0,6,0,0,2,2,4,6,1,6,3,1,0,1,2,],
+        [2,3,6,7,3,2,3,6,4,0,4,4,2,2,6,2,1,0,1,3,4,6,7,3,1,7,4,7,0,0,0,3,0,6,3,6,0,5,2,5,5,4,7,2,7,4,7,6,],
+        [1,2,5,6,4,1,4,5,2,2,6,2,3,1,6,1,0,4,3,7,6,3,6,6,2,4,5,7,0,3,3,6,4,0,7,0,0,5,0,7,1,3,3,3,7,1,7,3,],
+        [3,0,7,4,6,3,6,7,2,1,2,5,2,6,6,6,4,0,7,3,0,1,0,4,1,3,1,6,1,7,4,7,3,1,3,4,4,3,4,5,7,0,7,2,0,5,0,7,],
+        [1,1,5,5,2,0,2,4,2,1,6,1,1,2,4,2,3,7,6,7,7,3,7,6,3,6,6,6,4,5,7,2,3,4,6,4,0,3,2,5,0,7,2,5,3,0,5,0,],
+        [1,2,5,6,4,0,4,4,0,1,4,1,3,0,6,0,0,2,3,5,2,7,5,7,7,1,7,4,6,1,6,4,0,3,3,6,5,3,5,5,6,5,6,7,0,4,2,6,],
+        [0,1,4,5,3,0,3,4,0,7,4,7,2,4,6,4,4,1,7,1,2,6,5,6,4,2,7,2,0,2,0,5,7,3,7,6,2,1,4,3,1,3,1,5,0,0,2,0,],
+        [2,2,6,6,5,1,5,5,3,2,7,2,4,1,7,1,0,1,3,1,4,7,7,7,0,3,3,6,1,3,4,6,1,2,4,5,2,0,4,0,0,7,2,7,7,4,7,6,],
+        [1,1,5,5,2,0,2,4,2,1,6,1,0,4,3,4,4,3,7,3,2,7,5,4,3,0,6,0,4,7,7,4,3,2,6,2,5,7,7,5,1,5,3,7,0,1,0,3,],
+        [1,3,5,7,2,2,2,6,3,6,7,2,2,3,6,3,0,2,0,5,3,2,6,2,6,4,6,7,1,0,4,0,7,3,7,6,1,1,3,1,1,5,3,7,4,1,6,1,],
+        [0,1,4,5,1,0,1,4,1,1,5,1,0,0,3,0,2,6,5,6,3,5,6,2,7,3,7,6,0,4,0,7,2,7,5,7,5,5,7,7,5,4,7,6,1,5,1,7,],
+        [3,3,7,7,6,1,6,5,3,1,7,1,4,3,7,3,3,4,3,7,0,4,0,7,1,2,1,5,0,0,0,3,2,4,2,7,1,0,3,0,2,2,2,4,4,5,4,7,],
+        [3,1,7,5,4,0,4,4,2,1,6,1,3,4,7,4,0,3,3,6,0,4,3,7,0,2,3,5,7,0,7,3,2,3,5,0,5,5,5,7,0,7,2,7,0,2,2,0,],
+        [0,0,4,4,3,3,3,7,3,6,7,6,2,3,6,3,3,0,6,0,2,4,2,7,3,2,6,2,0,1,0,4,1,0,1,3,1,4,1,6,3,1,5,1,7,0,7,2,],
+        [2,2,6,6,5,1,5,5,2,1,6,1,4,3,7,3,0,5,3,2,3,0,6,0,2,4,2,7,4,7,7,4,3,4,6,7,1,0,1,2,7,0,7,2,0,0,0,2,],
+        [3,3,7,7,7,0,7,4,1,7,5,7,3,1,6,4,0,3,0,6,0,1,3,4,0,0,3,0,1,1,1,4,2,1,5,4,1,6,4,6,5,0,5,2,0,2,2,4,],
+        [0,0,4,4,1,3,1,7,0,7,4,7,0,3,3,3,6,3,6,6,7,4,7,7,2,4,5,7,4,3,7,0,2,3,5,0,4,2,6,0,3,4,5,6,0,5,0,7,],
+        [2,1,6,5,5,0,5,4,3,7,7,7,2,4,6,4,1,1,1,4,1,0,4,0,7,3,7,6,0,3,0,6,2,6,5,6,0,0,0,2,4,1,6,3,5,2,7,0,],
+        [1,3,5,7,5,0,5,4,7,3,7,7,4,4,7,4,2,0,2,3,3,4,6,7,0,4,3,7,0,0,3,3,1,2,4,2,6,1,6,3,0,3,0,5,1,4,3,6,],
+        [1,1,5,5,3,1,3,5,0,3,4,3,3,2,7,2,0,6,3,6,4,7,7,4,2,4,5,7,3,0,6,0,4,5,7,2,0,5,2,5,5,1,7,3,7,5,7,7,],
+        [3,2,7,6,4,1,4,5,2,6,6,6,3,5,7,5,0,7,3,4,2,4,5,1,2,0,5,0,7,1,7,4,0,2,0,5,1,1,1,3,3,7,5,7,5,2,7,0,],
+        [3,3,7,7,6,2,6,6,0,1,4,1,2,5,6,5,4,0,7,0,7,2,7,5,0,2,0,5,0,0,3,0,1,4,1,7,2,3,2,5,2,6,4,6,2,7,4,7,],
+        [2,1,6,5,6,0,6,4,2,4,6,4,2,1,6,1,7,2,7,5,0,4,0,7,1,5,4,5,2,7,5,7,0,3,3,3,0,0,3,0,4,2,6,4,0,2,2,2,],
+        [0,0,4,4,2,2,2,6,1,6,5,6,2,5,6,5,0,2,0,5,4,2,7,5,0,7,3,7,1,2,1,5,3,4,6,1,4,0,7,0,1,0,3,0,5,7,7,7,],
+        [1,1,5,5,1,0,1,4,0,4,4,4,0,0,3,0,7,1,7,4,4,0,4,3,0,6,3,6,4,4,4,7,6,2,6,5,5,7,7,7,5,0,7,0,3,0,3,2,],
+        [2,2,6,6,5,0,5,4,2,0,6,0,4,2,7,2,1,4,1,7,0,1,0,4,1,0,1,3,2,4,5,7,4,7,7,4,2,1,5,4,2,7,4,5,3,4,5,2,],
+        [0,3,4,7,1,2,1,6,1,1,5,5,1,3,5,3,3,2,6,2,4,6,7,6,2,4,2,7,4,1,7,1,3,4,6,7,5,0,7,0,0,5,0,7,7,2,7,4,],
+        [2,0,6,4,5,0,5,4,2,4,6,4,4,0,7,0,0,4,0,7,3,5,6,5,0,2,3,2,1,6,4,6,1,3,4,3,4,7,7,7,7,2,7,4,0,3,2,5,],
+        [0,0,4,4,3,0,3,4,0,4,4,4,2,0,5,0,4,7,7,7,1,6,4,6,4,2,7,5,4,3,7,6,4,1,7,4,0,1,2,3,0,5,2,5,0,7,2,7,],
+        [0,2,4,6,3,0,3,4,3,1,7,1,2,4,5,4,1,4,4,7,6,2,6,5,2,2,5,2,0,4,0,7,7,3,7,6,0,4,2,6,5,0,7,0,2,7,4,5,],
+        [0,2,4,6,3,1,3,5,1,2,5,2,2,5,6,5,2,0,5,0,7,0,7,3,2,7,5,7,4,4,7,4,1,4,1,7,4,3,6,3,5,1,7,3,0,4,0,6,],
+        [3,2,7,6,3,1,3,5,0,5,4,5,3,2,7,2,0,0,0,3,4,4,7,7,2,6,5,6,1,3,1,6,3,7,6,7,1,2,3,0,0,7,2,7,5,1,7,1,],
+        [1,0,5,4,2,3,2,7,3,3,7,7,0,7,3,7,0,4,3,1,5,0,5,3,6,2,6,5,2,0,5,0,3,4,6,7,7,1,7,4,5,0,7,0,0,1,0,3,],
+        [3,0,7,4,6,3,6,7,3,3,3,7,3,3,7,3,3,1,6,1,1,2,4,2,2,4,5,4,1,3,1,6,0,4,0,7,2,5,4,5,3,7,5,5,4,0,6,0,],
+        [0,1,4,5,0,0,0,4,0,3,4,3,0,1,4,1,3,7,6,4,3,5,6,2,1,4,4,7,4,0,7,0,2,2,5,2,5,4,7,6,0,5,0,7,7,3,7,5,],
+        [2,2,6,6,5,1,5,5,3,2,7,2,2,5,6,5,0,3,0,6,2,4,5,7,0,1,3,4,7,3,7,6,4,3,7,0,1,7,4,7,1,0,3,0,1,3,1,5,],
+        [2,3,6,7,2,0,2,4,1,0,5,0,2,3,6,3,4,4,7,7,0,3,3,6,2,7,5,7,4,1,7,1,0,4,0,7,4,2,7,2,4,4,6,4,7,4,7,6,],
+        [3,1,7,5,6,0,6,4,1,3,5,7,3,4,7,4,2,0,2,3,0,4,0,7,0,0,0,3,1,4,1,7,1,0,4,3,4,7,6,5,5,7,7,7,3,7,5,5,],
+        [3,3,7,7,7,0,7,4,6,0,6,4,1,4,4,7,4,3,7,6,2,0,5,0,0,2,0,5,2,4,5,7,2,2,5,2,1,1,3,1,0,1,2,3,1,7,3,7,],
+        [1,3,5,7,2,2,2,6,0,1,0,5,2,3,6,3,4,2,7,2,3,1,6,1,0,0,3,0,7,4,7,7,4,0,7,0,5,3,5,6,2,7,4,7,6,4,6,6,],
+        [3,3,7,7,6,2,6,6,2,3,6,7,4,2,7,2,0,5,3,5,2,1,5,4,2,0,5,0,7,3,7,6,0,6,3,6,0,2,2,0,3,1,5,1,0,4,2,2,],
+        [3,2,7,6,4,1,4,5,0,2,4,2,3,5,6,5,7,1,7,4,0,6,3,3,1,4,4,7,6,1,6,4,0,7,3,7,0,1,2,1,0,3,0,5,5,0,7,0,],
+        [0,0,4,4,2,2,2,6,1,4,5,4,2,5,6,5,1,0,4,3,3,6,6,6,3,0,6,0,2,0,5,3,7,1,7,4,4,1,6,1,7,5,7,7,0,5,0,7,],
+        [2,3,6,7,5,2,5,6,6,1,6,5,2,6,6,6,0,2,3,5,7,1,7,4,3,3,6,0,1,1,4,1,1,4,1,7,7,5,7,7,0,0,2,0,0,4,0,6,],
+        [0,3,4,7,3,2,3,6,0,4,4,0,1,6,4,6,4,3,7,0,6,3,6,6,7,4,7,7,2,1,5,1,4,4,7,1,0,5,0,7,4,5,6,7,0,2,2,0,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,1,3,4,3,4,6,7,3,1,4,1,7,7,4,7,7,5,1,5,4,2,0,5,0,2,7,5,7,0,4,0,6,4,4,6,2,],
+        [2,3,6,7,2,0,2,4,1,2,5,2,1,0,4,0,7,2,7,5,4,4,7,1,4,3,7,6,0,3,3,6,0,7,3,7,3,5,6,5,3,1,5,1,1,1,3,3,],
+        [3,3,7,7,3,0,3,4,1,1,5,1,2,4,6,4,7,2,7,5,1,3,1,6,4,3,7,0,1,7,4,7,2,4,5,7,0,2,0,5,4,5,6,7,0,1,2,3,],
+        [0,2,4,6,4,1,4,5,2,4,6,4,2,5,5,5,5,0,5,3,0,5,3,2,0,7,3,7,0,0,3,3,0,3,3,0,7,1,7,3,0,6,2,6,5,6,7,6,],
+        [1,2,5,6,4,0,4,4,1,0,5,0,3,4,6,4,3,7,6,7,2,4,2,7,0,2,0,5,6,0,6,3,4,4,7,7,0,1,2,1,3,2,5,2,7,1,7,3,],
+        [2,0,6,4,4,0,4,4,1,0,5,0,2,0,5,0,0,1,0,4,2,5,5,5,7,2,7,5,3,7,6,7,0,5,3,2,6,0,6,2,5,4,7,6,0,0,2,2,],
+        [1,0,5,4,3,0,3,4,0,2,4,2,1,0,4,0,7,0,7,3,1,5,4,5,3,7,6,7,6,3,6,6,1,6,4,6,5,0,5,3,0,3,0,5,7,4,7,6,],
+        [2,1,6,5,2,0,2,4,3,5,7,1,2,1,5,1,1,4,1,7,7,2,7,5,3,7,6,4,0,3,0,6,3,0,6,0,1,1,1,3,0,0,0,2,5,7,7,7,],
+        [3,1,7,5,6,0,6,4,3,2,7,6,4,2,7,2,1,4,4,7,0,3,3,3,4,0,7,3,0,4,0,7,3,7,6,4,2,7,4,5,1,5,1,7,0,0,0,2,],
+        [2,3,6,7,3,2,3,6,1,1,5,5,2,4,5,4,0,0,0,3,0,4,3,7,5,0,5,3,4,3,7,0,1,3,4,0,0,7,2,5,7,5,7,7,7,1,7,3,],
+        [3,3,7,7,6,1,6,5,3,1,7,1,4,3,7,3,0,2,0,5,2,1,2,4,1,5,4,5,0,0,3,0,3,7,6,7,3,6,5,6,5,2,7,0,1,2,3,4,],
+        [0,0,4,4,3,3,3,7,0,7,4,7,2,3,6,3,7,4,7,7,7,0,7,3,0,3,0,6,6,4,6,7,1,2,1,5,1,0,3,2,1,0,3,0,5,0,5,2,],
+        [1,2,5,6,3,0,3,4,6,3,6,7,3,1,7,1,5,2,5,5,7,2,7,5,0,5,3,5,1,6,4,6,0,2,3,5,0,1,2,1,4,2,4,4,5,0,7,0,],
+        [0,2,4,6,2,2,2,6,1,4,5,4,0,6,3,6,3,3,6,3,3,7,6,7,0,3,3,0,7,0,7,3,3,1,6,1,1,5,1,7,0,4,2,2,5,5,7,5,],
+        [1,3,5,7,1,0,1,4,0,0,4,0,0,4,3,4,5,3,5,6,4,1,7,1,7,3,7,6,6,4,6,7,4,2,4,5,2,7,4,7,0,7,2,5,3,1,3,3,],
+        [3,1,7,5,6,0,6,4,3,0,7,0,4,4,7,4,2,5,5,2,3,7,6,7,0,3,3,3,1,6,4,6,0,4,0,7,5,5,7,7,1,0,3,2,0,2,2,4,],
+        [3,0,7,4,6,0,6,4,2,3,6,3,4,0,7,0,0,4,3,1,0,2,3,5,1,6,4,6,0,7,3,7,3,4,6,7,7,5,7,7,0,5,2,5,3,2,5,4,],
+        [1,3,5,7,3,1,3,5,0,1,4,1,3,2,7,2,4,4,7,7,1,0,4,0,4,7,7,4,0,4,3,7,0,3,3,6,4,5,6,3,0,7,2,7,0,0,2,2,],
+        [2,2,6,6,6,1,6,5,1,6,5,6,2,4,6,4,7,2,7,5,0,5,3,2,0,1,0,4,1,2,1,5,1,1,4,1,5,7,7,7,5,2,7,0,4,2,6,0,],
+        [0,2,4,6,0,1,0,5,2,0,6,4,3,0,6,0,3,4,6,7,0,0,3,3,4,3,7,6,1,4,4,7,7,0,7,3,0,7,2,7,0,6,2,6,5,7,7,5,],
+        [2,0,6,4,3,0,3,4,0,4,4,4,3,1,7,1,4,7,7,4,3,6,6,3,0,5,3,5,0,0,0,3,0,3,3,0,4,0,7,0,5,7,7,5,5,2,7,2,],
+        [3,1,7,5,7,0,7,4,3,4,7,4,3,1,7,1,0,2,3,2,2,4,5,7,1,0,4,0,0,3,3,6,0,4,3,7,0,4,0,7,0,1,2,1,3,3,5,5,],
+        [2,2,6,6,4,2,4,6,0,2,4,2,2,2,5,2,2,1,5,1,0,7,3,7,3,7,6,7,7,0,7,3,0,3,3,6,7,4,7,6,6,1,6,3,4,0,6,0,],
+        [1,3,5,7,4,1,4,5,1,1,5,1,3,5,6,5,7,4,7,7,0,0,3,0,1,2,4,5,0,2,0,5,1,4,4,7,0,5,2,7,6,1,6,3,1,5,3,7,],
+        [2,1,6,5,6,0,6,4,2,3,6,3,4,0,7,0,1,7,4,7,0,6,3,6,0,2,0,5,7,2,7,5,0,0,3,0,0,1,2,3,3,5,5,7,1,4,3,4,],
+        [0,1,4,5,3,0,3,4,0,6,4,6,2,2,5,2,6,3,6,6,0,7,3,7,0,2,0,5,4,0,7,3,4,7,7,7,0,5,2,5,3,5,5,3,7,0,7,2,],
+        [0,1,4,5,3,0,3,4,3,1,7,1,2,0,6,0,4,4,7,4,2,6,5,6,1,4,1,7,2,7,5,7,0,4,0,7,0,2,2,4,2,1,4,3,6,5,6,7,],
+        [0,3,4,7,4,0,4,4,2,3,6,7,3,4,6,4,0,2,3,5,0,4,3,7,7,3,7,6,3,0,3,3,5,0,5,3,0,5,2,7,0,0,2,0,5,5,7,7,],
+        [1,2,5,6,3,2,3,6,0,4,4,4,1,2,4,2,4,3,7,0,0,0,3,0,7,4,7,7,3,7,6,7,4,0,4,3,0,1,3,1,5,4,5,6,0,5,2,5,],
+        [0,2,4,6,1,1,1,5,1,0,5,0,0,5,4,5,4,4,7,4,4,2,7,2,4,7,7,7,3,1,3,4,4,1,7,1,2,1,2,3,5,5,7,5,1,7,3,7,],
+        [2,1,6,5,4,1,4,5,2,0,6,0,2,1,5,1,7,0,7,3,0,2,0,5,1,0,1,3,2,4,5,7,1,5,4,5,5,5,7,7,6,2,6,4,7,3,7,5,],
+        [1,3,5,7,5,0,5,4,1,0,5,0,4,4,7,4,1,6,4,3,1,4,4,1,0,0,3,3,7,0,7,3,4,5,7,5,0,7,3,7,6,1,6,3,0,4,2,6,],
+        [0,1,4,5,0,0,0,4,2,1,6,5,1,6,4,6,0,6,3,3,3,1,6,4,1,7,4,7,4,0,7,3,7,4,7,7,4,1,6,3,1,4,3,6,1,0,3,0,],
+        [0,1,4,5,0,0,0,4,2,6,6,2,3,7,6,7,3,1,6,1,7,2,7,5,2,2,5,2,4,6,7,6,1,3,1,6,1,0,3,0,7,0,7,2,4,3,6,3,],
+        [1,3,5,7,4,2,4,6,2,3,6,3,3,2,6,2,7,0,7,3,3,1,6,1,0,3,3,0,0,7,3,7,0,3,0,6,6,5,6,7,0,0,2,0,7,5,7,7,],
+        [2,0,6,4,5,3,5,7,1,6,5,6,4,3,7,3,1,2,4,5,0,1,0,4,4,1,7,1,0,6,3,3,1,4,4,7,0,7,3,7,5,2,7,2,4,0,6,0,],
+        [0,1,4,5,1,0,1,4,3,5,7,1,0,2,3,2,0,2,0,5,7,2,7,5,4,6,7,6,3,3,6,0,2,1,5,4,1,4,4,7,0,6,2,6,2,0,4,0,],
+        [0,1,4,5,3,0,3,4,1,1,5,1,2,4,6,4,0,3,3,6,0,7,3,7,3,0,6,0,7,1,7,4,2,4,5,7,7,5,7,7,0,4,2,6,4,7,6,5,],
+        [0,0,4,4,2,0,2,4,0,1,0,5,0,0,3,0,0,6,3,6,7,1,7,4,2,5,5,2,4,7,7,7,5,3,5,6,1,5,3,7,0,7,2,7,4,1,6,1,],
+        [1,3,5,7,2,2,2,6,1,2,5,2,1,6,4,6,4,3,7,6,3,6,6,3,2,1,5,1,3,0,6,0,1,7,4,7,0,4,0,6,5,3,7,5,4,4,6,6,],
+        [0,0,4,4,1,3,1,7,3,5,7,5,0,7,3,7,4,1,7,4,1,0,4,3,2,3,2,6,3,6,6,6,0,2,0,5,1,2,3,0,5,1,7,3,2,0,4,2,],
+        [3,3,7,7,4,2,4,6,1,2,5,2,3,6,6,6,0,7,3,7,6,1,6,4,3,0,6,0,1,4,4,1,7,0,7,3,3,4,5,4,1,3,3,5,1,1,3,1,],
+        [0,1,4,5,1,0,1,4,1,5,5,1,1,1,5,1,0,4,0,7,4,4,7,1,7,4,7,7,1,6,4,6,1,7,4,7,4,0,7,0,6,3,6,5,5,4,5,6,],
+        [0,2,4,6,2,0,2,4,0,7,4,7,2,1,6,1,6,4,6,7,3,0,6,0,4,2,4,5,7,1,7,4,0,3,0,6,1,4,1,6,7,5,7,7,5,2,5,4,],
+        [3,3,7,7,5,3,5,7,0,0,4,0,3,3,6,3,3,2,6,2,3,4,3,7,0,1,0,4,4,5,7,5,1,1,4,1,5,0,7,2,2,4,2,6,0,5,0,7,],
+        [1,2,5,6,5,1,5,5,1,4,5,4,4,3,7,3,0,7,3,7,1,6,4,6,0,0,3,3,0,5,3,5,1,0,4,0,5,0,7,0,5,7,7,5,3,1,5,3,],
+        [2,0,6,4,5,3,5,7,0,0,4,4,4,7,7,7,0,2,0,5,2,5,5,2,1,4,1,7,1,3,4,6,6,0,6,3,7,3,7,6,3,2,5,0,2,7,4,5,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,2,3,2,7,4,7,7,6,1,6,4,3,5,6,5,2,1,5,1,2,4,5,4,3,0,6,0,7,1,7,3,4,6,6,6,],
+        [2,2,6,6,3,1,3,5,0,1,4,1,3,2,7,2,4,0,7,0,0,4,0,7,0,3,3,6,7,3,7,6,5,3,5,6,6,3,6,5,1,0,3,0,1,5,1,7,],
+        [0,2,4,6,4,1,4,5,1,5,5,5,3,5,6,5,0,0,3,3,0,3,0,6,7,2,7,5,4,0,7,0,6,1,6,4,0,7,2,7,4,7,6,7,1,6,3,6,],
+        [0,1,4,5,1,0,1,4,1,1,5,1,0,0,4,0,4,3,7,3,0,4,0,7,3,5,6,2,6,4,6,7,5,4,5,7,5,0,7,2,2,4,4,2,6,0,6,2,],
+        [3,2,7,6,3,1,3,5,1,4,5,4,2,5,6,5,0,4,3,7,2,0,2,3,4,7,7,7,3,6,6,6,3,0,6,3,4,0,6,0,5,3,7,5,7,2,7,4,],
+        [0,1,4,5,1,1,1,5,3,7,7,3,0,1,3,1,4,1,7,1,0,4,0,7,4,0,7,0,4,2,7,2,1,1,4,4,4,3,6,3,5,7,7,5,1,7,3,5,],
+        [1,3,5,7,4,2,4,6,2,3,6,3,2,6,5,6,7,3,7,6,1,0,4,0,5,0,5,3,0,0,0,3,0,4,0,7,6,0,6,2,1,5,1,7,2,1,4,1,],
+        [1,0,5,4,4,0,4,4,1,4,5,4,3,0,6,0,0,3,0,6,6,4,6,7,4,3,7,0,0,0,3,3,2,7,5,7,1,4,3,6,1,2,1,4,5,1,7,3,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,2,4,2,6,3,6,6,4,5,7,5,2,0,5,0,1,1,4,1,7,1,7,4,0,4,0,6,3,4,5,4,3,5,5,7,],
+        [0,2,4,6,2,0,2,4,1,0,5,0,0,4,3,4,1,7,4,7,4,3,7,6,4,1,7,1,3,3,6,6,4,2,7,2,1,6,3,6,5,3,7,5,4,5,6,7,],
+        [0,3,4,7,1,1,1,5,0,1,4,1,0,5,3,5,3,2,6,5,3,3,6,6,2,5,5,2,0,0,3,0,1,7,4,7,7,3,7,5,0,6,2,6,4,2,6,4,],
+        [2,1,6,5,3,0,3,4,1,1,1,5,1,4,4,4,4,6,7,3,4,7,7,7,0,3,0,6,6,2,6,5,4,0,7,0,3,5,3,7,1,7,3,5,5,1,5,3,],
+        [0,3,4,7,2,3,2,7,7,2,7,6,2,4,6,4,1,3,4,0,2,3,5,0,3,5,6,5,3,3,6,0,3,6,6,6,1,5,1,7,0,2,2,0,0,5,0,7,],
+        [0,2,4,6,3,1,3,5,3,2,7,2,2,1,6,1,4,4,7,4,0,7,3,7,4,5,7,5,2,0,5,0,1,4,4,7,1,4,1,6,2,3,4,3,5,7,7,7,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,2,4,2,4,0,7,3,4,5,7,2,1,1,4,1,0,7,3,7,0,0,3,0,4,6,6,4,5,7,7,5,5,6,7,4,],
+        [1,1,5,5,3,1,3,5,2,7,6,3,3,2,7,2,4,3,7,0,7,3,7,6,2,3,2,6,0,0,0,3,6,4,6,7,1,2,3,0,0,5,0,7,1,4,1,6,],
+        [3,3,7,7,7,0,7,4,1,2,5,6,4,0,7,3,0,2,0,5,1,4,1,7,1,3,4,6,3,3,6,3,2,2,5,2,2,1,4,1,2,7,4,5,5,0,7,2,],
+        [2,0,6,4,4,0,4,4,0,0,4,0,3,4,6,4,0,6,3,6,2,2,2,5,4,5,7,5,2,7,5,7,0,2,0,5,5,0,7,0,1,2,1,4,5,6,7,6,],
+        [3,2,7,6,5,0,5,4,2,0,6,0,4,4,7,4,0,2,3,5,7,0,7,3,0,7,3,4,2,6,5,6,1,4,1,7,2,7,5,7,0,1,2,3,0,4,0,6,],
+        [1,0,5,4,4,3,4,7,2,3,2,7,3,7,6,7,1,2,1,5,4,1,7,4,3,1,6,4,4,0,7,3,0,0,0,3,7,5,7,7,5,5,7,7,1,7,3,5,],
+        [2,2,6,6,3,1,3,5,3,2,7,2,2,1,5,1,4,7,7,4,1,0,4,0,2,4,2,7,1,1,1,4,0,1,0,4,5,7,7,7,5,3,7,5,0,6,2,4,],
+        [2,2,6,6,6,1,6,5,2,3,2,7,4,1,7,1,2,1,5,4,0,2,0,5,3,0,6,0,3,7,6,7,0,7,3,4,3,4,5,6,1,2,1,4,5,3,7,3,],
+        [0,3,4,7,2,3,2,7,1,3,5,3,0,7,3,7,3,4,6,7,6,3,6,6,2,1,5,1,0,2,3,2,7,4,7,7,6,0,6,2,3,2,5,2,7,1,7,3,],
+        [1,1,5,5,2,0,2,4,3,1,7,5,1,4,4,4,4,3,7,0,0,6,3,6,4,5,7,2,4,7,7,4,4,6,7,6,0,2,0,4,0,7,2,7,3,2,5,0,],
+        [2,1,6,5,4,1,4,5,1,1,5,1,2,1,5,1,0,4,0,7,6,0,6,3,1,3,4,0,3,7,6,7,1,3,1,6,0,0,2,0,7,1,7,3,2,6,4,6,],
+        [2,3,6,7,2,0,2,4,2,1,6,1,1,2,4,2,4,4,7,4,0,3,3,6,4,3,7,3,0,6,3,6,2,7,5,7,7,5,7,7,1,5,3,3,4,0,6,0,],
+        [3,2,7,6,4,0,4,4,0,1,4,1,3,4,6,4,1,4,4,7,0,4,3,7,3,5,6,2,7,1,7,4,6,2,6,5,4,6,6,6,0,4,2,2,4,0,6,0,],
+        [2,3,6,7,5,2,5,6,2,2,6,2,2,6,6,6,0,7,3,7,1,3,1,6,5,0,5,3,0,3,3,0,4,1,4,4,0,2,2,0,6,3,6,5,7,4,7,6,],
+        [2,1,6,5,5,0,5,4,3,1,7,1,4,2,7,2,4,6,7,6,0,4,3,4,0,5,3,5,4,7,7,7,1,1,4,4,0,7,2,7,0,3,2,3,1,6,3,6,],
+        [3,2,7,6,5,2,5,6,1,7,5,7,3,2,6,2,0,7,3,4,1,3,4,0,0,3,0,6,7,2,7,5,4,1,7,1,1,2,3,0,1,5,3,3,0,2,2,0,],
+        [0,0,4,4,1,3,1,7,2,0,6,0,0,7,3,7,3,6,6,3,7,2,7,5,0,1,0,4,6,4,6,7,2,4,5,7,4,1,7,1,1,2,3,4,2,1,4,3,],
+        [0,3,4,7,3,1,3,5,0,0,4,0,2,1,5,1,0,4,3,7,3,7,6,4,7,3,7,6,6,0,6,3,1,2,4,5,4,4,7,1,5,6,7,6,0,2,2,4,],
+        [3,2,7,6,3,1,3,5,0,5,4,5,1,5,4,5,6,0,6,3,5,0,5,3,1,1,1,4,2,1,2,4,3,7,6,4,4,7,7,7,7,0,7,2,0,6,2,6,],
+        [3,3,7,7,6,2,6,6,0,1,4,5,4,6,7,6,1,6,4,3,2,2,5,2,3,7,6,7,2,1,5,1,7,0,7,3,1,7,3,5,1,2,1,4,0,0,2,0,],
+        [3,0,7,4,6,3,6,7,3,7,7,7,4,3,7,3,2,2,5,5,0,3,0,6,1,2,4,5,2,0,5,3,1,6,4,6,0,0,0,2,7,0,7,2,1,0,1,2,],
+        [0,1,4,5,1,0,1,4,5,1,5,5,0,4,3,4,3,0,3,3,7,3,7,6,6,1,6,4,4,0,7,0,1,7,4,4,6,5,6,7,0,7,2,5,3,6,5,6,],
+        [1,1,5,5,4,0,4,4,2,1,6,1,3,2,6,2,7,3,7,6,1,3,4,6,2,7,5,4,6,3,6,6,1,4,1,7,0,5,0,7,0,2,0,4,2,5,2,7,],
+        [1,0,5,4,3,0,3,4,0,0,4,0,1,0,4,0,1,4,4,7,5,0,5,3,1,2,4,2,1,7,4,4,0,1,0,4,7,4,7,6,0,5,0,7,5,5,7,7,],
+        [1,2,5,6,2,0,2,4,1,0,5,0,0,4,3,4,3,7,6,7,3,1,6,4,3,3,6,3,7,4,7,7,4,1,7,1,3,2,6,5,1,7,3,5,0,5,2,7,],
+        [1,3,5,7,4,2,4,6,1,2,5,2,3,4,6,4,1,4,1,7,7,3,7,6,1,0,4,0,1,1,4,1,0,0,0,3,0,5,0,7,5,5,7,7,5,1,7,1,],
+        [2,0,6,4,5,0,5,4,1,3,5,3,2,4,6,4,0,4,0,7,7,4,7,7,2,6,5,6,2,5,5,5,4,0,7,3,7,1,7,3,1,2,3,0,1,7,3,7,],
+        [1,3,5,7,3,1,3,5,0,3,4,3,2,5,5,5,6,2,6,5,7,2,7,5,0,6,3,6,0,7,3,7,4,1,7,1,5,0,7,0,1,0,3,0,5,7,7,7,],
+        [3,2,7,6,7,1,7,5,3,2,7,2,2,7,6,3,0,1,0,4,2,2,5,5,1,1,4,1,2,4,5,7,1,3,1,6,3,0,6,0,0,0,2,0,1,2,3,4,],
+        [0,3,4,7,2,1,2,5,1,1,5,1,0,5,3,5,3,2,6,5,7,2,7,5,3,7,6,4,3,4,6,7,2,0,5,0,6,1,6,3,4,2,6,4,1,7,3,5,],
+        [3,0,7,4,6,3,6,7,1,3,5,7,3,3,7,3,1,7,4,4,2,0,2,3,0,1,0,4,1,4,4,7,4,0,7,0,0,5,0,7,5,4,7,6,1,6,3,4,],
+        [0,1,4,5,1,0,1,4,1,1,5,1,0,2,3,2,6,0,6,3,0,6,3,3,4,2,7,5,4,6,7,6,1,7,4,4,3,7,6,7,0,7,2,5,4,3,6,5,],
+        [1,1,5,5,3,1,3,5,6,3,6,7,1,1,4,1,1,3,1,6,1,7,4,7,5,0,5,3,7,1,7,4,4,3,7,6,0,6,2,4,2,0,4,0,6,0,6,2,],
+        [0,1,4,5,0,0,0,4,1,5,5,1,0,3,4,3,3,1,6,4,4,6,7,6,1,7,4,4,7,2,7,5,3,0,6,0,6,1,6,3,1,0,3,2,1,4,3,6,],
+        [1,1,5,5,4,1,4,5,0,0,0,4,3,5,6,5,1,2,1,5,5,0,5,3,7,1,7,4,0,7,3,4,6,1,6,4,3,2,5,4,3,6,5,6,5,7,7,5,],
+        [1,1,5,5,2,0,2,4,0,6,4,6,1,2,4,2,5,1,5,4,6,4,6,7,4,0,7,0,0,7,3,7,7,4,7,7,7,1,7,3,3,0,3,2,2,5,4,3,],
+        [1,3,5,7,5,0,5,4,2,1,6,1,2,0,6,0,3,4,6,7,0,7,3,7,7,2,7,5,6,2,6,5,0,3,0,6,1,1,4,4,1,6,3,6,2,1,4,3,],
+        [3,3,7,7,7,0,7,4,3,1,7,1,1,2,5,2,3,6,6,3,1,3,1,6,2,4,5,7,0,2,0,5,1,0,4,0,2,7,4,7,2,5,4,3,0,1,2,1,],
+        [1,3,5,7,2,2,2,6,1,1,5,1,2,3,6,3,7,1,7,4,1,0,4,0,5,3,5,6,0,1,0,4,1,7,4,7,1,4,1,6,6,4,6,6,5,2,7,0,],
+        [1,1,5,5,4,0,4,4,2,7,6,7,3,2,6,2,1,6,4,6,0,4,0,7,1,5,4,5,0,0,3,0,4,4,7,1,7,4,7,6,6,4,6,6,1,2,3,4,],
+        [3,2,7,6,4,1,4,5,0,4,4,4,2,5,5,5,4,0,7,0,0,1,3,1,7,2,7,5,0,0,3,0,0,3,3,3,3,7,5,5,5,7,7,7,1,5,1,7,],
+        [0,3,4,7,0,0,0,4,1,2,5,6,3,1,6,1,2,0,5,0,2,2,5,2,7,2,7,5,4,4,7,1,3,7,6,4,1,3,3,5,0,5,2,7,4,3,6,3,],
+        [0,0,4,4,1,0,1,4,0,4,4,4,0,0,3,0,4,3,7,0,4,6,7,6,1,6,4,6,0,7,3,7,7,2,7,5,6,3,6,5,4,0,6,0,2,1,4,1,],
+        [2,1,6,5,6,0,6,4,1,7,5,7,4,0,7,0,2,3,2,6,3,3,6,6,2,0,5,3,1,4,1,7,0,2,3,2,3,5,5,7,3,4,5,6,3,0,5,2,],
+        [1,3,5,7,4,2,4,6,3,2,3,6,3,4,6,4,3,1,6,1,2,0,5,0,7,0,7,3,0,4,3,7,7,4,7,7,4,7,6,5,0,1,0,3,0,0,2,2,],
+        [2,3,6,7,5,2,5,6,3,3,7,3,2,6,6,6,1,3,4,0,1,4,1,7,0,2,0,5,7,4,7,7,4,1,7,1,3,0,3,2,6,3,6,5,0,0,2,0,],
+        [0,2,4,6,2,2,2,6,1,4,5,4,1,2,5,2,4,0,7,0,2,7,5,7,1,1,4,1,0,4,0,7,6,4,6,7,0,0,3,0,7,4,7,6,5,1,7,1,],
+        [2,1,6,5,5,0,5,4,3,1,7,1,4,4,7,4,0,4,3,4,0,0,3,0,1,6,4,6,0,6,3,3,1,2,4,2,5,7,7,7,5,5,7,3,2,5,4,5,],
+        [1,2,5,6,2,1,2,5,1,3,1,7,2,2,6,2,3,3,6,3,3,0,6,0,0,1,0,4,7,0,7,3,2,7,5,7,4,1,6,1,2,6,4,4,0,0,2,0,],
+        [2,1,6,5,3,0,3,4,0,0,4,0,2,2,5,2,7,2,7,5,1,7,4,7,0,2,0,5,1,3,1,6,4,4,7,1,3,6,6,6,5,7,7,7,2,5,4,5,],
+        [0,1,4,5,1,0,1,4,2,2,6,2,0,2,3,2,1,6,4,3,0,4,0,7,4,0,7,0,5,4,5,7,3,3,3,6,2,6,4,4,7,2,7,4,4,6,6,4,],
+        [0,0,4,4,2,0,2,4,1,2,5,2,1,0,5,0,0,7,3,7,1,6,4,6,5,4,5,7,6,2,6,5,7,4,7,7,0,1,0,3,1,3,1,5,2,5,4,5,],
+        [0,2,4,6,2,2,2,6,1,4,5,4,1,2,4,2,3,0,6,3,4,5,7,5,0,1,3,1,3,7,6,7,0,3,0,6,6,0,6,2,4,3,6,3,7,0,7,2,],
+        [3,2,7,6,6,0,6,4,2,1,6,1,2,3,6,3,3,4,6,7,4,4,7,7,0,0,0,3,1,6,4,6,0,5,3,5,0,7,2,7,1,2,1,4,7,4,7,6,],
+        [3,3,7,7,6,2,6,6,0,7,4,3,4,6,7,6,2,0,5,3,1,4,4,1,2,7,5,7,1,0,1,3,0,1,0,4,3,6,5,4,7,0,7,2,1,5,1,7,],
+        [2,1,6,5,2,0,2,4,2,1,6,1,1,0,5,0,4,4,4,7,0,3,3,6,7,2,7,5,0,4,0,7,4,4,7,1,1,0,1,2,1,5,3,7,0,0,0,2,],
+        [2,3,6,7,4,1,4,5,1,1,5,1,0,2,4,2,6,1,6,4,0,4,0,7,7,0,7,3,2,4,2,7,1,4,1,7,5,4,7,6,3,7,5,5,0,0,2,0,],
+        [2,0,6,4,5,0,5,4,3,1,7,1,3,4,6,4,0,6,3,3,1,4,4,7,0,3,3,0,0,0,3,3,4,6,7,6,3,5,6,5,1,7,3,7,5,0,7,0,],
+        [2,1,6,5,3,0,3,4,3,1,7,1,2,0,5,0,1,4,4,7,0,4,3,7,0,0,0,3,4,2,7,5,1,3,4,6,5,2,7,2,5,7,7,7,1,0,1,2,],
+        [1,2,5,6,3,0,3,4,3,5,7,1,3,1,7,1,0,0,0,3,1,4,1,7,6,3,6,6,7,2,7,5,3,7,6,7,0,4,0,6,5,5,7,7,2,4,2,6,],
+        [2,0,6,4,4,2,4,6,0,6,4,6,0,3,4,3,4,7,7,7,7,2,7,5,0,5,3,5,0,2,3,2,6,0,6,3,0,3,0,5,5,4,7,6,3,0,5,2,],
+        [1,2,5,6,1,1,1,5,6,1,6,5,1,4,5,4,0,0,3,0,7,1,7,4,2,2,5,2,1,6,4,6,3,7,6,7,0,7,2,7,4,0,6,0,5,5,7,7,],
+        [2,0,6,4,3,3,3,7,2,1,2,5,2,5,5,5,0,4,0,7,3,2,6,5,1,4,1,7,4,0,7,0,1,1,1,4,4,6,7,6,4,7,6,7,3,0,5,2,],
+        [0,1,4,5,1,0,1,4,0,0,4,0,0,4,3,4,5,1,5,4,6,0,6,3,3,3,6,6,7,4,7,7,1,6,4,6,0,5,0,7,1,5,1,7,4,2,4,4,],
+        [3,0,7,4,4,3,4,7,0,6,4,6,3,3,6,3,0,0,0,3,1,0,1,3,4,6,7,6,4,6,7,3,2,0,5,3,7,0,7,2,2,1,2,3,1,4,3,4,],
+        [2,1,6,5,3,1,3,5,3,4,7,4,2,3,5,3,1,0,4,0,4,1,7,1,0,0,0,3,1,4,4,7,4,2,7,2,5,6,7,6,2,4,4,6,0,0,2,2,],
+        [2,2,6,6,3,1,3,5,0,1,4,1,2,5,5,5,0,6,3,6,7,2,7,5,0,7,3,7,4,3,7,0,0,0,3,0,4,0,6,2,0,5,2,3,4,7,6,5,],
+        [1,1,5,5,3,1,3,5,0,1,4,1,3,2,7,2,4,7,7,4,3,0,6,0,0,3,0,6,2,7,5,4,0,2,3,5,5,7,7,5,1,5,3,7,4,3,6,3,],
+        [3,3,7,7,4,2,4,6,1,2,5,2,0,3,4,3,0,7,3,4,6,0,6,3,7,3,7,6,1,0,4,3,0,4,3,7,4,7,6,5,4,0,6,0,3,0,5,2,],
+        [0,1,4,5,0,0,0,4,3,0,7,0,0,3,4,3,2,4,2,7,5,2,5,5,4,6,7,6,2,1,5,1,3,7,6,7,7,2,7,4,6,1,6,3,1,5,1,7,],
+        [3,0,7,4,5,0,5,4,3,7,7,3,3,0,6,0,1,5,4,5,0,3,3,3,1,0,4,3,0,6,3,6,0,4,3,4,5,7,7,5,5,6,7,6,0,0,2,2,],
+        [2,2,6,6,5,1,5,5,3,2,7,2,2,5,6,5,0,6,3,6,0,3,3,0,1,4,1,7,7,3,7,6,1,3,4,6,2,7,4,7,5,0,7,0,5,7,7,7,],
+        [2,0,6,4,3,3,3,7,3,6,7,6,2,7,5,7,3,2,6,5,4,1,7,4,3,0,6,0,1,0,1,3,2,3,2,6,0,2,0,4,1,4,1,6,5,1,7,1,],
+        [1,3,5,7,5,0,5,4,1,0,5,0,3,0,6,0,4,4,7,7,1,2,4,5,0,1,0,4,0,0,3,3,1,7,4,7,0,7,2,5,4,1,4,3,7,1,7,3,],
+        [2,2,6,6,3,1,3,5,3,4,7,4,2,1,6,1,2,4,2,7,4,2,7,2,1,0,1,3,0,4,0,7,2,0,5,0,4,5,6,3,5,7,7,7,4,7,6,5,],
+        [3,0,7,4,6,3,6,7,0,2,4,6,3,3,7,3,1,2,4,5,0,7,3,7,0,3,3,6,7,0,7,3,0,1,3,1,7,5,7,7,0,4,2,6,6,0,6,2,],
+        [1,0,5,4,2,3,2,7,0,6,4,6,2,6,5,6,3,4,6,7,4,4,7,1,4,0,7,0,0,0,0,3,3,0,6,3,6,4,6,6,2,0,4,2,1,1,1,3,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,2,4,5,4,0,6,3,6,3,7,6,7,7,0,7,3,0,0,3,0,4,3,7,0,4,0,6,2,6,4,6,6,7,5,7,7,],
+        [3,0,7,4,5,0,5,4,1,0,5,0,1,1,5,1,4,7,7,7,1,5,4,5,4,6,7,6,0,7,3,7,0,2,0,5,3,2,3,4,7,1,7,3,1,2,1,4,],
+        [3,0,7,4,6,0,6,4,2,3,6,3,4,0,7,0,0,6,3,6,2,5,5,5,0,4,3,1,4,6,7,6,3,2,6,5,0,2,2,0,3,7,5,7,1,4,3,4,],
+        [3,1,7,5,5,1,5,5,2,7,6,7,4,5,7,5,0,6,3,3,2,0,2,3,1,6,4,3,3,0,6,0,2,6,5,6,7,0,7,3,0,0,0,2,6,1,6,3,],
+        [1,1,5,5,2,1,2,5,0,6,4,6,1,5,4,5,4,1,7,4,3,7,6,7,0,0,0,3,6,4,6,7,3,0,6,0,5,1,7,1,3,1,5,3,3,2,5,4,],
+        [0,1,4,5,1,0,1,4,0,0,4,0,0,0,4,0,3,3,6,0,3,7,6,4,7,4,7,7,4,3,7,0,1,7,4,4,5,3,7,3,0,4,0,6,0,7,2,5,],
+        [1,2,5,6,1,1,1,5,0,5,4,5,1,4,5,4,6,3,6,6,1,0,4,3,3,3,6,0,2,0,5,0,0,7,3,7,3,7,5,7,3,7,5,5,7,1,7,3,],
+        [2,2,6,6,5,1,5,5,2,1,6,1,2,5,6,5,7,4,7,7,0,0,3,0,0,5,3,2,0,1,0,4,7,0,7,3,4,0,6,2,0,4,2,4,1,5,3,7,],
+        [0,1,4,5,4,0,4,4,0,4,4,4,0,1,4,1,7,3,7,6,5,1,5,4,1,6,4,6,1,7,4,7,0,5,3,5,6,3,6,5,1,0,3,0,5,5,7,7,],
+        [0,0,4,4,1,3,1,7,2,6,6,6,0,5,3,5,0,1,3,4,2,1,5,1,4,0,7,0,7,3,7,6,4,7,7,7,5,3,5,5,5,2,7,2,0,5,0,7,],
+        [0,1,4,5,3,0,3,4,1,1,5,1,2,2,5,2,6,2,6,5,0,6,3,6,7,3,7,6,5,4,5,7,0,2,0,5,5,0,7,0,1,3,3,5,0,7,2,7,],
+        [3,2,7,6,4,1,4,5,7,0,7,4,3,5,7,5,1,4,4,7,0,6,3,3,0,0,0,3,0,7,3,7,0,3,3,0,6,1,6,4,5,1,5,3,1,1,1,3,],
+        [0,1,4,5,4,0,4,4,1,4,5,4,0,1,4,1,1,7,4,7,2,6,5,6,5,0,5,3,0,5,3,5,6,0,6,3,3,0,3,2,0,0,2,0,7,2,7,4,],
+        [1,0,5,4,3,0,3,4,3,5,7,1,1,0,4,0,2,3,2,6,0,7,3,7,7,2,7,5,0,2,0,5,6,1,6,4,5,0,5,2,1,1,1,3,6,5,6,7,],
+        [1,0,5,4,2,3,2,7,0,6,4,6,1,7,5,7,6,4,6,7,7,3,7,6,4,4,7,1,0,4,3,1,2,0,5,0,4,2,6,0,3,4,5,6,5,2,7,2,],
+        [1,0,5,4,3,0,3,4,1,3,5,7,3,1,7,1,1,3,1,6,7,4,7,7,0,4,0,7,6,3,6,6,4,2,7,2,4,5,6,7,0,1,2,3,0,2,2,0,],
+        [0,2,4,6,3,0,3,4,0,0,4,0,2,4,5,4,4,7,7,7,7,1,7,4,2,2,5,2,3,1,6,1,0,3,3,6,6,4,6,6,1,5,1,7,0,1,2,1,],
+        [2,3,6,7,6,0,6,4,3,1,7,1,4,0,7,0,1,4,1,7,7,4,7,7,3,3,6,3,1,3,4,6,0,4,0,7,2,7,5,7,2,2,4,2,4,4,6,6,],
+        [2,2,6,6,5,0,5,4,3,7,7,3,1,1,5,1,0,1,3,4,0,3,0,6,3,6,6,3,1,0,4,0,4,7,7,7,1,4,1,6,1,7,3,5,5,6,7,4,],
+        [3,3,7,7,5,3,5,7,1,3,5,3,1,4,5,4,7,3,7,6,4,0,7,0,0,2,3,2,0,4,0,7,4,1,7,1,6,3,6,5,1,1,3,1,1,5,1,7,],
+        [2,0,6,4,4,2,4,6,1,6,5,6,0,3,4,3,1,4,4,1,4,5,7,2,3,0,6,0,2,7,5,7,7,4,7,7,5,1,7,3,6,5,6,7,0,5,2,5,],
+        [2,3,6,7,5,1,5,5,6,0,6,4,1,2,5,2,1,3,1,6,0,6,3,3,2,7,5,7,0,1,0,4,7,1,7,4,1,7,3,5,1,1,3,1,2,0,4,0,],
+        [2,1,6,5,4,3,4,7,0,7,4,7,3,7,6,7,6,0,6,3,0,1,3,4,0,0,3,3,7,1,7,4,0,3,0,6,5,5,7,7,2,0,4,0,5,3,7,5,],
+        [1,3,5,7,4,1,4,5,1,1,5,1,3,3,6,3,0,3,0,6,0,2,3,2,2,0,5,0,1,4,4,7,3,7,6,4,5,2,7,0,5,6,7,6,7,2,7,4,],
+        [1,1,5,5,2,1,2,5,2,4,6,4,0,5,3,5,4,0,7,0,0,1,0,4,2,0,5,3,0,7,3,7,7,2,7,5,5,7,7,7,0,0,2,0,6,1,6,3,],
+        [3,2,7,6,6,0,6,4,2,1,6,1,2,3,6,3,1,3,4,6,0,7,3,4,0,7,3,7,4,7,7,7,0,1,0,4,3,3,6,6,1,0,3,0,7,3,7,5,],
+        [3,2,7,6,5,2,5,6,2,2,6,2,3,2,6,2,1,0,4,0,0,7,3,7,0,3,3,6,0,1,3,1,0,6,3,3,1,2,3,4,4,1,6,1,4,4,4,6,],
+        [0,1,4,5,1,1,1,5,1,4,5,4,0,3,3,3,2,0,5,3,3,6,6,6,3,7,6,7,7,4,7,7,6,2,6,5,1,0,3,2,7,0,7,2,0,6,2,6,],
+        [2,2,6,6,6,1,6,5,5,0,5,4,3,1,7,1,1,2,4,5,7,3,7,6,0,3,3,6,0,0,3,0,4,0,4,3,3,7,6,7,0,4,2,6,0,5,0,7,],
+        [3,2,7,6,6,0,6,4,2,1,6,1,2,3,6,3,7,2,7,5,3,4,6,7,2,7,5,7,1,7,4,4,0,1,0,4,0,0,3,3,2,4,4,2,1,3,1,5,],
+        [1,2,5,6,1,1,1,5,0,3,4,3,0,1,3,1,7,4,7,7,3,5,6,2,0,6,3,6,3,7,6,7,7,0,7,3,3,2,5,0,0,7,2,7,2,0,4,0,],
+        [0,3,4,7,4,0,4,4,2,1,6,1,2,4,5,4,0,4,0,7,3,5,6,5,0,0,3,3,7,1,7,4,3,0,6,3,5,7,7,5,1,5,1,7,0,1,2,3,],
+        [0,2,4,6,3,1,3,5,3,0,7,4,2,5,5,5,0,4,0,7,2,0,5,3,3,7,6,7,1,4,1,7,7,1,7,4,5,6,7,6,5,0,7,0,2,1,2,3,],
+        [0,1,4,5,4,0,4,4,1,4,5,4,3,4,6,4,2,0,5,3,0,4,0,7,2,7,5,7,7,1,7,4,7,4,7,7,5,2,7,0,2,6,4,6,1,0,3,2,],
+        [2,0,6,4,5,3,5,7,1,6,5,6,4,3,7,3,0,4,0,7,1,0,1,3,1,4,4,1,0,0,0,3,1,4,4,4,4,1,7,1,5,2,7,4,2,5,4,5,],
+        [2,2,6,6,4,2,4,6,0,2,4,2,3,6,6,6,1,1,4,1,4,0,7,3,0,4,3,7,7,4,7,7,5,0,5,3,4,7,6,7,0,7,2,5,1,0,3,0,],
+        [1,3,5,7,4,2,4,6,2,3,6,3,2,6,5,6,7,3,7,6,4,7,7,7,0,7,3,7,2,1,5,1,2,0,5,0,1,4,1,6,1,2,3,2,0,2,0,4,],
+        [1,2,5,6,3,0,3,4,0,2,4,2,2,4,5,4,4,6,7,3,0,4,3,7,4,3,7,0,1,4,1,7,4,1,7,1,5,0,7,0,0,0,2,0,7,4,7,6,],
+        [1,2,5,6,2,1,2,5,3,2,7,6,0,5,3,5,3,7,6,4,3,3,6,0,7,2,7,5,3,7,6,7,4,4,7,1,3,0,5,2,1,4,1,6,0,0,0,2,],
+        [0,2,4,6,1,1,1,5,1,2,5,2,0,3,3,3,6,4,6,7,4,5,7,2,3,0,6,0,4,4,7,7,4,0,7,3,2,5,4,7,0,5,2,7,2,0,2,2,],
+        [0,0,4,4,3,0,3,4,3,3,7,3,2,0,5,0,7,2,7,5,1,4,4,1,0,6,3,6,4,6,7,6,2,5,5,5,4,7,7,7,1,7,3,7,0,1,0,3,],
+        [1,2,5,6,5,1,5,5,1,5,5,5,3,1,6,1,3,3,6,3,0,7,3,7,0,3,3,6,3,0,6,0,7,3,7,6,4,7,6,7,0,4,0,6,4,2,6,4,],
+        [0,1,4,5,3,0,3,4,1,1,5,1,2,2,5,2,6,0,6,3,0,4,0,7,7,0,7,3,1,6,4,6,0,2,3,5,5,3,5,5,4,7,6,5,4,4,6,4,],
+        [1,2,5,6,3,2,3,6,0,2,4,2,3,3,7,3,2,4,2,7,4,0,7,0,0,1,3,1,0,4,0,7,1,4,1,7,1,0,3,0,4,4,6,4,3,1,5,1,],
+        [0,3,4,7,1,2,1,6,6,2,6,6,1,3,4,3,2,6,5,3,3,1,6,1,2,1,2,4,3,4,6,7,0,0,3,0,0,7,2,7,7,3,7,5,3,7,5,5,],
+        [0,1,4,5,1,0,1,4,1,1,5,1,0,2,3,2,3,5,6,2,0,4,3,7,4,7,7,4,2,4,5,1,4,6,7,3,4,3,7,0,7,5,7,7,5,4,7,2,],
+        [1,3,5,7,1,0,1,4,2,3,6,3,0,2,3,2,4,2,7,2,3,4,6,7,4,0,7,0,2,1,5,1,7,3,7,6,0,6,3,6,0,5,2,5,5,5,7,7,],
+        [2,3,6,7,2,0,2,4,1,0,5,0,0,4,3,4,1,6,4,6,3,3,6,0,5,2,5,5,2,7,5,7,6,2,6,5,0,5,3,5,0,1,0,3,7,4,7,6,],
+        [2,1,6,5,5,0,5,4,3,1,7,1,2,4,6,4,1,1,1,4,0,0,3,0,4,5,7,2,3,7,6,7,0,2,0,5,3,6,5,6,5,5,7,7,0,7,2,7,],
+        [1,1,5,5,2,0,2,4,2,1,6,1,1,2,4,2,4,7,7,7,1,6,4,6,4,3,7,6,7,0,7,3,0,1,0,4,0,7,2,7,2,5,4,5,5,2,7,4,],
+        [0,0,4,4,1,0,1,4,1,3,5,3,0,4,3,4,4,7,7,4,1,6,4,3,2,1,5,1,4,6,7,3,4,2,7,2,3,5,3,7,7,5,7,7,4,0,6,0,],
+        [3,0,7,4,5,2,5,6,2,6,6,6,1,3,5,3,0,1,3,1,2,7,5,7,0,2,0,5,1,2,4,2,1,4,4,4,4,0,6,2,2,5,4,5,7,0,7,2,],
+        [3,1,7,5,5,3,5,7,7,0,7,4,4,3,7,3,1,3,4,6,0,6,3,6,0,5,3,2,2,0,5,0,0,7,3,7,0,2,2,2,6,5,6,7,4,4,4,6,],
+        [2,1,6,5,2,0,2,4,0,3,4,3,2,3,5,3,4,2,7,2,1,7,4,7,4,4,4,7,4,1,7,1,0,6,3,6,5,5,7,7,4,0,6,0,1,2,1,4,],
+        [0,3,4,7,1,2,1,6,3,3,7,7,0,4,3,4,2,1,5,1,0,7,3,7,6,1,6,4,7,1,7,4,3,2,6,5,1,0,3,0,5,0,7,0,3,5,5,3,],
+        [1,3,5,7,3,3,3,7,5,2,5,6,3,4,7,4,0,3,3,0,0,4,0,7,4,1,7,1,4,5,7,2,4,2,4,5,1,4,1,7,7,5,7,7,2,2,4,0,],
+        [3,1,7,5,5,1,5,5,2,1,6,1,1,2,5,2,4,7,7,4,0,0,3,0,0,7,3,4,4,4,4,7,0,4,3,7,0,5,2,3,5,0,7,0,0,2,2,4,],
+        [0,0,4,4,2,0,2,4,1,0,5,0,0,4,3,4,4,3,7,3,4,2,7,2,1,5,4,5,3,6,6,6,2,7,5,7,0,2,3,2,5,5,7,5,5,1,7,1,],
+        [0,2,4,6,1,1,1,5,3,4,7,0,1,2,5,2,6,2,6,5,7,0,7,3,3,3,6,6,2,1,5,1,2,7,5,4,0,0,3,0,7,4,7,6,0,6,2,6,],
+        [1,3,5,7,5,0,5,4,2,0,6,0,3,0,6,0,0,4,3,7,1,0,4,3,4,7,7,4,4,4,7,7,0,1,3,4,0,7,3,4,6,1,6,3,2,7,4,5,],
+        [1,3,5,7,2,2,2,6,1,2,5,2,0,6,3,6,4,3,7,6,4,4,7,1,0,0,3,0,6,3,6,6,0,1,0,4,4,0,7,0,4,4,6,6,3,1,5,1,],
+        [0,0,4,4,1,3,1,7,3,2,7,6,0,3,4,3,2,0,5,3,3,6,6,6,2,4,2,7,0,4,0,7,3,0,6,0,3,7,6,7,7,2,7,4,4,1,6,3,],
+        [3,0,7,4,4,3,4,7,3,1,7,5,3,5,6,5,2,3,2,6,7,0,7,3,0,1,3,4,0,2,0,5,0,0,3,3,5,7,7,5,1,7,3,7,4,0,6,0,],
+        [0,0,4,4,2,2,2,6,1,4,5,4,2,5,6,5,3,0,3,3,4,3,7,0,7,1,7,4,4,2,7,5,0,4,0,7,0,0,0,2,1,7,3,7,5,7,7,7,],
+        [1,2,5,6,4,1,4,5,3,3,7,3,3,5,6,5,2,4,2,7,0,4,3,1,3,7,6,7,1,4,1,7,1,0,4,0,4,2,7,2,5,0,7,0,7,4,7,6,],
+        [1,2,5,6,1,1,1,5,4,0,4,4,1,4,5,4,0,3,0,6,7,3,7,6,3,7,6,4,6,0,6,3,0,0,3,0,3,1,3,3,5,0,5,2,2,5,4,7,],
+        [1,0,5,4,3,0,3,4,0,0,4,0,2,4,5,4,0,3,0,6,2,7,5,7,1,5,4,5,4,1,7,4,0,1,3,4,7,5,7,7,6,4,6,6,4,2,6,0,],
+        [0,1,4,5,1,0,1,4,5,2,5,6,0,4,3,4,3,1,6,1,4,0,7,0,1,7,4,4,7,1,7,4,6,4,6,7,2,1,4,3,1,7,3,7,0,7,2,5,],
+        [0,1,4,5,2,1,2,5,1,3,5,3,0,5,3,5,3,1,6,1,4,6,7,3,4,7,7,4,0,7,3,7,0,6,3,6,4,0,6,0,0,2,0,4,3,2,5,2,],
+        [0,3,4,7,2,1,2,5,2,6,6,2,0,1,3,1,3,4,6,1,4,5,7,2,6,4,6,7,3,7,6,4,3,3,6,0,7,4,7,6,0,0,2,0,1,5,1,7,],
+        [1,0,5,4,3,2,3,6,0,6,4,6,2,2,6,2,2,0,5,0,7,4,7,7,3,7,6,7,1,2,1,5,0,0,0,3,5,5,7,3,0,4,2,4,5,1,7,1,],
+        [3,0,7,4,6,3,6,7,0,2,0,6,4,3,7,3,0,7,3,4,2,4,5,7,2,2,5,5,4,0,7,0,2,7,5,4,1,0,3,2,1,1,1,3,7,1,7,3,],
+        [1,2,5,6,3,2,3,6,0,2,4,2,3,3,7,3,0,4,0,7,3,0,6,0,7,4,7,7,1,1,1,4,1,4,1,7,3,7,5,5,5,2,7,0,2,4,2,6,],
+        [3,0,7,4,5,0,5,4,0,3,4,3,4,4,7,4,0,4,3,7,3,6,6,6,0,7,3,4,0,1,3,1,1,2,4,2,3,5,5,5,7,0,7,2,5,7,7,7,],
+        [3,0,7,4,4,3,4,7,2,6,6,6,3,5,6,5,0,2,0,5,2,4,5,1,1,2,1,5,0,7,3,7,6,1,6,4,1,0,4,3,0,7,2,5,5,0,7,0,],
+        [0,0,4,4,3,0,3,4,3,3,7,3,1,4,4,4,1,5,4,5,3,7,6,4,0,4,0,7,7,4,7,7,0,0,0,3,4,0,6,2,4,2,6,0,4,7,6,5,],
+        [1,1,5,5,4,1,4,5,0,4,4,4,3,5,7,5,6,0,6,3,0,3,3,0,2,6,5,6,1,7,4,7,7,1,7,4,5,4,7,6,0,5,2,5,0,0,0,2,],
+        [3,1,7,5,3,0,3,4,0,6,4,6,3,3,7,3,1,5,4,5,0,2,0,5,1,0,1,3,2,1,2,4,4,4,7,7,4,7,7,4,1,7,3,7,5,4,7,6,],
+        [2,1,6,5,4,1,4,5,1,1,5,1,3,5,6,5,0,3,3,6,4,7,7,7,1,2,4,5,6,1,6,4,0,4,3,7,7,2,7,4,0,5,2,7,2,0,4,0,],
+        [3,0,7,4,4,0,4,4,1,4,5,4,2,4,5,4,2,5,5,5,4,6,7,6,0,4,3,1,0,6,3,6,0,7,3,7,5,0,7,0,4,7,6,7,1,0,1,2,],
+        [1,0,5,4,3,0,3,4,0,3,0,7,2,4,5,4,6,0,6,3,2,0,2,3,7,3,7,6,3,1,6,4,1,4,4,7,4,5,6,5,7,0,7,2,1,5,1,7,],
+        [3,0,7,4,6,0,6,4,1,7,5,3,3,0,7,0,1,1,1,4,1,0,4,3,2,7,5,7,0,0,0,3,1,5,4,2,4,6,6,6,1,6,3,4,7,5,7,7,],
+        [3,1,7,5,6,0,6,4,1,0,1,4,4,2,7,2,4,7,7,7,0,1,0,4,3,6,6,6,1,4,1,7,2,5,5,5,5,4,7,6,2,0,4,0,7,2,7,4,],
+        [3,2,7,6,3,1,3,5,0,3,4,3,1,1,4,1,1,4,1,7,3,5,6,2,4,6,7,3,4,0,7,0,3,7,6,7,2,4,2,6,1,0,3,0,2,7,4,5,],
+        [3,3,7,7,6,2,6,6,3,3,7,3,4,4,7,4,1,3,4,0,1,6,4,6,0,3,3,0,1,7,4,7,0,4,0,7,2,3,2,5,5,0,7,0,0,2,2,0,],
+        [2,1,6,5,5,0,5,4,2,0,6,0,4,2,7,2,2,5,5,5,1,1,4,4,3,6,6,6,1,3,1,6,4,7,7,7,0,0,0,3,7,3,7,5,1,7,3,7,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,2,4,5,4,6,1,6,4,3,7,6,7,1,0,4,0,7,1,7,4,0,4,0,7,5,0,7,0,2,6,4,6,5,0,5,2,],
+        [2,3,6,7,2,0,2,4,1,0,5,0,0,4,3,4,4,3,7,3,0,6,3,6,7,4,7,7,3,3,6,6,4,2,7,2,0,5,3,5,4,1,6,1,0,7,2,7,],
+        [3,2,7,6,7,1,7,5,3,4,7,4,2,3,2,6,6,0,6,3,5,3,5,6,0,0,3,0,0,1,3,1,1,7,4,7,1,3,1,6,5,7,7,5,0,4,0,6,],
+        [0,3,4,7,1,2,1,6,2,0,6,4,0,6,3,6,2,4,5,4,4,3,7,0,2,3,5,0,7,2,7,5,0,7,3,7,3,5,5,5,0,0,2,2,5,6,7,6,],
+        [2,3,6,7,3,2,3,6,3,5,7,5,2,4,5,4,1,0,1,3,0,3,0,6,2,1,5,1,2,7,5,7,2,0,5,0,4,2,6,2,1,4,1,6,1,7,3,5,],
+        [0,3,4,7,0,0,0,4,2,4,6,0,0,1,3,1,4,4,7,7,4,2,7,5,4,3,7,6,3,0,6,3,0,5,3,2,1,7,3,7,3,4,5,6,3,5,5,7,],
+        [0,2,4,6,3,1,3,5,3,4,7,4,2,1,6,1,7,0,7,3,4,7,7,7,3,0,6,0,3,6,6,3,0,5,3,5,0,7,2,7,4,2,6,2,0,6,2,6,],
+        [0,1,4,5,0,0,0,4,0,1,4,1,3,3,6,0,4,6,7,3,2,7,5,7,4,3,7,6,4,4,7,7,2,0,5,0,0,7,2,5,1,7,3,5,5,2,7,4,],
+        [3,1,7,5,4,1,4,5,2,0,2,4,3,1,6,1,7,0,7,3,3,6,6,6,0,3,0,6,3,0,6,0,1,0,1,3,4,7,6,5,3,2,3,4,2,5,2,7,],
+        [2,1,6,5,3,1,3,5,0,2,0,6,2,1,5,1,6,0,6,3,7,0,7,3,7,4,7,7,0,0,3,0,2,2,2,5,1,4,1,6,2,7,4,5,3,7,5,5,],
+        [1,3,5,7,2,2,2,6,0,3,4,3,1,4,4,4,4,2,7,5,3,0,6,3,4,0,7,3,0,3,0,6,4,7,7,4,1,0,1,2,3,6,5,4,0,0,0,2,],
+        [2,3,6,7,5,2,5,6,1,1,1,5,4,2,7,2,3,0,3,3,1,7,4,4,7,3,7,6,0,3,0,6,2,7,5,7,2,0,2,2,4,0,6,0,6,3,6,5,],
+        [0,3,4,7,3,2,3,6,3,3,7,3,2,2,5,2,4,0,7,0,1,1,4,1,4,5,7,5,4,6,7,6,0,4,0,7,2,3,2,6,4,4,6,4,0,0,2,0,],
+        [1,2,5,6,4,1,4,5,2,7,6,7,3,3,6,3,4,6,7,3,0,0,0,3,0,5,3,5,1,3,4,0,7,4,7,7,7,0,7,2,0,4,0,6,1,0,3,2,],
+        [3,1,7,5,4,0,4,4,2,0,2,4,3,2,6,2,4,7,7,4,0,7,3,4,4,5,7,2,0,5,3,5,0,0,0,3,0,4,2,6,5,2,7,0,3,7,5,5,],
+        [0,1,4,5,2,1,2,5,1,3,5,3,0,5,3,5,4,2,7,2,4,4,7,7,4,7,7,4,2,0,5,0,0,6,3,6,1,4,4,1,7,5,7,7,1,7,3,7,],
+        [2,2,6,6,5,1,5,5,2,1,6,1,4,5,7,5,3,2,3,5,1,4,4,7,3,7,6,4,7,0,7,3,1,0,4,0,0,1,0,3,0,7,2,7,0,5,2,5,],
+        [0,0,4,4,1,3,1,7,0,7,4,7,0,3,3,3,0,2,0,5,4,3,7,6,2,0,5,0,3,1,6,4,2,5,5,5,5,2,7,4,5,1,7,1,5,7,7,5,],
+        [0,3,4,7,3,2,3,6,1,3,5,3,1,6,4,6,6,4,6,7,5,4,5,7,2,1,5,1,2,0,5,0,0,7,3,7,0,0,2,2,7,4,7,6,3,2,5,2,],
+        [0,2,4,6,0,1,0,5,0,7,4,3,0,4,4,4,7,0,7,3,4,7,7,4,2,7,5,4,3,0,6,0,3,1,6,4,0,0,2,2,2,1,4,3,1,5,3,7,],
+        [2,3,6,7,3,2,3,6,0,2,4,2,3,3,7,3,7,4,7,7,0,3,3,0,1,1,4,1,0,4,3,7,0,7,3,7,4,0,6,2,2,3,2,5,5,0,5,2,],
+        [1,2,5,6,3,0,3,4,0,2,4,2,3,1,7,1,2,4,5,7,4,3,7,3,4,0,7,0,4,3,7,6,4,4,7,7,0,4,2,6,0,0,2,0,0,5,0,7,],
+        [1,3,5,7,1,0,1,4,0,2,4,2,0,4,3,4,4,7,7,4,4,4,7,1,1,4,4,1,3,6,6,3,4,3,7,0,0,5,0,7,1,7,3,7,2,0,4,0,],
+        [1,3,5,7,2,2,2,6,3,2,7,2,1,6,5,6,3,4,6,1,4,5,7,5,1,0,4,0,5,1,5,4,0,7,3,7,0,0,0,2,5,0,7,0,4,1,6,3,],
+        [1,2,5,6,4,1,4,5,2,2,6,2,3,3,6,3,1,4,1,7,0,1,3,1,4,7,7,7,1,0,4,0,0,2,3,5,4,5,7,5,2,6,4,6,5,0,7,0,],
+        [3,2,7,6,4,1,4,5,2,2,6,2,3,3,6,3,0,3,3,0,3,6,6,6,0,7,3,4,4,7,7,7,4,0,7,0,1,7,3,7,0,4,0,6,5,1,7,1,],
+        [1,1,5,5,3,1,3,5,0,3,4,3,3,2,7,2,3,0,6,0,4,6,7,6,2,7,5,7,0,4,0,7,6,2,6,5,0,2,3,5,0,0,2,0,4,1,6,1,],
+        [1,1,5,5,1,0,1,4,3,1,7,1,0,2,3,2,4,0,4,3,2,7,5,4,0,6,3,3,4,7,7,7,6,3,6,6,0,1,2,3,0,7,2,5,0,3,0,5,],
+        [1,2,5,6,4,0,4,4,0,1,4,1,3,4,7,4,1,3,4,6,0,0,3,0,0,3,0,6,7,0,7,3,2,7,5,7,0,7,2,5,6,1,6,3,5,3,7,5,],
+        [3,1,7,5,4,0,4,4,2,1,6,1,3,4,7,4,0,5,3,2,3,6,6,6,2,2,5,5,2,4,2,7,1,2,1,5,0,0,0,3,5,1,7,3,4,0,6,0,],
+        [3,2,7,6,4,1,4,5,1,3,1,7,2,5,5,5,1,0,4,0,7,1,7,4,6,1,6,4,0,1,3,1,1,2,4,5,0,3,0,5,5,0,7,0,5,7,7,7,],
+        [2,0,6,4,3,3,3,7,1,6,5,6,1,7,4,7,2,1,5,4,2,2,2,5,3,0,6,3,0,4,0,7,1,2,1,5,7,0,7,2,4,0,6,0,5,7,7,5,],
+        [3,2,7,6,4,0,4,4,1,0,5,0,0,1,4,1,2,5,5,5,0,6,3,6,0,3,3,3,7,1,7,4,0,4,3,7,0,2,2,2,6,2,6,4,5,2,7,0,],
+        [0,3,4,7,1,2,1,6,0,2,4,2,0,6,3,6,3,0,6,0,4,4,7,1,4,3,7,6,1,3,4,6,0,7,3,7,0,1,2,1,3,1,5,1,5,2,7,4,],
+        [3,2,7,6,4,1,4,5,1,1,5,1,3,3,6,3,1,6,4,6,0,5,3,5,7,0,7,3,4,7,7,7,1,0,4,0,1,4,3,4,1,7,3,7,0,2,0,4,],
+        [0,3,4,7,1,2,1,6,2,1,6,5,0,4,3,4,4,0,7,3,7,4,7,7,3,1,6,4,2,2,5,5,0,7,3,7,4,5,7,2,5,0,7,0,3,5,5,7,],
+        [3,0,7,4,4,3,4,7,2,6,6,6,3,7,7,7,1,4,1,7,3,2,3,5,2,0,2,3,1,0,1,3,3,1,6,4,7,0,7,2,5,1,7,3,0,2,0,4,],
+        [0,1,4,5,3,1,3,5,0,5,4,5,2,1,5,1,5,4,5,7,0,0,3,0,4,2,7,5,7,1,7,4,4,0,7,0,0,6,2,6,0,4,2,2,1,7,3,7,],
+        [2,3,6,7,5,2,5,6,2,2,6,2,4,4,7,4,1,2,1,5,2,4,2,7,0,0,0,3,1,1,4,1,0,6,3,6,5,7,7,5,1,0,3,0,5,1,7,1,],
+        [0,3,4,7,0,0,0,4,1,2,5,6,1,0,5,4,2,4,5,1,4,6,7,3,6,0,6,3,1,7,4,4,0,4,3,1,5,7,7,5,3,0,5,2,7,0,7,2,],
+        [1,2,5,6,4,1,4,5,2,2,6,2,3,5,6,5,4,0,7,0,1,3,1,6,0,2,0,5,7,3,7,6,3,7,6,7,2,4,2,6,0,7,2,7,0,0,2,0,],
+        [3,1,7,5,4,0,4,4,1,0,5,0,3,4,6,4,3,6,6,6,0,2,3,5,0,4,0,7,4,7,7,7,1,4,1,7,4,1,7,4,0,1,2,3,2,2,4,2,],
+        [2,0,6,4,3,3,3,7,1,6,5,6,2,7,6,7,4,1,7,4,2,1,5,4,4,5,7,5,1,2,1,5,7,0,7,3,0,2,0,4,2,2,4,0,6,0,6,2,],
+        [3,2,7,6,3,1,3,5,3,0,7,4,2,3,5,3,0,3,3,6,4,4,7,7,0,1,3,1,3,7,6,4,7,0,7,3,0,0,2,0,4,7,6,7,6,0,6,2,],
+        [3,2,7,6,5,2,5,6,0,6,4,2,1,3,5,3,1,0,4,0,3,7,6,7,3,1,6,1,0,7,3,4,0,1,0,4,7,2,7,4,5,0,7,0,2,7,4,5,],
+        [1,2,5,6,3,0,3,4,0,2,0,6,2,4,5,4,6,4,6,7,4,0,7,0,1,3,1,6,7,1,7,4,1,7,4,4,2,7,4,7,4,1,6,1,0,0,2,2,],
+        [3,0,7,4,6,0,6,4,1,7,5,3,4,0,7,0,0,0,3,3,0,4,0,7,1,2,4,5,2,7,5,7,2,1,5,4,1,4,3,6,7,1,7,3,5,6,7,6,],
+        [1,0,5,4,3,2,3,6,0,6,4,6,2,2,6,2,5,0,5,3,2,7,5,7,4,4,7,7,1,2,4,5,3,0,6,3,0,0,2,2,0,3,2,5,7,4,7,6,],
+        [1,0,5,4,4,0,4,4,3,1,7,1,0,3,4,3,2,4,5,7,0,7,3,7,6,3,6,6,7,4,7,7,0,6,3,6,5,0,7,2,4,5,6,7,0,0,2,2,],
+        [1,0,5,4,2,3,2,7,2,4,6,4,1,5,4,5,0,4,0,7,4,7,7,7,4,0,7,3,0,0,3,3,3,0,6,3,4,6,6,6,7,0,7,2,0,1,0,3,],
+        [3,2,7,6,6,0,6,4,3,0,7,0,4,2,7,2,0,3,3,6,0,4,3,1,1,5,4,5,0,0,3,0,5,4,5,7,0,6,2,6,7,3,7,5,2,7,4,7,],
+        [0,0,4,4,3,3,3,7,3,6,7,6,2,3,6,3,4,2,7,2,2,0,5,0,4,5,7,5,0,1,0,4,1,2,1,5,2,1,4,1,0,6,2,6,5,7,7,7,],
+        [3,0,7,4,5,0,5,4,0,6,4,2,1,1,5,1,3,7,6,4,1,2,4,5,3,6,6,6,1,7,4,4,0,2,0,5,7,1,7,3,4,7,6,7,0,7,2,5,],
+        [0,2,4,6,3,1,3,5,3,2,7,2,2,1,5,1,2,3,2,6,2,7,5,7,1,0,4,0,7,3,7,6,1,4,1,7,0,0,2,2,5,5,7,3,3,6,5,4,],
+        [2,1,6,5,5,0,5,4,2,3,6,7,4,0,7,0,7,4,7,7,0,1,0,4,0,7,3,7,1,4,4,7,6,1,6,4,2,4,4,6,2,2,4,4,1,0,3,0,],
+        [1,1,5,5,1,0,1,4,0,2,4,2,0,4,3,4,2,6,5,6,6,3,6,6,4,3,7,0,3,7,6,7,3,0,6,0,0,5,2,5,2,1,4,1,7,1,7,3,],
+        [3,1,7,5,4,0,4,4,0,3,4,3,3,2,6,2,6,3,6,6,3,4,6,7,2,4,2,7,7,2,7,5,0,4,0,7,1,5,1,7,0,0,2,0,3,5,5,7,],
+        [1,2,5,6,1,1,1,5,2,0,6,4,0,3,3,3,2,4,2,7,6,0,6,3,1,0,4,3,7,0,7,3,3,7,6,7,5,5,7,7,3,0,5,0,0,0,0,2,],
+        [1,1,5,5,3,1,3,5,0,3,4,3,3,2,7,2,0,4,0,7,3,7,6,7,6,1,6,4,4,6,7,6,0,0,3,0,1,4,1,7,2,5,4,5,7,3,7,5,],
+        [0,3,4,7,4,0,4,4,2,1,6,1,3,2,6,2,4,5,7,2,0,6,3,3,0,0,3,3,0,4,3,7,4,4,7,1,4,6,7,3,5,7,7,7,0,1,2,3,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,3,7,6,7,1,1,1,4,4,1,7,4,7,0,7,3,4,2,7,5,0,2,0,5,1,5,3,3,2,0,4,0,0,1,2,3,],
+        [2,0,6,4,5,0,5,4,0,3,0,7,4,2,7,2,4,3,4,6,3,4,6,7,1,0,1,3,1,4,1,7,2,1,2,4,3,3,6,6,1,7,3,5,3,2,5,0,],
+        [1,3,5,7,1,0,1,4,0,2,4,2,0,4,3,4,2,1,5,4,0,6,3,6,1,5,4,5,7,0,7,3,3,0,6,0,6,2,6,4,3,7,5,5,0,1,2,3,],
+        [3,2,7,6,6,0,6,4,3,0,7,0,4,2,7,2,1,4,4,4,0,0,3,3,0,2,0,5,1,6,4,6,3,7,6,7,1,2,3,0,3,1,5,1,2,5,4,5,],
+        [1,3,5,7,4,1,4,5,3,0,7,0,3,5,6,5,0,5,3,2,0,6,3,6,1,7,4,7,5,1,5,4,0,0,3,3,7,0,7,2,7,5,7,7,1,2,3,0,],
+        [2,0,6,4,3,0,3,4,3,3,7,3,2,2,5,2,4,7,7,7,1,4,1,7,0,2,0,5,4,5,7,5,2,4,2,7,1,0,1,2,5,0,7,0,4,0,6,2,],
+        [3,3,7,7,7,0,7,4,3,1,7,1,0,1,4,5,2,0,5,0,2,6,5,6,2,2,5,2,0,7,3,7,1,3,1,6,0,4,0,6,4,3,6,5,5,3,7,5,],
+        [0,3,4,7,1,1,1,5,1,0,5,4,0,5,3,5,3,0,6,0,4,1,7,4,3,3,6,6,0,7,3,7,4,4,4,7,7,0,7,2,2,4,2,6,0,1,0,3,],
+        [0,2,4,6,2,0,2,4,7,0,7,4,1,4,4,4,5,0,5,3,3,2,6,5,0,3,0,6,2,7,5,7,3,0,6,3,4,2,6,2,4,5,6,7,7,5,7,7,],
+        [1,3,5,7,5,0,5,4,1,0,5,0,4,4,7,4,4,5,7,5,0,1,3,4,0,0,3,3,0,4,3,7,2,1,5,4,0,3,2,5,0,5,0,7,5,6,7,6,],
+        [0,1,4,5,2,1,2,5,3,6,7,6,0,1,3,1,0,4,0,7,4,0,7,3,3,3,6,3,2,2,5,2,6,4,6,7,2,7,4,7,1,0,3,0,3,5,5,3,],
+        [3,0,7,4,6,0,6,4,2,3,6,3,4,2,7,2,3,2,6,5,0,4,3,4,1,7,4,7,1,0,1,3,3,6,6,6,1,5,4,5,2,2,4,0,0,0,0,2,],
+        [1,1,5,5,3,3,3,7,0,5,4,5,1,3,4,3,4,1,7,4,0,0,0,3,7,0,7,3,3,3,6,0,4,7,7,7,3,0,3,2,5,3,7,5,0,4,2,4,],
+        [0,1,4,5,3,0,3,4,3,3,7,3,2,0,6,0,1,7,4,4,4,1,7,1,0,3,3,6,1,3,4,6,3,7,6,7,5,6,7,4,0,0,2,2,4,2,6,2,],
+        [3,3,7,7,5,3,5,7,2,1,6,1,4,7,7,7,0,1,3,4,3,0,6,0,0,0,3,3,6,2,6,5,2,4,5,7,1,4,3,6,0,2,0,4,7,4,7,6,],
+        [2,3,6,7,5,2,5,6,2,3,6,3,4,4,7,4,1,3,4,0,1,4,4,7,2,4,5,7,0,7,3,7,0,2,0,5,4,2,6,0,0,6,2,6,0,1,2,1,],
+        [1,2,5,6,2,0,2,4,1,0,5,0,0,4,3,4,7,2,7,5,3,1,6,4,1,6,4,6,4,3,7,6,4,3,7,0,3,2,5,0,2,7,4,7,4,4,6,6,],
+        [2,0,6,4,4,2,4,6,1,6,5,6,0,3,4,3,3,0,6,0,4,1,7,4,0,7,3,7,7,0,7,3,4,7,7,7,0,3,0,5,5,5,7,5,0,0,0,2,],
+        [3,2,7,6,6,1,6,5,3,1,7,1,3,5,7,5,0,6,3,3,0,1,3,4,0,6,3,6,0,2,0,5,2,0,5,0,5,7,7,5,5,2,7,0,7,2,7,4,],
+        [3,1,7,5,6,0,6,4,1,2,1,6,3,0,7,0,3,6,6,6,1,2,4,5,2,7,5,7,0,2,3,5,7,0,7,3,2,1,4,3,0,4,0,6,2,2,4,4,],
+        [2,2,6,6,4,2,4,6,1,2,5,2,0,3,4,3,2,0,5,0,2,4,2,7,2,1,5,1,1,4,1,7,0,4,0,7,6,1,6,4,4,7,6,5,3,4,3,6,],
+        [0,2,4,6,3,0,3,4,3,1,7,1,2,0,5,0,4,3,7,3,4,4,7,4,1,7,4,7,0,3,3,6,4,7,7,7,4,5,6,5,0,0,2,2,0,1,2,3,],
+        [0,3,4,7,1,2,1,6,4,0,4,4,0,4,3,4,5,1,5,4,1,1,4,4,2,4,5,7,4,5,7,5,7,1,7,4,3,0,3,2,6,1,6,3,0,5,0,7,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,3,3,6,3,0,5,3,5,4,2,7,2,2,3,5,6,7,4,7,7,6,4,6,7,3,1,6,1,2,0,4,0,0,7,2,7,],
+        [3,0,7,4,4,3,4,7,2,6,6,6,3,5,6,5,1,2,4,2,0,0,0,3,0,7,3,7,4,0,7,3,4,3,7,6,0,5,2,5,5,0,7,2,1,4,3,4,],
+        [3,1,7,5,3,0,3,4,0,4,4,4,1,4,4,4,3,5,6,5,5,4,5,7,6,0,6,3,1,6,4,6,1,7,4,7,1,1,1,3,7,0,7,2,0,1,2,3,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,4,3,4,4,2,7,2,5,4,5,7,4,1,7,1,0,1,3,1,6,3,6,6,4,4,4,6,1,7,3,7,4,0,6,0,],
+        [3,1,7,5,4,0,4,4,2,1,6,1,2,4,5,4,4,7,7,4,0,7,3,7,1,0,1,3,0,5,3,2,7,0,7,3,3,5,5,7,0,0,0,2,4,5,6,7,],
+        [2,1,6,5,3,0,3,4,3,3,7,3,2,0,6,0,1,4,1,7,4,4,4,7,2,4,2,7,4,1,7,1,1,0,1,3,2,2,4,2,5,7,7,7,0,1,0,3,],
+        [2,0,6,4,4,0,4,4,1,2,5,6,0,1,4,1,0,7,3,7,1,3,4,6,3,3,6,0,0,3,3,6,7,1,7,4,0,4,0,6,7,5,7,7,6,5,6,7,],
+        [3,3,7,7,6,1,6,5,1,4,5,0,3,5,7,5,1,3,4,0,3,7,6,7,0,3,3,0,1,6,4,6,2,5,5,2,0,4,0,7,5,1,7,1,7,2,7,4,],
+        [2,0,6,4,5,3,5,7,2,7,6,7,4,7,7,7,2,5,5,2,7,2,7,5,0,2,3,5,1,1,4,4,0,3,0,6,1,0,3,2,1,6,3,6,3,2,5,0,],
+        [1,2,5,6,2,0,2,4,1,0,5,0,0,4,3,4,7,2,7,5,4,1,7,1,2,6,5,3,3,7,6,4,4,2,7,2,0,5,2,5,0,7,2,7,4,3,6,5,],
+        [1,3,5,7,5,0,5,4,2,3,6,7,3,0,6,0,1,4,4,7,6,2,6,5,3,3,6,6,7,1,7,4,0,3,0,6,2,1,4,3,0,2,2,0,7,5,7,7,],
+        [0,1,4,5,3,0,3,4,0,0,4,0,3,1,7,1,3,5,6,2,6,3,6,6,0,3,3,6,0,7,3,7,7,2,7,5,2,4,2,6,4,2,6,2,5,7,7,7,],
+        [0,1,4,5,3,0,3,4,0,0,4,0,2,2,5,2,0,3,0,6,1,3,4,6,6,0,6,3,4,4,7,4,2,7,5,7,1,3,1,6,7,1,7,3,5,5,7,5,],
+        [0,3,4,7,2,3,2,7,1,3,5,3,0,7,3,7,4,6,7,3,4,0,7,0,0,1,3,1,3,0,6,3,3,2,3,5,5,1,7,1,7,4,7,6,0,2,2,2,],
+        [1,1,5,5,1,0,1,4,0,0,0,4,0,0,3,0,0,5,3,5,4,5,7,2,3,6,6,6,2,1,5,1,3,7,6,7,4,2,7,5,5,0,7,0,0,6,2,6,],
+        [2,2,6,6,3,1,3,5,1,2,5,2,2,5,6,5,4,3,7,3,0,6,3,6,0,2,3,5,3,7,6,7,4,0,7,0,4,6,6,4,0,5,2,3,0,1,2,1,],
+        [2,0,6,4,5,0,5,4,3,1,7,1,3,4,6,4,0,6,3,3,2,6,5,6,2,7,5,7,1,0,4,3,7,2,7,5,0,3,3,0,0,4,2,2,2,5,4,5,],
+        [3,2,7,6,6,1,6,5,2,4,6,0,3,5,7,5,0,6,3,6,7,1,7,4,0,2,0,5,1,3,4,0,0,7,3,7,1,0,1,2,1,4,3,6,5,7,7,7,],
+        [0,1,4,5,3,0,3,4,0,0,4,0,2,2,5,2,6,0,6,3,1,7,4,4,4,7,7,7,7,2,7,5,0,4,3,4,2,1,4,3,4,6,6,4,0,5,0,7,],
+        [2,3,6,7,3,2,3,6,3,0,7,0,2,6,5,6,2,1,5,1,4,4,7,1,0,2,0,5,2,7,5,7,1,3,1,6,1,0,1,2,6,4,6,6,5,4,5,6,],
+        [2,0,6,4,5,3,5,7,2,7,6,7,4,3,7,3,1,2,1,5,1,1,4,4,2,3,2,6,0,4,0,7,3,2,3,5,4,5,6,5,5,1,7,1,0,0,0,2,],
+        [2,0,6,4,4,2,4,6,0,6,4,6,3,6,6,6,7,1,7,4,2,4,2,7,1,0,1,3,0,0,0,3,1,4,4,1,5,2,7,0,4,0,6,2,0,5,2,7,],
+        [3,0,7,4,6,3,6,7,4,2,4,6,2,6,6,6,1,4,1,7,3,2,3,5,0,4,0,7,2,1,2,4,4,0,7,0,0,0,2,0,0,1,0,3,7,1,7,3,],
+        [3,1,7,5,4,0,4,4,2,1,6,1,3,4,7,4,1,3,4,6,0,0,0,3,4,7,7,7,3,6,6,3,0,4,3,7,1,4,3,2,0,5,2,7,5,0,7,0,],
+        [3,2,7,6,3,1,3,5,1,4,5,4,1,5,4,5,3,6,6,6,0,4,0,7,0,0,0,3,4,1,7,4,2,0,2,3,3,0,5,0,5,5,7,3,4,5,6,7,],
+        [2,0,6,4,5,0,5,4,7,3,7,7,1,3,5,3,1,5,4,5,1,6,4,6,0,0,0,3,0,4,0,7,1,4,4,4,4,7,6,7,1,7,3,7,6,1,6,3,],
+        [3,3,7,7,5,3,5,7,1,4,5,0,3,3,6,3,1,0,1,3,3,3,3,6,0,1,0,4,2,4,2,7,7,0,7,3,4,0,6,2,6,5,6,7,7,4,7,6,],
+        [2,3,6,7,4,3,4,7,3,0,7,0,2,3,5,3,1,1,1,4,0,1,0,4,6,4,6,7,0,6,3,6,4,2,7,2,1,0,3,2,3,1,5,1,0,7,2,7,],
+        [1,0,5,4,2,3,2,7,0,6,4,6,1,5,4,5,3,3,6,6,0,0,3,3,4,2,7,5,7,1,7,4,3,0,6,3,4,0,6,0,4,7,6,5,0,3,0,5,],
+        [2,2,6,6,2,1,2,5,3,4,7,0,0,5,3,5,7,2,7,5,3,7,6,7,1,1,1,4,0,0,3,0,3,1,6,4,3,6,5,6,0,4,2,6,5,4,7,6,],
+        [1,2,5,6,5,1,5,5,2,7,6,7,1,4,5,4,1,3,4,0,0,0,0,3,7,2,7,5,1,0,4,3,6,2,6,5,0,5,2,5,1,6,3,6,5,0,7,0,],
+        [2,0,6,4,3,3,3,7,2,1,6,5,2,5,5,5,7,0,7,3,2,2,2,5,1,1,1,4,3,0,6,3,0,2,0,5,5,7,7,7,4,6,6,6,0,7,2,7,],
+        [2,3,6,7,5,1,5,5,1,2,5,2,1,4,5,4,0,3,0,6,7,3,7,6,1,0,4,0,0,1,3,1,1,7,4,7,7,0,7,2,6,0,6,2,1,6,3,6,],
+        [0,0,4,4,2,2,2,6,1,6,5,6,0,6,3,6,4,7,7,7,4,5,7,5,2,1,5,4,0,1,0,4,4,1,7,4,7,0,7,2,1,2,1,4,2,0,4,0,],
+        [0,2,4,6,2,0,2,4,1,0,5,0,2,3,6,3,1,4,4,7,7,4,7,7,6,4,6,7,0,3,0,6,5,3,5,6,3,2,5,2,2,7,4,7,3,1,5,1,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,6,3,6,4,0,7,0,3,1,6,1,4,6,7,3,0,7,3,7,7,4,7,7,0,0,0,2,0,4,2,4,3,4,5,6,],
+        [1,0,5,4,2,3,2,7,0,4,4,0,2,6,6,6,3,0,6,3,7,0,7,3,3,3,6,0,3,5,6,2,1,4,1,7,5,7,7,7,5,5,7,5,0,5,0,7,],
+        [3,0,7,4,6,3,6,7,3,6,7,6,4,3,7,3,3,2,3,5,2,7,5,7,4,5,7,2,1,3,4,0,6,0,6,3,5,5,7,5,0,1,0,3,0,7,2,5,],
+        [0,0,4,4,1,3,1,7,1,6,5,6,0,7,3,7,2,0,2,3,4,5,7,2,0,3,3,0,4,0,4,3,7,3,7,6,5,0,7,0,5,7,7,7,6,4,6,6,],
+        [2,0,6,4,4,2,4,6,1,4,5,0,0,5,4,5,7,3,7,6,5,4,5,7,0,0,3,3,0,3,3,0,0,6,3,6,5,0,7,0,1,7,3,7,4,0,6,2,],
+        [3,0,7,4,5,0,5,4,1,3,1,7,3,0,6,0,1,0,1,3,0,4,0,7,2,4,5,7,0,0,0,3,6,4,6,7,4,3,4,5,2,0,4,2,2,1,2,3,],
+        [1,2,5,6,3,0,3,4,0,2,4,2,2,4,5,4,1,0,1,3,6,1,6,4,7,0,7,3,1,6,4,6,5,0,5,3,0,4,0,6,4,7,6,7,1,5,3,5,],
+        [1,0,5,4,2,3,2,7,1,7,5,7,1,3,4,3,4,6,7,3,4,4,7,1,3,0,6,0,7,4,7,7,0,3,0,6,2,0,4,2,3,4,5,6,5,1,5,3,],
+        [1,0,5,4,3,0,3,4,0,0,4,0,1,0,4,0,1,3,1,6,0,2,0,5,4,1,7,4,3,7,6,7,4,5,7,5,6,0,6,2,2,4,4,6,0,1,2,3,],
+        [2,2,6,6,3,1,3,5,0,1,4,1,3,2,7,2,4,3,7,6,0,4,3,7,0,3,3,6,0,0,3,0,4,7,7,7,7,0,7,2,0,5,2,7,7,3,7,5,],
+        [1,3,5,7,3,1,3,5,2,0,6,0,3,2,7,2,4,3,7,6,0,0,0,3,6,4,6,7,1,4,1,7,0,4,0,7,2,5,2,7,4,1,6,1,5,3,7,3,],
+        [2,0,6,4,4,0,4,4,0,0,4,0,2,0,5,0,1,3,1,6,1,2,4,5,3,7,6,7,7,4,7,7,2,4,2,7,5,4,5,6,0,3,0,5,0,1,2,1,],
+        [1,0,5,4,2,3,2,7,0,6,4,6,1,7,5,7,4,4,7,1,0,4,3,1,4,2,7,5,2,0,5,0,2,3,5,6,4,1,7,4,6,5,6,7,0,0,0,2,],
+        [3,0,7,4,5,0,5,4,0,7,4,3,1,1,5,1,4,5,7,5,0,4,3,4,0,3,3,3,2,6,5,6,0,5,3,5,1,7,3,7,4,4,6,4,5,7,7,7,],
+        [0,3,4,7,4,0,4,4,1,0,5,0,2,0,5,0,0,0,3,3,7,3,7,6,2,4,5,7,0,4,3,7,5,1,5,4,6,2,6,4,0,1,2,3,0,5,2,7,],
+        [0,1,4,5,1,0,1,4,2,2,6,2,0,0,3,0,3,3,6,3,0,2,0,5,4,4,7,7,7,3,7,6,2,6,5,6,4,0,7,0,0,7,2,5,0,6,2,4,],
+        [3,0,7,4,4,3,4,7,1,7,5,3,3,3,6,3,0,3,0,6,3,1,3,4,5,4,5,7,2,2,2,5,4,0,7,0,1,1,1,4,5,1,7,1,7,5,7,7,],
+        [2,3,6,7,2,0,2,4,1,0,5,0,0,4,3,4,0,4,0,7,3,1,6,1,4,4,7,7,4,2,7,2,4,3,7,6,1,5,1,7,2,5,4,7,0,1,0,3,],
+        [3,0,7,4,4,3,4,7,0,6,4,6,3,7,6,7,0,5,3,2,0,0,0,3,1,0,1,3,2,4,5,1,3,5,6,2,2,0,2,2,5,4,7,6,4,0,6,0,],
+        [1,1,5,5,4,0,4,4,3,2,3,6,2,4,5,4,7,3,7,6,0,4,3,7,6,0,6,3,6,4,6,7,0,0,3,0,0,1,2,3,0,5,0,7,5,1,5,3,],
+        [0,0,4,4,3,0,3,4,3,3,7,3,2,2,5,2,2,4,5,7,1,3,1,6,4,5,7,5,4,1,7,1,0,7,3,7,0,1,0,4,5,0,7,0,2,5,4,7,],
+        [2,0,6,4,5,3,5,7,1,6,5,6,2,7,6,7,7,2,7,5,1,3,4,3,0,0,0,3,3,0,6,0,0,5,3,5,3,2,3,4,4,1,6,3,2,2,4,4,],
+        [2,3,6,7,2,0,2,4,0,1,4,1,2,3,5,3,1,4,4,7,4,6,7,3,0,7,3,7,0,5,3,5,4,2,7,2,5,1,7,1,5,0,7,0,5,4,7,6,],
+        [2,0,6,4,3,0,3,4,0,4,4,4,1,4,4,4,4,7,7,7,6,0,6,3,4,6,7,6,7,1,7,4,0,7,3,4,3,6,5,4,0,0,2,2,0,6,2,6,],
+        [2,3,6,7,4,1,4,5,1,1,5,1,0,2,4,2,1,3,1,6,7,1,7,4,3,0,6,0,0,4,0,7,2,4,5,7,5,2,5,4,6,4,6,6,2,5,4,7,],
+        [0,2,4,6,3,0,3,4,3,1,7,1,2,4,5,4,4,2,7,5,1,4,4,7,2,0,2,3,0,3,0,6,3,4,6,7,1,5,1,7,7,2,7,4,3,2,5,4,],
+        [0,3,4,7,3,2,3,6,5,3,5,7,2,2,5,2,3,0,6,3,3,1,6,1,0,4,3,7,7,3,7,6,1,0,1,3,0,7,2,7,4,0,6,0,0,2,2,4,],
+        [0,2,4,6,0,1,0,5,0,4,4,4,0,2,4,2,0,6,3,6,1,1,4,1,4,3,7,6,0,7,3,7,0,0,3,0,4,2,6,4,5,0,7,0,5,5,5,7,],
+        [1,3,5,7,3,3,3,7,7,2,7,6,3,4,7,4,1,4,1,7,1,0,1,3,0,1,0,4,4,0,7,0,3,1,6,4,6,5,6,7,0,5,0,7,4,1,6,3,],
+        [3,0,7,4,5,2,5,6,1,6,5,6,1,3,5,3,7,0,7,3,0,7,3,7,1,5,4,5,0,2,0,5,1,4,4,4,4,0,6,2,2,0,2,2,5,7,7,7,],
+        [1,0,5,4,4,3,4,7,7,3,7,7,3,5,6,5,1,3,4,0,6,0,6,3,0,4,3,7,0,4,3,4,0,0,0,3,3,0,5,2,0,7,2,7,1,6,3,6,],
+        [1,0,5,4,4,0,4,4,1,7,5,7,2,4,5,4,7,1,7,4,0,3,3,6,6,2,6,5,0,3,3,3,4,4,7,7,0,4,0,6,0,0,2,2,4,5,6,7,],
+        [2,1,6,5,2,0,2,4,1,2,5,2,0,4,3,4,1,5,4,5,2,6,5,3,4,0,7,0,4,7,7,7,4,6,7,3,6,1,6,3,2,1,4,1,0,1,0,3,],
+        [2,1,6,5,4,1,4,5,3,6,7,6,0,2,4,2,1,3,4,6,4,6,7,3,0,6,3,3,3,0,6,0,0,7,3,4,0,2,2,0,7,0,7,2,5,3,7,5,],
+        [0,2,4,6,1,1,1,5,2,2,6,2,0,5,4,5,7,3,7,6,2,3,5,3,3,0,6,0,3,1,6,1,6,4,6,7,0,5,0,7,7,0,7,2,1,6,3,6,],
+        [2,2,6,6,2,1,2,5,1,5,5,5,1,1,4,1,1,6,4,6,0,0,3,0,2,1,5,4,0,4,0,7,6,2,6,5,5,2,7,0,7,5,7,7,4,7,6,7,],
+        [2,1,6,5,5,0,5,4,2,2,2,6,3,4,6,4,6,0,6,3,1,0,4,0,1,1,1,4,2,7,5,7,7,1,7,4,0,1,0,4,4,6,6,6,0,5,0,7,],
+        [3,1,7,5,5,3,5,7,1,7,5,7,4,7,7,7,0,6,3,3,0,3,3,0,0,4,3,1,1,6,4,3,2,6,5,3,4,1,7,1,5,4,7,2,0,0,0,2,],
+        [2,0,6,4,3,3,3,7,0,7,4,7,3,4,7,4,1,3,1,6,4,0,7,3,4,6,7,6,2,3,5,0,3,0,6,3,0,3,0,5,0,0,0,2,0,6,2,4,],
+        [2,1,6,5,2,0,2,4,3,5,7,1,1,0,4,0,4,6,7,3,0,7,3,4,0,0,3,3,7,4,7,7,3,7,6,7,1,2,1,4,2,7,4,5,5,2,7,0,],
+        [3,2,7,6,3,1,3,5,1,4,5,4,1,5,4,5,4,2,7,5,1,0,4,0,4,1,7,4,7,0,7,3,4,7,7,7,0,5,2,7,3,7,5,5,0,1,2,1,],
+        [0,3,4,7,3,2,3,6,0,2,4,2,3,3,7,3,3,0,6,0,4,4,7,7,1,1,4,1,0,4,0,7,7,0,7,3,4,5,6,5,5,4,7,4,1,7,3,7,],
+        [3,3,7,7,5,1,5,5,1,1,5,1,4,5,7,5,0,1,0,4,1,6,4,3,0,0,3,0,7,0,7,3,0,7,3,7,6,1,6,3,3,6,5,6,4,0,6,0,],
+        [3,2,7,6,6,1,6,5,1,1,5,5,3,1,7,1,0,1,3,4,0,3,3,6,4,7,7,7,0,2,3,5,0,4,3,7,0,5,0,7,3,6,5,6,0,0,2,0,],
+        [2,0,6,4,5,3,5,7,1,6,5,6,4,3,7,3,1,2,1,5,2,3,5,0,0,4,0,7,1,1,4,4,0,0,0,3,5,1,7,1,7,4,7,6,2,7,4,7,],
+        [3,0,7,4,5,0,5,4,2,0,6,0,4,4,7,4,2,2,2,5,3,3,3,6,1,4,1,7,3,7,6,7,1,0,1,3,4,6,6,6,4,5,6,5,0,3,0,5,],
+        [0,2,4,6,1,1,1,5,1,2,5,2,0,3,3,3,2,0,5,0,4,3,7,3,4,7,7,4,2,7,5,4,4,4,7,1,5,5,7,7,0,4,0,6,0,7,2,5,],
+        [1,2,5,6,5,1,5,5,1,4,5,4,2,5,6,5,6,0,6,3,0,0,3,3,0,7,3,7,7,0,7,3,0,6,3,6,1,0,3,2,2,0,4,0,7,5,7,7,],
+        [2,0,6,4,4,2,4,6,0,6,4,6,2,2,5,2,0,5,3,5,0,4,3,4,7,1,7,4,4,0,7,0,3,7,6,7,0,0,0,2,1,1,1,3,7,5,7,7,],
+        [1,2,5,6,3,0,3,4,1,3,5,7,1,0,4,0,4,4,7,4,5,0,5,3,0,0,0,3,0,4,3,1,1,4,4,7,7,0,7,2,4,2,6,0,0,1,2,1,],
+        [0,1,4,5,1,0,1,4,1,1,5,1,0,0,4,0,4,3,7,6,6,1,6,4,4,4,7,7,0,3,0,6,1,4,1,7,2,5,4,7,7,0,7,2,3,5,5,7,],
+        [0,0,4,4,1,3,1,7,0,2,0,6,0,7,3,7,2,1,5,4,3,1,6,4,4,1,7,4,4,0,7,0,2,3,5,6,2,5,4,7,4,0,6,2,5,7,7,5,],
+        [2,2,6,6,4,2,4,6,7,3,7,7,2,6,5,6,5,1,5,4,1,1,4,1,6,1,6,4,0,2,3,5,2,0,5,0,7,0,7,2,3,5,3,7,1,2,3,4,],
+        [1,3,5,7,2,2,2,6,7,1,7,5,2,5,5,5,3,4,6,4,4,0,7,0,1,0,4,3,3,1,6,1,1,7,4,7,0,3,0,5,1,5,3,3,6,5,6,7,],
+        [2,0,6,4,5,3,5,7,2,7,6,7,4,3,7,3,7,4,7,7,1,3,4,6,1,1,4,4,1,3,1,6,1,2,4,5,4,1,7,1,5,2,7,2,0,0,0,2,],
+        [1,2,5,6,2,1,2,5,0,2,0,6,1,3,4,3,7,4,7,7,4,2,7,2,1,4,4,7,1,7,4,4,3,1,6,1,1,0,3,0,6,5,6,7,0,1,2,1,],
+        [0,3,4,7,3,2,3,6,3,5,7,5,2,4,5,4,4,1,7,4,2,0,2,3,1,0,1,3,3,1,6,4,3,0,6,0,1,7,3,7,4,6,6,6,0,5,2,7,],
+        [1,2,5,6,4,0,4,4,0,1,4,1,3,2,6,2,1,6,4,6,0,2,0,5,0,6,3,3,7,1,7,4,0,7,3,7,6,3,6,5,5,7,7,5,1,0,3,0,],
+        [1,0,5,4,3,2,3,6,0,6,4,6,1,2,4,2,6,3,6,6,4,4,7,1,1,7,4,7,4,0,7,0,7,3,7,6,0,5,2,3,3,0,5,2,5,7,7,7,],
+        [0,1,4,5,4,0,4,4,5,0,5,4,3,0,6,0,2,7,5,7,1,3,4,6,7,0,7,3,4,1,7,4,0,4,0,7,6,5,6,7,4,4,6,2,0,3,2,5,],
+        [0,2,4,6,3,1,3,5,3,2,7,2,2,5,5,5,1,4,1,7,4,1,7,1,6,4,6,7,0,4,0,7,2,7,5,7,7,5,7,7,2,0,2,2,5,3,7,3,],
+        [3,2,7,6,4,1,4,5,0,4,4,4,3,5,7,5,4,7,7,4,0,0,3,3,4,4,7,1,6,4,6,7,0,6,3,6,0,1,2,3,5,2,7,0,2,1,4,1,],
+        [0,0,4,4,1,3,1,7,1,6,5,6,1,4,5,4,0,1,3,4,6,4,6,7,4,0,4,3,6,0,6,3,7,3,7,6,0,4,0,6,3,0,3,2,3,7,5,7,],
+        [3,2,7,6,4,1,4,5,0,0,0,4,0,2,4,2,2,3,2,6,3,7,6,4,6,0,6,3,7,0,7,3,4,7,7,7,1,4,1,6,2,0,4,0,1,1,3,1,],
+        [0,3,4,7,1,2,1,6,0,2,4,2,0,6,3,6,4,3,7,6,4,4,7,4,6,0,6,3,4,4,7,7,1,1,4,1,2,4,4,6,1,0,3,0,7,1,7,3,],
+        [2,0,6,4,5,3,5,7,1,4,5,0,3,7,6,7,0,1,0,4,0,6,3,3,7,4,7,7,4,3,7,0,2,6,5,3,5,1,7,3,1,1,1,3,2,7,4,5,],
+        [0,1,4,5,3,0,3,4,0,3,4,7,3,1,7,1,0,4,0,7,1,3,4,6,4,3,7,3,4,0,7,0,6,4,6,7,5,5,5,7,1,5,1,7,7,5,7,7,],
+        [2,2,6,6,6,1,6,5,0,5,4,1,2,4,6,4,1,0,1,3,5,0,5,3,7,2,7,5,1,5,4,5,1,7,4,7,3,6,5,6,0,2,0,4,7,5,7,7,],
+        [0,2,4,6,3,1,3,5,1,2,5,2,1,5,4,5,4,4,7,1,7,4,7,7,0,6,3,6,1,7,4,7,1,0,4,3,3,0,5,0,5,4,7,2,3,1,5,1,],
+        [2,0,6,4,5,0,5,4,3,6,7,6,4,2,7,2,3,2,3,5,2,2,2,5,1,2,1,5,0,2,0,5,1,7,4,7,0,6,2,6,6,5,6,7,5,2,7,0,],
+        [1,1,5,5,3,1,3,5,0,3,4,3,3,2,7,2,4,1,7,1,1,6,4,6,2,0,5,0,3,7,6,7,7,3,7,6,0,5,0,7,1,7,3,7,3,6,5,4,],
+        [0,2,4,6,1,1,1,5,3,2,7,2,0,3,3,3,4,7,7,4,3,6,6,3,3,0,6,0,2,0,2,3,0,7,3,7,5,3,7,5,3,1,5,1,4,4,6,6,],
+        [0,3,4,7,3,1,3,5,3,0,7,4,3,2,7,2,4,4,7,7,0,4,0,7,0,4,3,7,1,0,1,3,4,3,7,6,5,1,7,1,0,0,0,2,4,5,6,7,],
+        [1,3,5,7,3,3,3,7,0,3,4,3,2,7,5,7,3,0,6,3,2,0,5,3,7,3,7,6,0,4,0,7,6,4,6,7,4,0,6,2,7,0,7,2,0,1,2,1,],
+        [0,3,4,7,1,2,1,6,3,1,7,1,0,4,3,4,4,3,7,6,2,6,5,3,4,3,4,6,4,0,7,0,0,0,3,0,7,3,7,5,5,5,7,7,6,2,6,4,],
+        [0,3,4,7,1,2,1,6,7,0,7,4,0,6,4,6,2,3,5,6,4,2,7,5,0,7,3,7,3,0,6,3,3,3,6,6,4,0,6,2,1,1,3,1,5,4,7,6,],
+        [1,3,5,7,4,2,4,6,0,5,4,5,3,6,7,6,2,3,5,0,0,0,3,0,6,2,6,5,5,1,5,4,7,2,7,5,0,6,2,6,0,2,0,4,2,7,4,7,],
+        [2,2,6,6,4,2,4,6,0,2,4,2,3,6,6,6,2,3,2,6,1,4,1,7,3,0,6,0,0,3,0,6,7,1,7,4,3,7,6,7,5,4,7,6,6,1,6,3,],
+        [2,0,6,4,4,0,4,4,1,0,5,0,2,0,5,0,4,7,7,4,3,4,6,7,2,4,5,7,3,2,6,2,0,3,0,6,1,5,3,7,2,1,2,3,5,5,7,7,],
+        [1,0,5,4,4,0,4,4,0,3,4,3,2,4,5,4,4,5,7,5,0,4,0,7,5,0,5,3,4,7,7,7,6,3,6,6,3,6,5,6,1,5,3,5,0,0,2,2,],
+        [1,3,5,7,2,2,2,6,0,3,4,3,2,5,5,5,4,0,7,0,4,4,7,1,4,1,7,4,1,7,4,7,3,2,6,5,0,7,2,5,5,6,7,6,1,1,3,1,],
+        [0,0,4,4,1,3,1,7,0,7,4,7,1,6,5,6,0,2,0,5,3,5,6,5,4,0,7,3,4,3,7,0,2,3,5,0,7,4,7,6,2,0,4,2,5,4,7,2,],
+        [1,0,5,4,2,0,2,4,3,3,7,7,1,4,4,4,4,1,7,4,3,1,6,4,0,3,0,6,0,7,3,4,3,7,6,7,2,7,4,5,5,1,7,3,0,0,2,2,],
+        [1,1,5,5,3,3,3,7,7,2,7,6,3,6,7,6,2,0,5,3,2,1,5,4,6,2,6,5,3,0,6,0,2,4,2,7,1,5,1,7,3,0,5,2,0,5,2,3,],
+        [1,2,5,6,4,1,4,5,7,1,7,5,2,5,5,5,0,0,3,3,6,4,6,7,0,2,0,5,1,0,4,0,6,0,6,3,0,6,2,6,5,0,5,2,3,7,5,7,],
+        [2,0,6,4,5,0,5,4,1,3,5,3,2,4,6,4,3,6,6,6,4,5,7,5,6,0,6,3,7,0,7,3,0,7,3,7,0,1,2,1,0,5,2,5,4,7,6,7,],
+        [0,3,4,7,1,2,1,6,7,0,7,4,0,6,4,6,5,0,5,3,2,1,5,4,0,0,3,3,1,7,4,4,3,4,6,7,1,7,3,7,6,2,6,4,5,7,7,5,],
+        [1,2,5,6,3,0,3,4,0,0,4,0,2,4,5,4,4,1,7,4,1,4,1,7,4,6,7,3,4,7,7,7,0,3,0,6,2,5,2,7,5,0,7,2,4,2,6,0,],
+        [1,1,5,5,4,0,4,4,2,1,6,1,2,4,5,4,7,4,7,7,0,3,0,6,1,3,1,6,3,7,6,7,0,1,3,4,1,5,4,5,6,4,6,6,1,6,3,6,],
+        [1,3,5,7,2,2,2,6,3,4,7,0,2,5,5,5,3,0,3,3,4,4,7,1,1,0,1,3,0,1,0,4,4,7,7,4,2,0,4,2,4,0,6,0,5,4,7,2,],
+        [1,2,5,6,2,1,2,5,2,2,6,2,1,1,5,1,1,6,4,6,6,4,6,7,0,1,0,4,7,1,7,4,4,0,7,0,0,0,3,0,3,7,5,7,7,5,7,7,],
+        [0,1,4,5,2,1,2,5,1,1,5,1,0,5,3,5,6,4,6,7,5,4,5,7,4,4,7,1,1,7,4,7,2,0,5,0,5,2,7,4,2,6,4,6,0,2,0,4,],
+        [2,1,6,5,4,3,4,7,1,2,5,6,3,3,6,3,3,0,6,0,0,4,3,1,7,0,7,3,0,5,3,5,0,0,0,3,4,1,6,1,3,5,3,7,6,5,6,7,],
+        [1,1,5,5,2,0,2,4,2,1,6,1,1,2,4,2,1,5,4,5,7,0,7,3,3,7,6,7,0,6,3,6,3,0,6,3,4,6,6,6,0,7,2,7,7,4,7,6,],
+        [0,3,4,7,2,3,2,7,7,0,7,4,1,7,4,7,4,4,7,7,3,4,6,1,4,2,7,5,0,0,0,3,1,1,1,4,2,2,4,0,4,5,6,7,1,0,3,2,],
+        [0,3,4,7,3,1,3,5,0,1,4,1,2,5,5,5,4,3,7,6,0,4,3,7,4,0,7,0,2,0,2,3,7,2,7,5,1,2,3,0,5,1,5,3,6,1,6,3,],
+        [1,2,5,6,4,1,4,5,3,7,7,3,3,5,7,5,6,0,6,3,5,1,5,4,0,4,0,7,4,7,7,7,0,3,3,6,1,3,3,5,2,0,4,0,0,1,2,1,],
+        [3,2,7,6,6,0,6,4,2,3,2,7,4,4,7,4,2,0,5,3,0,0,0,3,1,3,4,6,1,1,4,1,0,4,0,7,5,5,7,7,3,4,5,6,4,7,6,7,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,3,3,6,3,2,3,5,0,0,5,3,5,0,4,3,4,1,3,4,0,6,4,6,7,7,0,7,2,7,3,7,5,4,2,6,0,],
+        [0,3,4,7,3,2,3,6,0,7,4,7,1,6,4,6,7,0,7,3,3,0,6,0,1,0,1,3,4,2,7,5,2,2,5,5,5,5,7,7,4,1,6,1,3,4,5,6,],
+        [1,3,5,7,5,0,5,4,2,0,6,0,4,4,7,4,0,3,0,6,0,1,3,4,2,1,5,1,7,0,7,3,6,1,6,4,4,7,6,5,2,5,2,7,1,1,3,3,],
+        [0,1,4,5,2,1,2,5,1,1,5,1,1,1,5,1,2,7,5,7,4,4,7,4,4,3,7,0,1,3,1,6,0,0,3,0,7,5,7,7,4,0,6,0,0,4,0,6,],
+        [3,0,7,4,6,0,6,4,3,4,7,4,4,4,7,4,1,0,1,3,3,6,6,6,0,0,0,3,1,7,4,7,1,5,4,2,5,7,7,7,1,4,3,6,2,0,2,2,],
+        [3,3,7,7,5,1,5,5,1,1,5,1,1,2,5,2,7,1,7,4,0,2,3,5,0,0,3,0,3,7,6,7,1,6,4,6,2,3,4,5,6,1,6,3,1,5,1,7,],
+        [1,0,5,4,4,0,4,4,0,3,4,3,3,4,7,4,6,0,6,3,0,4,3,7,3,5,6,5,4,7,7,7,5,0,5,3,0,0,2,2,0,5,2,7,3,6,5,6,],
+        [3,3,7,7,6,2,6,6,1,0,5,4,4,2,7,2,1,3,1,6,1,2,4,5,2,4,2,7,3,0,6,0,3,6,6,6,7,3,7,6,4,1,6,1,3,7,5,7,],
+        [3,3,7,7,4,2,4,6,0,5,4,5,2,6,5,6,4,0,7,0,0,0,3,0,7,3,7,6,0,7,3,7,2,1,5,1,2,2,2,4,6,2,6,4,0,1,0,3,],
+        [3,1,7,5,7,0,7,4,3,3,7,3,0,1,3,4,0,2,3,5,1,4,4,7,4,3,4,6,0,3,0,6,1,0,4,0,6,5,6,7,0,0,2,2,1,7,3,7,],
+        [0,1,4,5,3,0,3,4,7,0,7,4,2,4,6,4,1,3,1,6,3,5,6,5,2,7,5,7,0,2,0,5,5,0,5,3,3,3,5,3,3,6,5,6,1,1,3,3,],
+        [2,3,6,7,5,2,5,6,1,3,1,7,4,2,7,2,2,1,5,1,7,4,7,7,2,7,5,7,4,0,7,0,0,2,3,2,0,4,0,7,2,6,4,6,6,3,6,5,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,2,7,5,7,4,0,7,0,2,0,5,3,3,0,6,3,7,1,7,4,0,0,3,3,1,2,1,4,5,5,7,5,0,3,0,5,],
+        [3,3,7,7,4,2,4,6,0,3,4,3,0,5,4,5,0,0,3,0,6,0,6,3,2,7,5,7,7,1,7,4,1,6,4,6,0,4,2,4,1,1,3,1,3,2,3,4,],
+        [1,1,5,5,1,0,1,4,2,3,2,7,0,2,3,2,7,4,7,7,4,0,7,3,4,5,7,2,4,3,7,0,1,7,4,7,4,6,6,6,0,5,0,7,3,4,3,6,],
+        [0,3,4,7,2,1,2,5,1,1,5,1,0,5,3,5,4,4,7,7,4,5,7,2,1,0,4,0,3,4,6,1,7,3,7,6,0,6,2,6,0,0,0,2,4,2,6,2,],
+        [1,3,5,7,4,2,4,6,2,3,6,3,3,2,6,2,0,4,3,7,7,1,7,4,2,0,5,0,1,1,4,1,0,3,3,6,0,5,2,7,5,3,5,5,4,7,6,5,],
+        [2,0,6,4,5,0,5,4,2,4,6,4,4,4,7,4,1,2,1,5,0,7,3,7,4,5,7,2,1,0,4,3,2,4,5,7,6,1,6,4,0,2,0,4,1,1,3,3,],
+        [2,1,6,5,3,0,3,4,3,3,7,3,2,0,6,0,1,4,1,7,2,3,2,6,3,7,6,7,3,5,6,2,0,3,0,6,2,7,4,5,5,2,7,0,0,0,0,2,],
+        [2,3,6,7,4,3,4,7,1,3,5,3,2,3,5,3,0,3,3,6,6,3,6,6,1,1,4,1,2,2,5,2,7,0,7,3,1,7,3,5,4,0,6,0,7,5,7,7,],
+        [0,3,4,7,1,1,1,5,2,6,6,2,0,1,3,1,3,3,6,0,4,3,4,6,2,3,5,0,7,2,7,5,5,4,5,7,5,4,7,6,1,0,3,0,0,7,2,7,],
+        [3,1,7,5,4,1,4,5,1,5,5,5,0,2,4,2,2,4,5,7,0,3,0,6,3,1,6,1,0,6,3,6,4,7,7,4,2,0,4,0,7,1,7,3,5,0,7,0,],
+        [3,3,7,7,6,1,6,5,0,0,0,4,2,2,6,2,2,0,5,0,2,3,2,6,4,7,7,7,1,6,4,3,1,1,4,1,1,3,1,6,7,2,7,4,2,7,4,5,],
+        [2,0,6,4,5,3,5,7,0,5,4,1,4,7,7,7,0,0,0,3,3,4,6,1,7,3,7,6,2,4,5,1,1,7,4,4,2,7,4,5,1,2,3,0,0,7,2,5,],
+        [1,2,5,6,2,1,2,5,6,3,6,7,2,4,5,4,7,2,7,5,3,2,6,2,0,3,0,6,4,1,7,1,1,7,4,7,0,0,0,2,3,3,5,3,4,0,6,0,],
+        [0,0,4,4,3,3,3,7,0,2,4,6,2,3,6,3,7,0,7,3,0,4,0,7,3,2,6,2,4,7,7,7,3,1,6,1,1,4,1,7,2,5,2,7,5,4,7,4,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,2,4,2,7,4,7,7,6,0,6,3,1,7,4,4,3,4,6,7,0,4,0,7,4,6,6,4,3,0,5,2,0,1,2,1,],
+        [3,2,7,6,3,1,3,5,2,2,2,6,2,3,5,3,7,3,7,6,1,2,1,5,0,0,3,0,0,3,0,6,4,4,7,7,5,2,7,0,4,0,4,2,5,1,7,3,],
+        [0,1,4,5,4,0,4,4,1,4,5,4,0,1,4,1,1,7,4,7,3,3,3,6,7,0,7,3,3,6,6,6,6,0,6,3,0,5,0,7,0,2,0,4,3,2,5,2,],
+        [0,2,4,6,0,1,0,5,1,1,5,1,3,2,6,2,2,3,2,6,4,4,7,7,1,4,1,7,3,3,6,3,7,2,7,5,3,7,6,7,2,7,4,5,1,0,3,0,],
+        [0,0,4,4,2,0,2,4,1,0,5,0,1,0,5,0,4,3,7,6,2,6,5,6,3,2,6,2,3,1,6,1,0,4,0,7,7,2,7,4,2,3,4,5,0,1,0,3,],
+        [2,1,6,5,4,1,4,5,0,0,4,0,0,2,4,2,5,0,5,3,1,7,4,7,0,7,3,4,6,0,6,3,4,6,7,3,0,6,2,4,5,7,7,5,0,5,2,3,],
+        [3,0,7,4,4,0,4,4,0,3,4,3,3,4,6,4,0,6,3,6,1,7,4,7,3,5,6,5,0,2,3,2,3,1,6,1,7,1,7,3,4,6,6,6,0,0,2,0,],
+        [0,0,4,4,1,3,1,7,0,7,4,7,0,3,3,3,3,2,6,5,4,6,7,3,2,0,5,3,4,1,7,4,3,4,6,7,0,4,0,6,6,0,6,2,1,7,3,5,],
+        [0,0,4,4,3,3,3,7,2,0,6,4,2,7,5,7,3,0,6,3,4,0,7,3,0,2,0,5,1,0,4,3,1,2,1,5,5,4,7,6,7,1,7,3,0,7,2,5,],
+        [2,1,6,5,3,1,3,5,3,4,7,4,2,3,5,3,1,4,1,7,7,0,7,3,3,6,6,6,3,0,6,0,2,2,5,2,0,3,0,5,4,1,6,1,0,2,2,4,],
+        [2,1,6,5,3,0,3,4,0,0,4,0,2,4,5,4,4,7,7,7,0,4,0,7,6,1,6,4,0,4,3,7,1,1,1,4,2,7,4,5,5,6,7,6,5,2,5,4,],
+        [2,0,6,4,5,3,5,7,2,7,6,7,4,7,7,7,1,1,1,4,2,2,2,5,4,3,7,0,1,6,4,6,4,0,7,3,1,0,3,2,7,4,7,6,3,3,3,5,],
+        [2,3,6,7,5,2,5,6,6,0,6,4,4,6,7,6,0,5,3,5,1,0,4,0,2,1,5,1,1,4,1,7,2,7,5,7,2,2,4,4,7,1,7,3,1,1,1,3,],
+        [1,1,5,5,1,0,1,4,2,0,6,4,1,1,4,1,6,0,6,3,4,6,7,6,2,0,5,0,1,7,4,7,0,7,3,4,0,3,0,6,3,6,5,4,7,3,7,5,],
+        [0,3,4,7,2,3,2,7,0,0,4,4,2,4,6,4,2,1,5,1,2,0,5,0,1,3,1,6,7,1,7,4,6,0,6,3,5,7,7,5,5,5,7,5,5,2,7,0,],
+        [2,2,6,6,3,1,3,5,3,4,7,4,2,1,6,1,4,7,7,7,0,3,0,6,1,0,4,0,2,3,2,6,1,2,1,5,5,0,7,0,3,6,5,6,4,3,6,3,],
+        [0,1,4,5,3,0,3,4,6,1,6,5,2,4,6,4,0,6,3,6,7,2,7,5,4,0,4,3,4,7,7,7,0,5,3,5,5,0,7,0,3,7,5,5,0,2,0,4,],
+        [0,0,4,4,2,2,2,6,3,6,7,6,1,2,4,2,3,4,6,7,4,1,7,4,4,0,7,3,0,2,3,5,1,4,1,7,5,4,7,6,2,1,4,3,4,6,6,4,],
+        [2,1,6,5,2,0,2,4,3,1,7,5,0,4,3,4,4,4,7,7,0,7,3,7,4,0,7,3,0,5,3,5,2,6,5,6,0,0,0,2,3,0,5,2,1,1,1,3,],
+        [0,3,4,7,4,0,4,4,2,1,6,1,2,4,5,4,7,1,7,4,0,4,0,7,4,3,4,6,0,2,3,2,1,1,1,4,3,5,6,5,5,7,7,7,1,0,3,0,],
+        [0,1,4,5,3,1,3,5,3,4,7,4,2,5,5,5,4,3,7,3,0,7,3,7,3,0,6,0,4,7,7,7,4,6,7,6,0,2,2,4,4,1,6,1,0,6,2,6,],
+        [0,3,4,7,2,1,2,5,1,3,5,3,2,4,6,4,7,3,7,6,3,1,6,1,4,0,7,0,0,7,3,7,6,4,6,7,1,0,4,0,6,2,6,4,5,5,5,7,],
+        [3,1,7,5,4,0,4,4,0,1,4,1,0,3,4,3,0,4,0,7,2,6,5,6,0,0,3,0,6,2,6,5,1,5,4,5,7,0,7,3,3,2,5,2,0,2,2,2,],
+        [3,3,7,7,5,1,5,5,1,1,5,1,1,2,5,2,0,0,0,3,4,7,7,4,1,3,4,6,7,0,7,3,0,4,3,7,4,0,6,0,1,2,3,4,1,0,3,0,],
+        [0,1,4,5,3,0,3,4,1,1,5,1,1,4,4,4,0,5,3,5,5,2,5,5,3,6,6,6,0,7,3,7,6,1,6,4,4,0,6,0,4,7,6,7,7,1,7,3,],
+        [2,3,6,7,4,1,4,5,1,1,5,1,3,5,6,5,0,2,3,5,1,4,4,7,7,0,7,3,0,7,3,7,0,4,0,7,6,0,6,2,1,2,3,2,5,7,7,5,],
+        [3,0,7,4,6,0,6,4,2,3,6,3,3,4,7,4,4,6,7,6,1,2,1,5,0,6,3,6,0,7,3,7,4,5,7,5,0,2,2,0,2,2,4,2,0,3,0,5,],
+        [2,3,6,7,3,2,3,6,0,2,4,2,2,6,5,6,0,7,3,7,2,1,5,1,4,4,7,4,7,0,7,3,6,0,6,3,0,0,0,2,0,4,0,6,5,5,7,7,],
+        [0,2,4,6,1,0,1,4,1,1,5,1,0,0,4,0,0,3,0,6,5,4,5,7,7,4,7,7,6,3,6,6,7,1,7,4,3,4,5,2,2,7,4,5,1,5,3,7,],
+        [1,3,5,7,2,2,2,6,0,3,4,3,2,5,5,5,4,1,4,4,0,0,0,3,1,0,4,0,1,7,4,7,2,1,5,4,6,4,6,6,0,5,0,7,6,1,6,3,],
+        [2,3,6,7,4,1,4,5,1,7,5,7,3,5,6,5,5,0,5,3,1,0,1,3,0,4,0,7,0,0,3,3,1,6,4,6,7,2,7,5,6,1,6,3,0,1,2,1,],
+        [3,3,7,7,7,0,7,4,2,0,6,0,2,1,5,4,0,7,3,7,0,5,3,5,1,3,1,6,1,2,4,5,0,1,0,4,6,0,6,3,4,6,6,4,4,7,6,5,],
+        [2,0,6,4,4,0,4,4,3,7,7,7,3,4,6,4,2,5,5,5,0,2,0,5,0,6,3,3,1,1,1,4,3,6,6,6,5,0,7,2,1,0,3,2,7,4,7,6,],
+        [1,0,5,4,3,2,3,6,7,3,7,7,3,5,7,5,4,0,7,0,4,1,7,1,0,2,0,5,4,2,7,2,0,7,3,7,2,4,2,6,0,0,2,2,2,0,4,0,],
+        [2,0,6,4,4,2,4,6,0,6,4,6,2,2,5,2,7,3,7,6,4,7,7,7,3,3,6,6,1,2,4,5,0,7,3,7,0,5,3,5,6,0,6,2,0,0,0,2,],
+        [3,1,7,5,6,0,6,4,1,3,5,7,4,4,7,4,0,2,0,5,2,0,2,3,1,4,1,7,2,5,5,2,7,0,7,3,4,5,6,5,3,2,5,0,2,7,4,5,],
+        [3,2,7,6,7,1,7,5,3,4,7,4,1,4,4,7,0,1,0,4,3,0,6,3,0,4,3,7,1,3,4,6,0,0,3,3,5,7,7,7,0,7,2,7,2,0,4,2,],
+        [2,0,6,4,4,2,4,6,1,6,5,6,0,3,4,3,7,0,7,3,4,7,7,7,0,2,3,2,3,0,6,3,0,3,0,6,1,5,3,5,4,0,6,2,5,5,7,5,],
+        [2,3,6,7,3,2,3,6,3,3,7,3,2,2,6,2,2,0,5,0,0,7,3,7,4,4,7,4,0,4,0,7,7,4,7,7,0,4,2,6,0,2,0,4,4,1,6,1,],
+        [2,0,6,4,3,3,3,7,0,7,4,7,3,4,7,4,4,1,7,1,0,2,0,5,4,5,7,5,4,0,7,3,1,0,1,3,2,3,2,5,2,1,4,3,5,0,7,0,],
+        [0,2,4,6,2,0,2,4,1,2,5,2,2,3,6,3,3,4,6,7,4,0,7,0,0,7,3,7,0,6,3,6,3,1,6,1,5,7,7,5,6,3,6,5,5,5,7,7,],
+        [3,3,7,7,6,2,6,6,2,0,2,4,3,6,7,6,1,0,1,3,0,0,0,3,3,2,6,5,0,7,3,7,3,1,6,1,2,5,5,2,7,1,7,3,0,4,2,4,],
+        [2,0,6,4,5,3,5,7,2,6,6,6,2,3,6,3,1,0,1,3,4,1,7,1,0,1,0,4,0,7,3,4,4,0,7,0,3,5,3,7,1,0,3,2,7,5,7,7,],
+        [1,0,5,4,4,3,4,7,3,0,7,4,3,5,6,5,0,3,3,6,0,4,3,7,4,0,7,3,0,0,3,3,0,7,3,4,4,2,7,5,5,5,7,7,5,0,7,0,],
+        [1,0,5,4,4,3,4,7,2,6,6,6,3,7,7,7,6,0,6,3,0,2,3,5,1,1,4,4,1,4,1,7,2,0,5,3,3,0,5,0,5,5,7,3,7,0,7,2,],
+        [2,1,6,5,5,0,5,4,3,1,7,1,2,4,6,4,1,5,4,5,1,1,1,4,4,7,7,7,2,6,5,6,3,3,6,0,0,0,2,0,0,3,0,5,3,0,5,0,],
+        [1,3,5,7,3,1,3,5,0,1,4,1,1,1,4,1,0,3,0,6,4,2,4,5,4,7,7,4,0,6,3,6,4,0,7,0,6,1,6,3,1,0,3,0,5,3,7,5,],
+        [0,3,4,7,2,3,2,7,1,5,5,5,1,3,4,3,2,0,5,0,4,1,7,1,6,3,6,6,4,2,7,2,7,4,7,7,3,4,5,4,1,0,1,2,0,5,0,7,],
+        [3,2,7,6,4,1,4,5,3,7,7,7,0,2,4,2,0,6,3,3,6,0,6,3,4,6,7,3,2,0,5,0,0,2,0,5,1,6,3,4,3,5,3,7,0,7,2,7,],
+        [1,0,5,4,3,0,3,4,0,0,4,0,1,0,4,0,0,4,3,7,7,4,7,7,6,3,6,6,1,4,4,7,0,1,3,4,5,1,5,3,5,0,7,2,1,3,3,5,],
+        [1,3,5,7,1,0,1,4,1,1,5,1,0,2,3,2,1,7,4,7,6,0,6,3,7,4,7,7,1,6,4,3,3,5,6,5,4,4,6,4,0,3,0,5,7,0,7,2,],
+        [3,0,7,4,6,0,6,4,2,3,6,3,3,4,7,4,1,4,4,7,4,5,7,5,1,3,4,0,7,0,7,3,0,2,0,5,0,7,2,7,0,6,2,4,3,5,5,7,],
+        [3,2,7,6,5,0,5,4,1,0,5,0,1,1,5,1,3,4,3,7,1,3,1,6,2,2,2,5,4,4,4,7,6,0,6,3,7,0,7,2,5,5,7,7,0,4,0,6,],
+        [1,0,5,4,4,3,4,7,1,7,5,7,3,3,6,3,2,3,2,6,2,0,5,3,4,0,7,3,0,3,3,6,0,4,3,4,3,5,5,5,5,2,7,0,5,6,7,6,],
+        [1,1,5,5,2,0,2,4,1,0,5,0,0,4,3,4,3,6,6,3,4,1,7,1,4,2,7,2,6,4,6,7,2,4,2,7,5,0,7,0,0,1,0,3,3,5,5,7,],
+        [3,3,7,7,5,3,5,7,0,7,4,3,4,7,7,7,1,0,1,3,2,1,5,1,0,5,3,2,7,0,7,3,6,2,6,5,0,6,2,4,3,2,5,2,2,7,4,5,],
+        [0,0,4,4,3,3,3,7,3,6,7,6,1,7,4,7,3,0,6,3,1,0,4,3,1,3,4,0,2,3,2,6,4,5,7,5,0,1,0,4,4,2,6,4,7,0,7,2,],
+        [1,0,5,4,4,0,4,4,0,3,4,3,3,0,6,0,3,7,6,7,3,5,6,2,7,2,7,5,0,4,0,7,3,6,6,6,0,2,2,0,1,4,3,6,5,1,7,1,],
+        [3,0,7,4,4,3,4,7,0,6,4,6,3,7,7,7,5,0,5,3,2,0,2,3,0,2,3,5,7,0,7,3,3,3,6,6,0,3,2,5,1,7,3,7,5,4,7,6,],
+        [0,3,4,7,1,2,1,6,0,2,4,6,0,4,3,4,0,0,3,0,4,4,7,7,4,3,7,3,4,0,7,0,1,1,4,1,0,7,2,7,6,5,6,7,5,4,7,4,],
+        [1,1,5,5,4,0,4,4,1,3,1,7,3,4,6,4,0,3,3,0,0,4,0,7,2,4,2,7,4,7,7,4,6,0,6,3,5,7,7,5,7,2,7,4,0,0,0,2,],
+        [0,3,4,7,4,0,4,4,6,0,6,4,3,4,6,4,4,5,7,5,2,4,5,7,3,0,3,3,0,4,0,7,5,0,5,3,0,0,3,3,1,7,3,7,7,0,7,2,],
+        [0,0,4,4,3,3,3,7,1,6,5,6,2,7,6,7,7,0,7,3,0,3,0,6,3,2,6,5,1,0,4,0,5,0,5,3,6,0,6,3,0,2,2,4,2,1,4,1,],
+        [3,2,7,6,5,0,5,4,1,2,5,6,1,1,5,1,0,5,3,5,2,2,5,5,6,1,6,4,7,1,7,4,1,0,4,0,0,4,2,6,0,7,2,7,5,7,7,5,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,1,3,4,3,6,0,6,3,1,3,1,6,2,6,5,3,3,7,6,4,4,7,7,7,3,1,5,1,7,1,7,3,0,3,0,5,],
+        [1,0,5,4,3,2,3,6,0,4,4,4,2,2,6,2,0,0,0,3,2,0,5,0,2,7,5,7,3,1,6,1,4,6,7,3,7,4,7,6,0,7,2,5,4,5,6,7,],
+        [2,1,6,5,5,0,5,4,2,0,6,0,2,4,6,4,1,2,1,5,1,5,4,5,4,6,7,6,0,0,0,3,7,0,7,3,1,1,3,3,2,7,4,5,0,6,2,6,],
+        [3,1,7,5,5,3,5,7,1,7,5,7,1,4,5,4,0,3,3,3,4,1,7,4,4,0,7,3,1,0,4,3,0,5,3,5,6,5,6,7,1,6,3,6,0,0,2,2,],
+        [0,2,4,6,3,1,3,5,3,2,7,2,2,5,5,5,4,7,7,7,0,3,0,6,4,4,7,4,0,7,3,7,0,0,3,0,4,3,6,3,4,1,6,1,1,1,3,1,],
+        [1,2,5,6,2,0,2,4,3,1,7,1,1,4,4,4,6,3,6,6,0,5,3,5,0,7,3,7,4,6,7,3,0,1,0,4,3,2,6,2,5,0,7,0,4,3,6,3,],
+        [1,1,5,5,2,0,2,4,0,1,4,1,1,2,4,2,6,3,6,6,7,1,7,4,2,5,5,2,0,4,3,7,4,7,7,7,1,4,1,6,4,0,6,0,0,5,0,7,],
+        [1,0,5,4,3,0,3,4,0,2,4,2,2,4,5,4,6,0,6,3,0,3,3,6,1,7,4,7,0,3,0,6,4,6,7,3,5,6,7,6,5,1,5,3,1,7,3,5,],
+        [3,1,7,5,6,0,6,4,2,0,2,4,3,0,7,0,1,4,1,7,4,4,4,7,2,5,5,2,0,3,0,6,6,4,6,7,5,4,5,6,0,0,0,2,7,1,7,3,],
+        [1,3,5,7,4,1,4,5,1,1,5,1,3,5,6,5,3,0,3,3,7,4,7,7,0,1,0,4,1,7,4,7,6,1,6,4,0,7,2,5,1,2,3,4,7,1,7,3,],
+        [1,2,5,6,4,1,4,5,1,1,5,1,3,5,7,5,0,1,0,4,1,7,4,7,0,0,3,0,0,5,3,2,7,0,7,3,1,5,3,5,5,7,7,7,5,4,7,4,],
+        [2,3,6,7,6,0,6,4,2,1,6,5,4,0,7,0,0,4,3,1,3,3,6,6,1,7,4,7,3,0,6,3,0,3,3,6,7,2,7,5,1,7,3,5,0,2,2,0,],
+        [1,2,5,6,5,1,5,5,1,4,5,4,4,3,7,3,1,7,4,7,0,5,3,5,0,0,3,3,4,0,7,0,0,6,3,6,7,5,7,7,4,1,6,1,0,2,0,4,],
+        [3,2,7,6,5,0,5,4,1,0,5,0,4,4,7,4,2,1,2,4,0,0,0,3,0,4,0,7,1,7,4,7,3,6,6,6,6,0,6,3,1,2,1,4,2,5,4,5,],
+        [1,0,5,4,2,3,2,7,1,7,5,7,1,5,4,5,1,3,4,0,3,3,6,6,7,3,7,6,5,0,5,3,4,1,7,1,5,7,7,7,0,0,0,2,3,6,5,6,],
+        [3,3,7,7,4,2,4,6,1,2,5,2,0,3,4,3,0,1,3,1,3,4,3,7,4,0,7,0,6,2,6,5,7,2,7,5,0,4,2,4,1,0,3,0,4,7,6,7,],
+        [1,1,5,5,2,0,2,4,0,3,4,7,1,0,4,0,3,4,6,7,7,3,7,6,6,3,6,6,0,4,3,7,4,3,7,0,3,1,5,1,0,0,0,2,0,5,2,7,],
+        [0,3,4,7,0,0,0,4,1,7,5,3,4,5,7,2,4,3,7,0,3,7,6,4,2,1,5,1,2,0,5,0,1,5,4,2,4,5,6,7,5,7,7,5,0,5,0,7,],
+        [2,2,6,6,4,2,4,6,1,2,5,2,3,6,6,6,7,3,7,6,2,4,2,7,3,0,6,0,3,7,6,7,1,4,1,7,0,5,0,7,0,1,2,1,5,4,7,2,],
+        [3,2,7,6,5,2,5,6,1,1,1,5,1,3,5,3,0,3,0,6,1,0,4,0,2,1,5,1,4,7,7,7,0,7,3,7,1,5,3,5,1,6,3,6,4,4,4,6,],
+        [3,3,7,7,3,0,3,4,1,7,5,3,2,2,5,2,4,7,7,4,4,1,7,1,0,2,0,5,2,7,5,4,1,1,1,4,0,7,2,5,6,2,6,4,4,0,6,0,],
+        [0,3,4,7,3,2,3,6,3,3,7,3,2,6,5,6,0,7,3,7,4,2,7,2,2,1,2,4,1,0,1,3,4,4,7,7,5,7,7,5,3,0,5,0,0,2,2,0,],
+        [2,0,6,4,3,3,3,7,1,0,1,4,1,7,4,7,4,1,7,4,3,2,6,5,0,2,0,5,4,0,7,3,4,4,7,7,0,7,2,5,5,0,7,0,3,5,5,7,],
+        [0,3,4,7,0,0,0,4,0,3,4,3,0,1,4,1,4,0,7,0,6,3,6,6,5,3,5,6,4,1,7,1,7,2,7,5,1,7,3,5,0,6,2,4,5,7,7,7,],
+        [2,2,6,6,5,1,5,5,0,1,4,1,3,5,6,5,3,0,6,0,0,6,3,6,7,3,7,6,1,2,1,5,6,1,6,4,5,7,7,7,2,5,4,3,7,0,7,2,],
+        [3,1,7,5,6,1,6,5,2,4,6,4,4,5,7,5,0,4,0,7,0,3,3,0,1,4,4,7,1,3,4,3,3,1,6,1,1,5,3,7,3,0,5,0,0,2,2,0,],
+        [1,3,5,7,3,1,3,5,0,1,4,1,3,2,7,2,5,3,5,6,7,3,7,6,0,7,3,7,6,3,6,6,0,3,0,6,1,6,3,6,5,0,7,0,4,3,4,5,],
+        [2,2,6,6,3,1,3,5,0,3,4,7,2,1,5,1,3,6,6,3,7,4,7,7,7,0,7,3,1,2,1,5,2,4,2,7,0,4,0,6,2,0,4,0,4,3,6,5,],
+        [2,1,6,5,4,1,4,5,0,2,0,6,0,2,4,2,3,7,6,4,7,4,7,7,3,3,3,6,5,0,5,3,0,7,3,4,4,0,6,2,7,1,7,3,2,4,2,6,],
+        [3,2,7,6,3,1,3,5,0,5,4,5,3,2,7,2,0,3,3,0,4,0,7,0,1,7,4,7,0,4,3,4,0,6,3,6,5,7,7,7,5,5,7,3,5,1,7,1,],
+        [0,2,4,6,1,1,1,5,1,0,5,4,0,1,4,1,4,5,7,5,7,1,7,4,6,4,6,7,1,7,4,7,0,7,3,4,5,2,7,0,2,2,4,4,0,4,0,6,],
+        [1,0,5,4,3,0,3,4,0,5,4,1,1,0,4,0,7,1,7,4,2,6,5,3,3,7,6,7,4,6,7,6,6,0,6,3,0,0,2,2,0,7,2,5,0,1,0,3,],
+        [3,1,7,5,7,0,7,4,3,4,7,4,3,1,7,1,2,3,2,6,0,3,3,0,4,7,7,7,0,5,3,5,3,6,6,6,1,7,3,7,3,2,5,2,1,1,3,3,],
+        [3,1,7,5,4,1,4,5,1,5,5,5,2,5,5,5,7,1,7,4,0,3,3,0,4,6,7,6,0,4,0,7,4,7,7,7,0,2,3,5,1,4,3,2,1,7,3,7,],
+        [0,3,4,7,3,2,3,6,1,3,5,3,2,4,5,4,4,0,7,0,6,3,6,6,2,1,5,1,0,0,3,0,0,6,3,6,7,3,7,5,3,7,5,5,5,7,7,7,],
+        [2,0,6,4,4,0,4,4,1,0,5,0,0,1,4,1,1,3,1,6,0,2,3,2,3,4,6,7,1,7,4,7,6,0,6,3,7,1,7,3,5,4,7,6,2,6,4,6,],
+        [0,0,4,4,3,3,3,7,0,5,4,1,3,6,7,6,4,2,7,2,7,0,7,3,0,2,0,5,1,0,1,3,1,6,4,3,5,3,5,5,5,7,7,7,4,0,6,0,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,2,7,5,7,6,3,6,6,1,2,1,5,3,1,6,1,7,2,7,5,3,0,6,0,1,1,3,3,3,5,5,5,0,0,0,2,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,3,3,6,3,4,2,7,2,0,2,3,5,4,6,7,3,0,7,3,7,2,0,5,0,7,4,7,7,0,3,2,5,4,1,6,1,],
+        [0,1,4,5,3,0,3,4,1,1,5,1,1,4,4,4,6,3,6,6,4,6,7,3,0,5,3,5,4,0,7,0,7,4,7,7,0,7,3,7,4,7,6,7,1,6,3,6,],
+        [1,2,5,6,4,1,4,5,1,1,5,1,3,5,6,5,7,3,7,6,0,4,3,7,0,3,3,6,3,0,6,0,5,2,5,5,0,0,0,2,0,5,0,7,6,1,6,3,],
+        [0,2,4,6,2,0,2,4,1,2,5,2,0,4,3,4,4,4,7,4,3,1,6,1,4,7,7,7,3,6,6,3,0,7,3,7,0,5,2,5,5,0,7,0,3,3,5,3,],
+        [1,0,5,4,2,0,2,4,2,3,6,3,1,2,4,2,4,4,7,7,1,4,4,7,7,3,7,6,0,1,0,4,3,4,6,7,5,2,7,0,3,0,5,0,1,5,3,7,],
+        [1,1,5,5,4,1,4,5,1,5,5,5,3,5,6,5,0,7,3,7,1,6,4,6,0,3,3,0,0,4,0,7,4,0,7,3,4,4,7,4,1,3,1,5,5,7,7,7,],
+        [1,1,5,5,4,0,4,4,2,1,6,1,3,0,6,0,3,6,6,6,0,1,0,4,7,1,7,4,1,2,4,5,4,7,7,7,5,2,5,4,1,3,3,5,2,5,2,7,],
+        [1,3,5,7,2,2,2,6,1,2,5,2,1,6,4,6,2,0,5,0,1,7,4,7,6,0,6,3,0,0,0,3,3,4,6,7,3,3,6,6,0,4,0,6,7,3,7,5,],
+        [1,3,5,7,3,1,3,5,0,1,4,1,1,1,4,1,0,3,0,6,5,3,5,6,1,0,4,0,4,5,7,5,7,1,7,4,4,2,6,0,5,2,7,0,0,7,2,5,],
+        [3,3,7,7,5,1,5,5,1,1,5,1,1,2,5,2,2,4,2,7,0,1,0,4,0,0,3,0,6,1,6,4,4,7,7,4,7,1,7,3,2,3,4,5,3,5,3,7,],
+        [2,3,6,7,6,0,6,4,1,7,5,3,2,1,6,1,0,6,3,3,0,0,0,3,1,2,4,2,4,3,7,6,1,0,4,0,3,7,5,7,2,5,4,3,1,4,1,6,],
+        [3,0,7,4,5,2,5,6,1,3,5,7,3,6,6,6,0,2,3,2,1,7,4,7,0,4,0,7,3,0,6,0,6,2,6,5,2,3,4,3,7,1,7,3,1,4,3,6,],
+        [2,3,6,7,6,0,6,4,0,4,4,0,4,0,7,0,4,1,4,4,0,0,0,3,1,4,4,7,2,4,5,7,7,2,7,5,5,3,5,5,1,0,1,2,0,5,0,7,],
+        [1,0,5,4,2,3,2,7,2,4,6,4,1,5,4,5,7,2,7,5,5,0,5,3,1,3,4,0,3,3,6,6,0,4,0,7,0,2,2,0,6,0,6,2,4,7,6,7,],
+        [2,1,6,5,5,1,5,5,1,4,5,4,2,5,6,5,4,0,7,0,0,0,3,0,0,3,3,3,7,1,7,4,0,7,3,7,4,7,6,7,0,2,2,2,2,6,4,6,],
+        [2,1,6,5,5,1,5,5,2,5,6,5,4,5,7,5,3,7,6,7,1,1,4,4,1,6,4,6,1,0,4,0,6,1,6,4,7,0,7,3,5,6,7,4,0,6,2,4,],
+        [0,2,4,6,3,1,3,5,3,2,7,2,2,1,6,1,1,0,4,0,0,3,0,6,4,3,7,6,0,7,3,7,4,7,7,7,0,7,2,5,0,0,2,2,0,1,2,3,],
+        [3,0,7,4,4,0,4,4,0,3,4,3,3,0,6,0,0,6,3,6,2,0,5,3,2,4,5,7,1,4,4,7,7,0,7,3,3,4,5,6,0,7,2,7,3,7,5,5,],
+        [1,3,5,7,2,2,2,6,0,3,4,3,1,4,4,4,4,1,7,4,4,5,7,2,4,0,7,0,0,0,0,3,4,0,7,3,5,6,7,6,1,7,3,7,2,0,4,2,],
+        [1,2,5,6,1,1,1,5,3,1,7,1,1,4,5,4,0,2,0,5,7,3,7,6,6,2,6,5,4,0,7,0,3,7,6,4,3,2,5,4,3,5,5,3,1,0,3,0,],
+        [1,0,5,4,4,0,4,4,1,3,5,7,3,4,7,4,4,5,7,5,0,4,3,7,1,4,4,7,6,0,6,3,5,0,5,3,0,5,2,7,1,1,3,3,5,6,7,6,],
+        [1,3,5,7,2,2,2,6,7,2,7,6,1,4,4,4,3,0,3,3,3,6,6,3,6,4,6,7,4,3,7,0,2,1,5,1,0,3,0,5,4,2,6,0,0,2,2,0,],
+        [2,1,6,5,5,0,5,4,3,1,7,1,4,2,7,2,2,7,5,7,2,2,5,5,7,3,7,6,0,2,0,5,1,3,4,6,0,7,2,5,6,5,6,7,3,4,5,6,],
+        [0,3,4,7,3,1,3,5,0,1,4,1,3,2,7,2,4,6,7,6,4,3,7,3,1,0,4,0,0,2,3,2,4,5,7,5,5,1,7,1,1,5,3,7,5,7,7,7,],
+        [2,2,6,6,3,1,3,5,3,2,7,2,2,5,5,5,0,2,0,5,1,0,1,3,0,7,3,7,4,1,7,1,0,6,3,6,4,7,6,5,6,2,6,4,1,2,3,0,],
+        [3,2,7,6,5,0,5,4,2,3,6,7,3,0,6,0,0,4,0,7,3,7,6,4,7,0,7,3,1,4,1,7,1,0,1,3,2,5,4,7,2,4,4,2,5,7,7,5,],
+        [0,2,4,6,3,1,3,5,0,1,4,1,3,2,7,2,2,7,5,7,3,6,6,3,0,0,3,0,0,4,0,7,4,0,7,0,5,5,7,7,7,4,7,6,1,4,1,6,],
+        [0,2,4,6,1,1,1,5,1,2,5,2,0,1,4,1,7,1,7,4,2,7,5,7,0,3,0,6,1,6,4,3,2,0,5,0,6,1,6,3,4,5,6,7,4,4,6,6,],
+        [3,2,7,6,6,1,6,5,1,2,5,6,4,1,7,1,7,2,7,5,0,0,3,0,3,7,6,7,1,6,4,6,1,5,4,2,0,1,2,1,4,4,6,6,0,4,2,2,],
+        [2,1,6,5,4,3,4,7,1,0,5,0,0,6,4,6,0,2,3,5,6,0,6,3,7,4,7,7,3,1,6,4,7,0,7,3,2,3,5,6,0,5,2,5,0,4,2,2,],
+        [2,2,6,6,6,1,6,5,2,5,6,5,2,2,6,2,2,0,5,0,0,4,3,4,0,0,0,3,1,6,4,6,4,7,7,7,0,5,0,7,7,2,7,4,3,1,5,1,],
+        [1,0,5,4,4,0,4,4,0,3,4,3,3,4,7,4,0,5,3,5,4,7,7,7,4,4,7,7,7,0,7,3,0,6,3,6,0,4,2,4,6,0,6,2,0,0,2,2,],
+        [1,3,5,7,4,2,4,6,2,3,6,3,3,4,6,4,2,0,5,0,0,6,3,6,0,1,0,4,1,1,4,1,7,0,7,3,4,6,7,6,0,5,2,7,5,5,7,7,],
+        [3,0,7,4,5,0,5,4,2,0,6,0,3,0,6,0,2,4,5,7,1,6,4,3,0,3,3,3,4,4,7,7,1,2,4,2,0,4,2,6,0,0,0,2,2,7,4,7,],
+        [2,0,6,4,3,3,3,7,3,6,7,6,2,5,5,5,2,1,2,4,4,3,7,0,1,0,1,3,4,0,7,3,0,4,0,7,3,2,5,0,5,7,7,7,0,1,0,3,],
+        [1,3,5,7,2,2,2,6,6,0,6,4,1,2,4,2,0,2,0,5,5,1,5,4,4,7,7,4,3,3,6,6,4,0,4,3,2,7,4,5,1,3,1,5,7,5,7,7,],
+        [2,1,6,5,5,0,5,4,0,6,4,2,4,0,7,0,1,2,4,5,4,6,7,3,0,1,0,4,4,7,7,7,3,5,6,2,0,7,2,5,1,0,3,0,0,0,2,2,],
+        [2,1,6,5,3,1,3,5,0,6,4,6,3,4,7,4,5,3,5,6,1,0,1,3,2,1,5,1,0,1,0,4,2,7,5,7,4,0,6,0,7,0,7,2,3,0,5,2,],
+        [2,0,6,4,3,3,3,7,3,6,7,6,2,7,5,7,4,1,7,4,7,0,7,3,1,0,4,3,0,0,0,3,1,3,1,6,2,4,2,6,2,2,2,4,4,3,4,5,],
+        [0,0,4,4,3,3,3,7,0,7,4,7,2,7,5,7,4,5,7,5,1,0,4,0,2,1,5,4,5,0,5,3,0,3,0,6,0,2,2,4,6,2,6,4,0,1,2,3,],
+        [0,1,4,5,3,0,3,4,0,3,4,7,3,1,7,1,4,2,7,5,0,4,3,1,4,4,7,7,4,3,7,6,2,4,5,7,4,0,7,0,0,5,0,7,1,5,1,7,],
+        [0,3,4,7,3,2,3,6,1,0,5,0,2,6,5,6,4,5,7,2,0,6,3,3,4,2,7,5,4,3,7,6,4,1,7,1,0,4,3,1,5,0,7,0,5,5,7,7,],
+        [0,3,4,7,1,2,1,6,0,2,4,2,0,6,3,6,4,1,7,4,4,4,7,7,2,7,5,4,2,0,5,0,7,0,7,3,0,1,2,1,0,5,2,3,6,0,6,2,],
+        [2,2,6,6,5,1,5,5,0,1,4,5,4,5,7,5,4,0,4,3,0,3,3,6,0,2,3,5,7,0,7,3,0,0,3,0,1,5,3,7,6,1,6,3,4,7,6,7,],
+        [2,1,6,5,3,1,3,5,7,3,7,7,3,4,7,4,6,0,6,3,2,3,2,6,1,3,1,6,0,2,0,5,0,7,3,7,0,0,3,0,4,7,6,7,3,6,5,6,],
+        [1,2,5,6,2,0,2,4,1,0,5,0,2,3,6,3,1,6,4,6,2,7,5,7,6,4,6,7,7,0,7,3,0,4,0,7,7,4,7,7,1,5,3,5,6,0,6,2,],
+        [0,3,4,7,0,0,0,4,0,3,4,3,3,5,6,2,4,0,7,0,4,6,7,3,0,7,3,7,4,1,7,4,1,1,4,1,1,2,4,2,0,6,2,6,6,4,6,6,],
+        [1,3,5,7,2,2,2,6,3,1,7,5,2,5,5,5,0,3,0,6,4,3,7,6,7,1,7,4,1,7,4,7,4,0,7,0,3,0,5,2,1,1,1,3,0,0,0,2,],
+        [0,3,4,7,3,1,3,5,0,1,4,1,3,2,7,2,4,4,7,7,0,7,3,7,3,2,6,5,4,6,7,6,0,0,3,0,0,6,2,6,7,2,7,4,2,2,2,4,],
+        [3,1,7,5,4,0,4,4,0,3,4,3,3,4,7,4,3,7,6,7,0,2,3,2,3,5,6,5,0,4,0,7,4,6,7,6,5,2,7,2,7,0,7,2,2,4,2,6,],
+        [3,2,7,6,4,1,4,5,1,1,5,1,3,5,6,5,1,3,4,0,3,6,6,6,2,7,5,7,0,4,0,7,0,0,0,3,1,5,3,3,1,2,3,4,7,2,7,4,],
+        [0,0,4,4,1,3,1,7,5,0,5,4,0,3,3,3,2,5,5,5,2,7,5,7,6,3,6,6,7,0,7,3,2,6,5,6,0,4,0,7,6,0,6,2,7,4,7,6,],
+        [1,3,5,7,2,2,2,6,2,0,6,0,1,6,4,6,4,1,7,4,0,1,0,4,3,2,6,5,3,1,6,4,0,7,3,7,5,1,7,1,3,3,5,5,1,0,1,2,],
+        [1,3,5,7,2,2,2,6,0,3,4,3,2,5,5,5,7,3,7,6,3,1,6,4,3,0,6,0,0,7,3,7,1,4,4,1,0,2,2,0,5,2,7,2,4,7,6,5,],
+        [1,1,5,5,3,3,3,7,2,1,6,1,2,3,5,3,0,4,0,7,6,4,6,7,1,3,1,6,1,0,4,0,7,4,7,7,5,5,5,7,2,4,2,6,5,4,7,2,],
+        [3,1,7,5,4,0,4,4,0,2,4,6,2,4,5,4,0,3,3,0,7,1,7,4,0,7,3,7,0,5,3,2,0,0,3,3,4,7,7,7,4,5,6,5,6,0,6,2,],
+        [2,1,6,5,2,0,2,4,3,7,7,3,0,4,3,4,3,3,6,0,2,4,2,7,4,7,7,7,4,1,7,4,1,0,1,3,3,0,5,0,0,1,0,3,1,4,1,6,],
+        [0,2,4,6,1,1,1,5,0,7,4,3,1,4,4,4,5,2,5,5,3,3,6,0,2,0,2,3,4,7,7,4,6,4,6,7,1,7,3,7,3,0,3,2,7,1,7,3,],
+        [1,0,5,4,3,2,3,6,2,3,2,7,2,2,5,2,3,7,6,7,4,4,7,7,0,4,3,1,4,0,7,3,4,2,7,5,1,5,1,7,0,2,2,0,5,4,7,6,],
+        [1,3,5,7,4,2,4,6,7,0,7,4,3,6,7,6,0,4,3,7,1,1,4,1,3,3,6,0,0,5,3,2,0,0,3,0,1,6,3,4,5,3,7,5,6,1,6,3,],
+        [3,0,7,4,6,3,6,7,2,6,6,6,4,3,7,3,1,2,1,5,2,4,5,1,0,2,3,2,0,7,3,4,5,4,5,7,0,3,2,3,0,0,0,2,5,0,7,0,],
+        [0,3,4,7,1,2,1,6,0,2,4,2,0,2,4,2,4,0,7,3,3,4,6,4,4,5,7,5,6,0,6,3,2,3,5,3,1,1,3,1,1,0,3,0,1,7,3,5,],
+        [3,2,7,6,6,1,6,5,3,2,7,2,3,1,7,1,0,6,3,6,3,7,6,7,2,3,5,6,1,0,1,3,1,5,4,5,2,2,4,4,0,1,0,3,2,0,4,0,],
+        [0,0,4,4,2,0,2,4,3,4,7,0,0,0,3,0,4,2,7,5,0,6,3,6,0,7,3,7,0,1,0,4,7,1,7,4,4,6,7,6,4,5,6,3,1,5,3,5,],
+        [1,1,5,5,4,0,4,4,0,3,4,3,2,4,5,4,0,7,3,7,7,2,7,5,0,5,3,5,6,1,6,4,4,6,7,6,0,6,3,6,5,0,5,2,5,7,7,7,],
+        [2,1,6,5,6,0,6,4,3,3,7,7,4,2,7,2,2,4,2,7,3,7,6,7,0,3,0,6,1,1,1,4,2,0,5,3,5,1,7,3,1,5,1,7,3,6,5,6,],
+        [0,1,4,5,0,0,0,4,1,7,5,3,0,3,4,3,6,3,6,6,2,1,5,1,2,2,5,2,3,0,6,0,7,3,7,6,1,4,3,6,0,6,2,4,5,5,5,7,],
+        [2,3,6,7,5,2,5,6,0,3,0,7,3,6,6,6,3,3,6,0,1,7,4,4,1,0,4,3,1,3,4,0,2,7,5,7,0,2,2,0,6,2,6,4,7,1,7,3,],
+        [3,2,7,6,6,1,6,5,3,2,7,2,4,3,7,3,0,6,3,3,1,2,4,5,4,4,7,7,1,3,4,0,0,2,0,5,0,7,2,5,4,7,6,7,1,7,3,5,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,1,5,5,5,4,1,7,1,0,7,3,7,7,2,7,5,4,3,7,6,0,3,0,6,3,0,5,0,5,7,7,7,4,4,6,2,],
+        [2,0,6,4,4,2,4,6,2,3,2,7,2,6,5,6,0,3,3,0,3,4,3,7,7,2,7,5,5,0,5,3,1,3,1,6,6,0,6,2,5,5,7,7,0,0,2,2,],
+        [0,0,4,4,2,0,2,4,3,6,7,2,0,0,3,0,4,7,7,4,4,2,7,5,4,0,7,0,0,3,0,6,0,7,3,4,4,1,6,1,4,2,6,2,1,2,1,4,],
+        [0,3,4,7,1,2,1,6,1,7,5,3,0,4,3,4,0,0,3,3,4,1,7,1,1,0,4,0,4,2,7,2,4,5,7,5,5,7,7,7,7,4,7,6,3,2,5,4,],
+        [2,3,6,7,3,2,3,6,3,5,7,5,2,4,5,4,1,3,4,0,5,0,5,3,1,7,4,7,0,3,3,0,7,2,7,5,0,0,0,2,0,5,2,5,3,5,5,7,],
+        [3,3,7,7,4,2,4,6,2,3,6,3,3,4,6,4,0,1,0,4,1,1,1,4,0,6,3,6,7,1,7,4,3,1,6,1,5,0,7,0,4,7,6,5,1,0,3,0,],
+        [1,1,5,5,3,3,3,7,1,3,1,7,3,6,7,6,0,1,0,4,7,2,7,5,2,1,5,4,2,0,5,0,6,0,6,3,2,5,2,7,3,7,5,7,3,1,5,1,],
+        [0,0,4,4,3,3,3,7,1,6,5,6,2,5,5,5,6,1,6,4,2,3,5,0,4,0,4,3,7,1,7,4,0,3,0,6,0,2,2,4,5,7,7,5,5,4,7,6,],
+        [2,1,6,5,3,0,3,4,3,1,7,1,2,4,5,4,0,5,3,5,3,6,6,6,4,2,7,5,1,0,1,3,2,7,5,7,0,0,0,3,5,0,7,0,0,6,2,6,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,2,3,2,4,4,7,7,4,1,7,4,3,4,6,7,1,3,4,6,0,1,3,1,1,0,3,0,4,0,6,2,7,0,7,2,],
+        [2,2,6,6,3,1,3,5,0,1,4,1,3,2,7,2,2,7,5,4,0,4,3,7,4,0,7,3,4,7,7,7,1,0,1,3,7,4,7,6,6,3,6,5,0,5,2,3,],
+        [3,2,7,6,4,1,4,5,2,2,6,2,3,3,6,3,2,4,2,7,0,1,0,4,7,2,7,5,2,0,5,0,3,7,6,4,1,4,1,6,3,4,3,6,1,3,3,3,],
+        [1,3,5,7,3,1,3,5,0,3,4,3,2,5,5,5,7,0,7,3,6,0,6,3,0,0,3,0,4,7,7,4,5,1,5,4,0,7,3,7,2,6,4,4,6,4,6,6,],
+        [0,1,4,5,1,1,1,5,1,4,5,4,1,2,5,2,4,7,7,4,1,4,1,7,3,7,6,4,4,0,7,0,3,1,6,1,5,2,7,2,0,4,0,6,5,7,7,5,],
+        [3,2,7,6,6,1,6,5,7,0,7,4,4,3,7,3,1,3,4,6,1,4,4,7,1,1,4,1,0,4,0,7,3,3,6,6,3,0,5,0,0,0,0,2,1,7,3,7,],
+        [1,0,5,4,2,3,2,7,0,0,4,0,1,7,4,7,1,1,4,4,6,1,6,4,7,2,7,5,0,2,0,5,3,6,6,6,3,1,5,1,5,7,7,7,3,5,5,5,],
+        [2,1,6,5,3,0,3,4,3,1,7,1,2,4,5,4,2,4,5,7,0,1,0,4,7,3,7,6,1,7,4,7,1,0,1,3,4,0,4,2,1,4,1,6,5,4,5,6,],
+        [3,0,7,4,5,2,5,6,2,6,6,6,4,6,7,6,4,0,7,3,3,7,6,7,1,4,4,4,0,0,3,3,0,1,0,4,1,0,4,3,5,0,7,0,2,7,4,5,],
+        [2,2,6,6,6,1,6,5,3,7,7,7,4,3,7,3,1,0,1,3,1,4,4,1,0,7,3,4,0,2,0,5,3,0,6,0,2,4,4,6,7,4,7,6,2,7,4,5,],
+        [0,2,4,6,3,1,3,5,0,3,0,7,3,2,7,2,2,0,5,0,1,2,4,5,4,4,7,4,1,4,4,7,4,3,7,3,6,5,6,7,4,1,6,1,7,5,7,7,],
+        [0,3,4,7,1,2,1,6,3,5,7,1,0,6,4,6,3,4,6,7,1,1,4,4,4,1,7,4,1,0,4,3,4,0,7,0,5,7,7,5,0,5,2,7,0,0,0,2,],
+        [0,2,4,6,2,0,2,4,1,0,5,0,2,3,6,3,0,3,0,6,3,4,6,7,7,4,7,7,0,7,3,7,0,3,3,6,3,1,5,1,6,4,6,6,3,2,5,2,],
+        [3,2,7,6,6,1,6,5,3,1,7,1,4,3,7,3,3,6,6,6,0,4,3,4,3,0,6,0,2,2,5,5,1,5,4,5,1,1,3,1,5,2,7,0,4,7,6,7,],
+        [0,1,4,5,3,0,3,4,0,0,4,0,2,4,5,4,2,4,5,7,0,4,3,7,4,3,7,0,6,4,6,7,1,4,4,7,7,4,7,6,4,2,6,2,7,1,7,3,],
+        [0,3,4,7,0,0,0,4,3,0,3,4,0,1,4,1,1,7,4,4,7,1,7,4,6,2,6,5,5,1,5,4,4,6,7,6,1,0,1,2,2,4,4,2,5,7,7,7,],
+        [2,2,6,6,4,0,4,4,1,0,5,0,2,0,5,0,2,3,2,6,0,4,3,7,6,0,6,3,1,4,1,7,5,1,5,4,1,0,1,3,3,4,5,6,7,5,7,7,],
+        [2,0,6,4,4,0,4,4,0,0,4,0,3,4,6,4,0,3,3,6,1,3,4,6,4,7,7,4,7,0,7,3,0,4,3,7,6,0,6,2,0,5,2,7,3,2,5,2,],
+        [1,0,5,4,2,3,2,7,7,1,7,5,1,5,4,5,3,0,6,3,4,7,7,7,0,1,3,1,4,6,7,6,3,3,6,0,4,4,7,1,0,3,0,5,0,2,2,2,],
+        [1,0,5,4,4,3,4,7,6,2,6,6,3,7,6,7,2,0,5,0,0,6,3,3,0,7,3,4,3,3,6,0,0,0,0,3,5,2,7,0,1,7,3,5,7,1,7,3,],
+        [0,0,4,4,1,0,1,4,0,5,4,1,0,0,4,0,2,4,2,7,4,6,7,3,3,6,6,3,4,1,7,1,4,7,7,4,5,0,7,0,3,4,5,2,1,5,1,7,],
+        [3,2,7,6,7,1,7,5,3,2,7,2,1,0,1,4,0,7,3,4,2,0,5,0,0,0,3,3,1,7,4,4,0,2,0,5,3,6,5,6,0,1,2,1,3,1,5,1,],
+        [2,0,6,4,4,2,4,6,1,6,5,6,0,3,4,3,3,2,3,5,7,0,7,3,4,1,7,4,2,7,5,7,0,0,0,3,5,4,7,6,0,4,2,2,3,0,5,0,],
+        [0,3,4,7,0,0,0,4,1,2,5,6,4,2,7,5,4,3,7,6,1,7,4,7,4,6,7,3,2,0,5,0,0,4,0,7,1,1,3,3,5,1,7,1,0,2,2,4,],
+        [2,1,6,5,4,1,4,5,1,1,5,1,3,5,6,5,0,6,3,6,7,3,7,6,0,4,3,4,4,0,7,0,1,2,1,5,5,2,7,2,6,1,6,3,0,3,2,5,],
+        [2,1,6,5,3,0,3,4,7,0,7,4,1,4,4,4,0,2,0,5,4,2,7,5,2,7,5,7,6,0,6,3,1,0,1,3,4,5,6,7,1,6,3,6,4,4,6,6,],
+        [1,1,5,5,3,3,3,7,0,7,4,7,2,7,5,7,1,2,1,5,2,1,5,1,7,4,7,7,3,2,6,5,6,1,6,4,0,3,2,5,5,3,7,3,3,0,5,0,],
+        [2,0,6,4,4,0,4,4,1,0,5,0,2,0,5,0,0,1,0,4,6,0,6,3,7,3,7,6,0,0,3,3,4,7,7,7,0,7,2,5,3,5,5,5,3,6,5,6,],
+        [3,3,7,7,4,2,4,6,1,0,5,0,3,4,6,4,7,3,7,6,0,2,0,5,1,4,4,1,0,6,3,6,0,1,3,1,0,7,3,7,6,0,6,2,4,7,6,5,],
+        [3,3,7,7,5,1,5,5,1,1,1,5,3,1,6,1,6,0,6,3,0,7,3,7,1,6,4,6,2,0,2,3,0,0,0,3,4,5,6,7,7,4,7,6,3,3,3,5,],
+        [1,2,5,6,2,1,2,5,0,2,4,2,1,3,4,3,4,1,7,1,6,3,6,6,4,7,7,7,5,2,5,5,1,6,4,6,0,0,2,0,7,3,7,5,0,1,2,1,],
+        [2,0,6,4,5,0,5,4,1,3,5,3,4,2,7,2,1,5,4,2,0,3,3,0,0,7,3,4,4,7,7,4,2,7,5,4,0,0,0,2,5,7,7,5,1,7,3,5,],
+        [0,3,4,7,1,2,1,6,0,0,4,0,1,3,4,3,3,2,6,2,0,4,0,7,3,4,6,4,5,0,5,3,4,5,7,5,0,1,3,1,7,2,7,4,4,6,6,6,],
+        [3,1,7,5,4,0,4,4,3,6,7,2,2,4,5,4,1,7,4,7,1,3,1,6,4,6,7,6,0,3,3,0,0,4,0,7,1,1,3,3,5,0,5,2,0,0,0,2,],
+        [0,1,4,5,2,1,2,5,1,1,5,1,0,5,3,5,6,4,6,7,4,4,7,1,0,6,3,6,7,2,7,5,2,0,5,0,5,5,5,7,5,2,7,0,0,7,2,7,],
+        [2,0,6,4,4,0,4,4,1,0,5,0,0,1,4,1,2,3,5,6,0,2,3,2,1,7,4,7,1,3,1,6,0,3,0,6,7,3,7,5,6,5,6,7,6,1,6,3,],
+        [1,0,5,4,4,3,4,7,0,6,4,6,3,7,7,7,2,4,2,7,4,2,7,2,4,1,7,1,0,0,3,3,1,2,1,5,6,3,6,5,3,0,5,0,0,3,2,3,],
+        [0,2,4,6,0,1,0,5,2,3,6,3,1,3,4,0,4,4,7,7,0,7,3,4,2,7,5,4,4,1,7,1,4,2,7,2,6,5,6,7,1,2,3,0,3,7,5,7,],
+        [1,1,5,5,1,0,1,4,0,7,4,7,0,0,4,0,3,4,6,7,2,1,5,1,1,6,4,6,6,1,6,4,7,2,7,5,5,4,7,6,0,5,2,5,1,4,3,2,],
+        [0,3,4,7,4,0,4,4,0,2,4,6,3,2,6,2,3,4,6,7,0,0,3,0,0,7,3,7,7,0,7,3,2,1,5,1,4,3,6,3,1,1,3,3,0,4,2,6,],
+        [2,3,6,7,5,1,5,5,0,2,0,6,1,2,5,2,7,2,7,5,2,4,5,7,6,3,6,6,1,7,4,7,1,3,1,6,5,0,7,0,0,7,2,5,2,0,4,0,],
+        [1,0,5,4,2,3,2,7,1,7,5,7,1,3,4,3,4,6,7,3,4,1,7,1,0,0,0,3,2,0,5,3,3,4,6,7,1,4,1,6,1,2,3,0,5,2,7,2,],
+        [2,2,6,6,5,1,5,5,3,2,7,2,2,5,6,5,0,6,3,6,0,2,0,5,1,1,4,1,4,0,7,0,7,3,7,6,0,0,2,0,2,3,4,3,4,7,6,7,],
+        [1,2,5,6,2,1,2,5,7,2,7,6,1,3,4,3,0,6,3,6,6,2,6,5,5,0,5,3,4,7,7,7,0,0,3,0,7,0,7,2,3,7,5,5,0,2,0,4,],
+        [1,0,5,4,4,0,4,4,0,3,4,3,2,4,5,4,1,4,1,7,7,0,7,3,6,1,6,4,0,0,0,3,3,5,6,5,3,7,6,7,7,4,7,6,5,0,5,2,],
+        [0,2,4,6,3,1,3,5,2,7,6,7,3,2,7,2,0,6,3,6,3,0,6,0,4,3,7,6,4,4,7,7,4,1,7,1,2,0,2,3,0,2,0,4,5,3,7,3,],
+        [2,2,6,6,2,1,2,5,6,0,6,4,2,2,5,2,2,0,5,0,1,0,1,3,7,1,7,4,0,2,0,5,3,4,6,7,1,7,4,4,4,3,6,5,0,7,2,5,],
+        [2,3,6,7,3,2,3,6,1,3,5,3,2,6,6,6,4,4,7,4,7,0,7,3,2,7,5,7,0,2,0,5,3,0,6,0,7,5,7,7,1,1,3,1,0,7,2,5,],
+        [1,2,5,6,1,1,1,5,0,3,4,3,1,4,5,4,7,3,7,6,0,0,3,0,3,2,6,2,4,1,7,1,1,1,4,1,0,5,2,7,1,7,3,5,3,7,5,5,],
+        [0,1,4,5,4,0,4,4,2,3,6,3,3,2,6,2,4,6,7,6,7,0,7,3,0,2,3,5,2,7,5,7,0,4,0,7,1,0,3,0,5,7,7,7,1,4,1,6,],
+        [3,3,7,7,4,2,4,6,1,2,5,2,3,6,6,6,2,3,2,6,3,1,6,1,0,7,3,7,6,2,6,5,0,5,3,5,3,7,5,7,0,2,2,0,7,2,7,4,],
+        [0,3,4,7,1,2,1,6,0,2,4,2,0,6,3,6,5,0,5,3,4,4,7,7,2,3,5,6,4,0,7,3,4,3,7,6,0,7,2,7,0,4,2,4,5,7,7,5,],
+        [0,0,4,4,3,0,3,4,0,4,4,4,2,4,5,4,3,6,6,6,3,3,6,3,7,2,7,5,3,7,6,4,1,2,1,5,0,7,2,5,0,1,0,3,1,7,3,5,],
+        [2,1,6,5,5,0,5,4,2,0,6,0,4,4,7,4,0,3,0,6,1,3,1,6,4,6,7,6,2,3,2,6,3,3,3,6,0,7,2,7,5,7,7,5,6,1,6,3,],
+        [3,3,7,7,6,2,6,6,3,2,7,2,4,6,7,6,0,1,3,4,1,4,1,7,0,3,3,0,0,4,3,1,4,1,7,1,3,6,5,4,0,0,2,0,6,0,6,2,],
+        [1,3,5,7,2,2,2,6,1,2,5,2,1,6,4,6,4,0,7,0,7,4,7,7,4,1,7,1,1,7,4,7,3,3,6,6,5,2,5,4,0,1,2,1,1,4,1,6,],
+        [1,2,5,6,4,1,4,5,5,0,5,4,2,5,5,5,0,0,0,3,3,0,3,3,7,0,7,3,6,2,6,5,0,6,3,6,4,7,6,7,7,5,7,7,0,4,2,2,],
+        [0,0,4,4,3,3,3,7,1,0,5,4,2,3,6,3,4,1,7,1,0,3,0,6,4,6,7,6,2,3,2,6,1,2,1,5,5,2,7,2,0,7,2,7,4,5,6,5,],
+        [3,2,7,6,6,1,6,5,1,3,5,7,4,5,7,5,0,4,0,7,1,4,4,7,1,1,4,1,2,2,5,5,1,0,4,0,5,1,5,3,1,2,3,4,1,5,3,7,],
+        [1,0,5,4,2,3,2,7,0,6,4,6,1,7,5,7,2,2,5,5,1,2,1,5,7,3,7,6,2,0,5,3,6,2,6,5,4,0,6,2,5,2,7,0,0,0,0,2,],
+        [0,0,4,4,2,0,2,4,1,2,5,2,1,0,4,0,1,3,1,6,6,1,6,4,0,7,3,7,7,1,7,4,4,6,7,6,0,2,0,4,1,6,3,4,4,5,6,7,],
+        [2,3,6,7,3,2,3,6,0,2,4,2,3,3,7,3,4,4,7,7,0,7,3,7,3,0,6,0,1,3,1,6,2,1,5,1,5,4,7,4,5,2,7,2,2,0,4,2,],
+        [2,3,6,7,2,0,2,4,1,2,5,2,1,0,4,0,7,3,7,6,4,4,7,7,3,1,6,1,0,4,3,7,1,4,4,7,4,3,6,3,3,5,5,7,7,0,7,2,],
+        [0,2,4,6,2,2,2,6,1,2,5,2,0,6,3,6,3,3,6,3,3,7,6,7,7,3,7,6,0,1,3,1,1,0,4,0,2,3,5,6,4,4,6,6,4,1,6,1,],
+        [2,0,6,4,5,3,5,7,0,3,4,7,4,3,7,3,1,7,4,4,7,4,7,7,4,0,7,0,0,0,3,3,3,0,6,3,4,5,6,5,6,2,6,4,3,7,5,5,],
+        [3,1,7,5,6,0,6,4,3,0,7,0,3,4,7,4,1,0,4,3,0,3,0,6,2,4,2,7,0,0,3,3,3,5,6,5,4,6,6,6,1,4,1,6,3,7,5,7,],
+        [2,0,6,4,3,3,3,7,3,6,7,6,2,7,5,7,7,4,7,7,3,2,6,5,1,2,1,5,3,0,6,3,0,1,0,4,5,0,7,2,0,0,2,2,0,7,2,5,],
+        [1,0,5,4,4,0,4,4,1,3,5,7,3,2,6,2,1,4,1,7,7,1,7,4,0,1,0,4,6,3,6,6,1,2,4,5,2,7,4,7,5,0,7,0,0,7,2,5,],
+        [1,1,5,5,3,1,3,5,0,2,0,6,1,1,4,1,7,4,7,7,7,0,7,3,6,1,6,4,5,0,5,3,3,6,6,6,0,7,2,5,1,2,1,4,4,2,6,0,],
+        [1,2,5,6,4,1,4,5,0,0,0,4,3,5,6,5,7,1,7,4,2,4,2,7,0,4,0,7,2,0,5,0,4,7,7,7,1,1,3,1,5,1,5,3,6,2,6,4,],
+        [2,1,6,5,4,1,4,5,1,1,5,1,0,2,4,2,0,7,3,4,3,7,6,7,7,0,7,3,0,2,3,5,4,6,7,6,0,6,3,6,1,0,3,0,6,1,6,3,],
+        [2,1,6,5,2,0,2,4,0,3,4,3,2,3,5,3,6,1,6,4,4,0,7,0,1,7,4,4,4,7,7,7,7,4,7,7,1,0,1,2,0,5,2,7,3,0,5,2,],
+        [0,3,4,7,1,2,1,6,2,2,6,6,1,3,5,3,3,0,6,3,0,7,3,7,0,3,0,6,6,2,6,5,2,4,5,7,5,0,7,2,2,0,4,2,5,4,7,4,],
+        [3,2,7,6,5,2,5,6,2,0,6,0,1,3,5,3,7,2,7,5,3,7,6,7,1,1,4,1,0,0,0,3,1,3,1,6,6,1,6,3,0,7,2,5,0,4,0,6,],
+        [2,2,6,6,5,1,5,5,2,2,6,2,3,5,6,5,1,4,4,7,0,0,0,3,7,2,7,5,0,4,0,7,1,2,4,5,1,7,3,7,4,6,6,6,5,7,7,7,],
+        [3,2,7,6,6,1,6,5,2,3,6,7,4,3,7,3,1,3,4,6,4,4,4,7,0,4,3,7,1,1,4,1,2,0,5,0,0,0,0,3,0,7,2,5,4,2,6,0,],
+        [1,3,5,7,3,1,3,5,7,2,7,6,2,5,5,5,1,6,4,6,0,7,3,7,0,3,0,6,4,1,7,1,4,3,7,6,1,0,4,0,0,2,2,2,5,2,7,0,],
+        [0,3,4,7,2,3,2,7,6,3,6,7,2,4,6,4,1,3,4,0,3,3,6,0,7,0,7,3,1,0,4,3,5,4,5,7,0,4,0,6,0,2,2,0,7,5,7,7,],
+        [0,3,4,7,1,1,1,5,1,2,5,2,0,1,3,1,4,6,7,3,3,6,6,3,0,4,0,7,3,5,6,2,1,0,4,0,7,4,7,6,2,4,2,6,1,7,3,7,],
+        [0,3,4,7,0,0,0,4,3,0,7,4,3,7,7,3,2,6,5,3,4,3,7,6,2,4,5,1,2,0,2,3,3,4,6,7,1,0,1,2,5,0,7,2,0,5,0,7,],
+        [1,2,5,6,2,0,2,4,2,6,6,2,1,0,4,0,4,1,7,4,3,3,6,0,3,2,6,5,1,4,1,7,3,7,6,7,0,1,0,4,4,6,6,4,7,4,7,6,],
+        [0,2,4,6,2,0,2,4,0,2,0,6,2,1,6,1,3,0,3,3,2,7,5,4,7,4,7,7,2,5,5,2,3,7,6,7,5,5,7,3,1,4,1,6,4,4,6,2,],
+        [1,2,5,6,3,2,3,6,0,4,4,4,3,3,7,3,3,0,6,0,3,7,6,7,4,1,7,1,3,1,6,4,4,5,7,5,0,5,2,5,2,0,2,2,0,1,0,3,],
+        [2,2,6,6,4,2,4,6,1,2,5,2,2,2,5,2,3,1,6,1,1,3,1,6,1,7,4,7,0,4,0,7,7,0,7,3,5,7,7,7,0,2,2,0,3,4,3,6,],
+        [1,3,5,7,3,1,3,5,0,3,4,3,3,2,7,2,0,4,3,7,2,7,5,4,4,4,7,7,3,0,6,0,4,7,7,4,7,4,7,6,0,0,0,2,4,1,6,1,],
+        [3,2,7,6,6,0,6,4,7,0,7,4,2,1,6,1,3,3,3,6,2,4,2,7,0,0,0,3,1,2,1,5,3,7,6,4,0,5,2,3,5,7,7,5,3,0,5,0,],
+        [1,2,5,6,3,2,3,6,0,4,4,4,1,2,4,2,3,7,6,7,7,4,7,7,4,0,7,3,1,1,4,1,4,3,7,0,4,6,6,4,0,0,0,2,1,3,1,5,],
+        [1,1,5,5,2,0,2,4,0,7,4,3,1,0,4,0,1,7,4,7,7,2,7,5,4,6,7,6,4,2,7,5,0,2,0,5,4,1,6,1,1,3,3,5,5,0,7,0,],
+        [2,2,6,6,5,1,5,5,0,0,4,0,3,5,6,5,7,1,7,4,1,1,1,4,1,0,4,3,0,4,3,7,0,7,3,4,5,7,7,7,4,6,6,4,0,5,2,7,],
+        [1,3,5,7,3,3,3,7,0,5,4,5,2,7,5,7,4,0,7,0,5,2,5,5,4,1,4,4,0,1,0,4,0,0,3,0,7,4,7,6,1,4,3,2,4,1,6,1,],
+        [1,1,5,5,3,3,3,7,0,5,4,5,2,3,6,3,3,2,6,2,4,6,7,6,1,0,4,0,0,4,3,4,4,7,7,7,7,1,7,4,0,7,2,7,5,0,7,0,],
+        [3,0,7,4,6,0,6,4,0,2,0,6,3,4,7,4,0,1,3,1,2,3,5,3,1,3,4,6,7,0,7,3,1,7,4,7,0,7,2,5,5,5,5,7,7,5,7,7,],
+        [3,2,7,6,4,1,4,5,2,7,6,7,3,5,6,5,0,4,0,7,0,0,3,3,2,4,2,7,1,4,1,7,7,1,7,4,4,2,7,5,3,6,5,6,3,0,5,0,],
+        [2,1,6,5,6,0,6,4,0,2,0,6,2,3,6,3,4,7,7,7,1,6,4,6,3,3,6,6,7,3,7,6,1,3,4,0,1,5,3,7,2,3,2,5,1,0,1,2,],
+        [2,3,6,7,4,3,4,7,0,3,4,3,3,7,6,7,6,2,6,5,7,1,7,4,0,0,3,0,2,4,2,7,0,2,3,2,1,5,1,7,5,1,5,3,0,1,2,1,],
+        [0,3,4,7,1,2,1,6,1,3,5,3,0,6,3,6,1,1,4,1,7,0,7,3,1,0,4,0,2,2,5,5,3,2,6,2,3,4,5,6,1,7,3,7,6,5,6,7,],
+        [2,2,6,6,4,2,4,6,1,2,5,2,0,3,4,3,1,4,1,7,1,0,4,0,3,4,6,4,7,0,7,3,2,4,2,7,0,1,3,1,4,1,6,1,4,7,6,7,],
+        [3,0,7,4,6,3,6,7,3,7,7,7,4,3,7,3,0,1,3,1,0,7,3,4,0,2,3,5,4,0,7,0,0,4,3,7,2,2,4,4,3,6,5,4,1,0,3,2,],
+        [0,1,4,5,2,1,2,5,1,1,5,1,1,1,5,1,4,4,7,1,4,0,7,0,5,4,5,7,4,0,4,3,0,7,3,7,1,6,3,6,0,2,2,4,7,5,7,7,],
+        [2,2,6,6,5,1,5,5,2,1,6,1,2,5,6,5,3,0,6,0,0,4,3,4,7,0,7,3,0,6,3,6,3,7,6,7,2,1,4,3,0,2,2,0,6,2,6,4,],
+        [3,2,7,6,4,1,4,5,3,0,7,0,3,3,6,3,2,1,2,4,0,7,3,4,4,4,4,7,0,4,3,7,1,1,1,4,7,3,7,5,5,7,7,5,1,7,3,5,],
+        [0,2,4,6,2,2,2,6,1,2,5,2,0,6,3,6,3,1,6,1,0,3,0,6,4,5,7,2,6,4,6,7,4,4,7,1,3,0,6,0,0,7,2,5,3,7,5,7,],
+        [2,3,6,7,6,0,6,4,3,0,7,0,2,1,6,1,1,2,4,2,1,6,4,6,4,4,7,7,0,6,3,3,1,4,4,7,0,7,2,7,7,3,7,5,0,2,0,4,],
+        [2,1,6,5,6,0,6,4,2,6,6,6,4,2,7,2,1,4,4,4,0,2,0,5,7,3,7,6,1,5,4,5,1,3,4,0,1,7,4,7,5,1,7,3,0,1,2,3,],
+        [2,0,6,4,4,2,4,6,0,6,4,6,0,3,4,3,0,2,3,2,4,7,7,4,0,5,3,5,7,0,7,3,6,0,6,3,1,7,3,7,7,5,7,7,3,0,5,2,],
+        [3,0,7,4,5,2,5,6,1,6,5,6,4,6,7,6,0,5,3,5,1,1,1,4,2,4,5,1,7,0,7,3,0,0,0,3,2,2,4,0,5,1,7,3,4,7,6,7,],
+        [1,0,5,4,2,3,2,7,2,6,6,6,1,3,4,3,6,1,6,4,0,3,0,6,3,0,6,0,7,0,7,3,3,4,3,7,3,7,5,7,4,5,6,5,0,2,2,0,],
+        [3,1,7,5,4,0,4,4,1,0,5,0,3,2,6,2,3,4,6,7,7,1,7,4,0,4,3,7,1,1,1,4,2,2,2,5,0,0,0,2,3,4,3,6,5,5,7,7,],
+        [1,2,5,6,2,1,2,5,2,2,6,2,0,5,3,5,0,6,3,6,1,0,4,0,0,7,3,7,4,3,7,6,4,7,7,7,3,1,5,1,7,1,7,3,4,4,6,6,],
+        [0,1,4,5,4,0,4,4,1,4,5,4,0,1,4,1,3,7,6,4,0,2,0,5,5,0,5,3,6,1,6,4,7,2,7,5,3,6,5,6,1,5,1,7,4,7,6,7,],
+        [0,0,4,4,2,0,2,4,0,3,4,7,1,4,4,4,4,1,7,4,5,3,5,6,0,7,3,7,4,0,7,3,2,4,5,7,5,0,7,0,3,0,3,2,0,4,2,6,],
+        [0,0,4,4,2,0,2,4,1,0,5,0,1,0,5,0,1,5,4,5,6,0,6,3,0,6,3,6,4,4,7,7,3,2,6,5,3,7,5,7,0,1,0,3,7,1,7,3,],
+        [2,2,6,6,3,1,3,5,0,1,4,1,2,3,5,3,1,0,4,0,6,2,6,5,1,5,4,5,0,2,0,5,0,6,3,6,5,0,7,2,3,7,5,7,4,5,6,3,],
+        [3,1,7,5,4,0,4,4,0,3,4,3,3,4,7,4,2,4,5,7,6,0,6,3,0,4,3,7,0,0,3,0,0,7,3,4,5,5,7,7,3,4,5,6,7,0,7,2,],
+        [2,2,6,6,3,1,3,5,3,4,7,4,2,1,6,1,1,2,1,5,0,2,0,5,2,4,2,7,3,7,6,7,7,0,7,3,4,0,6,0,2,0,4,2,3,6,5,6,],
+        [3,3,7,7,5,3,5,7,1,3,5,3,4,7,7,7,0,4,3,7,0,2,3,2,7,2,7,5,1,6,4,6,2,1,5,1,2,7,4,5,1,4,3,4,4,0,6,0,],
+        [2,0,6,4,5,0,5,4,2,4,6,4,1,1,5,1,2,6,5,6,7,2,7,5,1,3,4,3,2,7,5,7,6,0,6,3,3,5,5,5,0,7,2,5,0,3,0,5,],
+        [2,1,6,5,5,1,5,5,2,5,6,5,4,1,7,1,0,4,3,1,1,5,4,2,4,6,7,6,4,0,7,0,0,7,3,7,0,0,0,2,7,2,7,4,4,7,6,7,],
+        [3,2,7,6,3,1,3,5,0,5,4,5,1,1,4,1,6,1,6,4,3,0,6,0,0,3,3,0,3,7,6,7,4,2,7,2,5,5,7,7,1,6,3,6,0,7,2,7,],
+        [0,1,4,5,3,1,3,5,5,3,5,7,2,5,5,5,7,2,7,5,0,6,3,6,3,0,6,3,1,7,4,7,6,4,6,7,2,4,4,6,0,0,2,0,0,2,0,4,],
+        [2,2,6,6,4,0,4,4,0,0,4,0,0,1,4,1,1,2,1,5,2,3,2,6,4,1,7,4,3,4,6,7,0,1,0,4,0,5,0,7,5,4,7,6,5,2,7,0,],
+        [3,3,7,7,5,1,5,5,0,7,4,3,1,2,5,2,0,0,0,3,1,1,4,1,2,6,5,6,6,2,6,5,4,0,7,0,0,5,2,3,1,7,3,7,7,3,7,5,],
+        [3,2,7,6,4,1,4,5,0,1,0,5,2,5,5,5,1,7,4,7,1,1,1,4,6,0,6,3,2,0,5,0,2,1,2,4,5,7,7,5,7,0,7,2,5,5,7,3,],
+        [1,1,5,5,1,0,1,4,0,2,4,2,0,4,3,4,1,6,4,6,6,1,6,4,1,5,4,5,3,0,6,0,5,1,5,4,1,7,4,7,5,7,7,5,0,1,2,3,],
+        [0,1,4,5,4,0,4,4,0,4,4,4,2,0,5,0,6,1,6,4,0,5,3,5,4,7,7,4,0,6,3,6,5,1,5,4,5,5,7,7,3,7,5,5,0,0,2,2,],
+        [0,3,4,7,2,3,2,7,1,3,5,3,0,7,3,7,2,3,5,6,3,1,6,1,7,1,7,4,3,2,6,2,3,0,6,0,5,5,7,7,2,6,4,4,1,0,1,2,],
+        [1,3,5,7,3,1,3,5,3,0,7,4,2,5,5,5,0,1,3,1,6,4,6,7,0,5,3,2,4,4,7,1,0,2,0,5,0,6,3,6,7,5,7,7,4,7,6,5,],
+        [0,3,4,7,1,2,1,6,2,1,6,5,0,6,4,6,4,2,7,5,2,3,5,6,3,1,6,1,4,4,7,7,0,7,3,7,0,4,0,6,5,2,7,2,0,0,0,2,],
+        [3,0,7,4,4,3,4,7,0,6,4,6,3,7,7,7,0,2,3,5,2,0,5,3,0,1,3,4,4,0,7,3,0,0,3,3,1,0,3,2,5,6,7,6,0,3,2,5,],
+        [0,0,4,4,1,3,1,7,3,1,7,1,1,6,5,6,2,3,5,3,6,2,6,5,0,3,3,0,2,5,5,2,7,3,7,6,4,0,6,0,5,7,7,7,3,2,5,4,],
+        [3,0,7,4,5,2,5,6,0,0,4,4,4,2,7,2,0,3,3,6,2,4,5,7,1,7,4,7,1,2,4,5,0,4,3,1,7,5,7,7,6,5,6,7,0,5,0,7,],
+        [3,3,7,7,6,2,6,6,3,0,7,0,4,2,7,2,4,1,7,1,0,7,3,7,0,1,3,4,1,4,4,7,1,0,4,3,1,3,4,6,5,7,7,5,4,5,6,7,],
+        [0,2,4,6,2,2,2,6,1,4,5,4,1,2,5,2,0,3,0,6,1,0,4,0,0,7,3,7,6,3,6,6,7,4,7,7,7,1,7,3,5,5,5,7,5,1,7,3,],
+        [0,2,4,6,2,0,2,4,0,7,4,3,0,0,3,0,4,4,7,1,4,7,7,4,3,3,6,0,2,7,5,4,6,3,6,6,1,4,1,7,5,2,7,0,3,2,5,0,],
+        [1,1,5,5,3,3,3,7,0,5,4,5,2,3,6,3,4,0,7,3,4,7,7,7,0,0,3,0,3,1,6,4,1,1,1,4,5,2,7,0,7,0,7,2,3,2,5,0,],
+        [0,0,4,4,1,3,1,7,2,0,6,4,1,6,5,6,7,0,7,3,1,2,4,5,3,0,6,0,1,0,4,3,0,2,0,5,5,7,7,7,5,5,7,5,4,1,6,3,],
+        [3,2,7,6,7,1,7,5,0,0,0,4,1,6,5,6,4,0,7,0,1,5,4,2,2,5,5,5,3,0,6,3,3,7,6,7,1,2,3,4,4,4,6,2,0,7,2,7,],
+        [1,0,5,4,4,0,4,4,2,3,2,7,2,4,5,4,6,3,6,6,5,0,5,3,0,0,3,3,7,4,7,7,0,7,3,4,1,2,1,4,0,3,0,5,3,7,5,5,],
+        [2,2,6,6,4,2,4,6,3,0,7,4,2,2,5,2,3,7,6,7,0,7,3,4,0,1,0,4,4,5,7,2,1,0,1,3,4,0,6,2,6,0,6,2,1,4,1,6,],
+        [0,2,4,6,2,0,2,4,1,2,5,2,1,0,4,0,4,4,7,7,0,3,0,6,1,7,4,7,0,7,3,4,4,5,7,2,4,3,6,5,7,3,7,5,5,1,7,1,],
+        [2,3,6,7,4,3,4,7,0,2,0,6,3,7,6,7,3,2,6,2,2,0,5,0,0,0,3,3,1,3,4,6,3,1,6,4,2,7,5,4,1,5,1,7,4,1,6,1,],
+        [1,2,5,6,5,1,5,5,0,3,0,7,3,5,6,5,1,1,4,1,1,6,4,6,1,0,4,0,4,0,7,0,1,7,4,7,7,3,7,5,0,2,2,4,4,4,6,2,],
+        [1,2,5,6,2,0,2,4,2,1,6,1,1,0,4,0,4,2,7,5,0,4,3,7,0,3,3,6,3,2,6,5,3,3,6,6,5,2,7,2,0,7,2,7,0,0,0,2,],
+        [3,1,7,5,6,0,6,4,1,2,1,6,3,0,7,0,0,4,0,7,0,0,3,3,2,5,5,5,3,6,6,6,3,2,6,5,2,7,5,7,7,3,7,5,0,1,0,3,],
+        [1,2,5,6,2,1,2,5,3,7,7,3,1,1,4,1,3,3,6,0,0,4,0,7,3,5,6,2,1,3,1,6,1,0,4,0,7,5,7,7,4,3,6,5,0,1,0,3,],
+        [3,2,7,6,5,0,5,4,1,0,5,0,3,0,6,0,0,7,3,4,4,2,4,5,0,2,3,5,4,7,7,7,7,1,7,4,0,4,0,6,3,6,5,6,1,7,3,7,],
+        [1,1,5,5,5,0,5,4,1,4,5,4,4,4,7,4,4,7,7,7,7,0,7,3,1,5,4,5,2,0,5,3,0,4,0,7,4,1,4,3,0,0,0,2,5,6,7,6,],
+        [2,0,6,4,4,2,4,6,7,2,7,6,2,6,5,6,4,1,7,1,1,2,4,5,1,3,4,6,1,4,1,7,0,0,3,3,0,2,0,5,6,5,6,7,5,4,5,6,],
+        [2,3,6,7,5,2,5,6,3,3,7,3,3,6,6,6,1,2,1,5,4,0,7,0,1,7,4,7,0,0,3,0,0,3,0,6,4,1,7,1,7,5,7,7,2,6,4,4,],
+        [2,1,6,5,3,0,3,4,0,0,4,0,2,2,5,2,2,7,5,7,4,4,7,7,0,6,3,6,0,3,3,6,6,1,6,4,7,0,7,3,1,3,3,5,0,1,2,3,],
+        [3,1,7,5,4,0,4,4,5,2,5,6,3,2,6,2,1,7,4,7,4,5,7,2,0,0,3,3,0,6,3,6,0,3,3,6,5,0,7,0,0,2,2,4,0,1,2,1,],
+        [0,0,4,4,1,3,1,7,7,3,7,7,0,5,3,5,4,0,7,0,0,3,3,0,5,2,5,5,4,1,7,1,3,6,6,6,0,6,2,4,0,0,0,2,1,4,3,2,],
+        [3,3,7,7,6,2,6,6,3,3,7,3,4,2,7,2,3,0,6,0,1,1,1,4,1,6,4,6,2,1,5,1,3,7,6,7,0,4,0,6,2,3,2,5,5,4,5,6,],
+        [2,2,6,6,5,1,5,5,2,0,6,4,4,3,7,3,0,5,3,5,3,4,6,7,1,3,4,6,0,6,3,6,1,4,4,1,6,0,6,2,0,1,2,1,5,4,7,6,],
+        [1,2,5,6,3,0,3,4,0,2,4,2,1,0,4,0,6,4,6,7,4,3,7,3,0,3,0,6,2,3,2,6,1,4,1,7,7,4,7,6,3,5,3,7,4,1,6,1,],
+        [2,2,6,6,4,2,4,6,0,2,4,2,3,6,6,6,1,4,1,7,3,0,6,3,7,1,7,4,2,1,5,1,0,3,3,3,0,5,0,7,0,0,2,0,5,3,7,5,],
+        [0,0,4,4,3,3,3,7,3,0,7,0,2,5,5,5,3,2,6,2,7,2,7,5,4,1,7,1,1,4,1,7,0,2,0,5,4,3,6,3,0,1,2,3,6,4,6,6,],
+        [3,3,7,7,5,3,5,7,1,3,5,3,4,7,7,7,3,2,6,2,7,3,7,6,0,7,3,4,3,0,6,0,0,3,0,6,2,7,4,5,3,1,5,1,2,4,4,6,],
+        [1,2,5,6,4,1,4,5,2,2,6,2,3,3,6,3,2,0,5,0,7,4,7,7,1,6,4,6,0,2,0,5,2,7,5,7,1,3,1,5,0,1,2,1,4,4,6,6,],
+        [3,3,7,7,4,2,4,6,1,2,5,2,3,4,6,4,0,0,3,0,0,4,0,7,1,7,4,7,3,1,6,1,0,3,3,6,1,3,4,6,4,0,6,0,7,4,7,6,],
+        [2,3,6,7,6,0,6,4,3,1,7,1,4,2,7,2,2,0,5,0,4,3,7,6,2,6,5,3,0,4,0,7,1,0,1,3,0,1,2,1,0,3,2,5,3,7,5,7,],
+        [0,1,4,5,0,0,0,4,0,3,4,3,1,4,1,7,7,0,7,3,2,6,5,3,3,7,6,4,7,4,7,7,3,0,6,0,6,5,6,7,0,6,2,6,1,0,3,2,],
+        [3,1,7,5,7,0,7,4,0,3,4,7,2,1,6,5,1,2,4,5,1,7,4,4,6,0,6,3,4,6,7,6,2,0,5,0,0,5,2,7,0,0,0,2,0,4,2,2,],
+        [0,1,4,5,3,0,3,4,3,3,7,3,2,0,6,0,1,7,4,4,2,7,5,7,4,1,7,1,3,6,6,6,0,2,0,5,4,2,6,2,0,7,2,5,5,4,7,6,],
+        [0,1,4,5,0,0,0,4,3,2,7,6,4,4,7,7,7,0,7,3,2,0,5,3,4,1,7,4,1,7,4,7,2,4,5,7,0,6,2,6,1,1,3,3,1,4,3,6,],
+        [3,1,7,5,5,3,5,7,2,0,2,4,1,6,5,6,0,7,3,7,2,5,5,2,6,0,6,3,0,0,0,3,1,4,4,1,3,5,6,5,4,0,6,0,1,1,3,3,],
+        [1,0,5,4,4,0,4,4,2,1,6,1,2,4,5,4,1,4,4,7,0,0,3,3,6,2,6,5,2,6,5,6,7,1,7,4,1,7,3,7,0,1,2,3,2,0,4,0,],
+        [0,3,4,7,4,0,4,4,1,3,5,7,2,0,5,0,3,1,6,4,5,1,5,4,6,1,6,4,3,4,6,7,0,4,0,7,0,0,0,2,2,1,2,3,1,5,1,7,],
+        [1,1,5,5,5,0,5,4,0,7,4,7,2,0,6,0,1,4,4,1,1,0,4,3,0,2,3,5,3,4,6,7,0,6,3,6,7,5,7,7,6,5,6,7,5,1,7,3,],
+        [1,3,5,7,2,2,2,6,1,2,5,2,0,6,3,6,0,7,3,7,4,5,7,2,2,1,5,1,1,0,4,0,3,3,6,6,0,2,0,5,4,7,6,5,2,1,4,3,],
+        [2,1,6,5,3,0,3,4,3,1,7,1,2,0,6,0,4,2,7,5,4,7,7,7,0,2,3,5,0,3,0,6,4,5,7,2,2,6,5,6,0,1,2,3,1,4,1,6,],
+        [3,3,7,7,5,1,5,5,2,1,6,1,3,1,6,1,0,2,3,5,1,4,4,7,1,2,4,5,3,0,6,0,6,2,6,5,0,7,3,7,0,4,2,6,2,2,4,2,],
+        [1,3,5,7,1,0,1,4,0,3,0,7,0,4,4,4,1,5,4,2,2,3,5,0,4,3,7,3,4,7,7,4,7,0,7,3,0,0,0,2,4,0,6,2,5,5,7,7,],
+        [2,1,6,5,5,0,5,4,3,1,7,1,4,2,7,2,1,7,4,4,1,1,4,4,1,2,4,5,0,0,0,3,4,6,7,3,0,5,2,5,5,7,7,7,7,4,7,6,],
+        [2,2,6,6,2,1,2,5,2,2,6,2,0,5,3,5,2,6,5,6,3,1,3,4,7,4,7,7,1,0,4,0,2,7,5,7,0,0,0,3,5,0,7,0,1,1,1,3,],
+        [1,2,5,6,4,1,4,5,1,1,5,1,3,5,7,5,2,0,5,0,2,4,2,7,6,1,6,4,1,4,1,7,0,2,0,5,7,1,7,3,3,3,5,3,5,7,7,7,],
+        [1,3,5,7,1,0,1,4,0,5,4,5,0,0,3,0,3,4,3,7,3,3,6,6,4,0,7,3,4,1,7,4,3,1,6,4,0,1,0,3,0,7,2,7,4,7,6,5,],
+        [3,3,7,7,4,1,4,5,1,1,5,1,3,5,6,5,2,4,2,7,0,0,0,3,6,1,6,4,1,1,1,4,1,0,4,0,1,5,1,7,3,6,5,6,4,3,6,5,],
+        [1,2,5,6,2,1,2,5,2,2,6,2,1,1,4,1,7,2,7,5,0,6,3,6,0,1,0,4,4,7,7,7,2,0,5,0,3,3,5,3,1,7,3,7,4,4,6,6,],
+        [3,0,7,4,6,3,6,7,3,7,7,7,2,4,6,4,4,0,7,3,1,4,1,7,2,5,5,5,0,4,0,7,0,1,3,1,0,0,3,3,5,0,7,2,7,5,7,7,],
+        [3,1,7,5,4,0,4,4,3,6,7,2,3,2,6,2,1,2,1,5,0,7,3,4,4,4,7,7,2,1,2,4,2,7,5,7,0,2,0,5,5,1,7,1,1,0,3,0,],
+        [0,0,4,4,2,0,2,4,2,6,6,6,1,4,4,4,3,2,6,2,0,4,0,7,7,1,7,4,3,7,6,7,4,5,7,5,5,3,7,5,4,0,6,0,0,1,0,3,],
+        [3,1,7,5,6,0,6,4,2,3,2,7,3,4,7,4,4,6,7,6,3,5,6,5,0,0,3,0,4,7,7,7,0,0,3,3,1,4,1,7,0,3,0,5,1,2,3,2,],
+        [0,2,4,6,1,0,1,4,2,5,6,1,0,4,3,4,6,3,6,6,1,1,4,4,2,3,5,0,5,3,5,6,7,3,7,6,4,0,7,3,0,5,0,7,2,7,4,5,],
+        [1,0,5,4,2,3,2,7,3,1,7,5,1,3,5,3,3,7,6,7,1,7,4,4,2,0,5,0,0,1,0,4,4,1,7,4,3,6,6,6,4,5,6,5,7,0,7,2,],
+      ];
+      List<List<String>> all_words=[
+        ["chief","grade","limit","path","lift","warm","gift","suit","burn","boy","jet","dog",],
+        ["quiet","twice","limit","below","lift","warm","wave","blow","bone","bad","jet","dog",],
+        ["dress","grade","worth","below","shop","jump","wave","suit","shoe","bad","jet","dog",],
+        ["dress","grade","limit","below","lift","warm","deny","blow","burn","boy","buy","dog",],
+        ["dress","twice","broad","feed","folk","warm","gift","suit","bone","boy","buy","pig",],
+        ["chief","twice","limit","below","folk","jump","deny","suit","bone","bad","cat","pig",],
+        ["chief","twice","limit","below","folk","soft","deny","cook","burn","wine","jet","pig",],
+        ["quiet","aware","limit","path","lift","jump","deny","blow","shoe","bad","jet","pig",],
+        ["dress","aware","broad","below","shop","warm","deny","blow","bone","bad","cat","and",],
+        ["quiet","aware","worth","below","folk","soft","wave","blow","bone","boy","buy","pig",],
+        ["quiet","aware","worth","below","lift","jump","gift","suit","shoe","bad","jet","pig",],
+        ["quiet","grade","limit","below","folk","soft","gift","blow","burn","bad","buy","pig",],
+        ["quiet","grade","limit","feed","folk","warm","deny","blow","bone","bad","buy","pig",],
+        ["chief","aware","worth","path","folk","soft","deny","cook","bone","bad","buy","pig",],
+        ["dress","twice","broad","path","folk","warm","gift","blow","burn","bad","buy","and",],
+        ["quiet","grade","broad","feed","folk","soft","wave","blow","burn","bad","buy","and",],
+        ["chief","aware","worth","feed","shop","soft","gift","suit","shoe","boy","cat","pig",],
+        ["quiet","twice","broad","below","lift","jump","deny","blow","bone","bad","jet","pig",],
+        ["dress","twice","broad","path","lift","jump","wave","blow","bone","boy","jet","dog",],
+        ["dress","twice","limit","below","lift","jump","deny","cook","burn","boy","jet","dog",],
+        ["dress","twice","limit","below","folk","jump","wave","cook","shoe","boy","cat","pig",],
+        ["chief","aware","worth","path","folk","warm","deny","suit","bone","boy","cat","dog",],
+        ["dress","grade","worth","feed","folk","jump","gift","blow","shoe","bad","buy","dog",],
+        ["dress","aware","worth","feed","shop","jump","wave","blow","shoe","boy","jet","and",],
+        ["quiet","twice","limit","feed","folk","soft","gift","cook","shoe","boy","cat","and",],
+        ["quiet","twice","broad","below","lift","warm","wave","cook","bone","boy","jet","dog",],
+        ["chief","twice","limit","below","shop","jump","wave","blow","bone","bad","cat","and",],
+        ["dress","twice","worth","below","shop","warm","deny","blow","burn","boy","buy","and",],
+        ["dress","twice","broad","below","lift","soft","deny","suit","bone","boy","jet","dog",],
+        ["dress","aware","broad","feed","lift","soft","gift","cook","bone","boy","jet","dog",],
+        ["chief","grade","worth","feed","shop","soft","wave","blow","shoe","wine","jet","pig",],
+        ["chief","aware","limit","path","folk","warm","wave","suit","shoe","boy","buy","and",],
+        ["quiet","twice","limit","below","shop","jump","gift","cook","shoe","bad","jet","pig",],
+        ["dress","twice","worth","path","lift","jump","gift","cook","bone","boy","cat","pig",],
+        ["dress","aware","worth","path","lift","soft","gift","suit","bone","bad","buy","dog",],
+        ["dress","twice","limit","path","lift","jump","gift","blow","shoe","boy","buy","pig",],
+        ["chief","twice","worth","feed","shop","warm","wave","suit","burn","bad","buy","pig",],
+        ["quiet","twice","worth","path","lift","jump","deny","blow","bone","bad","cat","dog",],
+        ["dress","twice","limit","below","folk","soft","gift","cook","bone","boy","jet","pig",],
+        ["chief","aware","worth","feed","folk","jump","gift","blow","shoe","boy","jet","and",],
+        ["quiet","twice","limit","below","shop","jump","gift","blow","shoe","wine","jet","pig",],
+        ["dress","twice","worth","feed","folk","jump","gift","cook","shoe","boy","buy","dog",],
+        ["chief","grade","broad","path","shop","warm","gift","cook","burn","boy","jet","dog",],
+        ["quiet","aware","limit","feed","lift","jump","deny","cook","bone","bad","buy","dog",],
+        ["quiet","grade","limit","path","lift","warm","wave","blow","shoe","bad","cat","dog",],
+        ["quiet","aware","limit","feed","shop","warm","gift","cook","shoe","bad","cat","pig",],
+        ["chief","grade","worth","path","folk","jump","deny","cook","shoe","boy","cat","dog",],
+        ["chief","aware","worth","below","folk","jump","gift","cook","shoe","boy","jet","dog",],
+        ["dress","grade","broad","path","shop","jump","gift","suit","bone","bad","jet","pig",],
+        ["quiet","aware","limit","feed","shop","soft","deny","suit","bone","boy","jet","and",],
+        ["dress","aware","limit","feed","lift","warm","wave","blow","shoe","boy","jet","dog",],
+        ["chief","twice","worth","below","shop","warm","gift","cook","shoe","wine","cat","and",],
+        ["chief","twice","limit","feed","lift","soft","gift","suit","shoe","boy","buy","pig",],
+        ["dress","grade","broad","below","lift","soft","wave","cook","burn","boy","jet","and",],
+        ["chief","grade","worth","below","folk","jump","gift","cook","burn","bad","buy","and",],
+        ["quiet","aware","worth","below","lift","jump","wave","blow","shoe","boy","cat","and",],
+        ["dress","grade","broad","below","folk","jump","gift","blow","bone","boy","cat","pig",],
+        ["chief","twice","broad","feed","folk","soft","wave","suit","bone","bad","cat","pig",],
+        ["chief","grade","broad","path","folk","soft","gift","suit","bone","boy","cat","dog",],
+        ["chief","twice","limit","path","shop","jump","deny","suit","shoe","wine","jet","pig",],
+        ["dress","twice","worth","feed","lift","jump","deny","suit","shoe","bad","buy","dog",],
+        ["dress","aware","broad","below","lift","soft","gift","blow","bone","boy","cat","dog",],
+        ["chief","aware","limit","below","lift","jump","deny","cook","shoe","wine","jet","dog",],
+        ["chief","twice","broad","feed","folk","jump","wave","cook","burn","wine","jet","and",],
+        ["dress","twice","worth","feed","lift","jump","wave","blow","bone","bad","cat","and",],
+        ["quiet","twice","broad","below","folk","jump","gift","blow","shoe","boy","buy","dog",],
+        ["quiet","twice","worth","path","shop","jump","wave","suit","burn","wine","jet","dog",],
+        ["dress","twice","worth","feed","lift","warm","deny","suit","burn","wine","buy","pig",],
+        ["chief","aware","broad","feed","folk","jump","gift","cook","bone","bad","cat","and",],
+        ["chief","grade","limit","feed","lift","soft","gift","blow","shoe","bad","jet","and",],
+        ["dress","twice","limit","below","lift","soft","wave","blow","shoe","bad","cat","and",],
+        ["dress","grade","worth","path","lift","jump","deny","blow","shoe","bad","buy","pig",],
+        ["dress","grade","broad","feed","shop","warm","deny","suit","burn","wine","jet","and",],
+        ["chief","twice","worth","feed","lift","warm","wave","blow","bone","boy","cat","pig",],
+        ["dress","grade","broad","below","shop","jump","gift","cook","bone","bad","jet","pig",],
+        ["quiet","grade","limit","path","lift","warm","wave","suit","bone","wine","buy","pig",],
+        ["dress","grade","worth","path","folk","jump","wave","blow","burn","boy","jet","dog",],
+        ["quiet","twice","worth","below","shop","soft","wave","blow","bone","bad","cat","and",],
+        ["dress","twice","broad","feed","lift","soft","wave","suit","bone","boy","buy","dog",],
+        ["chief","grade","worth","feed","shop","warm","wave","suit","shoe","bad","buy","and",],
+        ["dress","twice","limit","feed","lift","jump","deny","suit","shoe","boy","jet","pig",],
+        ["chief","grade","worth","below","lift","jump","gift","cook","bone","bad","buy","and",],
+        ["dress","grade","broad","path","folk","warm","deny","cook","bone","wine","jet","and",],
+        ["dress","grade","worth","path","lift","jump","wave","cook","shoe","wine","buy","dog",],
+        ["chief","aware","limit","feed","folk","jump","gift","cook","shoe","boy","buy","and",],
+        ["quiet","grade","worth","path","folk","soft","deny","cook","bone","boy","jet","dog",],
+        ["chief","twice","limit","feed","shop","jump","wave","suit","shoe","boy","buy","pig",],
+        ["quiet","grade","limit","feed","folk","soft","deny","suit","shoe","boy","cat","dog",],
+        ["quiet","aware","limit","feed","folk","soft","gift","suit","shoe","bad","cat","pig",],
+        ["chief","grade","broad","feed","lift","soft","gift","cook","bone","wine","jet","and",],
+        ["chief","twice","broad","feed","lift","soft","wave","blow","shoe","boy","jet","pig",],
+        ["chief","grade","limit","feed","shop","soft","gift","cook","bone","bad","jet","dog",],
+        ["chief","twice","broad","below","lift","warm","deny","cook","shoe","wine","cat","pig",],
+        ["dress","grade","broad","feed","shop","warm","deny","blow","burn","boy","buy","pig",],
+        ["quiet","twice","worth","path","folk","soft","deny","cook","shoe","boy","buy","dog",],
+        ["chief","twice","worth","path","shop","jump","deny","blow","bone","bad","buy","pig",],
+        ["chief","grade","broad","path","lift","warm","gift","suit","bone","wine","buy","dog",],
+        ["quiet","grade","limit","feed","lift","jump","wave","suit","bone","boy","jet","and",],
+        ["chief","aware","limit","feed","folk","warm","deny","blow","shoe","wine","cat","pig",],
+        ["quiet","aware","broad","path","folk","soft","deny","cook","shoe","bad","jet","and",],
+        ["quiet","twice","broad","below","shop","soft","wave","blow","burn","boy","buy","dog",],
+        ["quiet","grade","broad","feed","folk","soft","wave","suit","burn","boy","jet","dog",],
+        ["chief","aware","limit","path","shop","jump","wave","blow","shoe","bad","cat","dog",],
+        ["dress","aware","limit","below","folk","jump","deny","suit","bone","boy","buy","and",],
+        ["dress","grade","limit","feed","shop","soft","deny","suit","bone","boy","cat","and",],
+        ["chief","twice","limit","path","folk","jump","gift","cook","shoe","bad","jet","and",],
+        ["dress","twice","worth","below","shop","warm","deny","cook","shoe","wine","cat","and",],
+        ["quiet","twice","limit","path","lift","soft","gift","blow","shoe","boy","cat","dog",],
+        ["chief","grade","worth","feed","lift","jump","gift","cook","bone","wine","cat","pig",],
+        ["chief","aware","worth","path","shop","jump","gift","suit","shoe","bad","jet","and",],
+        ["dress","aware","worth","feed","shop","soft","wave","blow","shoe","boy","jet","pig",],
+        ["quiet","grade","worth","path","shop","warm","gift","cook","burn","boy","jet","dog",],
+        ["quiet","twice","worth","feed","lift","jump","wave","blow","shoe","boy","jet","and",],
+        ["chief","grade","broad","feed","lift","soft","gift","suit","bone","boy","buy","and",],
+        ["dress","twice","worth","path","lift","warm","wave","blow","bone","wine","cat","and",],
+        ["quiet","twice","broad","below","shop","jump","gift","suit","shoe","bad","buy","and",],
+        ["chief","grade","worth","below","folk","soft","wave","blow","shoe","bad","cat","and",],
+        ["dress","grade","broad","feed","folk","jump","gift","cook","burn","boy","jet","dog",],
+        ["chief","aware","broad","feed","folk","soft","gift","blow","burn","boy","jet","and",],
+        ["dress","twice","broad","feed","folk","soft","deny","cook","shoe","bad","buy","dog",],
+        ["quiet","grade","limit","below","folk","jump","deny","cook","bone","boy","cat","dog",],
+        ["chief","grade","broad","path","lift","jump","gift","blow","shoe","wine","jet","pig",],
+        ["chief","twice","broad","feed","lift","soft","deny","cook","shoe","bad","jet","and",],
+        ["dress","aware","broad","below","folk","jump","wave","blow","shoe","wine","jet","and",],
+        ["chief","aware","worth","below","lift","jump","wave","suit","burn","boy","jet","pig",],
+        ["chief","aware","limit","below","folk","warm","wave","suit","shoe","boy","buy","and",],
+        ["quiet","aware","worth","path","folk","jump","deny","blow","bone","boy","buy","dog",],
+        ["chief","aware","limit","below","folk","warm","wave","blow","bone","bad","jet","pig",],
+        ["chief","grade","broad","path","lift","warm","gift","cook","shoe","bad","buy","and",],
+        ["dress","aware","worth","feed","lift","jump","gift","cook","burn","boy","cat","and",],
+        ["quiet","grade","limit","below","shop","soft","gift","suit","bone","bad","jet","pig",],
+        ["quiet","aware","worth","path","shop","soft","wave","cook","bone","boy","buy","and",],
+        ["quiet","grade","broad","feed","lift","jump","wave","blow","burn","bad","jet","pig",],
+        ["quiet","aware","limit","below","lift","jump","deny","suit","burn","bad","jet","dog",],
+        ["chief","aware","worth","path","lift","jump","deny","blow","burn","boy","buy","pig",],
+        ["dress","aware","broad","path","lift","soft","gift","suit","bone","bad","buy","dog",],
+        ["quiet","grade","worth","below","lift","soft","deny","suit","burn","boy","buy","and",],
+        ["quiet","aware","worth","below","folk","soft","deny","blow","burn","bad","cat","dog",],
+        ["chief","aware","broad","path","lift","warm","gift","cook","bone","boy","buy","pig",],
+        ["chief","twice","broad","feed","shop","jump","wave","suit","burn","wine","cat","pig",],
+        ["chief","aware","broad","feed","shop","jump","deny","blow","shoe","bad","cat","and",],
+        ["chief","grade","limit","below","lift","warm","gift","blow","shoe","boy","cat","and",],
+        ["chief","twice","broad","feed","folk","jump","wave","blow","shoe","boy","jet","dog",],
+        ["quiet","twice","limit","below","lift","soft","deny","blow","bone","boy","jet","dog",],
+        ["quiet","grade","limit","below","lift","warm","wave","blow","shoe","boy","cat","and",],
+        ["chief","aware","worth","below","shop","warm","gift","suit","bone","bad","jet","and",],
+        ["chief","twice","limit","below","folk","warm","gift","blow","shoe","wine","jet","and",],
+        ["dress","twice","worth","below","lift","jump","wave","suit","burn","wine","jet","dog",],
+        ["chief","twice","worth","feed","lift","warm","wave","blow","burn","boy","buy","dog",],
+        ["dress","aware","broad","path","shop","soft","gift","cook","shoe","wine","buy","and",],
+        ["chief","aware","limit","below","shop","warm","gift","suit","burn","boy","cat","and",],
+        ["dress","aware","broad","path","shop","soft","wave","blow","shoe","wine","jet","and",],
+        ["dress","aware","broad","path","lift","soft","deny","cook","bone","boy","jet","and",],
+        ["dress","aware","worth","feed","lift","warm","wave","blow","shoe","bad","jet","pig",],
+        ["quiet","grade","worth","below","shop","soft","wave","cook","bone","boy","cat","pig",],
+        ["chief","twice","worth","below","shop","jump","wave","cook","bone","bad","jet","dog",],
+        ["chief","grade","limit","feed","folk","soft","deny","suit","shoe","wine","cat","dog",],
+        ["chief","grade","limit","below","shop","jump","wave","suit","burn","boy","buy","dog",],
+        ["chief","twice","worth","below","lift","warm","deny","blow","bone","bad","cat","pig",],
+        ["chief","grade","worth","below","folk","soft","deny","blow","burn","wine","buy","dog",],
+        ["chief","twice","worth","below","lift","soft","wave","blow","bone","wine","cat","dog",],
+        ["chief","aware","limit","below","shop","warm","wave","suit","shoe","bad","cat","pig",],
+        ["chief","twice","broad","path","shop","jump","gift","blow","shoe","bad","jet","dog",],
+        ["chief","aware","limit","below","lift","warm","deny","suit","burn","wine","cat","dog",],
+        ["quiet","aware","worth","feed","lift","jump","deny","suit","shoe","bad","cat","pig",],
+        ["quiet","aware","worth","path","shop","jump","gift","suit","bone","boy","buy","pig",],
+        ["dress","twice","limit","below","folk","jump","deny","blow","bone","bad","buy","and",],
+        ["quiet","grade","limit","below","shop","warm","wave","suit","bone","boy","cat","dog",],
+        ["chief","grade","limit","feed","shop","jump","wave","cook","bone","boy","buy","and",],
+        ["chief","grade","worth","path","folk","jump","deny","cook","bone","wine","cat","dog",],
+        ["chief","twice","limit","feed","lift","warm","deny","cook","bone","wine","jet","pig",],
+        ["dress","grade","worth","below","lift","jump","wave","cook","bone","wine","cat","pig",],
+        ["dress","grade","worth","feed","shop","warm","gift","suit","bone","bad","cat","pig",],
+        ["dress","aware","broad","feed","shop","warm","gift","suit","shoe","bad","cat","and",],
+        ["quiet","twice","worth","path","folk","warm","deny","cook","bone","bad","jet","and",],
+        ["chief","twice","limit","path","folk","jump","deny","suit","shoe","wine","jet","pig",],
+        ["dress","grade","limit","feed","lift","warm","wave","suit","bone","boy","buy","pig",],
+        ["chief","grade","limit","path","folk","jump","wave","cook","shoe","boy","buy","pig",],
+        ["chief","grade","limit","path","folk","jump","gift","suit","bone","bad","jet","pig",],
+        ["dress","aware","broad","path","shop","soft","gift","suit","bone","boy","cat","dog",],
+        ["quiet","aware","broad","below","shop","jump","gift","blow","burn","boy","buy","and",],
+        ["dress","twice","broad","below","folk","warm","wave","blow","bone","bad","cat","pig",],
+        ["quiet","twice","limit","path","folk","warm","gift","suit","bone","bad","jet","dog",],
+        ["chief","twice","worth","path","shop","soft","deny","blow","bone","bad","buy","and",],
+        ["chief","aware","broad","feed","folk","jump","gift","blow","burn","boy","jet","pig",],
+        ["dress","grade","broad","feed","folk","soft","wave","suit","burn","boy","buy","dog",],
+        ["dress","twice","worth","below","shop","jump","deny","blow","burn","bad","buy","dog",],
+        ["chief","twice","broad","below","folk","soft","gift","cook","shoe","bad","jet","dog",],
+        ["chief","twice","broad","path","folk","soft","deny","blow","burn","bad","cat","dog",],
+        ["dress","aware","broad","below","lift","jump","gift","suit","shoe","wine","buy","dog",],
+        ["chief","twice","limit","below","folk","jump","gift","cook","shoe","wine","jet","pig",],
+        ["quiet","twice","limit","path","shop","warm","wave","cook","shoe","bad","buy","pig",],
+        ["dress","aware","broad","feed","folk","soft","wave","blow","bone","bad","cat","pig",],
+        ["dress","grade","broad","feed","folk","warm","gift","blow","bone","bad","buy","dog",],
+        ["quiet","grade","limit","path","shop","soft","deny","blow","bone","bad","buy","and",],
+        ["quiet","aware","worth","below","folk","soft","gift","blow","burn","bad","cat","dog",],
+        ["chief","twice","broad","feed","shop","soft","deny","blow","shoe","bad","buy","dog",],
+        ["quiet","twice","limit","path","shop","soft","gift","cook","shoe","wine","jet","pig",],
+        ["quiet","grade","limit","below","lift","jump","deny","suit","shoe","bad","cat","dog",],
+        ["quiet","twice","broad","path","shop","soft","wave","blow","shoe","boy","cat","pig",],
+        ["chief","twice","limit","feed","folk","jump","wave","blow","shoe","wine","cat","and",],
+        ["chief","twice","broad","feed","shop","jump","gift","cook","bone","bad","cat","pig",],
+        ["chief","twice","limit","feed","shop","soft","gift","cook","bone","bad","jet","pig",],
+        ["quiet","aware","worth","path","folk","jump","wave","blow","shoe","bad","jet","and",],
+        ["chief","aware","worth","feed","lift","soft","deny","cook","burn","wine","buy","dog",],
+        ["quiet","grade","limit","path","shop","jump","deny","cook","shoe","wine","jet","and",],
+        ["chief","grade","worth","below","lift","warm","gift","blow","burn","boy","buy","dog",],
+        ["quiet","twice","broad","path","shop","warm","gift","blow","shoe","boy","cat","dog",],
+        ["chief","aware","broad","path","folk","soft","deny","suit","burn","boy","jet","dog",],
+        ["quiet","aware","limit","path","lift","warm","gift","cook","burn","bad","jet","dog",],
+        ["chief","aware","broad","feed","shop","warm","gift","cook","bone","bad","jet","dog",],
+        ["chief","aware","limit","below","folk","soft","wave","cook","shoe","wine","jet","dog",],
+        ["dress","twice","broad","below","shop","soft","wave","cook","burn","boy","buy","pig",],
+        ["quiet","twice","broad","path","folk","soft","gift","suit","bone","boy","buy","dog",],
+        ["dress","grade","broad","path","folk","soft","gift","blow","burn","boy","cat","and",],
+        ["chief","aware","limit","path","folk","jump","wave","suit","burn","wine","jet","and",],
+        ["quiet","aware","worth","path","folk","jump","deny","suit","burn","wine","jet","pig",],
+        ["quiet","aware","broad","below","lift","warm","wave","blow","burn","bad","buy","pig",],
+        ["chief","twice","worth","feed","lift","warm","wave","blow","burn","bad","jet","pig",],
+        ["quiet","grade","broad","below","lift","soft","gift","blow","shoe","boy","buy","dog",],
+        ["dress","grade","worth","below","lift","jump","deny","suit","bone","boy","cat","dog",],
+        ["dress","aware","limit","feed","shop","warm","wave","suit","bone","boy","buy","and",],
+        ["quiet","grade","worth","feed","folk","warm","gift","suit","bone","boy","jet","and",],
+        ["dress","aware","broad","path","shop","jump","wave","blow","burn","boy","buy","dog",],
+        ["quiet","grade","broad","below","lift","soft","gift","blow","bone","bad","cat","and",],
+        ["dress","twice","worth","path","lift","jump","deny","cook","burn","boy","jet","pig",],
+        ["dress","aware","broad","path","lift","soft","gift","suit","shoe","boy","jet","pig",],
+        ["chief","grade","limit","feed","shop","warm","wave","cook","shoe","boy","buy","dog",],
+        ["quiet","twice","broad","below","shop","soft","wave","cook","shoe","bad","cat","dog",],
+        ["quiet","aware","worth","below","folk","warm","deny","cook","burn","bad","cat","pig",],
+        ["chief","grade","broad","below","shop","jump","gift","suit","burn","bad","buy","pig",],
+        ["quiet","twice","broad","below","folk","warm","wave","cook","bone","boy","jet","pig",],
+        ["dress","grade","worth","path","lift","soft","wave","suit","burn","boy","cat","and",],
+        ["chief","twice","limit","feed","lift","jump","gift","suit","shoe","boy","jet","and",],
+        ["dress","twice","worth","feed","folk","soft","deny","suit","bone","wine","cat","and",],
+        ["chief","aware","limit","path","shop","warm","wave","suit","bone","bad","buy","pig",],
+        ["chief","aware","worth","path","lift","jump","gift","blow","burn","bad","buy","pig",],
+        ["chief","twice","broad","feed","shop","warm","wave","cook","bone","boy","buy","pig",],
+        ["quiet","twice","worth","feed","lift","warm","wave","blow","burn","boy","buy","and",],
+        ["quiet","aware","limit","feed","shop","warm","deny","cook","bone","boy","jet","dog",],
+        ["quiet","twice","worth","path","lift","jump","wave","suit","bone","bad","buy","and",],
+        ["dress","grade","broad","path","lift","soft","deny","suit","burn","bad","jet","pig",],
+        ["dress","aware","worth","path","folk","soft","wave","blow","shoe","boy","cat","and",],
+        ["chief","aware","broad","below","shop","warm","wave","blow","shoe","boy","buy","and",],
+        ["chief","grade","worth","path","shop","warm","wave","suit","shoe","boy","buy","dog",],
+        ["quiet","twice","broad","path","lift","soft","deny","blow","shoe","bad","cat","pig",],
+        ["chief","grade","worth","feed","folk","soft","deny","suit","shoe","wine","cat","dog",],
+        ["dress","aware","limit","path","shop","soft","gift","suit","burn","wine","jet","and",],
+        ["chief","twice","worth","feed","lift","soft","gift","cook","bone","wine","cat","dog",],
+        ["quiet","aware","limit","feed","folk","soft","gift","cook","shoe","boy","cat","pig",],
+        ["quiet","aware","broad","path","lift","soft","deny","suit","burn","bad","buy","and",],
+        ["chief","aware","limit","feed","folk","warm","wave","cook","bone","bad","buy","dog",],
+        ["chief","grade","worth","path","folk","soft","deny","blow","burn","bad","buy","and",],
+        ["quiet","twice","worth","path","folk","soft","gift","blow","bone","bad","jet","dog",],
+        ["dress","aware","broad","feed","lift","soft","gift","suit","shoe","wine","cat","pig",],
+        ["chief","aware","broad","path","shop","jump","wave","suit","burn","bad","cat","and",],
+        ["dress","grade","broad","below","lift","soft","gift","cook","burn","boy","cat","pig",],
+        ["dress","twice","limit","feed","folk","jump","gift","cook","burn","boy","buy","dog",],
+        ["dress","grade","broad","feed","shop","warm","wave","blow","burn","wine","jet","pig",],
+        ["dress","twice","worth","feed","shop","warm","gift","cook","bone","bad","cat","and",],
+        ["quiet","grade","limit","below","folk","jump","deny","cook","bone","bad","cat","dog",],
+        ["chief","grade","broad","path","shop","soft","wave","blow","shoe","wine","jet","and",],
+        ["quiet","twice","broad","path","folk","warm","gift","cook","burn","boy","jet","pig",],
+        ["chief","twice","broad","below","folk","jump","wave","cook","shoe","boy","jet","pig",],
+        ["dress","aware","limit","path","lift","soft","deny","blow","burn","bad","jet","pig",],
+        ["quiet","grade","limit","path","shop","soft","gift","suit","burn","bad","cat","pig",],
+        ["dress","grade","broad","below","lift","soft","deny","cook","shoe","wine","cat","dog",],
+        ["dress","grade","broad","feed","shop","jump","deny","blow","bone","boy","jet","and",],
+        ["chief","aware","limit","below","shop","jump","wave","cook","burn","bad","buy","dog",],
+        ["chief","grade","limit","path","lift","jump","wave","blow","shoe","boy","buy","pig",],
+        ["chief","grade","broad","feed","shop","warm","gift","cook","bone","bad","buy","dog",],
+        ["chief","twice","broad","path","lift","jump","gift","cook","bone","boy","cat","dog",],
+        ["dress","aware","broad","feed","lift","warm","wave","blow","burn","boy","jet","and",],
+        ["chief","twice","broad","feed","shop","warm","gift","blow","bone","bad","jet","pig",],
+        ["chief","grade","limit","path","folk","warm","wave","blow","shoe","boy","buy","and",],
+        ["quiet","grade","worth","below","shop","warm","deny","blow","shoe","boy","jet","pig",],
+        ["quiet","twice","limit","below","folk","jump","wave","suit","shoe","wine","buy","dog",],
+        ["chief","aware","worth","feed","folk","jump","gift","cook","shoe","boy","jet","dog",],
+        ["chief","aware","limit","below","lift","soft","deny","suit","shoe","boy","cat","dog",],
+        ["chief","aware","broad","path","shop","jump","deny","suit","bone","wine","cat","dog",],
+        ["chief","grade","limit","path","shop","soft","deny","cook","shoe","boy","jet","dog",],
+        ["chief","twice","limit","below","folk","warm","deny","suit","shoe","boy","buy","and",],
+        ["quiet","twice","limit","feed","lift","jump","gift","suit","burn","bad","cat","dog",],
+        ["dress","aware","worth","below","shop","jump","gift","blow","burn","bad","buy","dog",],
+        ["quiet","aware","limit","feed","folk","warm","wave","suit","bone","boy","cat","dog",],
+        ["dress","grade","broad","below","shop","soft","wave","blow","shoe","bad","cat","dog",],
+        ["dress","twice","worth","below","shop","warm","gift","cook","burn","boy","cat","and",],
+        ["dress","grade","worth","feed","lift","warm","deny","suit","bone","wine","cat","dog",],
+        ["quiet","aware","worth","path","shop","jump","wave","cook","burn","boy","buy","pig",],
+        ["dress","twice","broad","below","shop","jump","wave","cook","bone","bad","jet","and",],
+        ["dress","twice","limit","below","folk","warm","deny","cook","burn","boy","jet","dog",],
+        ["chief","twice","broad","below","folk","soft","wave","suit","burn","bad","cat","and",],
+        ["chief","grade","limit","path","lift","warm","wave","cook","shoe","wine","cat","dog",],
+        ["chief","aware","broad","feed","shop","warm","wave","blow","bone","boy","jet","and",],
+        ["chief","aware","worth","feed","folk","warm","wave","blow","bone","bad","cat","dog",],
+        ["dress","aware","worth","path","shop","jump","gift","cook","burn","boy","cat","pig",],
+        ["quiet","aware","broad","feed","folk","soft","gift","blow","bone","bad","jet","and",],
+        ["quiet","twice","worth","below","lift","jump","wave","cook","shoe","bad","jet","dog",],
+        ["chief","aware","broad","below","folk","soft","gift","blow","bone","boy","cat","and",],
+        ["chief","twice","broad","below","folk","jump","wave","blow","burn","boy","jet","dog",],
+        ["chief","twice","broad","path","folk","jump","gift","cook","bone","bad","cat","pig",],
+        ["chief","grade","worth","below","lift","soft","gift","blow","shoe","boy","buy","and",],
+        ["chief","aware","worth","feed","shop","soft","wave","suit","burn","boy","jet","pig",],
+        ["chief","twice","limit","path","folk","jump","wave","suit","bone","boy","buy","and",],
+        ["chief","grade","broad","below","shop","soft","gift","cook","shoe","boy","jet","and",],
+        ["quiet","grade","limit","below","shop","jump","deny","blow","burn","bad","cat","and",],
+        ["chief","grade","worth","feed","lift","jump","gift","suit","bone","boy","buy","and",],
+        ["quiet","grade","worth","feed","shop","warm","wave","blow","bone","boy","jet","dog",],
+        ["quiet","twice","limit","below","folk","warm","deny","blow","bone","boy","cat","pig",],
+        ["dress","aware","worth","feed","lift","jump","wave","suit","burn","bad","cat","and",],
+        ["quiet","twice","broad","feed","folk","soft","wave","blow","burn","wine","buy","dog",],
+        ["dress","aware","limit","path","shop","soft","deny","suit","bone","boy","jet","pig",],
+        ["chief","aware","broad","below","lift","warm","gift","blow","bone","boy","cat","pig",],
+        ["chief","twice","worth","below","shop","warm","deny","cook","burn","bad","buy","pig",],
+        ["chief","aware","broad","below","lift","warm","deny","suit","burn","bad","jet","and",],
+        ["chief","twice","limit","below","lift","jump","gift","cook","bone","boy","cat","pig",],
+        ["chief","grade","limit","path","shop","jump","deny","cook","bone","boy","cat","pig",],
+        ["chief","grade","worth","path","shop","jump","gift","blow","shoe","boy","jet","pig",],
+        ["chief","grade","limit","below","shop","warm","wave","cook","shoe","wine","jet","dog",],
+        ["chief","twice","worth","below","folk","warm","deny","blow","bone","boy","buy","dog",],
+        ["chief","twice","broad","path","lift","soft","gift","cook","burn","bad","cat","dog",],
+        ["chief","grade","worth","below","folk","jump","gift","blow","bone","boy","cat","pig",],
+        ["quiet","twice","broad","below","lift","jump","wave","cook","burn","boy","buy","dog",],
+        ["dress","aware","broad","feed","folk","warm","wave","blow","bone","boy","buy","and",],
+        ["dress","grade","broad","feed","folk","warm","deny","cook","bone","wine","jet","dog",],
+        ["dress","aware","limit","below","lift","soft","deny","suit","burn","boy","cat","dog",],
+        ["quiet","twice","limit","below","shop","soft","deny","cook","burn","boy","cat","dog",],
+        ["dress","twice","worth","below","folk","warm","wave","suit","burn","boy","buy","pig",],
+        ["dress","aware","limit","below","shop","soft","wave","suit","burn","bad","cat","dog",],
+        ["dress","twice","limit","feed","lift","warm","deny","blow","shoe","boy","buy","dog",],
+        ["dress","aware","broad","path","lift","soft","deny","cook","burn","bad","buy","and",],
+        ["dress","aware","worth","feed","shop","warm","gift","suit","shoe","boy","jet","and",],
+        ["dress","aware","worth","below","lift","warm","wave","blow","shoe","wine","jet","and",],
+        ["quiet","twice","worth","path","folk","jump","gift","suit","burn","bad","buy","dog",],
+        ["dress","aware","worth","path","lift","soft","deny","suit","shoe","boy","jet","and",],
+        ["dress","grade","limit","below","folk","warm","wave","cook","shoe","wine","cat","pig",],
+        ["dress","aware","worth","below","shop","warm","gift","suit","burn","wine","jet","dog",],
+        ["chief","twice","limit","feed","shop","warm","gift","cook","burn","boy","buy","pig",],
+        ["dress","grade","worth","feed","lift","soft","wave","cook","burn","boy","buy","pig",],
+        ["chief","aware","limit","feed","folk","warm","wave","blow","bone","boy","buy","and",],
+        ["chief","twice","worth","feed","lift","warm","deny","blow","bone","boy","cat","dog",],
+        ["chief","aware","worth","feed","lift","soft","wave","blow","shoe","wine","jet","and",],
+        ["quiet","twice","limit","feed","lift","jump","wave","blow","burn","boy","buy","dog",],
+        ["chief","grade","worth","feed","folk","soft","gift","cook","bone","boy","jet","pig",],
+        ["dress","twice","limit","feed","folk","jump","deny","suit","bone","boy","buy","dog",],
+        ["chief","grade","limit","feed","lift","jump","gift","suit","shoe","boy","jet","dog",],
+        ["chief","grade","broad","path","shop","jump","deny","blow","burn","bad","buy","and",],
+        ["dress","aware","worth","path","shop","warm","wave","cook","burn","wine","jet","and",],
+        ["chief","twice","limit","path","lift","jump","gift","suit","burn","boy","buy","pig",],
+        ["quiet","grade","worth","path","folk","soft","deny","blow","shoe","boy","buy","dog",],
+        ["quiet","twice","worth","below","folk","warm","gift","cook","shoe","boy","jet","pig",],
+        ["chief","grade","worth","feed","shop","jump","deny","cook","bone","boy","jet","and",],
+        ["chief","grade","broad","path","folk","jump","wave","blow","bone","wine","cat","and",],
+        ["dress","grade","worth","path","shop","jump","deny","blow","burn","wine","jet","pig",],
+        ["chief","twice","worth","feed","lift","jump","deny","suit","burn","wine","cat","pig",],
+        ["quiet","aware","worth","below","folk","jump","deny","blow","bone","boy","buy","pig",],
+        ["chief","grade","broad","path","shop","jump","gift","blow","bone","boy","buy","dog",],
+        ["dress","aware","worth","feed","folk","soft","wave","suit","bone","boy","cat","dog",],
+        ["dress","twice","worth","below","lift","soft","wave","suit","bone","bad","jet","and",],
+        ["dress","twice","broad","feed","shop","warm","gift","blow","bone","boy","cat","pig",],
+        ["dress","grade","worth","feed","lift","warm","wave","suit","shoe","boy","cat","dog",],
+        ["chief","grade","limit","path","lift","warm","deny","blow","shoe","bad","jet","pig",],
+        ["quiet","twice","broad","below","shop","jump","deny","blow","bone","wine","cat","dog",],
+        ["quiet","twice","worth","below","lift","soft","gift","suit","bone","bad","jet","pig",],
+        ["chief","twice","worth","path","folk","jump","deny","cook","bone","wine","cat","pig",],
+        ["chief","aware","limit","below","lift","soft","gift","blow","bone","wine","cat","dog",],
+        ["chief","twice","worth","path","shop","jump","deny","cook","bone","wine","buy","and",],
+        ["chief","aware","broad","feed","folk","soft","gift","cook","bone","wine","cat","dog",],
+        ["chief","grade","limit","below","lift","warm","gift","cook","bone","wine","buy","dog",],
+        ["quiet","grade","limit","path","folk","soft","gift","suit","shoe","bad","cat","dog",],
+        ["dress","twice","limit","below","shop","soft","wave","suit","bone","bad","jet","and",],
+        ["chief","aware","limit","feed","shop","warm","wave","blow","bone","wine","jet","dog",],
+        ["chief","twice","broad","below","folk","soft","wave","suit","burn","bad","cat","dog",],
+        ["chief","twice","worth","feed","folk","warm","gift","blow","shoe","boy","jet","dog",],
+        ["chief","aware","limit","feed","lift","soft","gift","blow","burn","bad","cat","pig",],
+        ["quiet","twice","limit","path","shop","jump","gift","cook","bone","boy","jet","dog",],
+        ["dress","twice","broad","path","shop","jump","gift","suit","bone","bad","jet","dog",],
+        ["dress","twice","worth","below","lift","jump","gift","suit","shoe","boy","buy","and",],
+        ["quiet","grade","worth","feed","lift","warm","deny","blow","bone","bad","buy","dog",],
+        ["quiet","twice","worth","below","folk","soft","deny","blow","burn","bad","buy","pig",],
+        ["quiet","twice","broad","feed","lift","soft","deny","blow","bone","bad","jet","dog",],
+        ["quiet","grade","worth","path","lift","soft","wave","cook","burn","wine","cat","and",],
+        ["dress","grade","broad","feed","folk","soft","deny","cook","shoe","bad","cat","pig",],
+        ["dress","aware","worth","below","shop","jump","deny","blow","bone","boy","cat","and",],
+        ["chief","twice","broad","below","folk","soft","wave","blow","bone","wine","buy","and",],
+        ["quiet","twice","worth","feed","folk","jump","wave","suit","burn","bad","cat","dog",],
+        ["dress","aware","broad","feed","folk","jump","wave","suit","shoe","bad","jet","pig",],
+        ["quiet","twice","broad","feed","lift","jump","wave","blow","burn","bad","buy","and",],
+        ["dress","grade","worth","below","lift","warm","wave","blow","burn","bad","jet","and",],
+        ["chief","grade","worth","path","lift","soft","deny","suit","burn","bad","cat","pig",],
+        ["chief","twice","limit","path","lift","soft","deny","blow","bone","bad","jet","dog",],
+        ["quiet","grade","broad","path","lift","soft","deny","blow","shoe","bad","buy","and",],
+        ["chief","aware","broad","path","lift","warm","deny","cook","bone","wine","cat","pig",],
+        ["chief","grade","worth","feed","shop","soft","wave","blow","bone","bad","cat","dog",],
+        ["chief","twice","worth","path","folk","warm","deny","cook","bone","wine","cat","and",],
+        ["chief","twice","worth","path","folk","warm","deny","suit","bone","wine","jet","dog",],
+        ["chief","aware","limit","feed","lift","soft","wave","cook","bone","boy","buy","pig",],
+        ["quiet","grade","broad","path","folk","jump","gift","cook","bone","bad","jet","dog",],
+        ["dress","grade","worth","feed","lift","warm","deny","blow","burn","bad","jet","dog",],
+        ["chief","grade","broad","below","folk","jump","wave","blow","bone","bad","jet","and",],
+        ["dress","grade","broad","feed","folk","soft","gift","cook","bone","boy","buy","and",],
+        ["dress","aware","limit","feed","folk","warm","deny","suit","bone","bad","cat","pig",],
+        ["dress","aware","limit","feed","folk","warm","wave","blow","bone","bad","buy","and",],
+        ["chief","grade","worth","path","folk","jump","wave","blow","shoe","boy","jet","and",],
+        ["chief","aware","limit","path","folk","soft","gift","cook","burn","bad","jet","pig",],
+        ["quiet","aware","worth","path","lift","jump","wave","suit","burn","wine","buy","pig",],
+        ["quiet","grade","limit","path","lift","warm","wave","blow","shoe","bad","jet","pig",],
+        ["chief","grade","limit","path","shop","soft","gift","cook","bone","boy","jet","and",],
+        ["quiet","twice","limit","path","shop","jump","deny","blow","shoe","wine","jet","dog",],
+        ["chief","aware","broad","feed","shop","warm","deny","cook","burn","boy","jet","and",],
+        ["chief","aware","broad","feed","lift","warm","deny","suit","burn","boy","cat","and",],
+        ["quiet","grade","worth","feed","shop","jump","deny","cook","bone","boy","jet","pig",],
+        ["chief","twice","limit","below","shop","soft","wave","cook","burn","bad","buy","and",],
+        ["quiet","aware","broad","below","folk","warm","wave","blow","bone","boy","jet","dog",],
+        ["dress","twice","limit","below","folk","warm","gift","blow","bone","boy","jet","pig",],
+        ["chief","twice","limit","path","folk","warm","gift","cook","burn","boy","cat","and",],
+        ["chief","grade","limit","below","folk","jump","gift","cook","shoe","boy","cat","dog",],
+        ["chief","grade","worth","path","shop","soft","wave","cook","bone","wine","cat","pig",],
+        ["quiet","grade","worth","path","lift","jump","wave","cook","bone","bad","buy","dog",],
+        ["quiet","twice","limit","below","shop","jump","deny","cook","shoe","wine","cat","pig",],
+        ["dress","grade","worth","path","folk","warm","wave","cook","burn","bad","jet","pig",],
+        ["dress","aware","limit","below","lift","warm","deny","suit","bone","bad","buy","dog",],
+        ["quiet","grade","worth","below","folk","warm","deny","cook","bone","wine","jet","dog",],
+        ["quiet","grade","limit","feed","folk","soft","gift","cook","bone","boy","jet","and",],
+        ["chief","grade","worth","feed","shop","jump","deny","cook","bone","boy","cat","and",],
+        ["dress","aware","broad","below","lift","soft","gift","cook","bone","bad","jet","and",],
+        ["quiet","aware","broad","path","shop","soft","wave","blow","burn","boy","cat","dog",],
+        ["quiet","aware","broad","path","lift","warm","gift","blow","burn","bad","cat","and",],
+        ["quiet","grade","worth","path","folk","soft","wave","blow","bone","wine","buy","dog",],
+        ["chief","grade","worth","below","lift","jump","deny","blow","shoe","bad","jet","dog",],
+        ["dress","aware","broad","path","shop","soft","gift","blow","shoe","boy","buy","dog",],
+        ["quiet","aware","broad","path","lift","soft","wave","suit","bone","bad","buy","pig",],
+        ["dress","grade","limit","path","lift","jump","gift","cook","shoe","bad","cat","pig",],
+        ["chief","aware","worth","feed","shop","soft","gift","suit","burn","boy","buy","pig",],
+        ["quiet","aware","broad","feed","shop","soft","gift","suit","burn","wine","jet","and",],
+        ["chief","grade","worth","below","folk","warm","gift","blow","burn","bad","jet","pig",],
+        ["dress","grade","limit","path","shop","jump","wave","suit","bone","boy","jet","pig",],
+        ["quiet","twice","broad","below","lift","soft","gift","blow","shoe","boy","jet","and",],
+        ["dress","twice","broad","feed","lift","soft","wave","blow","shoe","bad","buy","dog",],
+        ["dress","aware","limit","feed","shop","jump","deny","cook","burn","bad","buy","and",],
+        ["dress","twice","worth","below","shop","warm","gift","suit","bone","boy","cat","pig",],
+        ["dress","aware","limit","below","folk","soft","gift","cook","burn","bad","buy","dog",],
+        ["quiet","grade","broad","path","folk","jump","gift","cook","shoe","boy","cat","and",],
+        ["dress","aware","broad","path","lift","warm","gift","blow","shoe","bad","buy","pig",],
+        ["quiet","aware","worth","below","shop","warm","deny","cook","bone","boy","jet","dog",],
+        ["chief","twice","broad","below","lift","jump","gift","suit","burn","boy","cat","and",],
+        ["chief","aware","worth","path","lift","warm","gift","blow","bone","bad","buy","and",],
+        ["chief","aware","limit","path","shop","warm","gift","cook","burn","bad","cat","pig",],
+        ["chief","twice","limit","path","folk","jump","wave","cook","burn","boy","buy","and",],
+        ["chief","grade","broad","path","shop","soft","deny","cook","bone","boy","cat","dog",],
+        ["dress","grade","limit","path","shop","jump","gift","cook","burn","bad","cat","and",],
+        ["quiet","twice","limit","below","shop","soft","deny","suit","bone","wine","jet","pig",],
+        ["dress","grade","worth","path","shop","soft","gift","cook","shoe","wine","cat","dog",],
+        ["quiet","aware","worth","path","shop","warm","gift","blow","bone","boy","jet","dog",],
+        ["dress","grade","limit","path","lift","soft","wave","suit","burn","wine","jet","pig",],
+        ["chief","twice","limit","path","lift","soft","gift","cook","burn","bad","jet","pig",],
+        ["dress","aware","broad","path","folk","warm","gift","blow","burn","bad","jet","pig",],
+        ["dress","aware","limit","feed","lift","jump","gift","cook","burn","bad","buy","and",],
+        ["dress","aware","worth","path","lift","warm","deny","suit","shoe","bad","buy","pig",],
+        ["dress","grade","broad","path","shop","jump","deny","cook","burn","bad","jet","pig",],
+        ["dress","aware","limit","feed","lift","jump","deny","blow","shoe","bad","jet","and",],
+        ["dress","twice","broad","feed","folk","warm","deny","cook","shoe","boy","cat","pig",],
+        ["chief","twice","limit","feed","lift","soft","deny","suit","bone","boy","buy","dog",],
+        ["quiet","twice","broad","path","shop","warm","wave","blow","burn","boy","jet","and",],
+        ["dress","grade","broad","path","shop","jump","gift","blow","shoe","wine","jet","and",],
+        ["dress","twice","limit","path","lift","jump","gift","suit","bone","bad","jet","and",],
+        ["chief","grade","broad","below","folk","soft","wave","cook","shoe","bad","jet","and",],
+        ["quiet","twice","broad","feed","folk","soft","gift","suit","shoe","bad","cat","and",],
+        ["quiet","grade","broad","path","lift","soft","gift","blow","burn","boy","buy","and",],
+        ["dress","aware","broad","feed","folk","warm","deny","blow","burn","bad","cat","dog",],
+        ["dress","twice","worth","below","folk","warm","gift","cook","shoe","bad","cat","and",],
+        ["chief","aware","broad","below","lift","warm","gift","cook","shoe","bad","cat","and",],
+        ["quiet","grade","worth","below","lift","warm","gift","cook","burn","bad","jet","dog",],
+        ["quiet","twice","worth","below","shop","warm","wave","suit","burn","wine","cat","and",],
+        ["dress","aware","worth","path","shop","soft","wave","suit","shoe","bad","jet","pig",],
+        ["chief","grade","limit","path","folk","soft","gift","suit","shoe","bad","buy","dog",],
+        ["chief","aware","worth","feed","folk","soft","wave","cook","burn","wine","buy","and",],
+        ["quiet","grade","worth","path","lift","warm","wave","blow","shoe","bad","buy","dog",],
+        ["chief","twice","worth","feed","shop","soft","gift","cook","bone","boy","jet","dog",],
+        ["chief","grade","broad","path","lift","jump","gift","blow","bone","boy","cat","and",],
+        ["chief","grade","worth","feed","shop","warm","deny","cook","bone","boy","cat","dog",],
+        ["quiet","grade","broad","below","folk","soft","deny","blow","bone","bad","cat","dog",],
+        ["quiet","twice","broad","below","folk","warm","gift","cook","bone","bad","cat","and",],
+        ["dress","aware","limit","below","folk","soft","gift","blow","burn","wine","cat","and",],
+        ["quiet","aware","broad","feed","shop","jump","wave","blow","bone","bad","jet","dog",],
+        ["dress","aware","broad","feed","shop","warm","deny","cook","shoe","boy","jet","pig",],
+        ["chief","twice","broad","path","lift","jump","deny","cook","bone","boy","buy","pig",],
+        ["chief","aware","broad","below","lift","jump","wave","cook","shoe","bad","cat","and",],
+        ["chief","aware","broad","path","lift","warm","wave","suit","shoe","wine","cat","pig",],
+        ["quiet","twice","worth","feed","shop","soft","gift","suit","burn","bad","cat","and",],
+        ["chief","twice","broad","feed","shop","soft","deny","blow","bone","wine","buy","pig",],
+        ["chief","grade","worth","below","folk","warm","wave","suit","shoe","boy","jet","pig",],
+        ["dress","grade","worth","feed","shop","soft","gift","suit","burn","wine","cat","dog",],
+        ["quiet","aware","limit","below","lift","soft","gift","cook","shoe","bad","jet","dog",],
+        ["quiet","aware","broad","path","folk","soft","deny","suit","shoe","bad","jet","dog",],
+        ["quiet","aware","limit","feed","lift","warm","wave","blow","burn","boy","buy","and",],
+        ["quiet","aware","broad","path","lift","jump","wave","suit","burn","bad","cat","dog",],
+        ["dress","twice","limit","feed","lift","jump","deny","suit","bone","bad","cat","pig",],
+        ["chief","aware","limit","below","lift","warm","wave","cook","burn","boy","buy","pig",],
+        ["quiet","grade","worth","below","lift","jump","deny","blow","burn","boy","buy","and",],
+        ["dress","grade","worth","feed","shop","warm","gift","cook","burn","bad","jet","dog",],
+        ["dress","aware","limit","below","folk","jump","deny","suit","bone","bad","cat","dog",],
+        ["quiet","twice","broad","path","folk","jump","deny","cook","burn","bad","buy","dog",],
+        ["quiet","twice","broad","path","lift","jump","gift","suit","shoe","boy","buy","and",],
+        ["quiet","grade","worth","path","shop","soft","wave","cook","burn","boy","cat","and",],
+        ["chief","twice","broad","path","shop","soft","wave","blow","shoe","bad","cat","pig",],
+        ["chief","twice","broad","below","shop","soft","wave","suit","burn","boy","buy","and",],
+        ["quiet","grade","limit","path","folk","jump","deny","cook","shoe","bad","cat","and",],
+        ["dress","aware","worth","below","lift","soft","gift","suit","bone","bad","cat","dog",],
+        ["dress","twice","worth","path","shop","soft","deny","cook","shoe","bad","buy","and",],
+        ["dress","twice","worth","below","lift","soft","gift","cook","bone","boy","cat","and",],
+        ["quiet","grade","broad","feed","shop","warm","gift","blow","shoe","boy","cat","pig",],
+        ["chief","aware","limit","below","folk","warm","deny","cook","shoe","bad","jet","pig",],
+        ["chief","grade","broad","feed","shop","soft","deny","blow","bone","bad","cat","and",],
+        ["quiet","aware","worth","feed","lift","warm","gift","cook","bone","bad","buy","and",],
+        ["dress","twice","broad","below","lift","warm","deny","cook","shoe","boy","cat","and",],
+        ["quiet","twice","broad","path","lift","warm","wave","blow","shoe","boy","jet","pig",],
+        ["dress","twice","limit","feed","lift","soft","gift","cook","shoe","boy","cat","dog",],
+        ["quiet","aware","broad","feed","folk","warm","gift","cook","shoe","bad","buy","and",],
+        ["chief","twice","worth","path","folk","jump","wave","suit","bone","boy","buy","dog",],
+        ["quiet","aware","broad","below","folk","soft","wave","suit","bone","bad","buy","pig",],
+        ["dress","twice","broad","below","lift","soft","gift","cook","burn","boy","jet","pig",],
+        ["chief","twice","limit","path","lift","soft","wave","cook","burn","bad","cat","pig",],
+        ["chief","grade","worth","below","lift","soft","gift","cook","shoe","wine","buy","and",],
+        ["chief","twice","broad","below","shop","soft","wave","blow","burn","boy","jet","and",],
+        ["chief","twice","worth","path","shop","soft","wave","suit","bone","bad","cat","dog",],
+        ["chief","aware","limit","path","folk","soft","deny","blow","bone","wine","buy","pig",],
+        ["quiet","aware","limit","feed","lift","soft","wave","blow","shoe","wine","buy","dog",],
+        ["chief","twice","worth","feed","folk","warm","deny","cook","bone","boy","buy","and",],
+        ["chief","aware","worth","path","lift","warm","wave","blow","burn","bad","jet","and",],
+        ["chief","grade","limit","feed","lift","soft","gift","suit","bone","boy","cat","pig",],
+        ["dress","grade","broad","path","lift","warm","wave","suit","burn","wine","cat","and",],
+        ["chief","aware","worth","below","shop","soft","gift","suit","bone","boy","buy","dog",],
+        ["dress","grade","worth","feed","lift","warm","gift","suit","shoe","bad","jet","and",],
+        ["dress","aware","broad","feed","shop","soft","deny","cook","bone","boy","jet","dog",],
+        ["dress","twice","worth","below","folk","jump","gift","cook","burn","boy","cat","and",],
+        ["dress","aware","worth","feed","folk","soft","deny","suit","shoe","bad","jet","and",],
+        ["quiet","aware","limit","path","shop","soft","deny","blow","burn","boy","jet","and",],
+        ["chief","twice","worth","below","folk","soft","deny","suit","shoe","bad","jet","dog",],
+        ["quiet","twice","broad","below","folk","soft","deny","cook","bone","bad","cat","pig",],
+        ["dress","twice","limit","below","lift","warm","deny","cook","shoe","bad","jet","and",],
+        ["chief","grade","limit","path","folk","soft","gift","suit","shoe","boy","jet","pig",],
+        ["dress","grade","limit","feed","shop","soft","gift","suit","bone","boy","buy","pig",],
+        ["chief","twice","limit","path","shop","soft","deny","suit","shoe","bad","cat","pig",],
+        ["quiet","twice","broad","below","lift","soft","gift","blow","bone","boy","jet","dog",],
+        ["chief","grade","limit","below","lift","jump","gift","blow","bone","bad","buy","pig",],
+        ["chief","twice","worth","feed","folk","jump","wave","blow","burn","bad","cat","dog",],
+        ["quiet","grade","limit","feed","folk","warm","gift","cook","burn","wine","buy","pig",],
+        ["dress","twice","limit","feed","shop","jump","deny","blow","bone","wine","cat","dog",],
+        ["quiet","aware","broad","below","shop","warm","wave","blow","shoe","boy","buy","dog",],
+        ["chief","twice","broad","feed","shop","warm","gift","blow","shoe","boy","jet","and",],
+        ["dress","grade","worth","feed","lift","warm","gift","suit","burn","bad","jet","and",],
+        ["chief","aware","broad","below","lift","soft","wave","suit","bone","boy","buy","pig",],
+        ["dress","twice","limit","feed","lift","jump","gift","cook","burn","boy","jet","pig",],
+        ["chief","grade","worth","below","lift","jump","gift","blow","burn","bad","jet","and",],
+        ["chief","aware","worth","feed","folk","jump","wave","blow","bone","boy","buy","and",],
+        ["quiet","twice","worth","feed","folk","soft","wave","suit","shoe","bad","jet","dog",],
+        ["chief","grade","broad","path","lift","soft","deny","blow","bone","bad","cat","dog",],
+        ["dress","grade","broad","below","lift","jump","deny","cook","shoe","bad","buy","and",],
+        ["dress","twice","limit","path","lift","soft","gift","blow","shoe","boy","jet","pig",],
+        ["dress","twice","broad","path","folk","jump","wave","blow","burn","boy","buy","and",],
+        ["chief","grade","broad","below","shop","soft","wave","blow","bone","bad","jet","dog",],
+        ["chief","grade","limit","feed","shop","jump","wave","suit","shoe","bad","jet","dog",],
+        ["quiet","twice","broad","feed","folk","soft","wave","suit","shoe","bad","jet","and",],
+        ["chief","grade","limit","feed","folk","jump","gift","cook","bone","bad","cat","dog",],
+        ["chief","aware","broad","path","folk","soft","deny","suit","shoe","wine","buy","and",],
+        ["quiet","grade","limit","path","lift","warm","deny","suit","shoe","bad","jet","dog",],
+        ["quiet","grade","broad","path","lift","jump","deny","cook","bone","bad","buy","and",],
+        ["dress","aware","worth","path","folk","soft","wave","cook","burn","boy","jet","and",],
+        ["dress","twice","worth","path","folk","jump","wave","cook","shoe","boy","buy","and",],
+        ["chief","twice","broad","feed","folk","warm","deny","cook","bone","boy","cat","dog",],
+        ["chief","aware","worth","feed","shop","soft","gift","cook","shoe","bad","buy","dog",],
+        ["quiet","grade","broad","below","folk","warm","deny","cook","shoe","boy","jet","pig",],
+        ["quiet","aware","worth","below","lift","jump","deny","blow","bone","bad","jet","pig",],
+        ["quiet","aware","limit","below","shop","jump","gift","blow","shoe","boy","buy","dog",],
+        ["chief","aware","broad","feed","folk","soft","gift","suit","shoe","bad","buy","and",],
+        ["quiet","grade","limit","feed","lift","warm","deny","suit","shoe","boy","jet","and",],
+        ["quiet","aware","limit","below","lift","soft","gift","cook","shoe","boy","buy","and",],
+        ["chief","twice","broad","below","shop","jump","gift","blow","bone","bad","buy","pig",],
+        ["chief","grade","worth","feed","lift","warm","deny","suit","burn","boy","buy","dog",],
+        ["dress","grade","limit","path","folk","soft","deny","cook","shoe","bad","cat","and",],
+        ["quiet","twice","limit","below","shop","warm","deny","suit","shoe","bad","cat","and",],
+        ["quiet","grade","limit","path","shop","warm","deny","suit","burn","boy","buy","pig",],
+        ["dress","aware","limit","below","lift","soft","gift","suit","burn","bad","jet","dog",],
+        ["quiet","twice","worth","feed","lift","jump","gift","cook","burn","boy","cat","dog",],
+        ["quiet","grade","limit","path","lift","soft","gift","blow","burn","bad","buy","dog",],
+        ["quiet","grade","limit","below","lift","soft","wave","blow","burn","boy","buy","pig",],
+        ["quiet","grade","broad","below","folk","soft","deny","blow","burn","boy","jet","dog",],
+        ["quiet","twice","limit","feed","shop","soft","gift","suit","bone","wine","buy","pig",],
+        ["quiet","twice","worth","path","lift","soft","wave","suit","burn","bad","buy","dog",],
+        ["dress","grade","broad","feed","folk","jump","wave","blow","shoe","boy","cat","and",],
+        ["chief","grade","worth","feed","shop","warm","deny","suit","shoe","bad","jet","dog",],
+        ["chief","aware","broad","below","folk","soft","wave","cook","bone","boy","cat","and",],
+        ["dress","aware","limit","path","shop","warm","deny","suit","bone","boy","buy","and",],
+        ["dress","twice","broad","below","shop","soft","gift","cook","shoe","boy","cat","dog",],
+        ["chief","grade","limit","feed","folk","warm","wave","suit","bone","bad","cat","and",],
+        ["dress","grade","broad","below","folk","jump","deny","suit","shoe","boy","buy","and",],
+        ["quiet","grade","limit","below","lift","warm","deny","blow","bone","boy","jet","pig",],
+        ["dress","twice","worth","feed","lift","soft","wave","suit","bone","bad","jet","dog",],
+        ["chief","grade","worth","feed","folk","warm","deny","suit","bone","wine","buy","and",],
+        ["quiet","grade","limit","feed","shop","warm","gift","cook","burn","boy","jet","and",],
+        ["chief","aware","worth","below","lift","jump","wave","blow","bone","wine","cat","and",],
+        ["quiet","twice","worth","feed","folk","jump","wave","suit","bone","boy","cat","pig",],
+        ["dress","twice","broad","feed","folk","jump","wave","suit","shoe","bad","cat","and",],
+        ["chief","grade","broad","path","shop","warm","gift","suit","bone","boy","jet","pig",],
+        ["quiet","twice","broad","feed","folk","warm","deny","suit","shoe","boy","buy","and",],
+        ["dress","aware","broad","feed","lift","jump","gift","cook","bone","boy","buy","dog",],
+        ["chief","aware","limit","below","lift","warm","wave","cook","shoe","boy","jet","pig",],
+        ["dress","aware","limit","feed","shop","soft","wave","cook","shoe","bad","cat","dog",],
+        ["quiet","aware","worth","feed","lift","jump","gift","blow","burn","bad","cat","pig",],
+        ["quiet","grade","limit","feed","folk","soft","deny","blow","burn","bad","jet","and",],
+        ["chief","twice","worth","feed","lift","jump","wave","blow","bone","bad","buy","dog",],
+        ["quiet","twice","worth","below","folk","jump","wave","suit","burn","bad","cat","dog",],
+        ["dress","aware","broad","feed","folk","soft","deny","suit","shoe","boy","cat","dog",],
+        ["dress","twice","limit","below","shop","jump","deny","cook","burn","bad","buy","and",],
+        ["dress","aware","worth","below","shop","warm","deny","blow","burn","bad","jet","and",],
+        ["quiet","grade","limit","feed","folk","warm","deny","blow","bone","wine","buy","dog",],
+        ["quiet","grade","broad","feed","shop","soft","gift","suit","burn","boy","buy","dog",],
+        ["chief","twice","worth","feed","shop","warm","gift","suit","shoe","bad","jet","pig",],
+        ["chief","grade","limit","below","folk","soft","gift","blow","bone","bad","buy","and",],
+        ["quiet","aware","limit","path","shop","jump","wave","cook","shoe","wine","jet","and",],
+        ["chief","grade","broad","feed","shop","soft","deny","suit","burn","boy","cat","dog",],
+        ["chief","aware","worth","below","folk","warm","gift","cook","shoe","boy","buy","dog",],
+        ["dress","grade","limit","path","shop","jump","deny","blow","shoe","boy","cat","and",],
+        ["dress","twice","worth","feed","shop","soft","deny","blow","burn","boy","jet","dog",],
+        ["quiet","aware","worth","path","shop","soft","gift","blow","burn","boy","cat","pig",],
+        ["dress","aware","broad","feed","lift","soft","deny","suit","burn","wine","buy","and",],
+        ["quiet","grade","broad","below","folk","jump","deny","cook","shoe","bad","cat","pig",],
+        ["quiet","twice","worth","path","shop","jump","gift","suit","bone","bad","jet","pig",],
+        ["dress","aware","limit","path","folk","warm","deny","suit","bone","bad","jet","dog",],
+        ["dress","aware","broad","below","shop","soft","deny","suit","bone","bad","jet","and",],
+        ["dress","aware","limit","below","shop","soft","deny","blow","bone","wine","jet","pig",],
+        ["quiet","aware","limit","path","shop","warm","deny","suit","shoe","boy","jet","and",],
+        ["quiet","grade","limit","feed","shop","jump","wave","cook","bone","bad","cat","pig",],
+        ["chief","aware","limit","below","folk","jump","gift","cook","shoe","wine","jet","and",],
+        ["chief","grade","broad","below","folk","jump","deny","cook","burn","bad","jet","dog",],
+        ["dress","grade","limit","path","shop","jump","gift","blow","shoe","boy","buy","pig",],
+        ["chief","twice","worth","below","lift","warm","wave","blow","burn","bad","cat","pig",],
+        ["chief","twice","broad","path","lift","soft","gift","suit","burn","wine","jet","and",],
+        ["quiet","twice","worth","below","lift","jump","wave","blow","bone","boy","cat","dog",],
+        ["quiet","twice","broad","below","lift","warm","gift","cook","shoe","bad","cat","and",],
+        ["dress","aware","worth","path","shop","jump","wave","blow","burn","bad","buy","pig",],
+        ["chief","aware","broad","feed","shop","soft","gift","blow","burn","bad","jet","and",],
+        ["chief","aware","limit","path","folk","soft","gift","cook","burn","boy","cat","dog",],
+        ["dress","aware","worth","path","folk","jump","wave","cook","burn","bad","buy","pig",],
+        ["quiet","aware","broad","feed","shop","soft","wave","suit","burn","boy","buy","dog",],
+        ["quiet","aware","broad","feed","lift","jump","wave","cook","burn","boy","buy","and",],
+        ["quiet","aware","limit","feed","folk","soft","deny","blow","shoe","bad","cat","dog",],
+        ["dress","grade","worth","feed","folk","jump","deny","cook","shoe","wine","jet","dog",],
+        ["quiet","twice","broad","below","folk","warm","deny","suit","bone","boy","buy","dog",],
+        ["chief","grade","broad","below","lift","jump","gift","blow","shoe","boy","cat","pig",],
+        ["chief","grade","limit","below","folk","warm","deny","suit","burn","bad","jet","and",],
+        ["dress","twice","broad","feed","folk","jump","deny","suit","burn","boy","jet","and",],
+        ["chief","twice","broad","path","folk","warm","gift","blow","shoe","boy","cat","and",],
+        ["dress","grade","worth","feed","lift","soft","deny","blow","shoe","wine","cat","pig",],
+        ["dress","aware","worth","feed","lift","jump","deny","suit","bone","boy","cat","pig",],
+        ["dress","twice","limit","below","shop","soft","wave","cook","bone","wine","buy","dog",],
+        ["quiet","aware","worth","below","lift","jump","deny","suit","shoe","wine","cat","and",],
+        ["dress","twice","limit","below","shop","jump","gift","blow","shoe","bad","buy","pig",],
+        ["chief","grade","worth","feed","shop","jump","wave","suit","burn","bad","buy","dog",],
+        ["dress","twice","worth","feed","folk","soft","deny","blow","bone","bad","jet","and",],
+        ["dress","grade","broad","below","shop","jump","gift","cook","bone","bad","buy","dog",],
+        ["chief","aware","broad","feed","lift","jump","wave","suit","bone","bad","cat","and",],
+        ["dress","aware","worth","below","folk","jump","wave","suit","shoe","boy","cat","dog",],
+        ["quiet","grade","worth","feed","shop","warm","wave","blow","shoe","boy","buy","and",],
+        ["dress","twice","broad","feed","lift","soft","wave","blow","bone","wine","buy","dog",],
+        ["dress","grade","limit","below","folk","soft","gift","cook","shoe","wine","jet","dog",],
+        ["chief","twice","broad","feed","folk","warm","gift","blow","burn","bad","buy","and",],
+        ["dress","twice","broad","below","shop","warm","wave","cook","bone","boy","buy","pig",],
+        ["dress","twice","limit","path","folk","warm","gift","blow","bone","wine","jet","pig",],
+        ["quiet","aware","worth","path","shop","jump","gift","blow","bone","bad","cat","and",],
+        ["chief","twice","worth","feed","lift","soft","gift","blow","shoe","bad","jet","dog",],
+        ["dress","twice","worth","below","shop","warm","gift","cook","burn","boy","jet","pig",],
+        ["chief","aware","worth","below","lift","warm","wave","blow","bone","bad","buy","pig",],
+        ["quiet","aware","broad","below","folk","warm","deny","cook","shoe","boy","jet","dog",],
+        ["dress","twice","limit","below","shop","soft","wave","cook","burn","boy","buy","dog",],
+        ["quiet","grade","limit","below","shop","soft","deny","blow","burn","wine","jet","dog",],
+        ["chief","grade","broad","below","lift","soft","gift","blow","bone","bad","jet","and",],
+        ["chief","grade","limit","path","shop","soft","gift","blow","shoe","wine","jet","dog",],
+        ["chief","grade","worth","below","shop","soft","deny","cook","bone","bad","jet","dog",],
+        ["chief","grade","worth","below","shop","warm","wave","blow","burn","bad","buy","dog",],
+        ["dress","twice","worth","path","shop","jump","wave","suit","bone","bad","cat","pig",],
+        ["quiet","twice","limit","feed","lift","warm","gift","suit","burn","bad","jet","and",],
+        ["chief","aware","limit","below","shop","soft","deny","cook","burn","bad","cat","pig",],
+        ["chief","twice","worth","path","folk","warm","deny","cook","bone","boy","buy","dog",],
+        ["dress","grade","broad","path","folk","warm","deny","blow","shoe","boy","buy","pig",],
+        ["dress","grade","broad","below","lift","warm","gift","cook","burn","boy","cat","pig",],
+        ["dress","twice","limit","below","lift","soft","deny","blow","burn","boy","buy","pig",],
+        ["quiet","aware","broad","path","shop","soft","wave","cook","shoe","bad","cat","pig",],
+        ["quiet","aware","broad","feed","folk","soft","wave","cook","shoe","boy","buy","and",],
+        ["quiet","twice","broad","feed","folk","soft","deny","suit","burn","boy","buy","and",],
+        ["chief","grade","broad","feed","folk","soft","gift","suit","shoe","wine","cat","and",],
+        ["dress","aware","worth","feed","folk","warm","deny","suit","burn","boy","buy","and",],
+        ["chief","aware","worth","below","lift","soft","deny","cook","burn","boy","buy","dog",],
+        ["quiet","grade","worth","path","shop","jump","wave","suit","burn","bad","buy","and",],
+        ["quiet","aware","limit","feed","shop","warm","gift","cook","shoe","boy","cat","and",],
+        ["chief","twice","broad","feed","folk","jump","wave","suit","shoe","wine","cat","and",],
+        ["chief","grade","worth","below","folk","jump","gift","blow","shoe","wine","jet","dog",],
+        ["dress","twice","broad","below","folk","warm","deny","blow","bone","boy","cat","pig",],
+        ["chief","grade","worth","path","lift","jump","gift","blow","burn","boy","jet","and",],
+        ["dress","twice","limit","below","folk","jump","wave","cook","burn","boy","buy","pig",],
+        ["quiet","aware","broad","below","shop","soft","deny","suit","shoe","bad","jet","dog",],
+        ["dress","twice","limit","below","folk","jump","gift","blow","shoe","boy","buy","and",],
+        ["quiet","aware","worth","feed","folk","soft","gift","blow","bone","bad","buy","and",],
+        ["dress","aware","limit","feed","shop","jump","gift","blow","shoe","wine","jet","pig",],
+        ["chief","grade","worth","path","folk","jump","wave","cook","bone","boy","cat","and",],
+        ["quiet","twice","limit","feed","shop","warm","deny","blow","burn","boy","jet","and",],
+        ["chief","grade","worth","below","shop","warm","deny","suit","bone","bad","buy","pig",],
+        ["dress","aware","broad","feed","shop","soft","deny","cook","bone","boy","cat","and",],
+        ["quiet","aware","broad","below","folk","warm","deny","suit","shoe","boy","jet","and",],
+        ["chief","twice","broad","path","folk","jump","gift","cook","bone","wine","jet","dog",],
+        ["dress","grade","broad","path","shop","jump","gift","blow","burn","boy","jet","dog",],
+        ["dress","twice","limit","feed","shop","soft","deny","cook","burn","wine","jet","dog",],
+        ["chief","aware","broad","path","lift","warm","gift","blow","bone","boy","buy","dog",],
+        ["quiet","aware","broad","below","folk","warm","gift","cook","shoe","boy","jet","dog",],
+        ["quiet","aware","limit","path","folk","jump","gift","blow","burn","boy","buy","pig",],
+        ["chief","twice","limit","feed","folk","warm","deny","suit","burn","bad","jet","and",],
+        ["quiet","twice","worth","feed","lift","warm","wave","suit","shoe","bad","jet","and",],
+        ["quiet","twice","broad","below","folk","warm","wave","cook","shoe","bad","buy","and",],
+        ["dress","grade","limit","path","lift","warm","gift","blow","burn","boy","buy","and",],
+        ["chief","aware","worth","feed","shop","warm","gift","suit","bone","boy","jet","pig",],
+        ["chief","grade","limit","feed","folk","jump","wave","cook","bone","bad","buy","and",],
+        ["chief","twice","worth","below","shop","warm","gift","blow","burn","boy","cat","pig",],
+        ["chief","grade","limit","feed","lift","soft","deny","suit","burn","boy","cat","dog",],
+        ["dress","aware","worth","path","shop","soft","wave","suit","shoe","boy","jet","pig",],
+        ["dress","twice","worth","below","shop","warm","deny","cook","burn","boy","cat","pig",],
+        ["quiet","aware","limit","path","lift","jump","gift","blow","burn","bad","buy","pig",],
+        ["quiet","twice","broad","below","lift","warm","deny","blow","bone","boy","jet","and",],
+        ["chief","twice","worth","below","lift","jump","wave","blow","bone","boy","cat","pig",],
+        ["chief","grade","worth","below","lift","jump","gift","cook","bone","boy","jet","dog",],
+        ["chief","twice","broad","path","lift","jump","wave","cook","bone","boy","cat","and",],
+        ["chief","twice","limit","below","folk","jump","deny","cook","burn","boy","jet","and",],
+        ["dress","aware","broad","feed","lift","soft","deny","suit","shoe","wine","buy","pig",],
+        ["quiet","grade","worth","path","shop","jump","wave","cook","shoe","bad","cat","dog",],
+        ["chief","twice","worth","below","shop","warm","deny","blow","burn","boy","buy","and",],
+        ["quiet","aware","limit","below","folk","soft","deny","suit","burn","boy","buy","pig",],
+        ["chief","grade","broad","feed","lift","jump","deny","suit","shoe","boy","cat","and",],
+        ["chief","aware","worth","feed","folk","jump","wave","blow","bone","wine","jet","and",],
+        ["quiet","grade","worth","feed","shop","soft","deny","blow","burn","wine","jet","pig",],
+        ["chief","aware","broad","feed","folk","warm","deny","blow","bone","boy","cat","pig",],
+        ["dress","twice","limit","path","shop","soft","deny","cook","shoe","boy","jet","dog",],
+        ["dress","aware","worth","path","shop","jump","gift","cook","shoe","bad","buy","pig",],
+        ["dress","aware","broad","feed","lift","warm","gift","suit","shoe","wine","buy","and",],
+        ["quiet","aware","worth","path","folk","jump","deny","blow","bone","boy","cat","and",],
+        ["quiet","aware","broad","path","shop","jump","deny","blow","shoe","wine","jet","dog",],
+        ["dress","twice","worth","path","lift","jump","gift","suit","burn","bad","buy","dog",],
+        ["dress","twice","limit","below","folk","soft","gift","blow","bone","bad","jet","pig",],
+        ["chief","twice","broad","below","shop","warm","gift","suit","shoe","bad","jet","dog",],
+        ["dress","twice","broad","path","folk","soft","gift","suit","burn","boy","cat","pig",],
+        ["dress","grade","worth","feed","folk","warm","deny","blow","burn","bad","buy","pig",],
+        ["quiet","grade","broad","path","folk","warm","wave","cook","bone","bad","buy","pig",],
+        ["dress","aware","worth","below","folk","soft","deny","blow","burn","boy","cat","pig",],
+        ["dress","aware","broad","feed","folk","warm","gift","suit","burn","wine","jet","pig",],
+        ["chief","aware","worth","below","shop","warm","deny","blow","burn","boy","jet","pig",],
+        ["dress","aware","worth","feed","lift","warm","gift","blow","shoe","boy","cat","pig",],
+        ["chief","grade","worth","path","folk","soft","wave","blow","shoe","boy","cat","and",],
+        ["chief","twice","broad","below","shop","jump","deny","blow","shoe","boy","jet","dog",],
+        ["dress","grade","limit","below","folk","soft","gift","blow","bone","boy","cat","and",],
+        ["quiet","grade","limit","path","folk","soft","gift","blow","bone","boy","jet","and",],
+        ["quiet","grade","worth","path","folk","soft","deny","suit","shoe","bad","cat","pig",],
+        ["dress","aware","broad","below","shop","warm","deny","blow","bone","bad","jet","dog",],
+        ["chief","aware","worth","feed","shop","warm","wave","suit","shoe","boy","cat","and",],
+        ["dress","twice","broad","path","lift","warm","wave","suit","bone","bad","cat","and",],
+        ["quiet","aware","broad","below","shop","warm","gift","cook","bone","boy","buy","pig",],
+        ["chief","aware","worth","below","folk","soft","deny","suit","burn","boy","jet","dog",],
+        ["quiet","aware","limit","path","shop","soft","wave","suit","bone","bad","buy","dog",],
+        ["dress","twice","broad","below","shop","soft","wave","blow","burn","wine","jet","dog",],
+        ["chief","twice","limit","below","folk","soft","deny","blow","bone","boy","buy","pig",],
+        ["dress","grade","broad","below","folk","warm","wave","blow","shoe","bad","buy","pig",],
+        ["chief","grade","worth","path","folk","jump","gift","suit","shoe","wine","buy","pig",],
+        ["quiet","twice","worth","path","folk","jump","deny","cook","bone","boy","jet","pig",],
+        ["quiet","grade","broad","path","folk","warm","gift","blow","shoe","boy","jet","and",],
+        ["quiet","aware","limit","path","shop","warm","gift","suit","shoe","bad","jet","dog",],
+        ["quiet","aware","limit","path","lift","warm","wave","cook","burn","boy","buy","pig",],
+        ["dress","aware","limit","below","folk","soft","deny","cook","bone","boy","buy","and",],
+        ["quiet","aware","worth","feed","lift","warm","deny","suit","shoe","boy","buy","dog",],
+        ["quiet","aware","broad","feed","folk","jump","gift","suit","bone","bad","cat","and",],
+        ["quiet","aware","limit","below","folk","warm","gift","blow","bone","wine","buy","and",],
+        ["chief","aware","limit","feed","shop","warm","gift","blow","shoe","wine","cat","and",],
+        ["quiet","aware","broad","feed","lift","soft","gift","cook","burn","boy","cat","dog",],
+        ["chief","aware","limit","feed","lift","jump","wave","suit","bone","bad","buy","pig",],
+        ["dress","aware","limit","below","shop","jump","gift","suit","burn","wine","buy","dog",],
+        ["dress","aware","broad","below","folk","jump","gift","suit","bone","wine","buy","dog",],
+        ["chief","twice","worth","feed","lift","warm","wave","blow","burn","wine","cat","and",],
+        ["quiet","grade","limit","feed","shop","soft","deny","suit","shoe","boy","jet","and",],
+        ["dress","aware","broad","below","folk","jump","wave","cook","burn","boy","buy","pig",],
+        ["chief","grade","broad","below","lift","warm","gift","blow","shoe","bad","buy","and",],
+        ["chief","aware","broad","feed","folk","warm","gift","cook","shoe","boy","jet","and",],
+        ["chief","aware","limit","feed","folk","warm","wave","blow","burn","wine","buy","and",],
+        ["chief","aware","limit","feed","shop","soft","wave","cook","shoe","bad","cat","dog",],
+        ["quiet","grade","worth","feed","shop","warm","gift","cook","burn","boy","jet","pig",],
+        ["dress","twice","broad","feed","folk","warm","wave","cook","burn","bad","buy","and",],
+        ["quiet","grade","limit","feed","lift","warm","wave","blow","burn","wine","cat","dog",],
+        ["chief","twice","broad","path","folk","soft","gift","cook","shoe","boy","cat","and",],
+        ["chief","grade","limit","feed","folk","warm","wave","cook","shoe","bad","jet","pig",],
+        ["dress","twice","broad","feed","shop","warm","gift","blow","shoe","boy","buy","and",],
+        ["quiet","aware","limit","below","folk","warm","wave","suit","shoe","bad","cat","and",],
+        ["quiet","aware","worth","feed","folk","warm","gift","cook","shoe","boy","cat","dog",],
+        ["quiet","aware","broad","below","folk","warm","deny","blow","shoe","boy","cat","pig",],
+        ["chief","grade","broad","below","lift","jump","deny","cook","shoe","bad","jet","dog",],
+        ["chief","twice","broad","path","shop","warm","deny","cook","shoe","wine","jet","dog",],
+        ["quiet","grade","broad","feed","lift","soft","gift","blow","burn","wine","jet","and",],
+        ["dress","grade","limit","path","lift","soft","gift","blow","shoe","bad","cat","dog",],
+        ["chief","twice","broad","below","folk","warm","gift","blow","burn","bad","jet","and",],
+        ["chief","grade","limit","feed","lift","warm","deny","suit","bone","boy","jet","pig",],
+        ["chief","grade","broad","path","folk","jump","deny","suit","bone","boy","jet","pig",],
+        ["quiet","grade","worth","below","folk","warm","gift","blow","burn","bad","jet","dog",],
+        ["dress","twice","broad","path","lift","warm","gift","suit","shoe","boy","buy","and",],
+        ["chief","twice","broad","path","lift","soft","wave","suit","burn","boy","jet","dog",],
+        ["quiet","grade","worth","path","folk","soft","deny","cook","bone","boy","jet","and",],
+        ["chief","grade","broad","path","shop","warm","deny","blow","burn","boy","cat","dog",],
+        ["quiet","grade","worth","path","shop","soft","wave","blow","shoe","boy","buy","and",],
+        ["dress","twice","broad","below","folk","jump","deny","suit","shoe","boy","cat","pig",],
+        ["chief","grade","worth","path","shop","soft","gift","cook","bone","bad","cat","dog",],
+        ["chief","aware","worth","feed","shop","warm","deny","blow","burn","wine","jet","pig",],
+        ["quiet","aware","worth","path","shop","jump","gift","blow","shoe","boy","buy","pig",],
+        ["chief","aware","broad","below","folk","jump","deny","cook","burn","boy","jet","pig",],
+        ["chief","grade","worth","path","folk","jump","wave","suit","burn","bad","cat","pig",],
+        ["dress","twice","limit","feed","lift","warm","deny","blow","burn","wine","jet","dog",],
+        ["dress","aware","worth","below","lift","warm","wave","suit","shoe","bad","cat","and",],
+        ["chief","grade","limit","path","folk","warm","deny","cook","bone","boy","jet","dog",],
+        ["quiet","aware","limit","path","folk","warm","wave","blow","bone","boy","cat","pig",],
+        ["chief","aware","worth","feed","folk","jump","gift","cook","bone","boy","cat","dog",],
+        ["dress","twice","worth","feed","folk","soft","gift","suit","bone","wine","buy","dog",],
+        ["dress","grade","limit","path","shop","warm","gift","cook","burn","boy","jet","dog",],
+        ["chief","aware","limit","below","folk","warm","gift","cook","shoe","boy","buy","dog",],
+        ["quiet","grade","limit","below","shop","soft","wave","suit","shoe","bad","jet","and",],
+        ["dress","twice","worth","below","shop","soft","wave","blow","shoe","bad","buy","dog",],
+        ["chief","aware","broad","path","folk","warm","deny","cook","shoe","boy","cat","and",],
+        ["quiet","aware","broad","feed","folk","jump","deny","cook","burn","bad","jet","pig",],
+        ["chief","twice","broad","below","lift","jump","deny","cook","shoe","boy","cat","and",],
+        ["dress","twice","worth","path","folk","soft","gift","cook","shoe","wine","jet","and",],
+        ["quiet","twice","limit","feed","folk","jump","gift","blow","burn","bad","buy","pig",],
+        ["chief","grade","limit","path","folk","warm","deny","suit","shoe","wine","jet","dog",],
+        ["chief","aware","limit","path","folk","warm","wave","blow","burn","boy","jet","pig",],
+        ["dress","aware","limit","below","shop","soft","wave","blow","bone","bad","buy","and",],
+        ["dress","grade","broad","path","lift","jump","deny","cook","shoe","boy","jet","pig",],
+        ["dress","twice","worth","below","shop","jump","wave","cook","burn","boy","jet","pig",],
+        ["dress","grade","worth","path","folk","soft","deny","cook","bone","bad","cat","and",],
+        ["quiet","twice","worth","feed","shop","soft","deny","cook","bone","bad","cat","and",],
+        ["quiet","grade","limit","feed","lift","soft","gift","cook","bone","boy","jet","and",],
+        ["dress","twice","worth","feed","folk","warm","wave","suit","burn","boy","buy","and",],
+        ["chief","twice","worth","path","lift","warm","gift","blow","burn","boy","cat","dog",],
+        ["chief","grade","limit","path","shop","warm","wave","cook","burn","wine","buy","pig",],
+        ["dress","twice","broad","path","shop","warm","deny","cook","shoe","boy","jet","dog",],
+        ["chief","grade","worth","path","shop","soft","wave","cook","burn","bad","jet","dog",],
+        ["dress","grade","broad","path","shop","warm","gift","cook","shoe","boy","cat","dog",],
+        ["chief","grade","worth","feed","shop","warm","gift","blow","shoe","wine","buy","pig",],
+        ["quiet","grade","limit","feed","lift","jump","gift","blow","burn","boy","jet","pig",],
+        ["quiet","twice","worth","path","shop","soft","gift","cook","burn","boy","buy","dog",],
+        ["chief","twice","worth","below","lift","jump","deny","blow","bone","bad","buy","dog",],
+        ["quiet","grade","broad","below","shop","jump","deny","suit","shoe","bad","cat","dog",],
+        ["chief","twice","limit","feed","folk","soft","gift","suit","shoe","boy","jet","pig",],
+        ["dress","grade","limit","below","folk","soft","deny","suit","burn","boy","cat","pig",],
+        ["dress","grade","limit","path","lift","jump","gift","suit","burn","bad","jet","dog",],
+        ["dress","aware","limit","below","folk","jump","wave","cook","bone","boy","jet","dog",],
+        ["chief","aware","broad","feed","lift","warm","wave","suit","shoe","boy","jet","dog",],
+        ["quiet","aware","worth","below","lift","jump","deny","suit","bone","boy","buy","dog",],
+        ["quiet","grade","limit","path","folk","warm","deny","cook","burn","boy","cat","dog",],
+        ["dress","grade","broad","feed","folk","soft","gift","blow","shoe","wine","jet","pig",],
+        ["chief","aware","limit","below","shop","jump","gift","blow","bone","wine","cat","and",],
+        ["dress","grade","limit","feed","shop","warm","gift","blow","bone","wine","buy","dog",],
+        ["chief","grade","worth","below","folk","jump","deny","suit","burn","boy","jet","pig",],
+        ["chief","twice","limit","below","shop","warm","wave","suit","shoe","bad","buy","dog",],
+        ["dress","grade","worth","path","lift","warm","deny","suit","shoe","boy","cat","dog",],
+        ["chief","aware","broad","feed","shop","jump","deny","blow","bone","boy","buy","and",],
+        ["quiet","aware","broad","feed","shop","soft","deny","blow","burn","boy","cat","dog",],
+        ["dress","aware","broad","feed","shop","warm","gift","blow","burn","bad","cat","dog",],
+        ["quiet","aware","broad","feed","shop","jump","wave","cook","bone","bad","cat","and",],
+        ["chief","aware","broad","feed","lift","soft","gift","suit","bone","boy","buy","and",],
+        ["quiet","aware","broad","path","shop","warm","gift","blow","bone","bad","buy","pig",],
+        ["chief","grade","limit","feed","shop","jump","deny","blow","bone","boy","jet","and",],
+        ["chief","grade","limit","below","folk","warm","wave","blow","bone","bad","cat","dog",],
+        ["quiet","aware","worth","path","folk","warm","gift","suit","bone","boy","cat","and",],
+        ["chief","grade","worth","below","lift","soft","deny","cook","burn","bad","jet","pig",],
+        ["quiet","twice","limit","feed","lift","jump","deny","blow","bone","bad","cat","and",],
+        ["chief","aware","broad","below","folk","jump","deny","blow","shoe","bad","jet","dog",],
+        ["chief","twice","limit","feed","folk","soft","gift","blow","burn","boy","jet","and",],
+        ["quiet","twice","worth","feed","shop","warm","gift","cook","burn","wine","cat","and",],
+        ["quiet","aware","limit","feed","folk","soft","gift","blow","bone","bad","jet","and",],
+        ["chief","aware","broad","below","lift","soft","deny","blow","burn","bad","cat","dog",],
+        ["chief","aware","worth","feed","shop","warm","wave","cook","bone","bad","jet","and",],
+        ["dress","grade","limit","path","lift","warm","gift","cook","bone","bad","jet","pig",],
+        ["quiet","twice","broad","path","folk","warm","deny","cook","bone","boy","buy","dog",],
+        ["quiet","aware","limit","feed","shop","soft","gift","suit","shoe","boy","buy","and",],
+        ["quiet","twice","worth","below","lift","soft","wave","blow","burn","wine","jet","pig",],
+        ["dress","grade","worth","feed","shop","soft","gift","blow","burn","bad","buy","dog",],
+        ["quiet","aware","limit","below","lift","warm","gift","blow","bone","bad","jet","dog",],
+        ["quiet","twice","broad","below","lift","soft","gift","blow","bone","boy","jet","dog",],
+        ["quiet","grade","broad","feed","folk","soft","wave","blow","shoe","boy","cat","pig",],
+        ["chief","grade","worth","path","folk","soft","deny","cook","burn","wine","cat","dog",],
+        ["dress","twice","broad","feed","shop","jump","deny","cook","burn","wine","jet","dog",],
+        ["quiet","twice","broad","below","shop","soft","gift","suit","shoe","bad","jet","dog",],
+        ["dress","aware","worth","path","lift","soft","deny","blow","shoe","boy","jet","pig",],
+        ["dress","grade","limit","path","folk","jump","gift","cook","bone","boy","jet","and",],
+        ["dress","aware","limit","path","shop","soft","wave","cook","bone","wine","buy","pig",],
+        ["dress","twice","broad","below","folk","warm","gift","blow","burn","bad","cat","dog",],
+        ["quiet","twice","limit","below","lift","warm","wave","blow","bone","bad","jet","and",],
+        ["quiet","twice","worth","path","lift","jump","deny","suit","shoe","bad","jet","and",],
+        ["dress","twice","limit","below","lift","jump","gift","suit","burn","bad","buy","pig",],
+        ["dress","aware","limit","below","shop","soft","deny","blow","shoe","boy","buy","pig",],
+        ["quiet","twice","limit","path","shop","soft","wave","cook","bone","boy","jet","pig",],
+        ["quiet","aware","limit","path","lift","soft","wave","suit","bone","boy","jet","dog",],
+        ["quiet","grade","limit","feed","lift","jump","gift","suit","shoe","bad","jet","dog",],
+        ["quiet","twice","limit","feed","shop","soft","deny","cook","bone","boy","buy","dog",],
+        ["dress","twice","limit","below","lift","soft","wave","cook","shoe","wine","cat","pig",],
+        ["dress","grade","limit","below","shop","soft","deny","blow","shoe","boy","buy","pig",],
+        ["chief","aware","limit","feed","lift","soft","deny","cook","shoe","wine","buy","dog",],
+        ["chief","twice","broad","below","folk","soft","wave","blow","shoe","boy","buy","dog",],
+        ["quiet","twice","limit","feed","folk","warm","wave","suit","burn","boy","buy","dog",],
+        ["chief","grade","broad","feed","lift","soft","gift","cook","burn","bad","buy","dog",],
+        ["quiet","twice","worth","below","lift","soft","gift","suit","bone","wine","cat","dog",],
+        ["chief","aware","broad","path","folk","jump","deny","cook","burn","bad","cat","dog",],
+        ["quiet","twice","worth","below","folk","warm","deny","blow","burn","boy","cat","pig",],
+        ["chief","aware","broad","below","shop","soft","gift","cook","burn","bad","buy","dog",],
+        ["chief","grade","limit","path","folk","jump","deny","suit","bone","bad","buy","pig",],
+        ["quiet","twice","worth","path","lift","jump","gift","blow","shoe","wine","cat","dog",],
+        ["chief","twice","worth","below","shop","soft","wave","cook","shoe","bad","cat","dog",],
+        ["dress","grade","limit","path","folk","warm","gift","suit","burn","wine","cat","dog",],
+        ["dress","twice","limit","below","shop","jump","gift","cook","shoe","bad","jet","and",],
+        ["dress","twice","limit","feed","lift","warm","deny","blow","burn","bad","buy","pig",],
+        ["chief","aware","worth","path","folk","soft","gift","cook","bone","bad","buy","pig",],
+        ["chief","aware","broad","path","lift","jump","deny","suit","burn","bad","cat","pig",],
+        ["chief","grade","broad","feed","folk","warm","deny","suit","shoe","boy","jet","and",],
+        ["chief","twice","worth","below","shop","jump","deny","suit","shoe","boy","buy","pig",],
+        ["quiet","twice","broad","feed","folk","warm","deny","blow","shoe","boy","cat","pig",],
+        ["quiet","twice","worth","below","shop","jump","wave","suit","burn","boy","jet","pig",],
+        ["chief","aware","broad","path","folk","warm","deny","suit","bone","boy","cat","and",],
+        ["quiet","grade","broad","below","folk","jump","gift","cook","burn","boy","buy","pig",],
+        ["chief","grade","broad","below","shop","jump","deny","cook","bone","boy","jet","dog",],
+        ["quiet","twice","limit","feed","folk","soft","wave","cook","shoe","boy","buy","dog",],
+        ["dress","aware","broad","below","shop","soft","gift","suit","bone","bad","jet","pig",],
+        ["dress","aware","broad","path","folk","jump","wave","cook","shoe","bad","cat","dog",],
+        ["chief","twice","worth","path","shop","warm","wave","cook","shoe","bad","cat","dog",],
+        ["dress","aware","limit","path","folk","warm","gift","suit","burn","bad","cat","and",],
+        ["dress","twice","limit","below","folk","soft","wave","suit","burn","bad","jet","and",],
+        ["dress","twice","broad","below","lift","soft","gift","cook","burn","bad","cat","dog",],
+        ["chief","grade","limit","feed","lift","warm","deny","blow","bone","boy","buy","and",],
+        ["chief","twice","limit","path","shop","soft","wave","suit","bone","wine","buy","pig",],
+        ["chief","twice","limit","path","shop","jump","deny","blow","burn","boy","buy","pig",],
+        ["quiet","twice","worth","path","lift","jump","wave","cook","bone","bad","cat","dog",],
+        ["dress","twice","broad","feed","lift","warm","wave","suit","shoe","wine","jet","and",],
+        ["quiet","grade","limit","below","shop","jump","deny","suit","bone","boy","cat","dog",],
+        ["quiet","grade","broad","below","folk","soft","deny","suit","burn","boy","cat","pig",],
+        ["chief","aware","limit","below","shop","jump","wave","blow","shoe","boy","cat","dog",],
+        ["dress","twice","broad","feed","lift","soft","gift","suit","burn","boy","cat","and",],
+        ["quiet","grade","limit","feed","shop","soft","deny","suit","shoe","wine","jet","pig",],
+        ["quiet","twice","limit","below","folk","warm","deny","cook","bone","bad","jet","and",],
+        ["dress","twice","broad","path","shop","warm","gift","suit","burn","wine","jet","dog",],
+        ["dress","twice","limit","below","shop","warm","gift","cook","shoe","boy","buy","and",],
+        ["chief","aware","limit","below","lift","soft","wave","blow","burn","bad","buy","dog",],
+        ["dress","grade","worth","path","lift","soft","gift","blow","bone","boy","jet","and",],
+        ["dress","grade","limit","feed","lift","soft","wave","cook","shoe","boy","buy","pig",],
+        ["quiet","twice","broad","path","folk","warm","wave","cook","shoe","boy","buy","and",],
+        ["dress","twice","limit","feed","shop","jump","wave","cook","bone","boy","jet","dog",],
+        ["quiet","twice","broad","feed","shop","soft","gift","cook","shoe","wine","cat","pig",],
+        ["chief","twice","broad","path","lift","soft","wave","blow","shoe","boy","jet","pig",],
+        ["dress","aware","worth","path","shop","warm","deny","suit","bone","bad","cat","pig",],
+        ["quiet","grade","worth","below","shop","soft","wave","blow","bone","wine","jet","pig",],
+        ["quiet","aware","limit","path","shop","warm","deny","blow","shoe","boy","cat","dog",],
+        ["dress","twice","limit","path","lift","warm","deny","cook","shoe","bad","jet","and",],
+        ["chief","twice","limit","feed","folk","warm","wave","blow","shoe","boy","cat","and",],
+        ["dress","twice","broad","feed","lift","warm","wave","blow","bone","wine","buy","dog",],
+        ["chief","grade","worth","feed","shop","soft","wave","cook","shoe","wine","buy","dog",],
+        ["chief","aware","broad","path","shop","warm","gift","suit","shoe","wine","cat","dog",],
+        ["quiet","grade","limit","path","lift","jump","gift","suit","shoe","boy","cat","pig",],
+        ["quiet","grade","worth","path","shop","warm","wave","cook","burn","bad","jet","and",],
+        ["chief","grade","broad","feed","shop","soft","deny","blow","shoe","bad","buy","pig",],
+        ["chief","grade","limit","path","folk","soft","gift","suit","bone","boy","jet","dog",],
+        ["dress","twice","limit","path","lift","jump","gift","suit","bone","boy","buy","and",],
+        ["quiet","twice","limit","feed","folk","soft","wave","cook","bone","bad","cat","pig",],
+        ["quiet","grade","limit","path","folk","warm","wave","cook","burn","boy","cat","and",],
+        ["quiet","twice","limit","feed","lift","jump","deny","suit","shoe","bad","cat","dog",],
+        ["quiet","grade","worth","path","shop","warm","wave","suit","shoe","boy","buy","dog",],
+        ["quiet","aware","broad","path","lift","soft","wave","cook","shoe","wine","buy","pig",],
+        ["dress","grade","broad","path","shop","warm","gift","suit","bone","boy","cat","and",],
+        ["chief","twice","worth","path","shop","soft","gift","blow","shoe","bad","jet","and",],
+        ["dress","grade","limit","below","folk","warm","wave","cook","bone","bad","jet","and",],
+        ["chief","grade","broad","below","shop","warm","gift","cook","shoe","bad","jet","dog",],
+        ["dress","grade","limit","path","folk","jump","gift","suit","shoe","boy","cat","pig",],
+        ["dress","twice","broad","below","shop","jump","deny","cook","burn","wine","buy","dog",],
+        ["dress","grade","worth","feed","folk","warm","wave","cook","burn","bad","buy","pig",],
+        ["chief","twice","broad","path","lift","soft","gift","suit","bone","boy","buy","pig",],
+        ["dress","grade","limit","below","folk","soft","deny","blow","burn","bad","buy","and",],
+        ["quiet","aware","broad","feed","shop","warm","gift","cook","bone","wine","buy","dog",],
+        ["quiet","aware","worth","below","lift","soft","wave","suit","burn","wine","cat","dog",],
+        ["dress","twice","worth","path","shop","warm","deny","blow","bone","wine","cat","pig",],
+        ["dress","grade","limit","below","folk","soft","wave","cook","bone","boy","jet","and",],
+        ["quiet","grade","worth","path","lift","soft","deny","suit","bone","bad","cat","pig",],
+        ["dress","grade","broad","feed","shop","warm","deny","blow","burn","wine","buy","and",],
+        ["quiet","aware","broad","below","folk","warm","deny","blow","shoe","boy","cat","pig",],
+        ["chief","twice","broad","path","lift","warm","gift","cook","burn","boy","cat","dog",],
+        ["dress","aware","broad","feed","shop","soft","gift","blow","shoe","bad","cat","and",],
+        ["chief","aware","worth","path","shop","jump","deny","suit","bone","boy","cat","and",],
+        ["quiet","aware","broad","below","lift","soft","gift","blow","bone","wine","jet","dog",],
+        ["chief","grade","limit","path","folk","warm","wave","suit","shoe","wine","jet","and",],
+        ["quiet","twice","broad","feed","lift","jump","wave","suit","burn","boy","buy","pig",],
+        ["chief","aware","limit","below","shop","soft","wave","suit","bone","wine","buy","dog",],
+        ["dress","aware","limit","feed","lift","warm","deny","suit","bone","wine","jet","pig",],
+        ["chief","grade","limit","below","shop","warm","deny","blow","shoe","wine","cat","dog",],
+      ];
+      puzzle=all_puzzles[i];
+      solution_positions=all_solutions[i];
+      words=all_words[i];
       sorted_Num_Words = random.nextInt(9) - 1;
       next_Color = random.nextInt(5);
     }
@@ -964,21 +4078,16 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
 
   String return_Sorted_Words() {
     sorted_Num_Words++;
-    if (sorted_Num_Words == 9) {
+    if (sorted_Num_Words == 12) {
       sorted_Num_Words = 0;
     }
-    return words[sorted_Num_Words];
+    return words[sorted_Num_Words].toUpperCase();
   }
 
   String write_Puzzle_Letter(int i) {
     create_Puzzle_Random();
-    return puzzle[i];
+    return puzzle[0][i].toUpperCase();
   }
-
-
-
-
-
 
 
 
@@ -1050,2071 +4159,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       Navigator.of(context).pushNamed("/stats");
     }
   }
-  fit_Words_Puzzle(List<String> puzzle, String word_one, String word_two,
-      String word_three, String word_four, String word_five, String word_six
-      ,String word_seven,String word_eight,String word_nine) {
 
-    row_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
-    column_five = random.nextInt(num_rows_and_columns - word_five.length + 1);
-
-    int num_of_tentatives=0;
-    bool connection_one = false;
-    bool connection_two = false;
-    bool connection_three = false;
-    bool connection_four = false;
-    bool connection_five=false;
-    bool connection_six=false;
-    bool connection_seven=false;
-    bool connection_eight=false;
-    bool connection_nine=false;
-    bool connection_ten=false;
-    random.nextInt(2) == 0 ? word_one_reverse = false : word_one_reverse = true;
-    random.nextInt(2) == 0 ? word_two_reverse = false : word_two_reverse = true;
-    random.nextInt(2) == 0 ? word_three_reverse = false : word_three_reverse =
-    true;
-    random.nextInt(2) == 0 ? word_four_reverse = false : word_four_reverse =
-    true;
-    random.nextInt(2) == 0 ? word_five_reverse = false : word_five_reverse =
-    true;
-    random.nextInt(2) == 0 ? word_six_reverse = false : word_six_reverse = true;
-    random.nextInt(2) == 0 ? word_seven_reverse = false : word_seven_reverse =
-    true;
-    random.nextInt(2) == 0 ? word_eight_reverse = false : word_eight_reverse =
-    true;
-    random.nextInt(2) == 0 ? word_nine_reverse = false : word_nine_reverse =
-    true;
-
-
-    for (int i = 0; i < words[4].length; i++) {
-      for (int j = 0; j < words[0].length; j++) {
-        if (words[4][i] == words[0][j]) {
-          connection_one = true;
-          if (random.nextInt(2) == 0) {
-            row_one = row_five + i;
-            column_one = column_five + i - j;
-            if (column_one < 0 ||
-                column_one > num_rows_and_columns - word_one.length) {
-              row_one = row_five + i;
-              column_one = column_five + i - word_one.length + 1+ j;
-
-              if (column_one < 0 ||
-                  column_one > num_rows_and_columns - word_one.length) {
-                no_connection_one_count++;
-                if (no_connection_one_count < 20) {
-                  fit_Words_Puzzle(
-                      puzzle,
-                      word_one,
-                      word_two,
-                      word_three,
-                      word_four,
-                      word_five,
-                      word_six,
-                      word_seven,
-                      word_eight,
-                      word_nine
-                  );
-                }else {
-                  connection_one = false;
-                }
-              }else{
-                word_one_reverse = true;
-                word_five_reverse = false;
-                break;
-              }
-            } else {
-              word_one_reverse = false;
-              word_five_reverse = false;
-              break;
-            }
-          } else {
-            row_one = row_five + word_five.length - i - 1;
-            column_one =
-                column_five + word_five.length - i - 1 - j;
-            if (column_one < 0 ||
-                column_one > num_rows_and_columns - word_one.length) {
-              row_one = row_five + word_five.length - i - 1;
-              column_one = column_five + word_five.length - i - 1-word_one.length+1 + j;
-              if (column_one < 0 ||
-                  column_one > num_rows_and_columns - word_one.length) {
-                no_connection_one_count++;
-                if (no_connection_one_count < 20) {
-                  fit_Words_Puzzle(
-                      puzzle,
-                      word_one,
-                      word_two,
-                      word_three,
-                      word_four,
-                      word_five,
-                      word_six,
-                      word_seven,
-                      word_eight,
-                      word_nine
-                  );
-                }else {
-                  connection_one = false;
-                }
-              } else {
-                word_one_reverse = true;
-                word_five_reverse = true;
-                break;
-              }
-            } else {
-              word_one_reverse = false;
-              word_five_reverse = true;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_one){
-        break;
-      }
-    }
-
-    for (int i = 0; i < words[4].length; i++) {
-      for (int j = 0; j < words[1].length; j++) {
-        if (words[4][i] == words[1][j]) {
-          connection_two = true;
-          if (!word_five_reverse) {
-            row_two = row_five + i;
-            column_two = column_five + i - j;
-            if (column_two < 0 ||
-                column_two > num_rows_and_columns - word_two.length ||
-                row_one == row_two) {
-              row_two = row_five + i;
-              column_two = column_five + i -word_two.length+1 + j;
-              if (column_two < 0 ||
-                  column_two > num_rows_and_columns - word_two.length ||
-                  row_one == row_two) {
-                no_connection_two_count++;
-                if (no_connection_two_count < 15) {
-                  fit_Words_Puzzle(
-                      puzzle,
-                      word_one,
-                      word_two,
-                      word_three,
-                      word_four,
-                      word_five,
-                      word_six,
-                      word_seven,
-                      word_eight,
-                      word_nine
-                  );
-                } else {
-                  connection_two = false;
-                }
-              } else {
-                word_two_reverse = true;
-                break;
-              }
-            } else {
-              word_two_reverse = false;
-              break;
-            }
-          } else {
-            row_two = row_five + word_five.length - i - 1;
-            column_two =
-                column_five + word_five.length - i - 1 - j;
-            if (column_two < 0 ||
-                column_two > num_rows_and_columns - word_two.length ||
-                row_one == row_two) {
-              row_two = row_five + word_five.length - i - 1;
-              column_two = column_five + word_five.length - i - 1-word_two.length+1 + j;
-              if (column_two < 0 ||
-                  column_two > num_rows_and_columns - word_two.length ||
-                  row_one == row_two) {
-                no_connection_two_count++;
-                if (no_connection_two_count < 15) {
-                  fit_Words_Puzzle(
-                      puzzle,
-                      word_one,
-                      word_two,
-                      word_three,
-                      word_four,
-                      word_five,
-                      word_six,
-                      word_seven,
-                      word_eight,
-                      word_nine
-                  );
-                } else {
-                  connection_two = false;
-                }
-              } else {
-                word_two_reverse = true;
-                break;
-              }
-            } else {
-              word_two_reverse = false;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_two){
-        break;
-      }
-    }
-
-    if (!connection_one) {
-      int k = 0;
-      while (k < word_five.length * word_one.length) {
-        k = 0;
-        row_one =
-            random.nextInt(num_rows_and_columns);
-        column_one =
-            random.nextInt(num_rows_and_columns - word_one.length + 1);
-        for (int i = 0; i < word_five.length; i++) {
-          for (int j = 0; j < word_one.length; j++) {
-            if (!(row_five + i == row_one &&
-                column_five + i == column_one + j)) {
-              k++;
-            }
-          }
-        }
-      }
-    }
-
-    if (!connection_two) {
-      int k = 0;
-      while (k < word_five.length * word_two.length) {
-        k = 0;
-        row_two =
-            random.nextInt(num_rows_and_columns);
-        column_two = random.nextInt(num_rows_and_columns - word_two.length + 1);
-        for (int i = 0; i < word_five.length; i++) {
-          for (int j = 0; j < word_two.length; j++) {
-            if (!((row_five + i == row_two &&
-                column_five + i == column_two + j) || row_one == row_two)) {
-              k++;
-            }
-          }
-        }
-      }
-    }
-
-
-    for (int i = 0; i < words[1].length; i++) {
-      for (int j = 0; j < words[2].length; j++) {
-        if (words[1][i] == words[2][j]) {
-          connection_three = true;
-          if (!word_two_reverse) {
-            row_three = row_two - j;
-            column_three = column_two + i;
-            int k = 0;
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_three.length; l++) {
-                if (((row_five + p == row_three + l &&
-                    column_five + p == column_three) ||
-                    ((row_three <= row_one &&
-                        row_three + word_three.length - 1 >= row_one) &&
-                        (column_three >= column_one &&
-                            column_three <=
-                                column_one + word_one.length - 1)))) {
-                  k++;
-                }
-              }
-            }
-            if (row_three < 0 ||
-                row_three > num_rows_and_columns - word_three.length ||
-                k != 0) {
-              row_three = row_two-word_three.length+1 + j;
-              column_three = column_two + i;
-              k=0;
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_three.length; l++) {
-                  if (((row_five + p == row_three + l &&
-                      column_five + p == column_three) ||
-                      ((row_three <= row_one &&
-                          row_three + word_three.length - 1 >= row_one) &&
-                          (column_three >= column_one &&
-                              column_three <=
-                                  column_one + word_one.length - 1)))) {
-                    k++;
-                  }
-                }
-              }
-              if (row_three < 0 ||
-                  row_three > num_rows_and_columns - word_three.length ||
-                  k != 0) {
-                no_connection_three_count++;
-                if (no_connection_three_count < 5) {
-                  fit_Words_Puzzle(
-                      puzzle,
-                      word_one,
-                      word_two,
-                      word_three,
-                      word_four,
-                      word_five,
-                      word_six,
-                      word_seven,
-                      word_eight,
-                      word_nine
-                  );
-                } else {
-                  connection_three = false;
-                }
-              }  else {
-                word_three_reverse = true;
-                word_two_reverse = false;
-                break;
-              }
-            }else {
-              word_three_reverse = false;
-              word_two_reverse = false;
-              break;
-            }
-          } else {
-            row_three = row_two - j;
-            column_three = column_two + word_two.length - i - 1;
-            int k = 0;
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_three.length; l++) {
-                if (((row_five + p == row_three + l &&
-                    column_five + p == column_three) ||
-                    ((row_three <= row_one &&
-                        row_three + word_three.length - 1 >= row_one) &&
-                        (column_three >= column_one &&
-                            column_three <=
-                                column_one + word_one.length - 1)))) {
-                  k++;
-                }
-              }
-            }
-            if (row_three < 0 ||
-                row_three > num_rows_and_columns - word_three.length ||
-                k != 0) {
-              row_three = row_two - word_three.length + 1 + j;
-              column_three = column_two + word_two.length - i - 1;
-              k = 0;
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_three.length; l++) {
-                  if (((row_five + p == row_three + l &&
-                      column_five + p == column_three) ||
-                      ((row_three <= row_one &&
-                          row_three + word_three.length - 1 >= row_one) &&
-                          (column_three >= column_one &&
-                              column_three <=
-                                  column_one + word_one.length - 1)))) {
-                    k++;
-                  }
-                }
-              }
-              if (row_three < 0 ||
-                  row_three > num_rows_and_columns - word_three.length ||
-                  k != 0) {
-                no_connection_three_count++;
-                if (no_connection_three_count < 5) {
-                  fit_Words_Puzzle(
-                      puzzle,
-                      word_one,
-                      word_two,
-                      word_three,
-                      word_four,
-                      word_five,
-                      word_six,
-                      word_seven,
-                      word_eight,
-                      word_nine
-                  );
-                } else {
-                  connection_three = false;
-                }
-              }else{
-                word_three_reverse = true;
-                word_two_reverse = true;
-                break;
-              }
-            } else {
-              word_three_reverse = false;
-              word_two_reverse = true;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_three){
-        break;
-      }
-    }
-
-
-    if (!connection_three) {
-      num_of_tentatives = 0;
-      int k = 0;
-      while (k < word_five.length * word_three.length) {
-        k = 0;
-        row_three =
-            random.nextInt(num_rows_and_columns - word_three.length + 1);
-        column_three = random.nextInt(num_rows_and_columns);
-        num_of_tentatives++;
-        if (num_of_tentatives > 100) {
-          fit_Words_Puzzle(
-              puzzle,
-              word_one,
-              word_two,
-              word_three,
-              word_four,
-              word_five,
-              word_six,
-              word_seven,
-              word_eight,
-              word_nine
-          );
-        }
-        for (int i = 0; i < word_five.length; i++) {
-          for (int j = 0; j < word_three.length; j++) {
-            if (!((row_five + i == row_three + j &&
-                column_five + i == column_three) || ((row_three <= row_one &&
-                row_three + word_three.length - 1 >= row_one) &&
-                (column_three >= column_one &&
-                    column_three <= column_one + word_one.length - 1)) ||
-                ((row_three <= row_two &&
-                    row_three + word_three.length - 1 >= row_two) &&
-                    (column_three >= column_two &&
-                        column_three <= column_two + word_two.length - 1)))) {
-              k++;
-            }
-          }
-        }
-      }
-    }
-
-
-    for (int i=0;i<words[0].length;i++ ) {
-      for (int j = 0; j < words[3].length; j++) {
-        if (words[0][i] == words[3][j]) {
-          connection_four = true;
-          if (!word_one_reverse) {
-            row_four = row_one - j;
-            column_four = column_one + i;
-            int k = 0;
-            for(int y=0;y<word_five.length;y++){
-              for (int x=0;x<word_four.length;x++){
-                if((row_five+y==row_four+x && column_five+y==column_four)||
-                    column_four==column_three  ||
-                    (column_four>=column_two && column_four<=column_two+word_two.length-1
-                        && row_four<=row_two && row_four+word_four.length-1>=row_two)){
-                  k++;
-                }
-              }
-            }
-            if (row_four < 0 ||
-                row_four > num_rows_and_columns - word_four.length ||
-                k != 0) {
-              row_four = row_one-word_four.length+1 + j;
-              column_four = column_one + i;
-              k=0;
-              for(int y=0;y<word_five.length;y++){
-                for (int x=0;x<word_four.length;x++){
-                  if((row_five+y==row_four+x && column_five+y==column_four)||
-                      column_four==column_three  ||
-                      (column_four>=column_two && column_four<=column_two+word_two.length-1
-                          && row_four<=row_two && row_four+word_four.length-1>=row_two)){
-                    k++;
-                  }
-                }
-              }
-              if (row_four < 0 ||
-                  row_four > num_rows_and_columns - word_four.length ||
-                  k != 0) {
-                connection_four = false;
-              }
-              else {
-                word_four_reverse = true;
-                word_one_reverse = false;
-                break;
-              }
-            }else {
-              word_four_reverse = false;
-              word_one_reverse = false;
-              break;
-            }
-          } else {
-            row_four = row_one - j;
-            column_four = column_one + word_one.length - i - 1;
-            int k = 0;
-
-            for(int y=0;y<word_five.length;y++){
-              for (int x=0;x<word_four.length;x++){
-                if((row_five+y==row_four+x && column_five+y==column_four)||
-                    column_four==column_three  ||
-                    (column_four>=column_two && column_four<=column_two+word_two.length-1
-                        && row_four<=row_two && row_four+word_four.length-1>=row_two)){
-                  k++;
-                }
-              }
-            }
-
-            if (row_four < 0 ||
-                row_four > num_rows_and_columns - word_four.length ||
-                k != 0) {
-              row_four = row_one - word_four.length + 1 + j;
-              column_four = column_one + word_one.length - i - 1;
-              k = 0;
-
-
-              for(int y=0;y<word_five.length;y++){
-                for (int x=0;x<word_four.length;x++){
-                  if((row_five+y==row_four+x && column_five+y==column_four)||
-                      column_four==column_three  ||
-                      (column_four>=column_two && column_four<=column_two+word_two.length-1
-                          && row_four<=row_two && row_four+word_four.length-1>=row_two)){
-                    k++;
-                  }
-                }
-              }
-
-
-              if (row_four < 0 ||
-                  row_four > num_rows_and_columns - word_four.length ||
-                  k != 0) {
-                connection_four = false;
-              } else{
-                word_four_reverse = true;
-                word_one_reverse = true;
-                break;
-              }
-            } else {
-              word_four_reverse = false;
-              word_one_reverse = true;
-              break;
-            }
-          }
-
-        }
-      }
-      if(connection_four){
-        break;
-      }
-    }
-
-
-    if(!connection_four) {
-      num_of_tentatives = 0;
-      int k = 0;
-      while (k < word_five.length * word_four.length) {
-        k = 0;
-        row_four = random.nextInt(num_rows_and_columns - word_four.length + 1);
-        column_four = random.nextInt(num_rows_and_columns);
-        num_of_tentatives++;
-        if (num_of_tentatives > 100) {
-          fit_Words_Puzzle(
-              puzzle,
-              word_one,
-              word_two,
-              word_three,
-              word_four,
-              word_five,
-              word_six,
-              word_seven,
-              word_eight,
-              word_nine
-          );
-        }
-        for(int y=0;y<word_five.length;y++){
-          for (int x=0;x<word_four.length;x++){
-            if(!((row_five+y==row_four+x && column_five+y==column_four)||
-                column_four==column_three || (column_four>=column_one && column_four<=column_one+word_one.length-1
-                && row_four<=row_one && row_four+word_four.length-1>=row_one) ||
-                (column_four>=column_two && column_four<=column_two+word_two.length-1
-                    && row_four<=row_two && row_four+word_four.length-1>=row_two))){
-              k++;
-            }
-          }
-        }
-      }
-    }
-    for (int i = 0; i < words[3].length; i++) {
-      for (int j = 0; j < words[5].length; j++) {
-        if (words[3][i] == words[5][j]) {
-          connection_five = true;
-          if (!word_four_reverse) {
-            row_six = row_four + i;
-            column_six = column_four - j;
-            int k = 0;
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_six.length; l++) {
-                if ((row_five + p == row_six &&
-                    column_five + p == column_six + l) || row_six == row_one ||
-                    row_six == row_two
-                    || (column_six <= column_three &&
-                        column_six + word_six.length - 1 >= column_three &&
-                        row_six >= row_three &&
-                        row_six <= row_three + word_three.length - 1)) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_six < 0 ||
-                column_six > num_rows_and_columns - word_six.length ||
-                k != 0) {
-              row_six = row_four + i;
-              column_six = column_four - word_six.length + 1 + j;
-              int k = 0;
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_six.length; l++) {
-                  if ((row_five + p == row_six &&
-                      column_five + p == column_six + l) || row_six == row_one ||
-                      row_six == row_two
-                      || (column_six <= column_three &&
-                          column_six + word_six.length - 1 >= column_three &&
-                          row_six >= row_three &&
-                          row_six <= row_three + word_three.length - 1)) {
-                    k++;
-                  }
-                }
-              }
-              if (column_six < 0 ||
-                  column_six > num_rows_and_columns - word_six.length ||
-                  k != 0) {
-                connection_five = false;
-              } else {
-                word_six_reverse = true;
-                break;
-              }
-            } else {
-              word_six_reverse = false;
-              break;
-            }
-
-          } else {
-            column_six = column_four-j;
-            row_six = row_four+word_four.length-1 - i;
-            int k = 0;
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_six.length; l++) {
-                if ((row_five + p == row_six &&
-                    column_five + p == column_six + l) || row_six == row_one ||
-                    row_six == row_two
-                    || (column_six <= column_three &&
-                        column_six + word_six.length - 1 >= column_three &&
-                        row_six >= row_three &&
-                        row_six <= row_three + word_three.length - 1)) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_six < 0 ||
-                column_six > num_rows_and_columns - word_six.length ||
-                k != 0) {
-              column_six = column_four-word_six.length+1 + j;
-              row_six = row_four + word_four.length - 1 - i;
-              int k = 0;
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_six.length; l++) {
-                  if ((row_five + p == row_six &&
-                      column_five + p == column_six + l) || row_six == row_one ||
-                      row_six == row_two
-                      || (column_six <= column_three &&
-                          column_six + word_six.length - 1 >= column_three &&
-                          row_six >= row_three &&
-                          row_six <= row_three + word_three.length - 1)) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_six < 0 ||
-                  column_six > num_rows_and_columns - word_six.length ||
-                  k != 0) {
-                connection_five = false;
-              } else {
-                word_six_reverse = true;
-                break;
-              }
-            }
-            else {
-              word_six_reverse = false;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_five){
-        break;
-      }
-    }
-
-
-    if(!connection_five) {
-      for (int f = 0; f < num_rows_and_columns; f++) {
-        int k = 0;
-        for (int l = 0; l < num_rows_and_columns - word_six.length + 1; l++) {
-          row_six = f;
-          column_six = l;
-          for (int i = 0; i < word_five.length; i++) {
-            for (int j = 0; j < word_six.length; j++) {
-              if (!((row_five + i == row_six &&
-                  column_five + i == column_six + j) || row_six == row_one ||
-                  row_six == row_two ||
-                  (column_six <= column_four &&
-                      column_six + word_six.length - 1 >= column_four &&
-                      row_six >= row_four &&
-                      row_six <= row_four + word_four.length - 1)
-                  || (column_six <= column_three &&
-                      column_six + word_six.length - 1 >= column_three &&
-                      row_six >= row_three &&
-                      row_six <= row_three + word_three.length - 1))) {
-                k++;
-              }
-            }
-          }
-          if (k == word_five.length * word_six.length) {
-            break;
-          }
-        }
-        if (k == word_five.length * word_six.length) {
-          break;
-        }
-      }
-    }
-
-    for (int i = 0; i < words[2].length; i++) {
-      for (int j = 0; j < words[6].length; j++) {
-        if (words[2][i] == words[6][j]) {
-          connection_six = true;
-          if (!word_three_reverse) {
-            row_seven = row_three + i;
-            column_seven = row_three - j;
-            int k = 0;
-
-            for (int i = 0; i < word_five.length; i++) {
-              for (int j = 0; j < word_seven.length; j++) {
-                if ((row_five + i == row_seven &&
-                    column_five + i == column_seven + j) ||
-                    row_seven == row_six ||
-                    row_seven == row_one ||
-                    row_seven == row_two ||
-                    (column_seven <= column_four &&
-                        column_seven + word_seven.length - 1 >= column_four &&
-                        row_seven >= row_four &&
-                        row_seven <= row_four + word_four.length - 1)
-                ) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_seven < 0 ||
-                column_seven > num_rows_and_columns - word_seven.length ||
-                k != 0) {
-              row_seven = row_three + i;
-              column_seven = column_three-word_seven.length+1 + j;
-              int k = 0;
-
-              for (int i = 0; i < word_five.length; i++) {
-                for (int j = 0; j < word_seven.length; j++) {
-                  if ((row_five + i == row_seven &&
-                      column_five + i == column_seven + j) ||
-                      row_seven == row_six ||
-                      row_seven == row_one ||
-                      row_seven == row_two ||
-                      (column_seven <= column_four &&
-                          column_seven + word_seven.length - 1 >= column_four &&
-                          row_seven >= row_four &&
-                          row_seven <= row_four + word_four.length - 1)
-                  ) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_seven < 0 ||
-                  column_seven > num_rows_and_columns - word_seven.length ||
-                  k != 0) {
-                connection_six = false;
-              }else{
-                word_seven_reverse = true;
-                break;
-              }
-            }
-            else {
-              word_seven_reverse = false;
-              break;
-            }
-          } else {
-            column_seven = column_three-j;
-            row_seven = row_three+word_three.length-1 - i;
-            int k = 0;
-            for (int i = 0; i < word_five.length; i++) {
-              for (int j = 0; j < word_seven.length; j++) {
-                if ((row_five + i == row_seven &&
-                    column_five + i == column_seven + j) ||
-                    row_seven == row_six ||
-                    row_seven == row_one ||
-                    row_seven == row_two ||
-                    (column_seven <= column_four &&
-                        column_seven + word_seven.length - 1 >= column_four &&
-                        row_seven >= row_four &&
-                        row_seven <= row_four + word_four.length - 1)
-                ) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_seven < 0 ||
-                column_seven > num_rows_and_columns - word_seven.length ||
-                k != 0) {
-              column_seven = column_three -word_seven.length+1+j;
-              row_seven = row_three + word_three.length - 1 - i;
-              int k = 0;
-              for (int i = 0; i < word_five.length; i++) {
-                for (int j = 0; j < word_seven.length; j++) {
-                  if ((row_five + i == row_seven &&
-                      column_five + i == column_seven + j) ||
-                      row_seven == row_six ||
-                      row_seven == row_one ||
-                      row_seven == row_two ||
-                      (column_seven <= column_four &&
-                          column_seven + word_seven.length - 1 >= column_four &&
-                          row_seven >= row_four &&
-                          row_seven <= row_four + word_four.length - 1)
-                  ) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_seven < 0 ||
-                  column_seven > num_rows_and_columns - word_seven.length ||
-                  k != 0) {
-                connection_six = false;
-              }else{
-                word_seven_reverse = true;
-                break;
-              }
-            }else {
-              word_seven_reverse = false;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_six){
-        break;
-      }
-    }
-
-
-    if(!connection_six) {
-      for (int i = 0; i < words[3].length; i++) {
-        for (int j = 0; j < words[6].length; j++) {
-          if (words[3][i] == words[6][j]) {
-            connection_seven = true;
-            if (!word_four_reverse) {
-              row_seven = row_four + i;
-              column_seven = column_four - j;
-              int k = 0;
-
-              for (int i = 0; i < word_five.length; i++) {
-                for (int j = 0; j < word_seven.length; j++) {
-                  if ((row_five + i == row_seven &&
-                      column_five + i == column_seven + j) ||
-                      row_seven == row_six ||
-                      row_seven == row_one ||
-                      row_seven == row_two ||
-                      (column_seven <= column_three &&
-                          column_seven + word_seven.length - 1 >=
-                              column_three &&
-                          row_seven >= row_three &&
-                          row_seven <= row_three + word_three.length - 1)) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_seven < 0 ||
-                  column_seven > num_rows_and_columns - word_seven.length ||
-                  k != 0) {
-                row_seven = row_four + i;
-                column_seven = column_four - word_seven.length + 1 + j;
-                int k = 0;
-
-                for (int i = 0; i < word_five.length; i++) {
-                  for (int j = 0; j < word_seven.length; j++) {
-                    if ((row_five + i == row_seven &&
-                        column_five + i == column_seven + j) ||
-                        row_seven == row_six ||
-                        row_seven == row_one ||
-                        row_seven == row_two ||
-                        (column_seven <= column_three &&
-                            column_seven + word_seven.length - 1 >=
-                                column_three &&
-                            row_seven >= row_three &&
-                            row_seven <= row_three + word_three.length - 1)) {
-                      k++;
-                    }
-                  }
-                }
-                if (column_seven < 0 ||
-                    column_seven > num_rows_and_columns - word_seven.length ||
-                    k != 0) {
-                  connection_seven = false;
-                } else {
-                  word_seven_reverse = true;
-                  break;
-                }
-              } else {
-                word_seven_reverse = false;
-                break;
-              }
-            } else {
-              column_seven = column_four - j;
-              row_seven = row_four + word_four.length - 1 - i;
-              int k = 0;
-              for (int i = 0; i < word_five.length; i++) {
-                for (int j = 0; j < word_seven.length; j++) {
-                  if ((row_five + i == row_seven &&
-                      column_five + i == column_seven + j) ||
-                      row_seven == row_six ||
-                      row_seven == row_one ||
-                      row_seven == row_two ||
-                      (column_seven <= column_three &&
-                          column_seven + word_seven.length - 1 >=
-                              column_three &&
-                          row_seven >= row_three &&
-                          row_seven <= row_three + word_three.length - 1)) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_seven < 0 ||
-                  column_seven > num_rows_and_columns - word_seven.length ||
-                  k != 0) {
-                column_seven = column_four - word_seven.length + 1 + j;
-                row_seven = row_four + word_four.length - 1 - i;
-                int k = 0;
-                for (int i = 0; i < word_five.length; i++) {
-                  for (int j = 0; j < word_seven.length; j++) {
-                    if ((row_five + i == row_seven &&
-                        column_five + i == column_seven + j) ||
-                        row_seven == row_six ||
-                        row_seven == row_one ||
-                        row_seven == row_two ||
-                        (column_seven <= column_three &&
-                            column_seven + word_seven.length - 1 >=
-                                column_three &&
-                            row_seven >= row_three &&
-                            row_seven <= row_three + word_three.length - 1)) {
-                      k++;
-                    }
-                  }
-                }
-
-                if (column_seven < 0 ||
-                    column_seven > num_rows_and_columns - word_seven.length ||
-                    k != 0) {
-                  connection_seven = false;
-                } else {
-                  word_seven_reverse = true;
-                  break;
-                }
-              } else {
-                word_seven_reverse = false;
-                break;
-              }
-            }
-          }
-        }
-        if (connection_seven) {
-          break;
-        }
-      }
-    }
-    if(!connection_six && !connection_seven) {
-      for (int f = num_rows_and_columns - 1; f > -1; f--) {
-        int k = 0;
-        for (int l = 0; l < num_rows_and_columns - word_seven.length + 1; l++) {
-          row_seven = f;
-          column_seven = l;
-          k=0;
-          for (int i = 0; i < word_five.length; i++) {
-            for (int j = 0; j < word_seven.length; j++) {
-              if (!((row_five + i == row_seven &&
-                  column_five + i == column_seven + j) ||
-                  row_seven == row_six ||
-                  row_seven == row_one ||
-                  row_seven == row_two ||
-                  (column_seven <= column_four &&
-                      column_seven + word_seven.length - 1 >= column_four &&
-                      row_seven >= row_four &&
-                      row_seven <= row_four + word_four.length - 1)
-                  || (column_seven <= column_three &&
-                      column_seven + word_seven.length - 1 >= column_three &&
-                      row_seven >= row_three &&
-                      row_seven <= row_three + word_three.length - 1))) {
-                k++;
-              }
-            }
-          }
-          if (k == word_five.length * word_seven.length) {
-            break;
-          }
-        }
-        if (k == word_five.length * word_seven.length) {
-          break;
-        }
-      }
-
-      if (row_seven == 0 &&
-          column_seven == num_rows_and_columns - word_seven.length) {
-        fit_Words_Puzzle(
-            puzzle,
-            word_one,
-            word_two,
-            word_three,
-            word_four,
-            word_five,
-            word_six,
-            word_seven,
-            word_eight,
-            word_nine);
-      }
-    }
-    for (int i = 0; i < words[5].length; i++) {
-      for (int j = 0; j < words[7].length; j++) {
-        if (words[5][i] == words[7][j]) {
-          connection_eight = true;
-          if (!word_six_reverse) {
-            row_eight = row_six -j;
-            column_eight = column_six + i;
-
-            int k=0;
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_eight.length; l++) {
-                if ((row_five + p == row_eight + l &&
-                    column_five + p == column_eight) ||
-                    column_eight == column_three || column_eight == column_four ||
-                    (
-                        row_eight <= row_one &&
-                            row_eight + word_eight.length - 1 >= row_one &&
-                            column_eight >= column_one &&
-                            column_eight <= column_one + word_one.length - 1
-                    ) ||
-                    (
-                        row_eight <= row_two &&
-                            row_eight + word_eight.length - 1 >= row_two &&
-                            column_eight >= column_two &&
-                            column_eight <= column_two + word_two.length - 1
-                    )
-                    ||
-
-                    (
-                        row_eight <= row_seven &&
-                            row_eight + word_eight.length - 1 >= row_seven &&
-                            column_eight >= column_seven &&
-                            column_eight <= column_seven + word_seven.length - 1
-                    )
-                ){
-                  k++;
-                }
-              }
-            }
-
-            if (row_eight < 0 ||
-                row_eight > num_rows_and_columns - word_eight.length || k!=0) {
-              row_eight = row_six-word_eight.length+1 + j;
-              column_eight = column_six + i;
-
-              int k = 0;
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_eight.length; l++) {
-                  if ((row_five + p == row_eight + l &&
-                      column_five + p == column_eight) ||
-                      column_eight == column_three || column_eight == column_four ||
-                      (
-                          row_eight <= row_one &&
-                              row_eight + word_eight.length - 1 >= row_one &&
-                              column_eight >= column_one &&
-                              column_eight <= column_one + word_one.length - 1
-                      ) ||
-                      (
-                          row_eight <= row_two &&
-                              row_eight + word_eight.length - 1 >= row_two &&
-                              column_eight >= column_two &&
-                              column_eight <= column_two + word_two.length - 1
-                      )
-                      ||
-
-                      (
-                          row_eight <= row_seven &&
-                              row_eight + word_eight.length - 1 >= row_seven &&
-                              column_eight >= column_seven &&
-                              column_eight <= column_seven + word_seven.length - 1
-                      )
-                  ){
-                    k++;
-                  }
-                }
-              }
-
-              if (row_eight < 0 ||
-                  row_eight > num_rows_and_columns - word_eight.length ||
-                  k != 0) {
-                connection_eight = false;
-              }else {
-                word_eight_reverse = true;
-                break;
-              }
-            }
-            else {
-              word_eight_reverse = false;
-              break;
-            }
-          } else {
-            row_eight = row_six-j;
-            column_eight=column_six+word_six.length-1-i;
-            int k=0;
-
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_eight.length; l++) {
-                if ((row_five + p == row_eight + l &&
-                    column_five + p == column_eight) ||
-                    column_eight == column_three || column_eight == column_four ||
-                    (
-                        row_eight <= row_one &&
-                            row_eight + word_eight.length - 1 >= row_one &&
-                            column_eight >= column_one &&
-                            column_eight <= column_one + word_one.length - 1
-                    ) ||
-                    (
-                        row_eight <= row_two &&
-                            row_eight + word_eight.length - 1 >= row_two &&
-                            column_eight >= column_two &&
-                            column_eight <= column_two + word_two.length - 1
-                    )
-                    ||
-
-                    (
-                        row_eight <= row_seven &&
-                            row_eight + word_eight.length - 1 >= row_seven &&
-                            column_eight >= column_seven &&
-                            column_eight <= column_seven + word_seven.length - 1
-                    )
-                ){
-                  k++;
-                }
-              }
-            }
-
-            if (row_eight < 0 ||
-                row_eight > num_rows_and_columns - word_eight.length || k!=0) {
-              row_eight = row_six-word_eight.length+1+j;
-              column_eight=column_six+word_six.length-1-i;
-              int k=0;
-
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_eight.length; l++) {
-                  if ((row_five + p == row_eight + l &&
-                      column_five + p == column_eight) ||
-                      column_eight == column_three || column_eight == column_four ||
-                      (
-                          row_eight <= row_one &&
-                              row_eight + word_eight.length - 1 >= row_one &&
-                              column_eight >= column_one &&
-                              column_eight <= column_one + word_one.length - 1
-                      ) ||
-                      (
-                          row_eight <= row_two &&
-                              row_eight + word_eight.length - 1 >= row_two &&
-                              column_eight >= column_two &&
-                              column_eight <= column_two + word_two.length - 1
-                      )
-                      ||
-
-                      (
-                          row_eight <= row_seven &&
-                              row_eight + word_eight.length - 1 >= row_seven &&
-                              column_eight >= column_seven &&
-                              column_eight <= column_seven + word_seven.length - 1
-                      )
-                  ){
-                    k++;
-                  }
-                }
-              }
-
-              if (row_eight < 0 ||
-                  row_eight > num_rows_and_columns - word_eight.length || k!=0) {
-                connection_eight = false;
-              }else {
-                word_eight_reverse = true;
-                break;
-              }
-            }else {
-              word_eight_reverse = false;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_eight){
-        break;
-      }
-    }
-    if(!connection_eight) {
-      for (int f = 0; f < num_rows_and_columns-word_eight.length+1; f++) {
-        int k = 0;
-        for (int l = 0; l < num_rows_and_columns; l++) {
-          row_eight = f;
-          column_eight = l;
-          k=0;
-          for (int i = 0; i < word_five.length; i++) {
-            for (int j = 0; j < word_eight.length; j++) {
-              if (!((row_five + i == row_eight + j &&
-                  column_five + i == column_eight) ||
-                  column_eight == column_three || column_eight == column_four ||
-                  (
-                      row_eight <= row_one &&
-                          row_eight + word_eight.length - 1 >= row_one &&
-                          column_eight >= column_one &&
-                          column_eight <= column_one + word_one.length - 1
-                  ) ||
-                  (
-                      row_eight <= row_two &&
-                          row_eight + word_eight.length - 1 >= row_two &&
-                          column_eight >= column_two &&
-                          column_eight <= column_two + word_two.length - 1
-                  )
-                  ||
-                  (
-                      row_eight <= row_six &&
-                          row_eight + word_eight.length - 1 >= row_six &&
-                          column_eight >= column_six &&
-                          column_eight <= column_six + word_six.length - 1
-                  ) ||
-                  (
-                      row_eight <= row_seven &&
-                          row_eight + word_eight.length - 1 >= row_seven &&
-                          column_eight >= column_seven &&
-                          column_eight <= column_seven + word_seven.length - 1
-                  )
-              )) {
-                k++;
-              }
-            }
-          }
-
-          if (k == word_five.length * word_eight.length) {
-            break;
-          }
-        }
-        if (k == word_five.length * word_eight.length) {
-          break;
-        }
-      }
-      if (row_eight == num_rows_and_columns - word_eight.length &&
-          column_eight == num_rows_and_columns - 1) {
-        fit_Words_Puzzle(
-            puzzle,
-            word_one,
-            word_two,
-            word_three,
-            word_four,
-            word_five,
-            word_six,
-            word_seven,
-            word_eight,
-            word_nine);
-      }
-    }
-    for (int i = 0; i < words[7].length; i++) {
-      for (int j = 0; j < words[8].length; j++) {
-        if (words[7][i] == words[8][j]) {
-          connection_nine = true;
-          if (!word_eight_reverse) {
-            row_nine = row_eight +i;
-            column_nine = column_eight - j;
-
-            int k=0;
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_nine.length; l++) {
-                if ((row_five + p == row_nine &&
-                    column_five + p == column_nine + l) ||
-                    row_nine == row_seven || row_nine == row_six ||
-                    row_nine == row_one ||
-                    row_nine == row_two ||
-                    (column_nine <= column_four &&
-                        column_nine + word_nine.length - 1 >= column_four &&
-                        row_nine >= row_four &&
-                        row_nine <= row_four + word_four.length - 1)
-                    || (column_nine <= column_three &&
-                        column_nine + word_nine.length - 1 >= column_three &&
-                        row_nine >= row_three &&
-                        row_nine <= row_three + word_three.length - 1)
-                ) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_nine < 0 ||
-                column_nine > num_rows_and_columns - word_nine.length || k!=0) {
-              row_nine = row_eight + i;
-              column_nine = column_eight-word_nine.length+1 + j;
-
-              int k = 0;
-
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if ((row_five + p == row_nine &&
-                      column_five + p == column_nine + l) ||
-                      row_nine == row_seven || row_nine == row_six ||
-                      row_nine == row_one ||
-                      row_nine == row_two ||
-                      (column_nine <= column_four &&
-                          column_nine + word_nine.length - 1 >= column_four &&
-                          row_nine >= row_four &&
-                          row_nine <= row_four + word_four.length - 1)
-                      || (column_nine <= column_three &&
-                          column_nine + word_nine.length - 1 >= column_three &&
-                          row_nine >= row_three &&
-                          row_nine <= row_three + word_three.length - 1)
-                  ) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_nine < 0 ||
-                  column_nine > num_rows_and_columns - word_nine.length ||
-                  k != 0) {
-                connection_nine = false;
-              }else {
-                word_nine_reverse = true;
-                break;
-              }
-            }else {
-              word_nine_reverse = false;
-              break;
-            }
-          } else {
-            row_nine = row_eight+word_eight.length-1-i;
-            column_nine=column_eight-j;
-
-            int k=0;
-
-
-            for (int p = 0; p < word_five.length; p++) {
-              for (int l = 0; l < word_nine.length; l++) {
-                if ((row_five + p == row_nine &&
-                    column_five + p == column_nine + l) ||
-                    row_nine == row_seven || row_nine == row_six ||
-                    row_nine == row_one ||
-                    row_nine == row_two ||
-                    (column_nine <= column_four &&
-                        column_nine + word_nine.length - 1 >= column_four &&
-                        row_nine >= row_four &&
-                        row_nine <= row_four + word_four.length - 1)
-                    || (column_nine <= column_three &&
-                        column_nine + word_nine.length - 1 >= column_three &&
-                        row_nine >= row_three &&
-                        row_nine <= row_three + word_three.length - 1)
-                ) {
-                  k++;
-                }
-              }
-            }
-
-            if (column_nine < 0 ||
-                column_nine > num_rows_and_columns - word_nine.length || k!=0) {
-              row_nine = row_eight + word_eight.length - 1 - i;
-              column_nine = column_eight-word_nine.length+1 + j;
-
-              int k = 0;
-
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if ((row_five + p == row_nine &&
-                      column_five + p == column_nine + l) ||
-                      row_nine == row_seven || row_nine == row_six ||
-                      row_nine == row_one ||
-                      row_nine == row_two ||
-                      (column_nine <= column_four &&
-                          column_nine + word_nine.length - 1 >= column_four &&
-                          row_nine >= row_four &&
-                          row_nine <= row_four + word_four.length - 1)
-                      || (column_nine <= column_three &&
-                          column_nine + word_nine.length - 1 >= column_three &&
-                          row_nine >= row_three &&
-                          row_nine <= row_three + word_three.length - 1)
-                  ) {
-                    k++;
-                  }
-                }
-              }
-              if (column_nine < 0 ||
-                  column_nine > num_rows_and_columns - word_nine.length ||
-                  k != 0) {
-                connection_nine = false;
-              }else {
-                word_nine_reverse = true;
-                break;
-              }
-            }else {
-              word_nine_reverse = false;
-              break;
-            }
-          }
-        }
-      }
-      if(connection_nine){
-        break;
-      }
-    }
-    if(!connection_nine) {
-      for (int i = 0; i < words[3].length; i++) {
-        for (int j = 0; j < words[8].length; j++) {
-          if (words[3][i] == words[8][j]) {
-            connection_ten = true;
-            if (!word_four_reverse) {
-              row_nine = row_four + i;
-              column_nine = column_four - j;
-
-              int k = 0;
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if ((row_five + p == row_nine &&
-                      column_five + p == column_nine + l) ||
-                      row_nine == row_seven || row_nine == row_six ||
-                      row_nine == row_one ||
-                      row_nine == row_two ||
-                      (column_nine <= column_three &&
-                          column_nine + word_nine.length - 1 >= column_three &&
-                          row_nine >= row_three &&
-                          row_nine <= row_three + word_three.length - 1)) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_nine < 0 ||
-                  column_nine > num_rows_and_columns - word_nine.length ||
-                  k != 0) {
-                row_nine = row_four + i;
-                column_nine = column_four - word_nine.length + 1 + j;
-
-                int k = 0;
-
-                for (int p = 0; p < word_five.length; p++) {
-                  for (int l = 0; l < word_nine.length; l++) {
-                    if ((row_five + p == row_nine &&
-                        column_five + p == column_nine + l) ||
-                        row_nine == row_seven || row_nine == row_six ||
-                        row_nine == row_one ||
-                        row_nine == row_two ||
-                        (column_nine <= column_three &&
-                            column_nine + word_nine.length - 1 >= column_three &&
-                            row_nine >= row_three &&
-                            row_nine <= row_three + word_three.length - 1)) {
-                      k++;
-                    }
-                  }
-                }
-
-                if (column_nine < 0 ||
-                    column_nine > num_rows_and_columns - word_nine.length ||
-                    k != 0) {
-                  connection_ten = false;
-                } else {
-                  word_nine_reverse = true;
-                  break;
-                }
-              } else {
-                word_nine_reverse = false;
-                break;
-              }
-            } else {
-              row_nine = row_four + word_four.length - 1 - i;
-              column_nine = column_four - j;
-
-              int k = 0;
-
-              for (int p = 0; p < word_five.length; p++) {
-                for (int l = 0; l < word_nine.length; l++) {
-                  if ((row_five + p == row_nine &&
-                      column_five + p == column_nine + l) ||
-                      row_nine == row_seven || row_nine == row_six ||
-                      row_nine == row_one ||
-                      row_nine == row_two ||
-                      (column_nine <= column_three &&
-                          column_nine + word_nine.length - 1 >= column_three &&
-                          row_nine >= row_three &&
-                          row_nine <= row_three + word_three.length - 1)) {
-                    k++;
-                  }
-                }
-              }
-
-              if (column_nine < 0 ||
-                  column_nine > num_rows_and_columns - word_nine.length ||
-                  k != 0) {
-                row_nine = row_four + word_four.length - 1 - i;
-                column_nine = column_four - word_nine.length + 1 + j;
-
-                int k = 0;
-
-                for (int p = 0; p < word_five.length; p++) {
-                  for (int l = 0; l < word_nine.length; l++) {
-                    if ((row_five + p == row_nine &&
-                        column_five + p == column_nine + l) ||
-                        row_nine == row_seven || row_nine == row_six ||
-                        row_nine == row_one ||
-                        row_nine == row_two ||
-                        (column_nine <= column_three &&
-                            column_nine + word_nine.length - 1 >= column_three &&
-                            row_nine >= row_three &&
-                            row_nine <= row_three + word_three.length - 1)) {
-                      k++;
-                    }
-                  }
-                }
-
-                if (column_nine < 0 ||
-                    column_nine > num_rows_and_columns - word_nine.length ||
-                    k != 0) {
-                  connection_ten = false;
-                } else {
-                  word_nine_reverse = true;
-                  break;
-                }
-              } else {
-                word_nine_reverse = false;
-                break;
-              }
-            }
-          }
-        }
-        if (connection_ten) {
-          break;
-        }
-      }
-    }
-    if(!connection_nine && !connection_ten) {
-      for (int f = 0; f < num_rows_and_columns; f++) {
-        int k = 0;
-        for (int l = num_rows_and_columns - word_nine.length; l > -1; l--) {
-          row_nine = f;
-          column_nine = l;
-          k=0;
-          for (int i = 0; i < word_five.length; i++) {
-            for (int j = 0; j < word_nine.length; j++) {
-              if (!((row_five + i == row_nine &&
-                  column_five + i == column_nine + j) ||
-                  row_nine == row_seven || row_nine == row_six ||
-                  row_nine == row_one ||
-                  row_nine == row_two ||
-                  (column_nine <= column_four &&
-                      column_nine + word_nine.length - 1 >= column_four &&
-                      row_nine >= row_four &&
-                      row_nine <= row_four + word_four.length - 1)
-                  || (column_nine <= column_three &&
-                      column_nine + word_nine.length - 1 >= column_three &&
-                      row_nine >= row_three &&
-                      row_nine <= row_three + word_three.length - 1) ||
-                  (column_nine <= column_eight &&
-                      column_nine + word_nine.length - 1 >= column_eight &&
-                      row_nine >= row_eight &&
-                      row_nine <= row_eight + word_eight.length - 1))) {
-                k++;
-              }
-            }
-          }
-          if (k == word_five.length * word_nine.length) {
-            break;
-          }
-        }
-        if (k == word_five.length * word_nine.length) {
-          break;
-        }
-      }
-      if (row_nine == num_rows_and_columns - 1 && column_nine == 0) {
-        fit_Words_Puzzle(
-            puzzle,
-            word_one,
-            word_two,
-            word_three,
-            word_four,
-            word_five,
-            word_six,
-            word_seven,
-            word_eight,
-            word_nine);
-      }
-    }
-
-
-  }
-  rotate_puzzle(List<String> puzzle, String word_one, String word_two, String word_three, String word_four, String word_five,String word_six
-      ,String word_seven, String word_eight, String word_nine){
-    int num_rotates=random.nextInt(4);
-    solution_positions[0] = row_one;
-    solution_positions[1] = column_one;
-    solution_positions[2] = row_one;
-    solution_positions[3] =column_one+word_one.length - 1;
-    solution_positions[4] = row_two;
-    solution_positions[5] = column_two;
-    solution_positions[6] = row_two;
-    solution_positions[7] = column_two + word_two.length - 1;
-    solution_positions[8] = row_three;
-    solution_positions[9] = column_three;
-    solution_positions[10] = row_three + word_three.length - 1;
-    solution_positions[11] = column_three;
-    solution_positions[12] = row_four;
-    solution_positions[13] = column_four;
-    solution_positions[14] = row_four + word_four.length - 1;
-    solution_positions[15] = column_four;
-    solution_positions[16] = row_five;
-    solution_positions[17] = column_five;
-    solution_positions[18] = row_five + word_five.length - 1;
-    solution_positions[19] = column_five + word_five.length - 1;
-    solution_positions[20] = row_six;
-    solution_positions[21] = column_six;
-    solution_positions[22] = row_six;
-    solution_positions[23] = column_six + word_six.length - 1;
-    solution_positions[24] = row_seven;
-    solution_positions[25] = column_seven;
-    solution_positions[26] = row_seven;
-    solution_positions[27] = column_seven + word_seven.length - 1;
-    solution_positions[28] = row_eight;
-    solution_positions[29] = column_eight;
-    solution_positions[30] = row_eight + word_eight.length - 1;
-    solution_positions[31] = column_eight;
-    solution_positions[32] = row_nine;
-    solution_positions[33] = column_nine;
-    solution_positions[34] = row_nine;
-    solution_positions[35] = column_nine + word_nine.length - 1;
-    for(int i =0;i<num_rotates;i++) {
-      List<String> old_puzzle=['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
-
-      for(int i=0;i<num_rows_and_columns*num_rows_and_columns;i++){
-        old_puzzle[i]=puzzle[i];
-      }
-
-      for (int j = 0; j < num_rows_and_columns; j++) {
-        for (int l = 0; l < num_rows_and_columns; l++) {
-          puzzle[num_rows_and_columns * l + j] =
-          old_puzzle[num_rows_and_columns * (num_rows_and_columns-1-j) + l];
-        }
-      }
-      row_one=solution_positions[0];
-      column_one=solution_positions[1];
-
-      row_two=solution_positions[4];
-      column_two=solution_positions[5];
-
-      row_three=solution_positions[8];
-      column_three=solution_positions[9];
-
-      row_four=solution_positions[12];
-      column_four=solution_positions[13];
-
-      row_five=solution_positions[16];
-      column_five=solution_positions[17];
-
-      row_six=solution_positions[20];
-      column_six=solution_positions[21];
-
-      row_seven=solution_positions[24];
-      column_seven=solution_positions[25];
-
-      row_eight=solution_positions[28];
-      column_eight=solution_positions[29];
-
-      row_nine=solution_positions[32];
-      column_nine=solution_positions[33];
-
-      if(num_rotates==1) {
-        solution_positions[0] = column_one;
-        solution_positions[1] = num_rows_and_columns-1-row_one;
-        solution_positions[2] = column_one + word_one.length - 1;
-        solution_positions[3] =num_rows_and_columns-1-row_one ;
-
-        solution_positions[4] = column_two;
-        solution_positions[5] = num_rows_and_columns-1-row_two;
-        solution_positions[6] = column_two + word_two.length - 1;
-        solution_positions[7] =num_rows_and_columns-1-row_two;
-
-        solution_positions[8] =column_three;
-        solution_positions[9] = num_rows_and_columns-1-row_three;
-        solution_positions[10] =  column_three;
-        solution_positions[11] = num_rows_and_columns-1-row_three - word_three.length + 1;
-
-        solution_positions[12] =column_four;
-        solution_positions[13] = num_rows_and_columns-1-row_four;
-        solution_positions[14] =  column_four;
-        solution_positions[15] = num_rows_and_columns-1-row_four - word_four.length + 1;
-
-        solution_positions[16] = column_five;
-        solution_positions[17] = num_rows_and_columns-1-row_five;
-        solution_positions[18] =  column_five + word_five.length - 1;
-        solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
-
-        solution_positions[20] = column_six;
-        solution_positions[21] = num_rows_and_columns-1-row_six;
-        solution_positions[22] = column_six + word_six.length - 1;
-        solution_positions[23] =num_rows_and_columns-1-row_six;
-
-        solution_positions[24] = column_seven;
-        solution_positions[25] = num_rows_and_columns-1-row_seven;
-        solution_positions[26] = column_seven + word_seven.length - 1;
-        solution_positions[27] =num_rows_and_columns-1-row_seven;
-
-        solution_positions[28] =column_eight;
-        solution_positions[29] = num_rows_and_columns-1-row_eight;
-        solution_positions[30] =  column_eight;
-        solution_positions[31] = num_rows_and_columns-1-row_eight - word_eight.length + 1;
-
-        solution_positions[32] = column_nine;
-        solution_positions[33] = num_rows_and_columns-1-row_nine;
-        solution_positions[34] = column_nine + word_nine.length - 1;
-        solution_positions[35] =num_rows_and_columns-1-row_nine;
-      }else if(num_rotates==2){
-        solution_positions[0] =column_one;
-        solution_positions[1] = num_rows_and_columns-1-row_one;
-        solution_positions[2] =  column_one;
-        solution_positions[3] = num_rows_and_columns-1-row_one - word_one.length + 1;
-
-        solution_positions[4] =column_two;
-        solution_positions[5] = num_rows_and_columns-1-row_two;
-        solution_positions[6] =  column_two;
-        solution_positions[7] = num_rows_and_columns-1-row_two - word_two.length + 1;
-
-        solution_positions[8] = column_three;
-        solution_positions[9] = num_rows_and_columns-1-row_three;
-        solution_positions[10] = column_three - word_three.length + 1;
-        solution_positions[11] =num_rows_and_columns-1-row_three ;
-
-        solution_positions[12] = column_four;
-        solution_positions[13] = num_rows_and_columns-1-row_four;
-        solution_positions[14] = column_four - word_four.length + 1;
-        solution_positions[15] =num_rows_and_columns-1-row_four ;
-
-        solution_positions[16] = column_five;
-        solution_positions[17] = num_rows_and_columns-1-row_five;
-        solution_positions[18] =  column_five - word_five.length + 1;
-        solution_positions[19] = num_rows_and_columns-1-row_five - word_five.length + 1;
-
-        solution_positions[20] =column_six;
-        solution_positions[21] = num_rows_and_columns-1-row_six;
-        solution_positions[22] =  column_six;
-        solution_positions[23] = num_rows_and_columns-1-row_six - word_six.length + 1;
-
-        solution_positions[24] =column_seven;
-        solution_positions[25] = num_rows_and_columns-1-row_seven;
-        solution_positions[26] =  column_seven;
-        solution_positions[27] = num_rows_and_columns-1-row_seven - word_seven.length + 1;
-
-        solution_positions[28] = column_eight;
-        solution_positions[29] = num_rows_and_columns-1-row_eight;
-        solution_positions[30] = column_eight - word_eight.length + 1;
-        solution_positions[31] =num_rows_and_columns-1-row_eight ;
-
-        solution_positions[32] =column_nine;
-        solution_positions[33] = num_rows_and_columns-1-row_nine;
-        solution_positions[34] =  column_nine;
-        solution_positions[35] = num_rows_and_columns-1-row_nine - word_nine.length + 1;
-      }else if(num_rotates==3){
-        solution_positions[0] = column_one;
-        solution_positions[1] = num_rows_and_columns-1-row_one;
-        solution_positions[2] = column_one - word_one.length + 1;
-        solution_positions[3] =num_rows_and_columns-1-row_one ;
-
-        solution_positions[4] = column_two;
-        solution_positions[5] = num_rows_and_columns-1-row_two;
-        solution_positions[6] = column_two - word_two.length + 1;
-        solution_positions[7] =num_rows_and_columns-1-row_two;
-
-        solution_positions[8] =column_three;
-        solution_positions[9] = num_rows_and_columns-1-row_three;
-        solution_positions[10] =  column_three;
-        solution_positions[11] = num_rows_and_columns-1-row_three + word_three.length - 1;
-
-        solution_positions[12] =column_four;
-        solution_positions[13] = num_rows_and_columns-1-row_four;
-        solution_positions[14] =  column_four;
-        solution_positions[15] = num_rows_and_columns-1-row_four + word_four.length - 1;
-
-        solution_positions[16] = column_five;
-        solution_positions[17] = num_rows_and_columns-1-row_five;
-        solution_positions[18] =  column_five - word_five.length + 1;
-        solution_positions[19] = num_rows_and_columns-1-row_five + word_five.length - 1;
-
-        solution_positions[20] = column_six;
-        solution_positions[21] = num_rows_and_columns-1-row_six;
-        solution_positions[22] = column_six - word_six.length + 1;
-        solution_positions[23] =num_rows_and_columns-1-row_six;
-
-        solution_positions[24] = column_seven;
-        solution_positions[25] = num_rows_and_columns-1-row_seven;
-        solution_positions[26] = column_seven - word_seven.length + 1;
-        solution_positions[27] =num_rows_and_columns-1-row_seven;
-
-        solution_positions[28] =column_eight;
-        solution_positions[29] = num_rows_and_columns-1-row_eight;
-        solution_positions[30] =  column_eight;
-        solution_positions[31] = num_rows_and_columns-1-row_eight + word_eight.length - 1;
-
-        solution_positions[32] = column_nine;
-        solution_positions[33] = num_rows_and_columns-1-row_nine;
-        solution_positions[34] = column_nine - word_nine.length + 1;
-        solution_positions[35] =num_rows_and_columns-1-row_nine;
-      }
-    }
-
-  }
-  write_Words_Puzzle(List<String> puzzle, String word_one,String word_two,String word_three,String word_four,String word_five,String word_six
-      ,String word_seven, String word_eight,String word_nine) {
-
-    if (word_five_reverse == false) {
-      for (int i = 0; i < word_five.length; i++) {
-        puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
-        word_five[i];
-      }
-    } else {
-      for (int i = 0; i < word_five.length; i++) {
-        puzzle[(row_five + i) * num_rows_and_columns + column_five + i] =
-        word_five[word_five.length - 1 - i];
-      }
-    }
-    if (word_one_reverse == false) {
-      for (int i = 0; i < word_one.length; i++) {
-        puzzle[row_one * num_rows_and_columns + i + column_one] = word_one[i];
-      }
-    } else {
-      for (int i = 0; i < word_one.length; i++) {
-        puzzle[row_one * num_rows_and_columns + i + column_one] =
-        word_one[word_one.length - 1 - i];
-      }
-    }
-    if (word_two_reverse == false) {
-      for (int i = 0; i < word_two.length; i++) {
-        puzzle[row_two * num_rows_and_columns + i + column_two] = word_two[i];
-      }
-    } else {
-      for (int i = 0; i < word_two.length; i++) {
-        puzzle[row_two * num_rows_and_columns + i + column_two] =
-        word_two[word_two.length - 1 - i];
-      }
-    }
-
-    if (word_three_reverse == false) {
-      for (int i = 0; i < word_three.length; i++) {
-        puzzle[(row_three + i) * num_rows_and_columns + column_three] =
-        word_three[i];
-      }
-    } else {
-      for (int i = 0; i < word_three.length; i++) {
-        puzzle[(row_three + i) * num_rows_and_columns + column_three] =
-        word_three[word_three.length - 1 - i];
-      }
-    }
-    if (word_four_reverse == false) {
-      for (int i = 0; i < word_four.length; i++) {
-        puzzle[(row_four + i) * num_rows_and_columns + column_four] =
-        word_four[i];
-      }
-    } else {
-      for (int i = 0; i < word_four.length; i++) {
-        puzzle[(row_four + i) * num_rows_and_columns + column_four] =
-        word_four[word_four.length - 1 - i];
-      }
-    }
-    if (word_six_reverse == false) {
-      for (int i = 0; i < word_six.length; i++) {
-        puzzle[row_six * num_rows_and_columns + i + column_six] = word_six[i];
-      }
-    } else {
-      for (int i = 0; i < word_six.length; i++) {
-        puzzle[row_six * num_rows_and_columns + i + column_six] =
-        word_six[word_six.length - 1 - i];
-      }
-    }
-
-    if (word_seven_reverse == false) {
-      for (int i = 0; i < word_seven.length; i++) {
-        puzzle[row_seven * num_rows_and_columns + i + column_seven] = word_seven[i];
-      }
-    } else {
-      for (int i = 0; i < word_seven.length; i++) {
-        puzzle[row_seven * num_rows_and_columns + i + column_seven] =
-        word_seven[word_seven.length - 1 - i];
-      }
-    }
-
-    if (word_eight_reverse == false) {
-      for (int i = 0; i < word_eight.length; i++) {
-        puzzle[(row_eight + i) * num_rows_and_columns + column_eight] =
-        word_eight[i];
-      }
-    } else {
-      for (int i = 0; i < word_eight.length; i++) {
-        puzzle[(row_eight + i) * num_rows_and_columns + column_eight] =
-        word_eight[word_eight.length - 1 - i];
-      }
-    }
-
-    if (word_nine_reverse == false) {
-      for (int i = 0; i < word_nine.length; i++) {
-        puzzle[row_nine * num_rows_and_columns + i + column_nine] = word_nine[i];
-      }
-    } else {
-      for (int i = 0; i < word_nine.length; i++) {
-        puzzle[row_nine * num_rows_and_columns + i + column_nine] =
-        word_nine[word_nine.length - 1 - i];
-      }
-    }
-
-  }
-
-  set_language() {
-    String language=AppLocalizations.of(context).translate("game_language");
-    if(widget.game_type.type=='food') {
-      if (language == 'en') {
-        words[0] = "Date".toUpperCase();
-        words[1] = "Mango".toUpperCase();
-        words[2] = "coco".toUpperCase();
-        words[3] = "apple".toUpperCase();
-        words[4] = "bean".toUpperCase();
-        words[5] = "meat".toUpperCase();
-        words[6] = "pea".toUpperCase();
-        words[7] = "lime".toUpperCase();
-        words[8] = "egg".toUpperCase();
-      } else if (language == 'pt') {
-        words[0] = "Jambo".toUpperCase();
-        words[1] = "Abiu".toUpperCase();
-        words[2] = "Baru".toUpperCase();
-        words[3] = "Manga".toUpperCase();
-        words[4] = "Lima".toUpperCase();
-        words[5] = "Akee".toUpperCase();
-        words[6] = "Ata".toUpperCase();
-        words[7] = "Uva".toUpperCase();
-        words[8] = "Uxi".toUpperCase();
-      } else if (language == 'fr') {
-        words[0] = "pomme".toUpperCase();
-        words[1] = "Coing".toUpperCase();
-        words[2] = "chou".toUpperCase();
-        words[3] = "noix".toUpperCase();
-        words[4] = "lime".toUpperCase();
-        words[5] = "coco".toUpperCase();
-        words[6] = "Taxo".toUpperCase();
-        words[7] = "Kaki".toUpperCase();
-        words[8] = "Kiwi".toUpperCase();
-      } else if (language == 'es') {
-        words[0] = "limon".toUpperCase();
-        words[1] = "mango".toUpperCase();
-        words[2] = "coco".toUpperCase();
-        words[3] = "higo".toUpperCase();
-        words[4] = "lima".toUpperCase();
-        words[5] = "kiwi".toUpperCase();
-        words[6] = "mora".toUpperCase();
-        words[7] = "uva".toUpperCase();
-        words[8] = "yaca".toUpperCase();
-      }
-    }else if (widget.game_type.type=='animals'){
-      if (language == 'en') {
-        words[0] = "whale".toUpperCase();
-        words[1] = "gecko".toUpperCase();
-        words[2] = "crow".toUpperCase();
-        words[3] = "wild".toUpperCase();
-        words[4] = "lion".toUpperCase();
-        words[5] = "fox".toUpperCase();
-        words[6] = "dog".toUpperCase();
-        words[7] = "rat".toUpperCase();
-        words[8] = "cat".toUpperCase();
-      } else if (language == 'pt') {
-        words[0] = "aguia".toUpperCase();
-        words[1] = "bode".toUpperCase();
-        words[2] = "asno".toUpperCase();
-        words[3] = "boto".toUpperCase();
-        words[4] = "alce".toUpperCase();
-        words[5] = "asno".toUpperCase();
-        words[6] = "boi".toUpperCase();
-        words[7] = "boa".toUpperCase();
-        words[8] = "kea".toUpperCase();
-      } else if (language == 'fr') {
-        words[0] = "panda".toUpperCase();
-        words[1] = "grive".toUpperCase();
-        words[2] = "geai".toUpperCase();
-        words[3] = "porc".toUpperCase();
-        words[4] = "cane".toUpperCase();
-        words[5] = "milan".toUpperCase();
-        words[6] = "oie".toUpperCase();
-        words[7] = "ane".toUpperCase();
-        words[8] = "rat".toUpperCase();
-      } else if (language == 'es') {
-        words[0] = "limon".toUpperCase();
-        words[1] = "mango".toUpperCase();
-        words[2] = "coco".toUpperCase();
-        words[3] = "higo".toUpperCase();
-        words[4] = "lima".toUpperCase();
-        words[5] = "kiwi".toUpperCase();
-        words[6] = "mora".toUpperCase();
-        words[7] = "uva".toUpperCase();
-        words[8] = "yaca".toUpperCase();
-      }
-    }
-    else if (widget.game_type.type=='diverse'){
-      if (language == 'en') {
-        words[0] = "uncle".toUpperCase();
-        words[1] = "blast".toUpperCase();
-        words[2] = "lazy".toUpperCase();
-        words[3] = "jump".toUpperCase();
-        words[4] = "cake".toUpperCase();
-        words[5] = "site".toUpperCase();
-        words[6] = "aba".toUpperCase();
-        words[7] = "act".toUpperCase();
-        words[8] = "air".toUpperCase();
-      } else if (language == 'pt') {
-        words[0] = "palta".toUpperCase();
-        words[1] = "texto".toUpperCase();
-        words[2] = "cano".toUpperCase();
-        words[3] = "cena".toUpperCase();
-        words[4] = "seta".toUpperCase();
-        words[5] = "Abiu".toUpperCase();
-        words[6] = "Ata".toUpperCase();
-        words[7] = "Uva".toUpperCase();
-        words[8] = "Uxi".toUpperCase();
-      } else if (language == 'fr') {
-        words[0] = "bodin".toUpperCase();
-        words[1] = "brant".toUpperCase();
-        words[2] = "roma".toUpperCase();
-        words[3] = "roku".toUpperCase();
-        words[4] = "tout".toUpperCase();
-        words[5] = "coco".toUpperCase();
-        words[6] = "por".toUpperCase();
-        words[7] = "pom".toUpperCase();
-        words[8] = "rop".toUpperCase();
-      } else if (language == 'es') {
-        words[0] = "roger".toUpperCase();
-        words[1] = "cuzco".toUpperCase();
-        words[2] = "lelo".toUpperCase();
-        words[3] = "loli".toUpperCase();
-        words[4] = "tous".toUpperCase();
-        words[5] = "soez".toUpperCase();
-        words[6] = "spa".toUpperCase();
-        words[7] = "spy".toUpperCase();
-        words[8] = "soy".toUpperCase();
-      }
-    }
-  }
   play_Found_Sound () async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool("has_Sounds") == true) {
