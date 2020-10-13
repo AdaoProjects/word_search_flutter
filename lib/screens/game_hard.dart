@@ -3796,7 +3796,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     (word_six_scratch &&
                                         sorted_Num_Words == 4) ||
                                     (word_one_scratch &&
-                                        sorted_Num_Words == 14) ||
+                                        sorted_Num_Words == 19) ||
                                     (word_two_scratch &&
                                         sorted_Num_Words == 0) ||
                                     (word_three_scratch &&
@@ -3859,7 +3859,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     (word_six_scratch &&
                                         sorted_Num_Words == 4) ||
                                     (word_one_scratch &&
-                                        sorted_Num_Words == 14) ||
+                                        sorted_Num_Words == 19) ||
                                     (word_two_scratch &&
                                         sorted_Num_Words == 0) ||
                                     (word_three_scratch &&
@@ -3923,7 +3923,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     (word_six_scratch &&
                                         sorted_Num_Words == 4) ||
                                     (word_one_scratch &&
-                                        sorted_Num_Words == 14) ||
+                                        sorted_Num_Words == 19) ||
                                     (word_two_scratch &&
                                         sorted_Num_Words == 0) ||
                                     (word_three_scratch &&
@@ -3982,7 +3982,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     (word_six_scratch &&
                                         sorted_Num_Words == 4) ||
                                     (word_one_scratch &&
-                                        sorted_Num_Words == 14) ||
+                                        sorted_Num_Words == 19) ||
                                     (word_two_scratch &&
                                         sorted_Num_Words == 0) ||
                                     (word_three_scratch &&
@@ -4041,7 +4041,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     (word_six_scratch &&
                                         sorted_Num_Words == 4) ||
                                     (word_one_scratch &&
-                                        sorted_Num_Words == 14) ||
+                                        sorted_Num_Words == 19) ||
                                     (word_two_scratch &&
                                         sorted_Num_Words == 0) ||
                                     (word_three_scratch &&
