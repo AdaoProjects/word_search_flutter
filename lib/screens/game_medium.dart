@@ -3699,7 +3699,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       .of(context)
                       .size
                       .height / 25),
-                  Container(
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Container(
                     width: MediaQuery
                         .of(context)
                         .size
@@ -3994,24 +3996,17 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                         ]
                     ),
 
+
                     decoration: BoxDecoration(
                       color: Colors.white,
 
-                      boxShadow: [
-                        BoxShadow(
-                            color: GameColors.primary,
-                            spreadRadius: MediaQuery
-                                .of(context)
-                                .size
-                                .height / 100),
-
-                      ],
                       borderRadius: BorderRadius.circular(MediaQuery
                           .of(context)
                           .size
                           .height / 30),
                     ),
                   ),
+      ),
                 ]
             ),
           ),
@@ -4079,8 +4074,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
         !word_five_scratch || !word_six_scratch || !word_seven_scratch||
         !word_eight_scratch||!word_nine_scratch||!word_ten_scratch||
-        !word_eleven_scratch||!word_twelve_scratch||word_thirteenth_scratch||
-    word_fourteenth_scratch || word_fifteenth_scratch) {
+        !word_eleven_scratch||!word_twelve_scratch||!word_thirteenth_scratch||
+    !word_fourteenth_scratch || !word_fifteenth_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;

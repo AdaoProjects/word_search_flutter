@@ -3590,7 +3590,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                              width: MediaQuery
                                  .of(context)
                                  .size
-                                 .width,
+                                 .width*1.4,
                              child: Table(
                                  children: [
                                     for (int i=0; i<3;i++) TableRow(children: [
@@ -3819,15 +3819,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                              decoration: BoxDecoration(
                                 color: Colors.white,
 
-                                boxShadow: [
-                                   BoxShadow(
-                                       color: GameColors.primary,
-                                       spreadRadius: MediaQuery
-                                           .of(context)
-                                           .size
-                                           .height / 100),
 
-                                ],
                                 borderRadius: BorderRadius.circular(MediaQuery
                                     .of(context)
                                     .size
@@ -3896,7 +3888,8 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
   }
   void _getTime() {
     if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
-        !word_five_scratch || !word_six_scratch || !word_seven_scratch||!word_eight_scratch||!word_nine_scratch) {
+        !word_five_scratch || !word_six_scratch || !word_seven_scratch||!word_eight_scratch||!word_nine_scratch||
+      !word_ten_scratch|| !word_eleven_scratch || !word_twelve_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;
