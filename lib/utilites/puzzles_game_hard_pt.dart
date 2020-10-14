@@ -2003,7 +2003,7 @@ class PuzzlesGameHardPT{
     [4,4,10,10,7,2,7,8,3,7,8,7,3,2,8,2,11,2,11,7,0,5,0,10,1,5,6,10,1,8,5,4,1,3,5,3,4,11,8,11,3,10,7,10,6,3,9,0,10,4,10,7,9,5,9,8,0,1,0,4,2,2,2,5,4,0,7,0,8,4,10,2,8,5,10,3,8,9,10,11,],
     [1,1,7,7,2,2,2,8,3,9,8,9,2,8,7,8,6,5,11,0,10,5,10,10,6,11,11,11,3,2,7,2,6,7,10,3,0,11,4,11,11,3,11,7,0,3,3,0,7,5,10,8,4,0,7,0,3,3,3,6,7,3,10,0,0,4,0,7,4,1,6,1,3,7,5,7,9,3,11,1,],
   ];
-  static final List<List<String>> all_puzzles_words_hard_pt=[
+  static final List<List<String>> all_words_hard_pt=[
     ["prolixo","aspecto","exceto","emitir","alento","eficaz","isento","igual","falso","inato","algoz","vale","alto","casa","apto","suma","mito","mac","cat","par",],
     ["mitigar","aspecto","exceto","linear","perene","eficaz","hostil","verso","apoio","inato","sagaz","foco","rito","fase","medo","crer","mito","avo","cat","par",],
     ["prolixo","almejar","exceto","adepto","alento","eficaz","hostil","verso","falso","afeto","algoz","sair","alto","fase","medo","crer","amor","mac","bar","vai",],

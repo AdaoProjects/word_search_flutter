@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/utilites/puzzles_game_hard_en.dart';
+import 'package:findthewords/utilites/puzzles_game_hard_pt.dart';
 import 'package:findthewords/custom_painter.dart';
 import 'package:findthewords/main.dart';
 import 'package:audioplayers/audio_cache.dart';
@@ -1099,9 +1100,9 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
     if (!created_puzzle) {
       created_puzzle = true;
       int i =random.nextInt(1000);
-      puzzle=PuzzlesGameHard.all_puzzles_hard_en[i];
-      solution_positions=PuzzlesGameHard.all_solutions_hard_en[i];
-      words=PuzzlesGameHard.all_words_hard_en[i];
+      puzzle=PuzzlesGameHardPT.all_puzzles_hard_pt[i];
+      solution_positions=PuzzlesGameHardPT.all_solutions_hard_pt[i];
+      words=PuzzlesGameHardPT.all_words_hard_pt[i];
       sorted_Num_Words = random.nextInt(20) - 1;
       next_Color = random.nextInt(5);
     }

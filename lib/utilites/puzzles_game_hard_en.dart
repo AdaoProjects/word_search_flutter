@@ -1,4 +1,4 @@
-class PuzzlesGameHard{
+class PuzzlesGameHardEN{
  static final List<List<String>> all_puzzles_hard_en=[
   ["PHQGHpssAgiplFDXubroVSswiGBkleeQfUrofscOdaclTteltasrhatPoRtbbsuetaSsdwiPymtKrFbaywrMudenydoiirwKbCXFerLntYcpFADPbreFXZoCyieldsaABhYGPstorrapsPLJ"],
   ["timileEClOTtWytfosdHiOaeVulsnWWiscXrYbiparrotsGaVtfDrJGbeoMwcXtbresrnQraJhlCovhosYXsKoiYwaoaUBhAwCPeswpdYoZIVCUYfsdleiySGyoungerXDHPOAMVtceridXS"],
