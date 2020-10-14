@@ -2,9 +2,8 @@ import 'dart:io';
 import 'dart:ui';
 import 'dart:math';
 import 'package:findthewords/custom_painter.dart';
-import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/main.dart';
-import 'package:findthewords/utilites/all_lang_puzzles.dart';
+import 'package:findthewords/utilites/puzzles_game_medium_en.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
@@ -699,7 +698,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                     width: MediaQuery
                         .of(context)
                         .size
-                        .width * 1.1,
+                        .width * 1.5,
                     child: Table(
                         children: [
                           for (int i=0; i<3;i++) TableRow(children: [
@@ -1017,9 +1016,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
       created_puzzle = true;
       int i =random.nextInt(1000);
 
-      puzzle=AllLangPuzzles.all_puzzles_medium_en[i];
-      solution_positions=AllLangPuzzles.all_solutions_medium_en[i];
-      words=AllLangPuzzles.all_words_medium_en[i];
+      puzzle=PuzzlesGameMediumEN.all_puzzles_medium_en[i];
+      solution_positions=PuzzlesGameMediumEN.all_solutions_medium_en[i];
+      words=PuzzlesGameMediumEN.all_words_medium_en[i];
       sorted_Num_Words = random.nextInt(15) - 1;
       next_Color = random.nextInt(5);
     }

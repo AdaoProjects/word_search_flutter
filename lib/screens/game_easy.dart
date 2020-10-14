@@ -4,8 +4,7 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
-import 'package:findthewords/utilites/all_lang_puzzles.dart';
-import 'package:findthewords/screens/levels.dart';
+import 'package:findthewords/utilites/puzzles_game_easy_en.dart';
 import 'package:findthewords/custom_painter.dart';
 import 'package:findthewords/main.dart';
 import 'package:audioplayers/audio_cache.dart';
@@ -836,9 +835,9 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
       created_puzzle=true;
       int i =random.nextInt(1000);
       
-      puzzle=AllLangPuzzles.all_puzzles_easy_en[i];
-      solution_positions=AllLangPuzzles.all_solutions_easy_en[i];
-      words=AllLangPuzzles.all_words_easy_en[i];
+      puzzle=PuzzlesGameEasyEN.all_puzzles_easy_en[i];
+      solution_positions=PuzzlesGameEasyEN.all_solutions_easy_en[i];
+      words=PuzzlesGameEasyEN.all_words_easy_en[i];
       sorted_Num_Words = random.nextInt(12) - 1;
       next_Color = random.nextInt(5);
     }
