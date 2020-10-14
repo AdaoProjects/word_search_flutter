@@ -14,8 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:findthewords/app_localizations.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Hard extends StatefulWidget {
-  Game_Type game_type;
-  Game_Hard({Key key, @required this.game_type}) : super(key: key);
+
   @override
   _Game_HardState createState() => _Game_HardState();
 }
@@ -760,7 +759,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       width: MediaQuery
                           .of(context)
                           .size
-                          .width * 1.5,
+                          .width * 1.6,
                       child: Table(
                           children: [
                             for (int i=0; i<4;i++) TableRow(children: [

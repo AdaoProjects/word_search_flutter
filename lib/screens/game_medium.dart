@@ -14,8 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:findthewords/app_localizations.dart';
 AudioCache audioPlayer = AudioCache();
 class Game_Medium extends StatefulWidget {
-  Game_Type game_type;
-  Game_Medium({Key key, @required this.game_type}) : super(key: key);
   @override
   _Game_MediumState createState() => _Game_MediumState();
 }
