@@ -4,6 +4,9 @@ import 'dart:math';
 import 'package:findthewords/custom_painter.dart';
 import 'package:findthewords/main.dart';
 import 'package:findthewords/utilites/puzzles_game_medium_en.dart';
+import 'package:findthewords/utilites/puzzles_game_medium_es.dart';
+import 'package:findthewords/utilites/puzzles_game_medium_pt.dart';
+import 'package:findthewords/utilites/puzzles_game_medium_fr.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
@@ -1015,10 +1018,25 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
     if (!created_puzzle) {
       created_puzzle = true;
       int i =random.nextInt(1000);
-
-      puzzle=PuzzlesGameMediumEN.all_puzzles_medium_en[i];
-      solution_positions=PuzzlesGameMediumEN.all_solutions_medium_en[i];
-      words=PuzzlesGameMediumEN.all_words_medium_en[i];
+      String language=AppLocalizations.of(context).translate("game_language");
+      if(language=="en"){
+        puzzle=PuzzlesGameMediumEN.all_puzzles_medium_en[i];
+        solution_positions=PuzzlesGameMediumEN.all_solutions_medium_en[i];
+        words=PuzzlesGameMediumEN.all_words_medium_en[i];
+      }else if(language=="pt"){
+        puzzle=PuzzlesGameMediumPT.all_puzzles_medium_pt[i];
+        solution_positions=PuzzlesGameMediumPT.all_solutions_medium_pt[i];
+        words=PuzzlesGameMediumPT.all_words_medium_pt[i];
+      }else if(language=="es"){
+        puzzle=PuzzlesGameMediumES.all_puzzles_medium_es[i];
+        solution_positions=PuzzlesGameMediumES.all_solutions_medium_es[i];
+        words=PuzzlesGameMediumES.all_words_medium_es[i];
+      }else if(language=="fr") {
+        puzzle=PuzzlesGameMediumFR.all_puzzles_medium_fr[i];
+        solution_positions=PuzzlesGameMediumFR.all_solutions_medium_fr[i];
+        words=PuzzlesGameMediumFR.all_words_medium_fr[i];
+      }
+      
       sorted_Num_Words = random.nextInt(15) - 1;
       next_Color = random.nextInt(5);
     }

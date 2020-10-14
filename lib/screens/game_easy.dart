@@ -5,6 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/utilites/puzzles_game_easy_en.dart';
+import 'package:findthewords/utilites/puzzles_game_easy_es.dart';
+import 'package:findthewords/utilites/puzzles_game_easy_fr.dart';
+import 'package:findthewords/utilites/puzzles_game_easy_pt.dart';
 import 'package:findthewords/custom_painter.dart';
 import 'package:findthewords/main.dart';
 import 'package:audioplayers/audio_cache.dart';
@@ -834,10 +837,24 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     if(!created_puzzle) {
       created_puzzle=true;
       int i =random.nextInt(1000);
-      
-      puzzle=PuzzlesGameEasyEN.all_puzzles_easy_en[i];
-      solution_positions=PuzzlesGameEasyEN.all_solutions_easy_en[i];
-      words=PuzzlesGameEasyEN.all_words_easy_en[i];
+      String language=AppLocalizations.of(context).translate("game_language");
+      if(language=="en"){
+        puzzle=PuzzlesGameEasyEN.all_puzzles_easy_en[i];
+        solution_positions=PuzzlesGameEasyEN.all_solutions_easy_en[i];
+        words=PuzzlesGameEasyEN.all_words_easy_en[i];
+      }else if(language=="pt"){
+        puzzle=PuzzlesGameEasyPT.all_puzzles_easy_pt[i];
+        solution_positions=PuzzlesGameEasyPT.all_solutions_easy_pt[i];
+        words=PuzzlesGameEasyPT.all_words_easy_pt[i];
+      }else if(language=="es"){
+        puzzle=PuzzlesGameEasyES.all_puzzles_easy_es[i];
+        solution_positions=PuzzlesGameEasyES.all_solutions_easy_es[i];
+        words=PuzzlesGameEasyES.all_words_easy_es[i];
+      }else if(language=="fr") {
+        puzzle=PuzzlesGameEasyFR.all_puzzles_easy_fr[i];
+        solution_positions=PuzzlesGameEasyFR.all_solutions_easy_fr[i];
+        words=PuzzlesGameEasyFR.all_words_easy_fr[i];
+      }
       sorted_Num_Words = random.nextInt(12) - 1;
       next_Color = random.nextInt(5);
     }
