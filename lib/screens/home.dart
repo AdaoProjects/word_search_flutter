@@ -3,7 +3,7 @@ import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/screens/stats.dart';
 import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
-import 'package:findthewords/app_localizations.dart';
+import 'package:findthewords/screens/share.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -124,7 +124,7 @@ class _HomeState extends State<Home> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Level()),
+                      MaterialPageRoute(builder: (context) => Share()),
                     );
                   },
                 ),
