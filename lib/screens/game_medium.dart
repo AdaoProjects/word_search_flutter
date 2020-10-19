@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'dart:ui';
 import 'dart:math';
 import 'package:findthewords/custom_painter.dart';
@@ -227,7 +227,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   double end_Of_Selection_dx;
   double end_Of_Selection_dy;
   List<DrawingPoints> points = List();
-  StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.butt : StrokeCap.round;
+  StrokeCap strokeCap =  StrokeCap.butt;
   Color selected_color;
   double opacity = 0.2;
   List<Color> colors = [
