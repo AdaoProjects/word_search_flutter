@@ -202,7 +202,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 //Paint
   bool first_Point_Drawed=false;
   int number_Of_Words_Selected=0;
-  int init_Pan_Update=0;
   List<int> solution_positions = [
     0,
     0,
@@ -359,10 +358,11 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                   }
                   row_end=row;
                   column_end=column;
-                  if(!first_Point_Drawed) {
-                    points.removeAt(2*number_Of_Words_Selected + 1);
-                  }first_Point_Drawed=false;
+
                   setState(() {
+                    if(!first_Point_Drawed) {
+                      points.removeAt(2*number_Of_Words_Selected + 1);
+                    }first_Point_Drawed=false;
                     points.add(DrawingPoints(
                       radius: MediaQuery
                           .of(context)
@@ -464,8 +464,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
 
                       ));
-
-                      init_Pan_Update=0;
                     });
                   }
                 }
@@ -761,7 +759,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       width: MediaQuery
                           .of(context)
                           .size
-                          .width * 1.6,
+                          .width * 1.8,
                       child: Table(
                           children: [
                             for (int i=0; i<4;i++) TableRow(children: [

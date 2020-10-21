@@ -187,11 +187,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       }
                       row_end=row;
                       column_end=column;
-                      if(!first_Point_Drawed) {
-                        points.removeAt(2*number_Of_Words_Selected + 1);
-                      }
-                      first_Point_Drawed=false;
+
                       setState(() {
+                        if(!first_Point_Drawed) {
+                          points.removeAt(2*number_Of_Words_Selected + 1);
+                        }
+                        first_Point_Drawed=false;
                         points.add(DrawingPoints(
                           radius: MediaQuery
                               .of(context)

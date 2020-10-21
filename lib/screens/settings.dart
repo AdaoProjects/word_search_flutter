@@ -28,7 +28,7 @@ class _SettingsState extends State<Settings> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.italic,
-                          fontSize: MediaQuery. of(context). size. height/15)
+                          fontSize: MediaQuery. of(context). size. width/12)
                   ),
 
                   SizedBox(height:MediaQuery.of(context).size.height/20),
