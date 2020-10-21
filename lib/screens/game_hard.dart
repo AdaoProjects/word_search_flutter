@@ -189,13 +189,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
   bool word_ten_scratch = false;
   bool word_eleven_scratch = false;
   bool word_twelve_scratch = false;
-  bool word_thirteenth_scratch = false;
-  bool word_fourteenth_scratch=false;
-  bool word_fifteenth_scratch=false;
-  bool word_sixteenth_scratch=false;
-  bool word_seventeenth_scratch=false;
-  bool word_eighteenth_scratch=false;
-  bool word_nineteenth_scratch=false;
+  bool word_thirteen_scratch = false;
+  bool word_fourteen_scratch=false;
+  bool word_fifteen_scratch=false;
+  bool word_sixteen_scratch=false;
+  bool word_seventeen_scratch=false;
+  bool word_eighteen_scratch=false;
+  bool word_nineteen_scratch=false;
   bool word_twenty_scratch=false;
 
   int sorted_Num_Words;
@@ -578,60 +578,60 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                     word_twelve_scratch = true;
                   });
                 }else if (i == 12) {
-                  if (word_thirteenth_scratch == true) {
+                  if (word_thirteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_thirteenth_scratch = true;
+                    word_thirteen_scratch = true;
                   });
                 }else if (i == 13) {
-                  if (word_fourteenth_scratch == true) {
+                  if (word_fourteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_fourteenth_scratch = true;
+                    word_fourteen_scratch = true;
                   });
                 }else if (i == 14) {
-                  if (word_fifteenth_scratch == true) {
+                  if (word_fifteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_fifteenth_scratch = true;
+                    word_fifteen_scratch = true;
                   });
                 }else if (i == 15) {
-                  if (word_sixteenth_scratch == true) {
+                  if (word_sixteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_sixteenth_scratch = true;
+                    word_sixteen_scratch = true;
                   });
                 }else if (i == 16) {
-                  if (word_seventeenth_scratch == true) {
+                  if (word_seventeen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_seventeenth_scratch = true;
+                    word_seventeen_scratch = true;
                   });
                 }else if (i == 17) {
-                  if (word_eighteenth_scratch == true) {
+                  if (word_eighteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_eighteenth_scratch = true;
+                    word_eighteen_scratch = true;
                   });
                 }else if (i == 18) {
-                  if (word_nineteenth_scratch == true) {
+                  if (word_nineteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_nineteenth_scratch = true;
+                    word_nineteen_scratch = true;
                   });
                 }else if (i == 19) {
                   if (word_twenty_scratch == true) {
@@ -659,8 +659,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               play_Wrong_Sound();
             }
             if(word_one_scratch && word_two_scratch && word_three_scratch&&word_four_scratch&&word_five_scratch&&word_six_scratch&&word_seven_scratch&&word_eight_scratch
-            && word_nine_scratch && word_ten_scratch&& word_eleven_scratch==true && word_twelve_scratch==true && word_thirteenth_scratch && word_fourteenth_scratch && word_fifteenth_scratch && word_sixteenth_scratch && word_seventeenth_scratch
-            && word_eighteenth_scratch && word_nineteenth_scratch && word_twenty_scratch){
+            && word_nine_scratch && word_ten_scratch&& word_eleven_scratch==true && word_twelve_scratch==true && word_thirteen_scratch && word_fourteen_scratch && word_fifteen_scratch && word_sixteen_scratch && word_seventeen_scratch
+            && word_eighteen_scratch && word_nineteen_scratch && word_twenty_scratch){
               set_Best_Time();
               show_Congrats();
             }
@@ -771,13 +771,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .size
                                     .width / 13),
           (word_twenty_scratch && sorted_Num_Words==18)
-          ||(word_nineteenth_scratch && sorted_Num_Words==17)
-          ||(word_eighteenth_scratch && sorted_Num_Words==16)
-          ||(word_seventeenth_scratch && sorted_Num_Words==15)
-                                ||(word_sixteenth_scratch && sorted_Num_Words==14)
-                                ||(word_fifteenth_scratch && sorted_Num_Words==13)
-                                    || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                    ||(word_thirteenth_scratch && sorted_Num_Words==11)
+          ||(word_nineteen_scratch && sorted_Num_Words==17)
+          ||(word_eighteen_scratch && sorted_Num_Words==16)
+          ||(word_seventeen_scratch && sorted_Num_Words==15)
+                                ||(word_sixteen_scratch && sorted_Num_Words==14)
+                                ||(word_fifteen_scratch && sorted_Num_Words==13)
+                                    || (word_fourteen_scratch && sorted_Num_Words==12)
+                                    ||(word_thirteen_scratch && sorted_Num_Words==11)
                                     ||(word_twelve_scratch &&
                                     sorted_Num_Words == 10) ||
                                     (word_eleven_scratch &&
@@ -834,13 +834,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .size
                                     .width / 30),
                                 (word_twenty_scratch && sorted_Num_Words==18)
-                                    ||(word_nineteenth_scratch && sorted_Num_Words==17)
-                                    ||(word_eighteenth_scratch && sorted_Num_Words==16)
-                                    ||(word_seventeenth_scratch && sorted_Num_Words==15)
-                                    ||(word_sixteenth_scratch && sorted_Num_Words==14)
-                                    ||(word_fifteenth_scratch && sorted_Num_Words==13)
-                                    || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                    ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                                    ||(word_nineteen_scratch && sorted_Num_Words==17)
+                                    ||(word_eighteen_scratch && sorted_Num_Words==16)
+                                    ||(word_seventeen_scratch && sorted_Num_Words==15)
+                                    ||(word_sixteen_scratch && sorted_Num_Words==14)
+                                    ||(word_fifteen_scratch && sorted_Num_Words==13)
+                                    || (word_fourteen_scratch && sorted_Num_Words==12)
+                                    ||(word_thirteen_scratch && sorted_Num_Words==11)
                                     ||(word_twelve_scratch &&
                                     sorted_Num_Words == 10) ||
                                     (word_eleven_scratch &&
@@ -898,13 +898,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .width / 30),
 
                                 (word_twenty_scratch && sorted_Num_Words==18)
-                                    ||(word_nineteenth_scratch && sorted_Num_Words==17)
-                                    ||(word_eighteenth_scratch && sorted_Num_Words==16)
-                                    ||(word_seventeenth_scratch && sorted_Num_Words==15)
-                                    ||(word_sixteenth_scratch && sorted_Num_Words==14)
-                                    ||(word_fifteenth_scratch && sorted_Num_Words==13)
-                                    || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                    ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                                    ||(word_nineteen_scratch && sorted_Num_Words==17)
+                                    ||(word_eighteen_scratch && sorted_Num_Words==16)
+                                    ||(word_seventeen_scratch && sorted_Num_Words==15)
+                                    ||(word_sixteen_scratch && sorted_Num_Words==14)
+                                    ||(word_fifteen_scratch && sorted_Num_Words==13)
+                                    || (word_fourteen_scratch && sorted_Num_Words==12)
+                                    ||(word_thirteen_scratch && sorted_Num_Words==11)
                                     ||(word_twelve_scratch &&
                                     sorted_Num_Words == 10) ||
                                     (word_eleven_scratch &&
@@ -957,13 +957,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .size
                                     .width / 30),
                                 (word_twenty_scratch && sorted_Num_Words==18)
-                                    ||(word_nineteenth_scratch && sorted_Num_Words==17)
-                                    ||(word_eighteenth_scratch && sorted_Num_Words==16)
-                                    ||(word_seventeenth_scratch && sorted_Num_Words==15)
-                                    ||(word_sixteenth_scratch && sorted_Num_Words==14)
-                                    ||(word_fifteenth_scratch && sorted_Num_Words==13)
-                                    || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                    ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                                    ||(word_nineteen_scratch && sorted_Num_Words==17)
+                                    ||(word_eighteen_scratch && sorted_Num_Words==16)
+                                    ||(word_seventeen_scratch && sorted_Num_Words==15)
+                                    ||(word_sixteen_scratch && sorted_Num_Words==14)
+                                    ||(word_fifteen_scratch && sorted_Num_Words==13)
+                                    || (word_fourteen_scratch && sorted_Num_Words==12)
+                                    ||(word_thirteen_scratch && sorted_Num_Words==11)
                                     ||(word_twelve_scratch &&
                                     sorted_Num_Words == 10) ||
                                     (word_eleven_scratch &&
@@ -1016,13 +1016,13 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                                     .size
                                     .width / 30),
                                 (word_twenty_scratch && sorted_Num_Words==18)
-                                    ||(word_nineteenth_scratch && sorted_Num_Words==17)
-                                    ||(word_eighteenth_scratch && sorted_Num_Words==16)
-                                    ||(word_seventeenth_scratch && sorted_Num_Words==15)
-                                    ||(word_sixteenth_scratch && sorted_Num_Words==14)
-                                    ||(word_fifteenth_scratch && sorted_Num_Words==13)
-                                    || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                    ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                                    ||(word_nineteen_scratch && sorted_Num_Words==17)
+                                    ||(word_eighteen_scratch && sorted_Num_Words==16)
+                                    ||(word_seventeen_scratch && sorted_Num_Words==15)
+                                    ||(word_sixteen_scratch && sorted_Num_Words==14)
+                                    ||(word_fifteen_scratch && sorted_Num_Words==13)
+                                    || (word_fourteen_scratch && sorted_Num_Words==12)
+                                    ||(word_thirteen_scratch && sorted_Num_Words==11)
                                     ||(word_twelve_scratch &&
                                     sorted_Num_Words == 10) ||
                                     (word_eleven_scratch &&
@@ -1181,12 +1181,12 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
   }
 
   void _getTime() {
-    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
+    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||!word_four_scratch||
         !word_five_scratch || !word_six_scratch || !word_seven_scratch ||
         !word_eight_scratch || !word_nine_scratch || !word_ten_scratch ||
-        !word_eleven_scratch || !word_twelve_scratch || !word_thirteenth_scratch ||
-        !word_fourteenth_scratch || word_fifteenth_scratch || word_sixteenth_scratch||
-        !word_seventeenth_scratch || !word_eighteenth_scratch || !word_nineteenth_scratch||
+        !word_eleven_scratch || !word_twelve_scratch || !word_thirteen_scratch ||
+        !word_fourteen_scratch || word_fifteen_scratch || word_sixteen_scratch||
+        !word_seventeen_scratch || !word_eighteen_scratch || !word_nineteen_scratch||
           !word_twenty_scratch) {
       _seconds++;
       if (_seconds == 60) {

@@ -897,7 +897,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
     super.initState();
   }
   void _getTime() {
-    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
+    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||!word_four_scratch||
         !word_five_scratch || !word_six_scratch || !word_seven_scratch||!word_eight_scratch||!word_nine_scratch||
       !word_ten_scratch|| !word_eleven_scratch || !word_twelve_scratch) {
       _seconds++;

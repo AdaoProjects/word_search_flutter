@@ -144,9 +144,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   bool word_ten_scratch = false;
   bool word_eleven_scratch = false;
   bool word_twelve_scratch = false;
-  bool word_thirteenth_scratch = false;
-  bool word_fourteenth_scratch=false;
-  bool word_fifteenth_scratch=false;
+  bool word_thirteen_scratch = false;
+  bool word_fourteen_scratch=false;
+  bool word_fifteen_scratch=false;
 
 
 
@@ -521,30 +521,30 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   });
                 }
                 else if (i == 12) {
-                  if (word_thirteenth_scratch == true) {
+                  if (word_thirteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_thirteenth_scratch = true;
+                    word_thirteen_scratch = true;
                   });
                 }
                 else if (i == 13) {
-                  if (word_fourteenth_scratch == true) {
+                  if (word_fourteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_fourteenth_scratch = true;
+                    word_fourteen_scratch = true;
                   });
                 }
                 else if (i == 14) {
-                  if (word_fifteenth_scratch == true) {
+                  if (word_fifteen_scratch == true) {
                     number_Of_Words_Selected--;
                     found_word = false;
                   }
                   setState(() {
-                    word_fifteenth_scratch = true;
+                    word_fifteen_scratch = true;
                   });
                 }
                 else {
@@ -569,8 +569,8 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 word_seven_scratch == true && word_eight_scratch == true
                 && word_nine_scratch == true && word_ten_scratch == true &&
                 word_eleven_scratch == true && word_twelve_scratch == true&&
-                word_thirteenth_scratch==true && word_fourteenth_scratch==true &&
-                word_fifteenth_scratch==true) {
+                word_thirteen_scratch==true && word_fourteen_scratch==true &&
+                word_fifteen_scratch==true) {
               set_Best_Time();
               show_Congrats();
             }
@@ -710,9 +710,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .of(context)
                                   .size
                                   .width / 13),
-                              (word_fifteenth_scratch && sorted_Num_Words==13)
-                                  || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                  ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                              (word_fifteen_scratch && sorted_Num_Words==13)
+                                  || (word_fourteen_scratch && sorted_Num_Words==12)
+                                  ||(word_thirteen_scratch && sorted_Num_Words==11)
           ||(word_twelve_scratch &&
                                   sorted_Num_Words == 10) ||
                                   (word_eleven_scratch &&
@@ -768,9 +768,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .of(context)
                                   .size
                                   .width / 30),
-                              (word_fifteenth_scratch && sorted_Num_Words==13)
-                                  || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                  ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                              (word_fifteen_scratch && sorted_Num_Words==13)
+                                  || (word_fourteen_scratch && sorted_Num_Words==12)
+                                  ||(word_thirteen_scratch && sorted_Num_Words==11)
                                   ||(word_twelve_scratch &&
                                   sorted_Num_Words == 10) ||
                                   (word_eleven_scratch &&
@@ -827,9 +827,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .size
                                   .width / 30),
 
-                              (word_fifteenth_scratch && sorted_Num_Words==13)
-                                  || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                  ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                              (word_fifteen_scratch && sorted_Num_Words==13)
+                                  || (word_fourteen_scratch && sorted_Num_Words==12)
+                                  ||(word_thirteen_scratch && sorted_Num_Words==11)
                                   ||(word_twelve_scratch &&
                                   sorted_Num_Words == 10) ||
                                   (word_eleven_scratch &&
@@ -881,9 +881,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .of(context)
                                   .size
                                   .width / 30),
-                              (word_fifteenth_scratch && sorted_Num_Words==13)
-                                  || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                  ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                              (word_fifteen_scratch && sorted_Num_Words==13)
+                                  || (word_fourteen_scratch && sorted_Num_Words==12)
+                                  ||(word_thirteen_scratch && sorted_Num_Words==11)
                                   ||(word_twelve_scratch &&
                                   sorted_Num_Words == 10) ||
                                   (word_eleven_scratch &&
@@ -935,9 +935,9 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                                   .of(context)
                                   .size
                                   .width / 30),
-                              (word_fifteenth_scratch && sorted_Num_Words==13)
-                                  || (word_fourteenth_scratch && sorted_Num_Words==12)
-                                  ||(word_thirteenth_scratch && sorted_Num_Words==11)
+                              (word_fifteen_scratch && sorted_Num_Words==13)
+                                  || (word_fourteen_scratch && sorted_Num_Words==12)
+                                  ||(word_thirteen_scratch && sorted_Num_Words==11)
                                   ||(word_twelve_scratch &&
                                   sorted_Num_Words == 10) ||
                                   (word_eleven_scratch &&
@@ -1082,11 +1082,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
   }
 
   void _getTime() {
-    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||
+    if (!word_one_scratch || !word_two_scratch || !word_three_scratch ||!word_four_scratch||
         !word_five_scratch || !word_six_scratch || !word_seven_scratch||
         !word_eight_scratch||!word_nine_scratch||!word_ten_scratch||
-        !word_eleven_scratch||!word_twelve_scratch||!word_thirteenth_scratch||
-    !word_fourteenth_scratch || !word_fifteenth_scratch) {
+        !word_eleven_scratch||!word_twelve_scratch||!word_thirteen_scratch||
+    !word_fourteen_scratch || !word_fifteen_scratch) {
       _seconds++;
       if (_seconds == 60) {
         _minutes++;
