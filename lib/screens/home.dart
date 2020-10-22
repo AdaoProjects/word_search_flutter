@@ -4,6 +4,7 @@ import 'package:findthewords/screens/stats.dart';
 import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/screens/share.dart';
+import 'package:findthewords/app_localizations.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,7 +20,23 @@ class _HomeState extends State<Home> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/images/find_the_words_adan.png',
+            AppLocalizations.of(context).translate("game_language")=="en"? Image.asset('assets/images/find_the_words_adan.png',
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 5,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width) :AppLocalizations.of(context).translate("game_language")=="pt"?Image.asset('assets/images/img_ftw_pt.png',
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 5,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width) :Image.asset('assets/images/find_the_words_adan.png',
                 height: MediaQuery
                     .of(context)
                     .size

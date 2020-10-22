@@ -58,6 +58,7 @@ flutter:
 
   assets:
     - assets/images/find_the_words_adan.png
+    - assets/images/img_ftw_pt.png
     - assets/sounds/selectionsound.wav
     - assets/sounds/wrongsound.wav
     - assets/sounds/foundsound.wav
