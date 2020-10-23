@@ -5,13 +5,27 @@ import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/screens/share.dart';
 import 'package:findthewords/app_localizations.dart';
+import 'dart:io';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  AnimationController control;
+  @override
+  void initState() {
+    super.initState();
+
+    control = AnimationController(
+      duration: Duration(seconds: 12),
+      vsync: this,
+    );
+
+
+    control.repeat();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +64,14 @@ class _HomeState extends State<Home> {
 
             Row(children:[
               SizedBox(width:MediaQuery.of(context).size.width/5),
-              Icon(Icons.star,
-                  color: GameColors.secondary,
-                  size:MediaQuery.of(context).size.width/10),
+              AnimatedStar(controller: control),
               SizedBox(width:MediaQuery.of(context).size.width/10),
               Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/5),
+
               SizedBox(width:MediaQuery.of(context).size.width/10),
-              Icon(Icons.star,
-                  color: GameColors.secondary,
-                  size:MediaQuery.of(context).size.width/10),
+              AnimatedStar(controller: control),
             ]),
 
 
@@ -184,5 +195,22 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+}
+class AnimatedStar extends AnimatedWidget {
+  const AnimatedStar({Key key, AnimationController controller,})
+      : super(key: key, listenable: controller,);
+
+  Animation<double> get _progress => listenable;
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      Transform.rotate(
+        angle: _progress.value * 2.0 * 3.1415,
+        child:  Icon(Icons.star,
+            color: GameColors.secondary,
+            size:MediaQuery.of(context).size.width/10),
+      );
   }
 }
