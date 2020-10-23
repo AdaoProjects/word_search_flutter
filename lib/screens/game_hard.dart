@@ -1221,8 +1221,8 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("You won"),
-      content:  Text('Congratulations your time was '+_stringDuration(Duration(seconds: _seconds + 60 * _minutes))),
+      title: Text(AppLocalizations.of(context).translate("you_won")),
+      content:  Text(AppLocalizations.of(context).translate("your_time")+_stringDuration(Duration(seconds: _seconds + 60 * _minutes))),
       actions: [
         okButton,
       ],

@@ -24,5 +24,9 @@
   "game_level_type_food": "Aliments",
   "game_level_type_animals": "Animaux",
   "game_level_type_diverse": "Divers",
-  "game_language": "fr"
+  "game_language": "fr",
+
+  "you_won": "Tu as terminé",
+  "your_time": "\nFélicitations, votre temps était "
+
 }

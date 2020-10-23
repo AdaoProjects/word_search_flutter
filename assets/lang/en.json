@@ -23,7 +23,10 @@
   "game_level_type_food": "Food",
   "game_level_type_animals": "Animals",
   "game_level_type_diverse": "Diverse",
-  "game_language": "en"
+  "game_language": "en",
+
+  "you_won": "You won",
+  "your_time": "Congratulations your time was "
 
 
 

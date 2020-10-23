@@ -5,7 +5,6 @@ import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/screens/share.dart';
 import 'package:findthewords/app_localizations.dart';
-import 'dart:io';
 
 class Home extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
 
     control = AnimationController(
-      duration: Duration(seconds: 12),
+      duration: Duration(seconds: 20),
       vsync: this,
     );
 
