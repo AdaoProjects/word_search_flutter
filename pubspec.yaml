@@ -21,7 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  url_launcher: ^5.7.5
+  url_launcher: ^5.7.8
   audioplayers: ^0.16.1
   shared_preferences: ^0.5.10
   flutter:
@@ -59,6 +59,8 @@ flutter:
   assets:
     - assets/images/find_the_words_adan.png
     - assets/images/img_ftw_pt.png
+    - assets/images/img_ftw_es.png
+    - assets/images/img_ftw_fr.png
     - assets/sounds/selectionsound.wav
     - assets/sounds/wrongsound.wav
     - assets/sounds/foundsound.wav
