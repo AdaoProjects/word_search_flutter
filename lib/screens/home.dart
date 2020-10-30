@@ -12,19 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  AnimationController control;
-  @override
-  void initState() {
-    super.initState();
 
-    control = AnimationController(
-      duration: Duration(seconds: 20),
-      vsync: this,
-    );
-
-
-    control.repeat();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,14 +68,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
             Row(children:[
               SizedBox(width:MediaQuery.of(context).size.width/5),
-              AnimatedStar(controller: control),
+              Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:MediaQuery.of(context).size.width/10),
               SizedBox(width:MediaQuery.of(context).size.width/10),
               Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/5),
 
               SizedBox(width:MediaQuery.of(context).size.width/10),
-              AnimatedStar(controller: control),
+              Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:MediaQuery.of(context).size.width/10),
             ]),
 
 
@@ -211,22 +203,5 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
       ),
     );
-  }
-}
-class AnimatedStar extends AnimatedWidget {
-  const AnimatedStar({Key key, AnimationController controller,})
-      : super(key: key, listenable: controller,);
-
-  Animation<double> get _progress => listenable;
-
-  @override
-  Widget build(BuildContext context) {
-    return
-      Transform.rotate(
-        angle: _progress.value * 2.0 * 3.1415,
-        child:  Icon(Icons.star,
-            color: GameColors.secondary,
-            size:MediaQuery.of(context).size.width/10),
-      );
   }
 }

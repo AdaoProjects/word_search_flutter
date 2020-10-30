@@ -334,7 +334,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
           },
           onPanStart: (details) {
             RenderBox box = context.findRenderObject();
-            if (!first_Point_Drawed) {
+
               final Offset local = box.globalToLocal(
                   details.globalPosition);
               for (int row = 0; row < num_rows_and_columns; row++) {
@@ -413,7 +413,7 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   }
                 }
               }
-            }
+
             first_Point_Drawed = true;
           },
           onPanEnd: (details)  {
@@ -574,6 +574,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 word_fifteen_scratch==true) {
               set_Best_Time();
               show_Congrats();
+            }
+            while(points.length/2!=number_Of_Words_Selected){
+              setState(() {
+                points.removeAt(2 * number_Of_Words_Selected);
+              });
             }
           },
 

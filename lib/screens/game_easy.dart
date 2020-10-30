@@ -220,7 +220,6 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
               },
               onPanStart: (details)  {
                 RenderBox box = context.findRenderObject();
-                if(!first_Point_Drawed) {
                   final Offset local = box.globalToLocal(
                       details.globalPosition);
                   for (int row = 0; row < num_rows_and_columns; row++) {
@@ -299,7 +298,7 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                       }
                     }
                   }
-                }
+
                 first_Point_Drawed=true;
               },
 
@@ -323,8 +322,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     if (i==0) {
                       if(word_one_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -334,8 +335,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else if (i==1) {
                       if(word_two_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -344,8 +347,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else if (i==2) {
                       if(word_three_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
                       }
                       setState(() {
                         word_three_scratch = true;
@@ -354,8 +359,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     else if (i==3) {
                       if(word_four_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -364,8 +371,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else if (i==5) {
                       if(word_six_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -374,8 +383,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     }   else if (i==6) {
                       if(word_seven_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -384,8 +395,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else if (i==7) {
                       if(word_eight_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -394,8 +407,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     }  else if (i==8) {
                       if(word_nine_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -404,8 +419,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     }else if(i==9){
                       if(word_ten_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
                       }
                       setState(() {
                         word_ten_scratch=true;
@@ -413,8 +430,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else if(i==10){
                       if(word_eleven_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
                       }
                       setState(() {
                         word_eleven_scratch=true;
@@ -422,8 +441,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else if(i==11){
                       if(word_twelve_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
                       }
                       setState(() {
                         word_twelve_scratch=true;
@@ -431,8 +452,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                     } else {
                       if(word_five_scratch==true){
                         number_Of_Words_Selected--;
-                        points.removeAt(2 * number_Of_Words_Selected + 1);
-                        points.removeAt(2 * number_Of_Words_Selected);
+                        setState(() {
+                          points.removeAt(2 * number_Of_Words_Selected + 1);
+                          points.removeAt(2 * number_Of_Words_Selected);
+                        });
 
                       }
                       setState(() {
@@ -442,8 +465,10 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   }
                 }
                 if (!found_word) {
-                  points.removeAt(2 * number_Of_Words_Selected + 1);
-                  points.removeAt(2 * number_Of_Words_Selected);
+                  setState(() {
+                    points.removeAt(2 * number_Of_Words_Selected + 1);
+                    points.removeAt(2 * number_Of_Words_Selected);
+                  });
                   play_Wrong_Sound();
                 }
                 if (word_one_scratch == true && word_two_scratch == true &&
@@ -458,6 +483,12 @@ class _Game_EasyState extends State<Game_Easy> with TickerProviderStateMixin {
                   });
 
                 }
+                while(points.length/2!=number_Of_Words_Selected){
+                  setState(() {
+                    points.removeAt(2 * number_Of_Words_Selected);
+                  });
+                }
+
               },
 
 

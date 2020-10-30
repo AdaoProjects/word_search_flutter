@@ -391,7 +391,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
           },
           onPanStart: (details) {
             RenderBox box = context.findRenderObject();
-            if(!first_Point_Drawed) {
+
               final Offset local = box.globalToLocal(
                   details.globalPosition);
               for (int row = 0; row < num_rows_and_columns; row++) {
@@ -467,7 +467,6 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                     });
                   }
                 }
-              }
             }
             first_Point_Drawed=true;
           },
@@ -662,6 +661,11 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
               set_Best_Time();
               show_Congrats();
             }
+            while(points.length/2!=number_Of_Words_Selected){
+              setState(() {
+                points.removeAt(2 * number_Of_Words_Selected);
+              });
+            }
           },
 
           child: CustomPaint(
@@ -759,7 +763,7 @@ class _Game_HardState extends State<Game_Hard> with TickerProviderStateMixin {
                       width: MediaQuery
                           .of(context)
                           .size
-                          .width * 1.8,
+                          .width * 1.9,
                       child: Table(
                           children: [
                             for (int i=0; i<4;i++) TableRow(children: [
