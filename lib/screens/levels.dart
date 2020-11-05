@@ -73,126 +73,88 @@ class _LevelState extends State<Level> {
 
                   Column(
                     children:[
-                      RaisedButton(
-                        color:Colors.black,
-
-                        child:Ink(
-
-                          child:
-                          Container(
-
-                            constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Column(children:[
-                              Text(AppLocalizations.of(context).translate("levels_easy"),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: MediaQuery
-                                          .of(context)
-                                          .size
-                                          .height / 15)
-                              ),
-
-                            ]),
-                            decoration:  BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: <Color>[GameColors.primary, Colors.black],),
-                              borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
-                            ),
-                          ),
-                        ),
-
+                      FlatButton(
+                      color: GameColors.primary,
+                        highlightColor: Colors.yellowAccent,
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Game_Easy(
                               )));
                         },
-
-                      ),
-                      SizedBox(height:MediaQuery.of(context).size.height/10),
-                      RaisedButton(
-                        color:Colors.black,
-
-                        child:Ink(
-
-                          child:
-                        Container(
-
-                          constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                          alignment: Alignment.center,
-                          child: Column(children:[
-                          Text(AppLocalizations.of(context).translate("levels_medium"),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic,
-                                  fontSize: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height / 15)
-                          ),
-
-                        ]),
-                          decoration:  BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: <Color>[GameColors.primary, Colors.black],),
-                            borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
-                          ),
+                        child: Text(AppLocalizations.of(context).translate("levels_easy"),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15)
                         ),
-    ),
-
+                        shape: StadiumBorder(),
+                        textColor: Colors.white,
+                      ),
+                      SizedBox(width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 10,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 20),
+                      FlatButton(
+                        color: GameColors.primary,
+                        highlightColor: Colors.yellowAccent,
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Game_Medium(
                               )));
                         },
-
-                      ),
-                      SizedBox(height:MediaQuery.of(context).size.height/10),
-                      RaisedButton(
-                        color:Colors.black,
-
-                        child:Ink(
-
-                          child:
-                          Container(
-
-                            constraints:  BoxConstraints(minWidth: MediaQuery. of(context). size. width*4/5, minHeight: MediaQuery. of(context). size. height/15), // min sizes for Material buttons
-                            alignment: Alignment.center,
-                            child: Column(children:[
-                              Text(AppLocalizations.of(context).translate("levels_hard"),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: MediaQuery
-                                          .of(context)
-                                          .size
-                                          .height / 15)
-                              ),
-
-                            ]),
-                            decoration:  BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: <Color>[GameColors.primary, Colors.black],),
-                              borderRadius: BorderRadius.all(Radius.circular(MediaQuery. of(context). size. height/15)),
-                            ),
-                          ),
+                        child: Text(AppLocalizations.of(context).translate("levels_medium"),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15)
                         ),
-
+                        shape: StadiumBorder(),
+                        textColor: Colors.white,
+                      ),
+                      SizedBox(width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 10,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 20),
+                      FlatButton(
+                        color: GameColors.primary,
+                        highlightColor: Colors.yellowAccent,
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Game_Hard(
                               )));
                         },
-
+                        child: Text(AppLocalizations.of(context).translate("levels_hard"),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                                fontSize: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height / 15)
+                        ),
+                        shape: StadiumBorder(),
+                        textColor: Colors.white,
                       ),
-
                     ]
                   ),
                 ]

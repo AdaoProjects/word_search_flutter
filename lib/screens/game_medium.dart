@@ -258,17 +258,17 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                 if (local.dx > MediaQuery
                     .of(context)
                     .size
-                    .width / 18.415
+                    .width / 18.69
                     + column * MediaQuery
                         .of(context)
                         .size
-                        .width / 11.21 && local.dx < MediaQuery
+                        .width / 11.14 && local.dx < MediaQuery
                     .of(context)
                     .size
-                    .width / 18.415 + (column + 1) * MediaQuery
+                    .width / 18.69 + (column + 1) * MediaQuery
                     .of(context)
                     .size
-                    .width / 11.21
+                    .width / 11.14
 
                     && local.dy > MediaQuery
                         .of(context)
@@ -286,10 +286,10 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   end_Of_Selection_dx = MediaQuery
                       .of(context)
                       .size
-                      .width / 18.415 + (column + 1 / 2) * MediaQuery
+                      .width / 18.69 + (column + 1 / 2) * MediaQuery
                       .of(context)
                       .size
-                      .width / 11.21;
+                      .width / 11.14;
                   end_Of_Selection_dy = MediaQuery
                       .of(context)
                       .size
@@ -342,17 +342,17 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                   if (local.dx > MediaQuery
                       .of(context)
                       .size
-                      .width / 18.415
+                      .width / 18.69
                       + column * MediaQuery
                           .of(context)
                           .size
-                          .width / 11.21 && local.dx < MediaQuery
+                          .width / 11.14 && local.dx < MediaQuery
                       .of(context)
                       .size
-                      .width / 18.415 + (column + 1) * MediaQuery
+                      .width / 18.69 + (column + 1) * MediaQuery
                       .of(context)
                       .size
-                      .width / 11.21
+                      .width / 11.14
 
                       && local.dy > MediaQuery
                           .of(context)
@@ -373,11 +373,11 @@ class _Game_MediumState extends State<Game_Medium> with TickerProviderStateMixin
                       start_Of_Selection_dx = MediaQuery
                           .of(context)
                           .size
-                          .width / 18.415 +
+                          .width / 18.69 +
                           (column + 1 / 2) * MediaQuery
                               .of(context)
                               .size
-                              .width / 11.21;
+                              .width / 11.14;
                       start_Of_Selection_dy = MediaQuery
                           .of(context)
                           .size

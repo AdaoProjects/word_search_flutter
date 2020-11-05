@@ -96,8 +96,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   SizedBox(width:MediaQuery.of(context).size.width/25),
                   Container(child:
                   IconButton(
-                    splashRadius: MediaQuery.of(context).size.width/7,
+                    splashRadius: MediaQuery.of(context).size.width/9,
                     splashColor:Colors.yellowAccent,
+                    highlightColor: Colors.yellowAccent,
                     color:GameColors.primary,
                     icon: Icon(Icons.play_arrow),
                     iconSize: MediaQuery.of(context).size.width/7,
@@ -120,10 +121,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Container(
                       child:
                       IconButton(
-                        splashRadius: MediaQuery.of(context).size.width/7,
+                        splashRadius: MediaQuery.of(context).size.width/9,
                         splashColor:Colors.yellowAccent,
+                        highlightColor: Colors.yellowAccent,
                         color:GameColors.secondary,
+
                         icon: Icon(Icons.trending_up),
+
                         iconSize: MediaQuery.of(context).size.width/7,
                         onPressed: () {
                           Navigator.push(
@@ -152,8 +156,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 SizedBox(width:MediaQuery.of(context).size.width/25),
                 Container(child:
                 IconButton(
-                  splashRadius: MediaQuery.of(context).size.width/7,
+                  splashRadius: MediaQuery.of(context).size.width/9,
                   splashColor:Colors.yellowAccent,
+                  highlightColor: Colors.yellowAccent,
                   color:GameColors.secondary,
                   icon: Icon(Icons.share),
                   iconSize: MediaQuery.of(context).size.width/7,
@@ -172,11 +177,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           .height / 10)
                   ),
                 ),
-                SizedBox(width:MediaQuery.of(context).size.width/10),
+                SizedBox(width:MediaQuery.of(context).size.width/9),
                 Container(child:
                 IconButton(
-                  splashRadius: MediaQuery.of(context).size.width/7,
+                  splashRadius: MediaQuery.of(context).size.width/9,
                   splashColor:Colors.yellowAccent,
+                  highlightColor: Colors.yellowAccent,
                   color:GameColors.secondary,
                   icon: Icon(Icons.settings),
                   iconSize: MediaQuery.of(context).size.width/7,
