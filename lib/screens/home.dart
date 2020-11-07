@@ -12,7 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-
+double _height = 1;
+bool _resized = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,14 +73,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
               SizedBox(width:MediaQuery.of(context).size.width/10),
-              Icon(Icons.star,
+               new AnimatedSize(
+              curve: Curves.bounceInOut,
+              child: Icon(Icons.star,
                   color: GameColors.secondary,
-                  size:MediaQuery.of(context).size.width/5),
-
+                  size:_height),
+              vsync: this,
+              duration: new Duration(seconds: 5),
+            ),
               SizedBox(width:MediaQuery.of(context).size.width/10),
               Icon(Icons.star,
                   color: GameColors.secondary,
-                  size:MediaQuery.of(context).size.width/10),
+                  size:return_height_small(),
+              )
             ]),
 
 
@@ -209,5 +215,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
       ),
     );
+    
   }
+  double return_height_small(){
+      setState(() {
+        _height=MediaQuery.of(context).size.width/5;
+      });
+      return MediaQuery.of(context).size.width/10;
+    }
 }
