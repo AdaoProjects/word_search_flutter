@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:findthewords/screens/levels.dart';
 import 'package:findthewords/screens/stats.dart';
 import 'package:findthewords/screens/settings.dart';
@@ -13,7 +14,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 double _height = 1;
-bool _resized = false;
+
+@override
+  void initState() {
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _animation());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,12 +85,12 @@ bool _resized = false;
                   color: GameColors.secondary,
                   size:_height),
               vsync: this,
-              duration: new Duration(seconds: 5),
+              duration: new Duration(seconds: 3),
             ),
               SizedBox(width:MediaQuery.of(context).size.width/10),
               Icon(Icons.star,
                   color: GameColors.secondary,
-                  size:return_height_small(),
+                  size:MediaQuery.of(context).size.width/10,
               )
             ]),
 
@@ -217,10 +223,9 @@ bool _resized = false;
     );
     
   }
-  double return_height_small(){
+  void _animation(){
       setState(() {
         _height=MediaQuery.of(context).size.width/5;
       });
-      return MediaQuery.of(context).size.width/10;
     }
 }
