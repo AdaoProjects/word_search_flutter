@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 double _height = 1;
+double _height_small=1;
 
 @override
   void initState() {
@@ -73,27 +74,31 @@ double _height = 1;
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/15),
 
-            Row(children:[
-              SizedBox(width:MediaQuery.of(context).size.width/5),
-              Icon(Icons.star,
-                  color: GameColors.secondary,
-                  size:MediaQuery.of(context).size.width/10),
-              SizedBox(width:MediaQuery.of(context).size.width/10),
-               new AnimatedSize(
+            new AnimatedSize(
               curve: Curves.bounceInOut,
-              child: Icon(Icons.star,
+              child: Row(children:[
+              SizedBox(width:MediaQuery.of(context).size.width/5),
+               Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:_height_small),
+              
+            
+              SizedBox(width:MediaQuery.of(context).size.width/10),
+                Icon(Icons.star,
                   color: GameColors.secondary,
                   size:_height),
+              
+              SizedBox(width:MediaQuery.of(context).size.width/10),
+               Icon(Icons.star,
+                  color: GameColors.secondary,
+                  size:_height_small),
+
+            ]),
+
               vsync: this,
               duration: new Duration(seconds: 3),
             ),
-              SizedBox(width:MediaQuery.of(context).size.width/10),
-              Icon(Icons.star,
-                  color: GameColors.secondary,
-                  size:MediaQuery.of(context).size.width/10,
-              )
-            ]),
-
+            
 
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/10),
@@ -226,6 +231,7 @@ double _height = 1;
   void _animation(){
       setState(() {
         _height=MediaQuery.of(context).size.width/5;
+        _height_small=MediaQuery.of(context).size.width/10;
       });
     }
 }
