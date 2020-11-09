@@ -6,6 +6,7 @@ import 'package:findthewords/screens/settings.dart';
 import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/screens/share.dart';
 import 'package:findthewords/app_localizations.dart';
+import 'package:flutter/rendering.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,16 +14,27 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-double _height = 1;
-double _height_small=1;
+
+  double opacity = 1.0;
 
 @override
-  void initState() {
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _animation());
-    super.initState();
-  }
+void initState() {
+  super.initState();
+  changeOpacity();
+}
+
+changeOpacity() {
+  Future.delayed(Duration(seconds: 3), () {
+    setState(() {
+      opacity = opacity == 0.0 ? 1.0 : 0.0;
+      changeOpacity();
+    });
+  });
+}
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -73,32 +85,31 @@ double _height_small=1;
                     .width),
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/15),
-
-            new AnimatedSize(
-              curve: Curves.bounceInOut,
-              child: Row(children:[
+            
+             AnimatedOpacity(
+        opacity: opacity == 1 ? 0 : 1,
+        duration: Duration(seconds: 1),
+        child:  Row(children:[
               SizedBox(width:MediaQuery.of(context).size.width/5),
                Icon(Icons.star,
                   color: GameColors.secondary,
-                  size:_height_small),
+                  size:MediaQuery.of(context).size.width/10),
               
             
               SizedBox(width:MediaQuery.of(context).size.width/10),
                 Icon(Icons.star,
                   color: GameColors.secondary,
-                  size:_height),
+                  size:MediaQuery.of(context).size.width/5),
               
               SizedBox(width:MediaQuery.of(context).size.width/10),
                Icon(Icons.star,
                   color: GameColors.secondary,
-                  size:_height_small),
+                  size:MediaQuery.of(context).size.width/10),
 
             ]),
+      ),
+               
 
-              vsync: this,
-              duration: new Duration(seconds: 3),
-            ),
-            
 
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/10),
@@ -228,10 +239,7 @@ double _height_small=1;
     );
     
   }
-  void _animation(){
-      setState(() {
-        _height=MediaQuery.of(context).size.width/5;
-        _height_small=MediaQuery.of(context).size.width/10;
-      });
-    }
+  
 }
+
+
