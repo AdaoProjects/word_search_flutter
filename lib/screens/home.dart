@@ -24,9 +24,9 @@ void initState() {
 }
 
 changeOpacity() {
-  Future.delayed(Duration(seconds: 3), () {
+  Future.delayed(Duration(seconds: 2), () {
     setState(() {
-      opacity = opacity == 0.0 ? 1.0 : 0.0;
+      opacity = opacity == 0.5 ? 1.0 : 0.5;
       changeOpacity();
     });
   });
@@ -86,28 +86,35 @@ changeOpacity() {
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/15),
             
-             AnimatedOpacity(
-        opacity: opacity == 1 ? 0 : 1,
-        duration: Duration(seconds: 1),
-        child:  Row(children:[
+             Row(children:[
               SizedBox(width:MediaQuery.of(context).size.width/5),
-               Icon(Icons.star,
+                AnimatedOpacity(
+        opacity: opacity == 1 ? 1.0 : 0.5,
+        duration: Duration(seconds: 2),
+        child: Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
-              
+                ),
             
               SizedBox(width:MediaQuery.of(context).size.width/10),
-                Icon(Icons.star,
+                AnimatedOpacity(
+        opacity: opacity == 1 ? 0.5 : 1,
+        duration: Duration(seconds: 2),
+        child:  Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/5),
-              
+              ),
               SizedBox(width:MediaQuery.of(context).size.width/10),
-               Icon(Icons.star,
+                AnimatedOpacity(
+        opacity: opacity == 1 ? 1.0 : 0.5,
+        duration: Duration(seconds: 2),
+        child: Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
+                ),
 
             ]),
-      ),
+      
                
 
 
