@@ -47,7 +47,7 @@ changeOpacity() {
           children: <Widget>[
              AnimatedOpacity(
         opacity: opacity_once,
-        duration: Duration(milliseconds: 250),
+        duration: Duration(milliseconds: 350),
         child:AppLocalizations.of(context).translate("game_language")=="en"? Image.asset('assets/images/find_the_words_adan.png',
                 height: MediaQuery
                     .of(context)
@@ -141,7 +141,7 @@ changeOpacity() {
 
             AnimatedOpacity(
         opacity: opacity_once,
-        duration: Duration(milliseconds: 250),
+        duration: Duration(milliseconds: 350),
         child:  SingleChildScrollView(
               scrollDirection: Axis.horizontal,
 
@@ -208,7 +208,7 @@ changeOpacity() {
              
              AnimatedOpacity(
         opacity: opacity_once,
-        duration: Duration(milliseconds: 250),
+        duration: Duration(milliseconds: 350),
         child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                 child:
