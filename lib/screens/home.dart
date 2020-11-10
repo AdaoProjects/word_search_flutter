@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   double opacity = 1.0;
-  double opacity_once = 0.3;
+
 
 @override
 void initState() {
@@ -30,7 +30,6 @@ changeOpacity() {
     setState(() {
       opacity = opacity == 0.3 ? 1.0 : 0.3;
       changeOpacity();
-    opacity_once=1.0;
     });
   
   });
@@ -45,10 +44,7 @@ changeOpacity() {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             AnimatedOpacity(
-        opacity: opacity_once,
-        duration: Duration(milliseconds: 350),
-        child:AppLocalizations.of(context).translate("game_language")=="en"? Image.asset('assets/images/find_the_words_adan.png',
+             AppLocalizations.of(context).translate("game_language")=="en"? Image.asset('assets/images/find_the_words_adan.png',
                 height: MediaQuery
                     .of(context)
                     .size
@@ -90,7 +86,7 @@ changeOpacity() {
                     .of(context)
                     .size
                     .width),
-             ),
+            
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/15),
             
@@ -138,11 +134,7 @@ changeOpacity() {
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/10),
 
-
-            AnimatedOpacity(
-        opacity: opacity_once,
-        duration: Duration(milliseconds: 350),
-        child:  SingleChildScrollView(
+SingleChildScrollView(
               scrollDirection: Axis.horizontal,
 
                   child:Row(
@@ -203,13 +195,10 @@ changeOpacity() {
                 ],
               ),
             ),
-            ),
+    
               SizedBox(height:MediaQuery.of(context).size.height/15),
              
-             AnimatedOpacity(
-        opacity: opacity_once,
-        duration: Duration(milliseconds: 350),
-        child: SingleChildScrollView(
+              SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                 child:
               Row(children:[
@@ -264,7 +253,7 @@ changeOpacity() {
               ]
               )
               )
-             )
+             
 
           ],
         ),

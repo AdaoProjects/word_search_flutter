@@ -6,6 +6,8 @@ import 'package:findthewords/screens/stats.dart';
 import 'app_localizations.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
+
+
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
