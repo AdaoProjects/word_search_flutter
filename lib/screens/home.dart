@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   double opacity = 1.0;
+  double opacity_once = 0.3;
 
 @override
 void initState() {
@@ -24,11 +25,13 @@ void initState() {
 }
 
 changeOpacity() {
-  Future.delayed(Duration(seconds: 2), () {
+  Future.delayed(Duration(seconds: 3), () {
     setState(() {
-      opacity = opacity == 0.5 ? 1.0 : 0.5;
+      opacity = opacity == 0.3 ? 1.0 : 0.3;
       changeOpacity();
+    opacity_once=1.0;
     });
+  
   });
 }
 
@@ -41,7 +44,10 @@ changeOpacity() {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AppLocalizations.of(context).translate("game_language")=="en"? Image.asset('assets/images/find_the_words_adan.png',
+             AnimatedOpacity(
+        opacity: opacity_once,
+        duration: Duration(milliseconds: 250),
+        child:AppLocalizations.of(context).translate("game_language")=="en"? Image.asset('assets/images/find_the_words_adan.png',
                 height: MediaQuery
                     .of(context)
                     .size
@@ -83,14 +89,15 @@ changeOpacity() {
                     .of(context)
                     .size
                     .width),
+             ),
             SizedBox(width:MediaQuery. of(context). size. width/20,
                 height: MediaQuery. of(context). size. height/15),
             
              Row(children:[
               SizedBox(width:MediaQuery.of(context).size.width/5),
                 AnimatedOpacity(
-        opacity: opacity == 1 ? 1.0 : 0.5,
-        duration: Duration(seconds: 2),
+        opacity: opacity == 1 ? 1.0 : 0.3,
+        duration: Duration(seconds: 3),
         child: Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
@@ -98,16 +105,16 @@ changeOpacity() {
             
               SizedBox(width:MediaQuery.of(context).size.width/10),
                 AnimatedOpacity(
-        opacity: opacity == 1 ? 0.5 : 1,
-        duration: Duration(seconds: 2),
+        opacity: opacity == 1 ? 0.3 : 1,
+        duration: Duration(seconds: 3),
         child:  Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/5),
               ),
               SizedBox(width:MediaQuery.of(context).size.width/10),
                 AnimatedOpacity(
-        opacity: opacity == 1 ? 1.0 : 0.5,
-        duration: Duration(seconds: 2),
+        opacity: opacity == 1 ? 1.0 : 0.3,
+        duration: Duration(seconds: 3),
         child: Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
@@ -122,7 +129,10 @@ changeOpacity() {
                 height: MediaQuery. of(context). size. height/10),
 
 
-            SingleChildScrollView(
+            AnimatedOpacity(
+        opacity: opacity_once,
+        duration: Duration(milliseconds: 250),
+        child:  SingleChildScrollView(
               scrollDirection: Axis.horizontal,
 
                   child:Row(
@@ -183,8 +193,13 @@ changeOpacity() {
                 ],
               ),
             ),
+            ),
               SizedBox(height:MediaQuery.of(context).size.height/15),
-              SingleChildScrollView(
+             
+             AnimatedOpacity(
+        opacity: opacity_once,
+        duration: Duration(milliseconds: 250),
+        child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                 child:
               Row(children:[
@@ -239,6 +254,7 @@ changeOpacity() {
               ]
               )
               )
+             )
 
           ],
         ),
