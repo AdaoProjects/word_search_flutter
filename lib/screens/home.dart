@@ -7,6 +7,7 @@ import 'package:findthewords/utilites/colors.dart';
 import 'package:findthewords/screens/share.dart';
 import 'package:findthewords/app_localizations.dart';
 import 'package:flutter/rendering.dart';
+import 'package:icon_shadow/icon_shadow.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -98,26 +99,35 @@ changeOpacity() {
                 AnimatedOpacity(
         opacity: opacity == 1 ? 1.0 : 0.3,
         duration: Duration(seconds: 3),
-        child: Icon(Icons.star,
+        child:IconShadowWidget(
+          Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
+          shadowColor: Colors.yellowAccent,
+        ),
                 ),
             
               SizedBox(width:MediaQuery.of(context).size.width/10),
                 AnimatedOpacity(
         opacity: opacity == 1 ? 0.3 : 1,
         duration: Duration(seconds: 3),
-        child:  Icon(Icons.star,
+        child:  IconShadowWidget(
+          Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/5),
+          shadowColor:Colors.yellowAccent,
+        ),
               ),
               SizedBox(width:MediaQuery.of(context).size.width/10),
                 AnimatedOpacity(
         opacity: opacity == 1 ? 1.0 : 0.3,
         duration: Duration(seconds: 3),
-        child: Icon(Icons.star,
+        child: IconShadowWidget(
+          Icon(Icons.star,
                   color: GameColors.secondary,
                   size:MediaQuery.of(context).size.width/10),
+          shadowColor: Colors.yellowAccent,
+        ),
                 ),
 
             ]),
