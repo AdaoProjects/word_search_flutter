@@ -45,16 +45,9 @@ class _SettingsState extends State<Settings> {
                               fontStyle: FontStyle.italic,
                               fontSize: MediaQuery. of(context). size. height/20)
                       ),
-                      Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 3.0, color: Colors.red),
-                left: BorderSide(width: 3.0, color: Colors.red),
-                right: BorderSide(width: 3.0, color: Colors.red),
-                bottom: BorderSide(width: 3.0, color: Colors.red),
-              ),
-            ),
-            child:Checkbox(
+                      Theme(
+data: ThemeData(unselectedWidgetColor: Colors.blue),
+child: Checkbox(
                         hoverColor: Colors.white,
                         activeColor: Colors.white,
                         checkColor: GameColors.primary,
@@ -78,9 +71,8 @@ class _SettingsState extends State<Settings> {
                           }
                         },
                       ),
-            width: 20,
-            height: 20),
-                      
+                      ),
+
                     ]
                     ),
 
