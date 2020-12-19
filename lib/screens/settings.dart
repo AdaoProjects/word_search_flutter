@@ -10,7 +10,7 @@ class Settings extends StatefulWidget {
 }
 class _SettingsState extends State<Settings> {
   Language _selectedLanguage;
-  bool checkValue=true;
+  bool checkValue=false;
   @override
   Widget build(BuildContext context) {
 
@@ -45,7 +45,16 @@ class _SettingsState extends State<Settings> {
                               fontStyle: FontStyle.italic,
                               fontSize: MediaQuery. of(context). size. height/20)
                       ),
-                      Checkbox(
+                      Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(width: 3.0, color: Colors.red),
+                left: BorderSide(width: 3.0, color: Colors.red),
+                right: BorderSide(width: 3.0, color: Colors.red),
+                bottom: BorderSide(width: 3.0, color: Colors.red),
+              ),
+            ),
+            child:Checkbox(
                         hoverColor: Colors.white,
                         activeColor: Colors.white,
                         checkColor: GameColors.primary,
@@ -56,19 +65,22 @@ class _SettingsState extends State<Settings> {
                           });
                           if(checkValue==false){
                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setBool('has_Sounds', true);
+                            prefs.setBool('has_Sounds', false);
                             Navigator.of(context).pushNamed("/game_easy");
                             Navigator.of(context).pushNamed("/game_medium");
                             Navigator.of(context).pushNamed("/game_hard");
                           }else{
                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setBool('has_Sounds', true);
+                            prefs.setBool('has_Sounds', false);
                             Navigator.of(context).pushNamed("/game_easy");
                             Navigator.of(context).pushNamed("/game_medium");
                             Navigator.of(context).pushNamed("/game_hard");
                           }
                         },
-                      )
+                      ),
+            width: 20,
+            height: 20),
+                      
                     ]
                     ),
 
