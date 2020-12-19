@@ -56,7 +56,7 @@ class _SettingsState extends State<Settings> {
                           });
                           if(checkValue==false){
                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setBool('has_Sounds', false);
+                            prefs.setBool('has_Sounds', true);
                             Navigator.of(context).pushNamed("/game_easy");
                             Navigator.of(context).pushNamed("/game_medium");
                             Navigator.of(context).pushNamed("/game_hard");
